@@ -7,7 +7,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preflight": "npm ci .",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces"
   },
-  "workspaces": ["workspaces/*", "examples/*"]
+  "workspaces": ["workspaces/*", "examples/*"],
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  }
 }
