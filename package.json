@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "bento-editor",
+  "version": "0.0.1",
+  "volta": {
+    "node": "16.14.2"
+  },
+  "license": "MIT",
+  "scripts": {
+    "preflight": "npm ci .",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces"
+  },
+  "workspaces": ["workspaces/*", "examples/*"],
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  }
+}
