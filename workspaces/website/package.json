@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },
-  "homepage": "https://github.com/cam-inc/bento#readme"
+  "homepage": "https://github.com/cam-inc/bento#readme",
+  "devDependencies": {
+    "cypress": "^10.1.0"
+  }
 }
