@@ -6,7 +6,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "run-s test:e2e:run",
+    "test:e2e:run": "cypress run",
+    "test:e2e:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },
-  "homepage": "https://github.com/cam-inc/bento#readme"
+  "homepage": "https://github.com/cam-inc/bento#readme",
+  "devDependencies": {
+    "cypress": "^10.1.0"
+  }
 }
