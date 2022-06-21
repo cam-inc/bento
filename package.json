@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "name": "bento-editor",
   "version": "0.0.1",
   "volta": {

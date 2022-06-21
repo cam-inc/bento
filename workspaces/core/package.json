@@ -12,7 +12,16 @@
     "type": "git",
     "url": "git+https://github.com/cam-inc/bento.git"
   },
-  "author": "",
+  "contributers": [
+    {
+      "name": "Go Ohtani",
+      "url": "https://github.com/cathcheeno"
+    },
+    {
+      "name": "Shuta Hirai",
+      "url": "https://github.com/shuta13"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
