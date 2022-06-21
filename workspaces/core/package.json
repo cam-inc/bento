@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@bento-editor/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "JSON Schema based block-styled editor.",
   "main": "dist/index.js",
   "scripts": {
