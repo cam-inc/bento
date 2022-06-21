@@ -1,13 +1,13 @@
 {
   "private": false,
   "name": "@bento-editor/core",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "JSON Schema based block-styled editor.",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "jest",
-    "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --same-file"
+    "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix core/ --same-file --append"
   },
   "repository": {
     "type": "git",
