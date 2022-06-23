@@ -1,7 +1,7 @@
 {
   "private": "false",
   "name": "@bento-editor/website",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "develop": "docusaurus start",
     "build": "docusaurus build",
