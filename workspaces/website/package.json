@@ -1,5 +1,5 @@
 {
-  "private": "false",
+  "private": false,
   "name": "@bento-editor/website",
   "version": "0.0.2",
   "scripts": {
