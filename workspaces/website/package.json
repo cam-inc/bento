@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@bento-editor/website",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "develop:en": "docusaurus start --port 4000 --locale en",
     "develop:ja": "docusaurus start --port 4000 --locale ja",
