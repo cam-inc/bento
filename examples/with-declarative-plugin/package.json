@@ -3,9 +3,17 @@
   "name": "@bento-editor/with-declarative-plugin",
   "version": "0.0.1",
   "description": "With @bento-editor/declarative-plugin example.",
-  "main": "index.js",
+  "main": "dist/bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "node \"../../scripts/rmdir.js\" \"./dist\"",
+    "build": "run-s typecheck build:prod",
+    "build:dev": "webpack --mode=\"development\"",
+    "build:prod": "webpack --mode=\"production\"",
+    "typecheck": "tsc --noEmit",
+    "watch": "npm run build:dev --watch",
+    "serve": "budo --dir dist/ --live",
+    "start": "run-s build serve",
+    "start:watch": "run-p watch serve"
   },
   "repository": {
     "type": "git",
@@ -17,5 +25,12 @@
     "url": "https://github.com/cam-inc/bento/issues"
   },
   "homepage": "https://github.com/cam-inc/bento#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "esbuild-loader": "^2.19.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  }
 }
