@@ -1,0 +1,36 @@
+{
+  "private": false,
+  "name": "@bento-editor/declarative-plugin",
+  "version": "0.0.1",
+  "description": "Plugin for constructing Editor.js Tools",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cam-inc/bento.git"
+  },
+  "contributers": [
+    {
+      "name": "Go Ohtani",
+      "url": "https://github.com/cathcheeno"
+    },
+    {
+      "name": "Shuta Hirai",
+      "url": "https://github.com/shuta13"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cam-inc/bento/issues"
+  },
+  "homepage": "https://github.com/cam-inc/bento#readme",
+  "devDependencies": {
+    "type-fest": "^2.13.1"
+  },
+  "peerDependencies": {
+    "@editorjs/editorjs": ">=2.24.3"
+  }
+}
