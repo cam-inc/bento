@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "@bento-editor/with-declarative-plugin",
+  "version": "0.0.1",
+  "description": "With @bento-editor/declarative-plugin example.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cam-inc/bento.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cam-inc/bento/issues"
+  },
+  "homepage": "https://github.com/cam-inc/bento#readme",
+  "devDependencies": {}
+}
