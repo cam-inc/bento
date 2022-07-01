@@ -23,19 +23,161 @@ Plugin for constructing Editor.js Tools
 
 ## Getting started
 
+### Install
+
 ```shell
 npm i @editorjs/editorjs @bento-editor/declarative-plugin
 ```
 
+### With JavaScript(babel)
+
+Install dependencies related with babel.
+
+```shell
+npm i --save-dev @babel/core @babel/cli @babel/plugin-transform-react-jsx @babel/preset-env
+```
+
+Add `.babelrc` like shown below.
+
+```json
+{
+  "presets": [["@babel/preset-env"]],
+  "plugins": ["@babel/plugin-transform-react-jsx"]
+}
+```
+
+Sample code
+
+```jsx
+/* @jsx h */
+import { h, createTool } from "@bento-editor/declarative-plugin";
+import EditorJS from "@editorjs/editorjs";
+
+const CustomTool = () => {
+  const handleClick = () => {
+    console.log("clicked");
+  };
+  const handleSave = (blockContent) => console.log(blockContent.value);
+  return (
+    <tool
+      save={handleSave}
+      validate={undefined}
+      renderSettings={undefined}
+      destory={undefined}
+      onPaste={undefined}
+      merge={undefined}
+      static_get_pasteConfig={undefined}
+      static_get_sanitize={undefined}
+      static_get_shortcut={undefined}
+      static_get_conversionConfig={undefined}
+      static_get_enableLineBreaks={undefined}
+      static_get_isReadOnlySupported={undefined}
+      static_get_toolbox={{ title: "CustomTool", icon: "<span>🔮</span>" }}
+    >
+      <div>
+        <button
+          style={{ border: "none", cursor: "pointer" }}
+          onClick={handleClick}
+        >
+          button
+        </button>
+      </div>
+    </tool>
+  );
+};
+
+const CustomInlineTool = () => {
+  return (
+    <inlineTool
+      surround={() => {}}
+      checkState={() => {}}
+      renderActions={undefined}
+      clear={undefined}
+      static_get_isInline={true}
+      get_shortcut={undefined}
+      static_get_sanitize={undefined}
+      static_get_title={undefined}
+    >
+      <div className="inline-tool-container">
+        <span className="ce-inline-tool">📝</span>
+      </div>
+    </inlineTool>
+  );
+};
+
+const CustomBlockTune = () => {
+  return (
+    <blockTune
+      save={undefined}
+      wrap={undefined}
+      static_get_isTune={true}
+      static_prepare={undefined}
+      static_reset={undefined}
+    >
+      <div>
+        <span>BlockTune</span>
+        <div>
+          <span>nested</span>
+        </div>
+        <span />
+        <div>
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+        </div>
+      </div>
+    </blockTune>
+  );
+};
+
+const customTool = createTool(<CustomTool />);
+const customInlineTool = createTool(<CustomInlineTool />);
+const customBlockTune = createTool(<CustomBlockTune />);
+
+const e = document.createElement("div");
+e.id = "editorjs";
+document.body.appendChild(e);
+
+new EditorJS({
+  holder: "editorjs",
+  tools: {
+    customTool,
+    CustomInlineTool: { class: customInlineTool },
+    CustomBlockTune: { class: customBlockTune },
+  },
+});
+```
+
+[Example](../../examples/with-declarative-plugin)
+
+### With TypeScript
+
 Strongly recommended to use with TypeScript
 
 ```shell
-npm i -D typescript
+npm i --save-dev typescript
 ```
 
-## Usage
+Add `tsconfig.json` like shown below.
 
-### With TypeScript
+```json
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react"
+  }
+}
+```
+
+Sample code
 
 ```tsx
 /* @jsx h */
@@ -133,9 +275,13 @@ new EditorJS({
 });
 ```
 
-If the `@jsx h` comment is not enabled, you can use @bento-editor/declarative-plugin by modifying `@babel/plugin-transform-react-jsx` pragma or compilerOptions.jsxFactory in tsconfig.json as follows.
+[Example](https://github.com/shuta13/poc-editor-jsx)
 
-### `.babelrc` (with `@babel-transform-react-jsx`)
+### N.B.
+
+If you do not want to use `@jsx h`, you can use @bento-editor/declarative-plugin by modifying `@babel/plugin-transform-react-jsx` pragma or compilerOptions.jsxFactory in tsconfig.json as follows.
+
+**`.babelrc` (with `@babel-transform-react-jsx`)**
 
 ```json
 {
@@ -143,7 +289,7 @@ If the `@jsx h` comment is not enabled, you can use @bento-editor/declarative-pl
 }
 ```
 
-### `tsconfig.json` (with `tsc`)
+**`tsconfig.json` (with `tsc`)**
 
 ```json
 {
