@@ -206,7 +206,7 @@ const CustomTool: EditorJSX.Tool = () => {
       static_get_conversionConfig={undefined}
       static_get_enableLineBreaks={undefined}
       static_get_isReadOnlySupported={undefined}
-      static_get_toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
+      static_get_toolbox={{ title: "CustomTool", icon: "<span>🔮</span>" }}
     >
       <div>
         <button onClick={handleClick}>button</button>
