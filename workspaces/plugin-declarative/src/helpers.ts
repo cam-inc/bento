@@ -1,13 +1,13 @@
-import { emptyVNode, EditorJSXVNodeType } from "./constants";
+import { emptyVNode, PDJSXVNodeType } from "./constants";
 
 export const isWhiteSpace = (str: string) => str === " ";
 export const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
   Object.prototype.hasOwnProperty.call(thisArg, key);
 
 export const isEditorJSVNode = (
-  type: EditorJSXVNodeType | string
-): type is EditorJSXVNodeType => {
-  return hasOwnProperty(emptyVNode, type as EditorJSXVNodeType);
+  type: PDJSXVNodeType | string
+): type is PDJSXVNodeType => {
+  return hasOwnProperty(emptyVNode, type as PDJSXVNodeType);
 };
 
 export const isObjectFactory = (o: any) => {

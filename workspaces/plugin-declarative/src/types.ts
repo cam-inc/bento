@@ -14,9 +14,9 @@ export type ComponentType<P = {}> = FunctionComponent<P>;
 
 export type Props = {
   children?: any;
-} & EditorJSX.ToolAttributes &
-  EditorJSX.InlineToolAttributes &
-  EditorJSX.BlockTuneAttributes & { [key: string]: any };
+} & PDJSX.ToolAttributes &
+  PDJSX.InlineToolAttributes &
+  PDJSX.BlockTuneAttributes & { [key: string]: any };
 export type Key = string | number;
 
 type RefObject<T> = { current: T | null };
@@ -40,16 +40,16 @@ export type VNode<P = {}> = VNodeProps<P> & {
   hydrating: boolean | null;
   constructor: typeof Object.prototype.constructor;
   pluginProps:
-    | EditorJSX.ToolAttributes
-    | EditorJSX.InlineToolAttributes
-    | EditorJSX.BlockTuneAttributes
+    | PDJSX.ToolAttributes
+    | PDJSX.InlineToolAttributes
+    | PDJSX.BlockTuneAttributes
     | null;
   isRoot: boolean;
 };
 
 export type Original = VNode | string | number | null;
 
-export namespace EditorJSX {
+export namespace PDJSX {
   export interface Tool<P = {}> extends FunctionComponent<P> {}
 
   export interface InlineTool<P = {}> extends FunctionComponent<P> {}
@@ -109,9 +109,9 @@ export namespace EditorJSX {
   export interface EditorJSToolAttributes {}
 
   export interface EditorJSToolElements {
-    tool: EditorJSX.ToolAttributes;
-    inlineTool: EditorJSX.InlineToolAttributes;
-    blockTune: EditorJSX.BlockTuneAttributes;
+    tool: PDJSX.ToolAttributes;
+    inlineTool: PDJSX.InlineToolAttributes;
+    blockTune: PDJSX.BlockTuneAttributes;
   }
 }
 
@@ -909,7 +909,7 @@ declare global {
       zoomAndPan?: string;
     }
 
-    interface IntrinsicElements extends EditorJSX.EditorJSToolElements {
+    interface IntrinsicElements extends PDJSX.EditorJSToolElements {
       // HTML
       a: HTMLAttributes<HTMLAnchorElement>;
       abbr: HTMLAttributes<HTMLElement>;

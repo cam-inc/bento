@@ -1,9 +1,9 @@
-import { EditorJSX } from "./types";
+import { PDJSX } from "./types";
 
-export type EditorJSXVNodeType = keyof EditorJSX.EditorJSToolElements;
+export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
 
 export const emptyVNode: {
-  [K in EditorJSXVNodeType]: null;
+  [K in PDJSXVNodeType]: null;
 } = {
   tool: null,
   inlineTool: null,

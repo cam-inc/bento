@@ -182,14 +182,14 @@ Sample code
 ```tsx
 /* @jsx h */
 import { h, createTool } from "@bento-editor/plugin-declarative";
-import type { EditorJSX } from "@bento-editor/plugin-declarative";
+import type { PDJSX } from "@bento-editor/plugin-declarative";
 import EditorJS from "@editorjs/editorjs";
 
-const CustomTool: EditorJSX.Tool = () => {
+const CustomTool: PDJSX.Tool = () => {
   const handleClick = () => {
     console.log("clicked");
   };
-  const handleSave: EditorJSX.ToolAttributes<{ value: string }>["save"] = (
+  const handleSave: PDJSX.ToolAttributes<{ value: string }>["save"] = (
     blockContent
   ) => console.log(blockContent.value);
   return (
@@ -215,7 +215,7 @@ const CustomTool: EditorJSX.Tool = () => {
   );
 };
 
-const CustomInlineTool: EditorJSX.InlineTool = () => {
+const CustomInlineTool: PDJSX.InlineTool = () => {
   return (
     <inlineTool
       surround={() => {}}
@@ -234,7 +234,7 @@ const CustomInlineTool: EditorJSX.InlineTool = () => {
   );
 };
 
-const CustomBlockTune: EditorJSX.BlockTune = () => {
+const CustomBlockTune: PDJSX.BlockTune = () => {
   return (
     <blockTune
       save={undefined}
