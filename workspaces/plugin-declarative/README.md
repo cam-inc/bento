@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    ⚔️  @bento-editor/declarative-plugin ⚔️
+    ⚔️  @bento-editor/plugin-declarative ⚔️
   </h1>
   <h3>
     🚜 CURRENTLY IN EARLY DEVELOPMENT 🚜
@@ -11,11 +11,11 @@
   <p>
     <a href="https://codesandbox.io/s/focused-merkle-ky84t5?file=/src/index.tsx">Live Demo</a>
     <span>・</span>
-    <a href="https://github.com/shuta13/@bento-editor/declarative-plugin/issues/new">Report Bugs | Request Features</a>
+    <a href="https://github.com/shuta13/@bento-editor/plugin-declarative/issues/new">Report Bugs | Request Features</a>
   </p>
 </div>
 
-## About @bento-editor/declarative-plugin
+## About @bento-editor/plugin-declarative
 
 Plugin for constructing Editor.js Tools
 
@@ -26,7 +26,7 @@ Plugin for constructing Editor.js Tools
 ### Install
 
 ```shell
-npm i @editorjs/editorjs @bento-editor/declarative-plugin
+npm i @editorjs/editorjs @bento-editor/plugin-declarative
 ```
 
 ### With JavaScript(babel)
@@ -50,7 +50,7 @@ Sample code
 
 ```jsx
 /* @jsx h */
-import { h, createTool } from "@bento-editor/declarative-plugin";
+import { h, createTool } from "@bento-editor/plugin-declarative";
 import EditorJS from "@editorjs/editorjs";
 
 const CustomTool = () => {
@@ -150,7 +150,7 @@ new EditorJS({
 });
 ```
 
-[Example](../../examples/with-declarative-plugin)
+[Example](../../examples/with-plugin-declarative)
 
 ### With TypeScript
 
@@ -181,8 +181,8 @@ Sample code
 
 ```tsx
 /* @jsx h */
-import { h, createTool } from "@bento-editor/declarative-plugin";
-import type { EditorJSX } from "@bento-editor/declarative-plugin";
+import { h, createTool } from "@bento-editor/plugin-declarative";
+import type { EditorJSX } from "@bento-editor/plugin-declarative";
 import EditorJS from "@editorjs/editorjs";
 
 const CustomTool: EditorJSX.Tool = () => {
@@ -279,7 +279,7 @@ new EditorJS({
 
 ### N.B.
 
-If you do not want to use `@jsx h`, you can use @bento-editor/declarative-plugin by modifying `@babel/plugin-transform-react-jsx` pragma or compilerOptions.jsxFactory in tsconfig.json as follows.
+If you do not want to use `@jsx h`, you can use @bento-editor/plugin-declarative by modifying `@babel/plugin-transform-react-jsx` pragma or compilerOptions.jsxFactory in tsconfig.json as follows.
 
 **`.babelrc` (with `@babel-transform-react-jsx`)**
 
@@ -307,7 +307,7 @@ If you do not want to use `@jsx h`, you can use @bento-editor/declarative-plugin
   - [x] Prototyping(Add a simple parser)
   - [x] [Styles API support](https://editorjs.io/styles)
   - [ ] [Access params of constructor as props](https://editorjs.io/tools-api#class-constructor)
-  - [ ] [JSX as props](https://github.com/shuta13/@bento-editor/declarative-plugin/blob/2152be5020b83c75ac8c0d456a07b2ca5fc260fc/packages/core/src/types.ts#L64)
+  - [ ] [JSX as props](https://github.com/shuta13/@bento-editor/plugin-declarative/blob/2152be5020b83c75ac8c0d456a07b2ca5fc260fc/packages/core/src/types.ts#L64)
 - [ ] Add unit & integration testing
 - [ ] Add implements of diff or reconcile
 - [x] Add functions for transforming JSX nodes to plugin class syntax

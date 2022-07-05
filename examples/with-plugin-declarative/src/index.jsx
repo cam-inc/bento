@@ -1,5 +1,5 @@
 /* @jsx h */
-import { h, createTool } from "@bento-editor/declarative-plugin";
+import { h, createTool } from "@bento-editor/plugin-declarative";
 import EditorJS from "@editorjs/editorjs";
 
 const CustomTool = () => {

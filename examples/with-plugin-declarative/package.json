@@ -1,7 +1,7 @@
 {
-  "name": "@bento-editor/example-with-declarative-plugin",
+  "name": "@bento-editor/example-with-plugin-declarative",
   "version": "0.0.1",
-  "description": "Example with @bento-editor/declarative-plugin",
+  "description": "Example with @bento-editor/plugin-declarative",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -27,6 +27,6 @@
     "budo": "^11.7.0"
   },
   "dependencies": {
-    "@bento-editor/declarative-plugin": "npm:@bento-editor/declarative-plugin@*"
+    "@bento-editor/plugin-declarative": "file:workspaces/plugin-declarative"
   }
 }

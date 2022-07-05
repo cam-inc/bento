@@ -1,6 +1,6 @@
 {
   "private": false,
-  "name": "@bento-editor/declarative-plugin",
+  "name": "@bento-editor/plugin-declarative",
   "version": "0.0.1",
   "description": "Plugin for constructing Editor.js Tools.",
   "main": "dist/index.js",
