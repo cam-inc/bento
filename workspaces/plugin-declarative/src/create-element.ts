@@ -35,11 +35,11 @@ export const createElement = (
   for (let i in config) {
     if (i === "key") {
       key = config[i];
-    }
-    if (i === "ref") {
+    } else if (i === "ref") {
       ref = config[i];
+    } else {
+      props[i] = config[i];
     }
-    props[i] = config[i];
   }
 
   if (children != null) {
