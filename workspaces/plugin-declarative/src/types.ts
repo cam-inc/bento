@@ -14,9 +14,7 @@ export type ComponentType<P = {}> = FunctionComponent<P>;
 
 export type Props = {
   children?: any;
-} & PDJSX.ToolAttributes &
-  PDJSX.InlineToolAttributes &
-  PDJSX.BlockTuneAttributes & { [key: string]: any };
+} & { [key: string]: any };
 export type Key = string | number;
 
 type RefObject<T> = { current: T | null };
@@ -105,6 +103,10 @@ export namespace PDJSX {
     static_prepare?: (config: { [key: string]: any }) => void | Promise<void>;
     static_reset?: () => void | Promise<void>;
   }
+
+  export type PluginAttributes = ToolAttributes &
+    InlineToolAttributes &
+    BlockTuneAttributes;
 
   export interface EditorJSToolAttributes {}
 

@@ -1,6 +1,6 @@
 import type { ToolConstructable } from "@editorjs/editorjs";
 import { createElement, Fragment } from "./create-element";
-import { Props, VNode } from "./types";
+import { PDJSX, Props, VNode } from "./types";
 import { pluginMethodPrefixes } from "./constants";
 import {
   hasOwnProperty,
@@ -37,7 +37,7 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
     vNode.children = children.filter((child: VNode) =>
       hasOwnProperty(child, "type")
     );
-    vNode.pluginProps = pluginProps;
+    vNode.pluginProps = pluginProps as PDJSX.PluginAttributes;
     vNode.parent = null;
 
     return vNode;
