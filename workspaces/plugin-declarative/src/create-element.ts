@@ -28,7 +28,7 @@ export const createElement = (
   config: { [key: string]: any } | null,
   ...children: VNode[] // NOTE: evil...
 ) => {
-  const emptyProps: { [key: string]: any } = {};
+  const props: { [key: string]: any } = {};
 
   let key: Key | undefined = undefined;
   let ref: Ref | undefined = undefined;
@@ -39,16 +39,16 @@ export const createElement = (
     if (i === "ref") {
       ref = config[i];
     }
-    emptyProps[i] = config[i];
+    props[i] = config[i];
   }
 
   if (children != null) {
-    emptyProps.children = children;
+    props.children = children;
   }
 
   return createVNode({
     type,
-    props: emptyProps as unknown as Props,
+    props: props as unknown as Props,
     key,
     ref,
     original: null,
