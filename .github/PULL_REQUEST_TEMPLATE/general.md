@@ -7,8 +7,8 @@ Write a summary of your PR here.
 Provide references that relate to your PR, if any.
 
 - #123
-- [link](https://github.com/cam-inc/viron)
+- [link](https://github.com/cam-inc/bento)
 
 ## Checklist
 
-- [ ] [changeset file(s)](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md) included
+- [ ] CHANGELOG file(s) included
