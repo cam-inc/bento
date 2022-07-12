@@ -57,6 +57,11 @@ export namespace PDJSX {
   export interface BlockTune<P = {}> extends FunctionComponent<P> {}
 
   export interface ToolAttributes<C = any> {
+    children: {
+      type: string | ComponentType<any>;
+      props: VNodeProps;
+      key: Key | null;
+    };
     save: (blockContent: C) => void;
     validate?: boolean;
     // TODO: JSX as props
