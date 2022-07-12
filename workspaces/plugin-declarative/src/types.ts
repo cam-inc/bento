@@ -47,6 +47,8 @@ export type VNode<P = {}> = VNodeProps<P> & {
 
 export type Original = VNode | string | number | null;
 
+export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
+
 export namespace PDJSX {
   export interface Tool<P = {}> extends FunctionComponent<P> {}
 

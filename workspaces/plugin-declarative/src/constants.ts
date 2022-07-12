@@ -1,6 +1,4 @@
-import { PDJSX } from "./types";
-
-export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
+import { PDJSXVNodeType } from "./types";
 
 export const emptyVNode: {
   [K in PDJSXVNodeType]: null;

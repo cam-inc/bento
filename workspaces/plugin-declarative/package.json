@@ -3,8 +3,8 @@
   "name": "@bento-editor/plugin-declarative",
   "version": "0.0.1",
   "description": "Plugin for constructing Editor.js Tools.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",

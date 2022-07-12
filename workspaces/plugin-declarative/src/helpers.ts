@@ -1,4 +1,5 @@
-import { emptyVNode, PDJSXVNodeType } from "./constants";
+import { emptyVNode } from "./constants";
+import { PDJSXVNodeType } from "./types";
 
 export const isWhiteSpace = (str: string) => str === " ";
 export const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
