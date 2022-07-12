@@ -7,7 +7,10 @@
   "types": "dist/lib/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "run-p test:unit test:integration test:smoke",
+    "test:unit": "jest ./__tests__/unit",
+    "test:integration": "jest ./__tests__/integration",
+    "test:smoke": "node ./__tests__/smoke",
     "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
   },
   "repository": {
@@ -30,6 +33,10 @@
   },
   "homepage": "https://github.com/cam-inc/bento#readme",
   "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "jest": "^28.1.2",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.2",
     "type-fest": "^2.13.1"
   },
   "peerDependencies": {

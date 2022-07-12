@@ -12,5 +12,8 @@
     "baseUrl": ".",
     "outDir": "dist"
   },
+  "exclude": [
+    "__tests__/smoke/**"
+  ],
   "$schema": "https://json.schemastore.org/tsconfig.json"
 }
