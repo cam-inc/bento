@@ -33,7 +33,10 @@
   },
   "homepage": "https://github.com/cam-inc/bento#readme",
   "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-transform-react-jsx": "^7.18.6",
     "@types/jest": "^28.1.4",
+    "budo": "^11.7.0",
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2",
     "ts-jest": "^28.0.5",
