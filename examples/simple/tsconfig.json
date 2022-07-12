@@ -1,13 +1,23 @@
+// @see: https://github.com/vitejs/vite/blob/main/packages/create-vite/template-vanilla-ts/tsconfig.json
+// @see: https://vitejs.dev/guide/features.html#typescript
 {
+  "include": ["src"],
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "CommonJS",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
     "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "outDir": "dist"
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true
   },
   "$schema": "https://json.schemastore.org/tsconfig.json"
 }
