@@ -185,7 +185,7 @@ const createDomTree = (vNode: VNode) => {
 /**
  * @description Remove `replaceNode` from params because of using this directory as API
  */
-export const createTool = (vNode: VNode): ToolConstructable => {
+export const createPlugin = (vNode: VNode): ToolConstructable => {
   const initialVNode = createElement(Fragment, null, vNode);
 
   const initialNodes = traverseNodes(initialVNode);

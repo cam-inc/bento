@@ -1,5 +1,5 @@
 /* @jsx h */
-import { h, createTool } from "@bento-editor/plugin-declarative";
+import { h, createPlugin } from "@bento-editor/plugin-declarative";
 import EditorJS from "@editorjs/editorjs";
 
 const CustomTool = () => {
@@ -81,9 +81,9 @@ const CustomBlockTune = () => {
   );
 };
 
-const customTool = createTool(<CustomTool />);
-const customInlineTool = createTool(<CustomInlineTool />);
-const customBlockTune = createTool(<CustomBlockTune />);
+const customTool = createPlugin(<CustomTool />);
+const customInlineTool = createPlugin(<CustomInlineTool />);
+const customBlockTune = createPlugin(<CustomBlockTune />);
 
 const e = document.createElement("div");
 e.id = "editorjs";
