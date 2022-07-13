@@ -7,6 +7,6 @@ if (!canvasElm) {
   throw new Error('Could not find the element#canvas.');
 }
 
-const editor = new Editor({
+new Editor({
   holder: canvasElm
 });
