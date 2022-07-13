@@ -1,21 +1,23 @@
 {
-  "private": true,
   "name": "@bento-editor/example-simple",
   "version": "0.0.1",
   "description": "Simple example for bento-editor",
-  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clear": "rimraf dist && mkdirp dist",
+    "develop": "vite --host"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cam-inc/bento.git"
   },
-  "author": "",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },
-  "homepage": "https://github.com/cam-inc/bento#readme"
+  "homepage": "https://github.com/cam-inc/bento#readme",
+  "dependencies": {
+    "@bento-editor/core": "*"
+  },
+  "devDependencies": {
+    "vite": "^2.9.14"
+  }
 }

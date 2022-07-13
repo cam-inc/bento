@@ -1,18 +1,33 @@
 {
-  "private": false,
   "name": "@bento-editor/core",
   "version": "0.0.3",
   "description": "JSON Schema based block-styled editor.",
-  "main": "dist/index.js",
+  "keywords": [
+    "TODO"
+  ],
+  "exports": {
+    "require": "dist/index.cjs",
+    "import": "dist/index.mjs",
+    "module": "dist/index.esm.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "run-s clear build",
+    "clear": "rimraf dist && mkdirp dist",
+    "testes": "which tsc",
+    "build": "bunchee ./src/index.ts",
+    "develop": "bunchee ./src/index.ts",
     "test": "jest",
     "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cam-inc/bento.git"
+  "homepage": "https://github.com/cam-inc/bento/tree/main/workspaces/core",
+  "bugs": {
+    "url": "https://github.com/cam-inc/bento/issues"
   },
+  "license": "MIT",
   "contributers": [
     {
       "name": "Go Ohtani",
@@ -23,15 +38,18 @@
       "url": "https://github.com/shuta13"
     }
   ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cam-inc/bento/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cam-inc/bento.git"
   },
-  "homepage": "https://github.com/cam-inc/bento#readme",
   "devDependencies": {
     "@types/jest": "^28.1.1",
+    "bunchee": "^1.9.0",
     "jest": "^28.1.1",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.1"
+  },
+  "peerDependencies": {
+    "@editorjs/editorjs": "^2.25.0"
   }
 }

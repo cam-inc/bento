@@ -1,3 +1,3 @@
-export default {
-  hello: 'world',
-};
+import EditorJS from '@editorjs/editorjs';
+
+export const Editor = EditorJS;
