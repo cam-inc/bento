@@ -1,6 +1,5 @@
-/* @jsx h */
-import { h, createPlugin } from "@bento-editor/plugin-declarative";
-import EditorJS from "@editorjs/editorjs";
+const { h, createPlugin } = require("../../../dist/lib");
+const EditorJS = require("@editorjs/editorjs");
 
 const CustomTool = () => {
   const handleClick = () => {

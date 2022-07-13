@@ -59,4 +59,4 @@ export const createElement = (
   });
 };
 
-export const Fragment = (props: { children?: any }) => props.children;
+export const Fragment = (props: VNode["props"]) => props.children;
