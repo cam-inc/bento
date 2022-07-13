@@ -47,6 +47,8 @@ export type VNode<P = {}> = VNodeProps<P> & {
 
 export type Original = VNode | string | number | null;
 
+export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
+
 export namespace PDJSX {
   export interface Tool<P = {}> extends FunctionComponent<P> {}
 
@@ -55,6 +57,11 @@ export namespace PDJSX {
   export interface BlockTune<P = {}> extends FunctionComponent<P> {}
 
   export interface ToolAttributes<C = any> {
+    children: {
+      type: string | ComponentType<any>;
+      props: VNodeProps;
+      key: Key | null;
+    };
     save: (blockContent: C) => void;
     validate?: boolean;
     // TODO: JSX as props

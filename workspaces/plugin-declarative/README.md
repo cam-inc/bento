@@ -50,7 +50,7 @@ Sample code
 
 ```jsx
 /* @jsx h */
-import { h, createTool } from "@bento-editor/plugin-declarative";
+import { h, createPlugin } from "@bento-editor/plugin-declarative";
 import EditorJS from "@editorjs/editorjs";
 
 const CustomTool = () => {
@@ -132,9 +132,9 @@ const CustomBlockTune = () => {
   );
 };
 
-const customTool = createTool(<CustomTool />);
-const customInlineTool = createTool(<CustomInlineTool />);
-const customBlockTune = createTool(<CustomBlockTune />);
+const customTool = createPlugin(<CustomTool />);
+const customInlineTool = createPlugin(<CustomInlineTool />);
+const customBlockTune = createPlugin(<CustomBlockTune />);
 
 const e = document.createElement("div");
 e.id = "editorjs";
@@ -181,7 +181,7 @@ Sample code
 
 ```tsx
 /* @jsx h */
-import { h, createTool } from "@bento-editor/plugin-declarative";
+import { h, createPlugin } from "@bento-editor/plugin-declarative";
 import type { PDJSX } from "@bento-editor/plugin-declarative";
 import EditorJS from "@editorjs/editorjs";
 
@@ -257,9 +257,9 @@ const CustomBlockTune: PDJSX.BlockTune = () => {
   );
 };
 
-const customTool = createTool(<CustomTool />, null);
-const customInlineTool = createTool(<CustomInlineTool />, null);
-const customBlockTune = createTool(<CustomBlockTune />, null);
+const customTool = createPlugin(<CustomTool />, null);
+const customInlineTool = createPlugin(<CustomInlineTool />, null);
+const customBlockTune = createPlugin(<CustomBlockTune />, null);
 
 const e = document.createElement("div");
 e.id = "editorjs";
