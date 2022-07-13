@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 const budo = require("budo");
-const { Blob } = require("node:buffer");
 
 const port = 3000;
 const host = "127.0.0.1";
@@ -19,13 +18,24 @@ const run = () => {
     stream: process.stdout,
     port,
     host,
-  })
-    .on("connect", () => {
-      console.log(`Listening on http://${host}:${port}`);
-    })
-    .on("exit", () => {
-      fs.unlinkSync(destFilePath);
-    });
+  }).on("connect", () => {
+    console.info("[INFO] Press Ctrl+c if you want to stop the server.");
+  });
+  process.on("SIGINT", () => {
+    if (fs.existsSync(destFilePath)) {
+      try {
+        fs.unlinkSync(destFilePath);
+        console.info("[INFO] Delete the file transpiled.");
+      } catch (e) {
+        console.error(e);
+        process.exit(1);
+      } finally {
+        console.info("[INFO] Server is stopped.");
+      }
+    } else {
+      process.exit(0);
+    }
+  });
 };
 
 module.exports = {

@@ -1,4 +1,3 @@
-/* @jsx h */
 const { h, createPlugin } = require("../../../dist/lib");
 const EditorJS = require("@editorjs/editorjs");
 
