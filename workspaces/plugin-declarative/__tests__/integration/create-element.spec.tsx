@@ -1,4 +1,4 @@
-import { Fragment, h } from "../../lib";
+import { h, Fragment } from "../../lib";
 import { hasOwnProperty } from "../../src/helpers";
 
 describe("h", () => {
