@@ -16,8 +16,9 @@
     "graph": "turbo run build test lint format --graph=task-graph.png"
   },
   "workspaces": [
-    "workspaces/*",
-    "examples/*"
+    "apps/*",
+    "examples/*",
+    "packages/*"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
