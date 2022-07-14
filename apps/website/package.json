@@ -3,8 +3,9 @@
   "name": "@bento-editor/website",
   "version": "0.0.3",
   "scripts": {
-    "develop:en": "docusaurus start --port 4000 --locale en",
-    "develop:ja": "docusaurus start --port 4000 --locale ja",
+    "dev": "npm run dev:en",
+    "dev:en": "docusaurus start --no-open --port 4000 --locale en",
+    "dev:ja": "docusaurus start --no-open --port 4001 --locale ja",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
