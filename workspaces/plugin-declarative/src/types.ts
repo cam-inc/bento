@@ -1,4 +1,4 @@
-import { PasteEvent } from "@editorjs/editorjs";
+import { PasteEvent } from '@editorjs/editorjs';
 
 export type ComponentClass<P = {}, _S = {}> = {
   new (props: P, context?: unknown): unknown;
@@ -130,7 +130,7 @@ declare global {
     type TargetedEvent<
       Target extends EventTarget = EventTarget,
       TypedEvent extends Event = Event
-    > = Omit<TypedEvent, "currentTarget"> & {
+    > = Omit<TypedEvent, 'currentTarget'> & {
       readonly currentTarget: Target;
     };
 
@@ -446,11 +446,11 @@ declare global {
     type DOMCSSProperties = {
       [key in keyof Omit<
         CSSStyleDeclaration,
-        | "item"
-        | "setProperty"
-        | "removeProperty"
-        | "getPropertyValue"
-        | "getPropertyPriority"
+        | 'item'
+        | 'setProperty'
+        | 'removeProperty'
+        | 'getPropertyValue'
+        | 'getPropertyPriority'
       >]?: string | number | null | undefined;
     };
     type AllCSSProperties = {
@@ -505,21 +505,21 @@ declare global {
       defaultChecked?: boolean;
       defaultValue?: string;
       defer?: boolean;
-      dir?: "auto" | "rtl" | "ltr";
+      dir?: 'auto' | 'rtl' | 'ltr';
       disabled?: boolean;
       disableRemotePlayback?: boolean;
       download?: any;
-      decoding?: "sync" | "async" | "auto";
+      decoding?: 'sync' | 'async' | 'auto';
       draggable?: boolean;
       encType?: string;
       enterkeyhint?:
-        | "enter"
-        | "done"
-        | "go"
-        | "next"
-        | "previous"
-        | "search"
-        | "send";
+        | 'enter'
+        | 'done'
+        | 'go'
+        | 'next'
+        | 'previous'
+        | 'search'
+        | 'send';
       form?: string;
       formAction?: string;
       formEncType?: string;
@@ -547,7 +547,7 @@ declare global {
       label?: string;
       lang?: string;
       list?: string;
-      loading?: "eager" | "lazy";
+      loading?: 'eager' | 'lazy';
       loop?: boolean;
       low?: number;
       manifest?: string;
@@ -578,14 +578,14 @@ declare global {
       readonly?: boolean;
       readOnly?: boolean;
       referrerpolicy?:
-        | "no-referrer"
-        | "no-referrer-when-downgrade"
-        | "origin"
-        | "origin-when-cross-origin"
-        | "same-origin"
-        | "strict-origin"
-        | "strict-origin-when-cross-origin"
-        | "unsafe-url";
+        | 'no-referrer'
+        | 'no-referrer-when-downgrade'
+        | 'origin'
+        | 'origin-when-cross-origin'
+        | 'same-origin'
+        | 'strict-origin'
+        | 'strict-origin-when-cross-origin'
+        | 'unsafe-url';
       rel?: string;
       required?: boolean;
       reversed?: boolean;
@@ -627,22 +627,22 @@ declare global {
 
       // Non-standard Attributes
       autocapitalize?:
-        | "off"
-        | "none"
-        | "on"
-        | "sentences"
-        | "words"
-        | "characters";
+        | 'off'
+        | 'none'
+        | 'on'
+        | 'sentences'
+        | 'words'
+        | 'characters';
       autoCapitalize?:
-        | "off"
-        | "none"
-        | "on"
-        | "sentences"
-        | "words"
-        | "characters";
+        | 'off'
+        | 'none'
+        | 'on'
+        | 'sentences'
+        | 'words'
+        | 'characters';
       disablePictureInPicture?: boolean;
       results?: number;
-      translate?: "yes" | "no";
+      translate?: 'yes' | 'no';
 
       // RDFa Attributes
       about?: string;
@@ -665,26 +665,26 @@ declare global {
     interface SVGAttributes<Target extends EventTarget = SVGElement>
       extends HTMLAttributes<Target> {
       accentHeight?: number | string;
-      accumulate?: "none" | "sum";
-      additive?: "replace" | "sum";
+      accumulate?: 'none' | 'sum';
+      additive?: 'replace' | 'sum';
       alignmentBaseline?:
-        | "auto"
-        | "baseline"
-        | "before-edge"
-        | "text-before-edge"
-        | "middle"
-        | "central"
-        | "after-edge"
-        | "text-after-edge"
-        | "ideographic"
-        | "alphabetic"
-        | "hanging"
-        | "mathematical"
-        | "inherit";
-      allowReorder?: "no" | "yes";
+        | 'auto'
+        | 'baseline'
+        | 'before-edge'
+        | 'text-before-edge'
+        | 'middle'
+        | 'central'
+        | 'after-edge'
+        | 'text-after-edge'
+        | 'ideographic'
+        | 'alphabetic'
+        | 'hanging'
+        | 'mathematical'
+        | 'inherit';
+      allowReorder?: 'no' | 'yes';
       alphabetic?: number | string;
       amplitude?: number | string;
-      arabicForm?: "initial" | "medial" | "terminal" | "isolated";
+      arabicForm?: 'initial' | 'medial' | 'terminal' | 'isolated';
       ascent?: number | string;
       attributeName?: string;
       attributeType?: string;
@@ -704,7 +704,7 @@ declare global {
       clipPathUnits?: number | string;
       clipRule?: number | string;
       colorInterpolation?: number | string;
-      colorInterpolationFilters?: "auto" | "sRGB" | "linearRGB" | "inherit";
+      colorInterpolationFilters?: 'auto' | 'sRGB' | 'linearRGB' | 'inherit';
       colorProfile?: number | string;
       colorRendering?: number | string;
       contentScriptType?: number | string;
@@ -731,7 +731,7 @@ declare global {
       externalResourcesRequired?: number | string;
       fill?: string;
       fillOpacity?: number | string;
-      fillRule?: "nonzero" | "evenodd" | "inherit";
+      fillRule?: 'nonzero' | 'evenodd' | 'inherit';
       filter?: string;
       filterRes?: number | string;
       filterUnits?: number | string;
@@ -853,8 +853,8 @@ declare global {
       stroke?: string;
       strokeDasharray?: string | number;
       strokeDashoffset?: string | number;
-      strokeLinecap?: "butt" | "round" | "square" | "inherit";
-      strokeLinejoin?: "miter" | "round" | "bevel" | "inherit";
+      strokeLinecap?: 'butt' | 'round' | 'square' | 'inherit';
+      strokeLinejoin?: 'miter' | 'round' | 'bevel' | 'inherit';
       strokeMiterlimit?: string | number;
       strokeOpacity?: number | string;
       strokeWidth?: number | string;

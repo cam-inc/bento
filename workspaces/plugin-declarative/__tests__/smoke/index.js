@@ -1,5 +1,5 @@
-"use strict";
-const { run } = require("./dev-server");
+'use strict';
+const { run } = require('./dev-server');
 
 (() => {
   try {
@@ -8,7 +8,7 @@ const { run } = require("./dev-server");
     throw e;
   }
 
-  process.on("uncaughtException", (e) => {
+  process.on('uncaughtException', (e) => {
     throw e;
   });
 })();

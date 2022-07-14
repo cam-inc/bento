@@ -50,12 +50,12 @@ Sample code
 
 ```jsx
 /* @jsx h */
-import { h, createPlugin } from "@bento-editor/plugin-declarative";
-import EditorJS from "@editorjs/editorjs";
+import { h, createPlugin } from '@bento-editor/plugin-declarative';
+import EditorJS from '@editorjs/editorjs';
 
 const CustomTool = () => {
   const handleClick = () => {
-    console.log("clicked");
+    console.log('clicked');
   };
   const handleSave = (blockContent) => console.log(blockContent.value);
   return (
@@ -72,11 +72,11 @@ const CustomTool = () => {
       static_get_conversionConfig={undefined}
       static_get_enableLineBreaks={undefined}
       static_get_isReadOnlySupported={undefined}
-      static_get_toolbox={{ title: "CustomTool", icon: "<span>🔮</span>" }}
+      static_get_toolbox={{ title: 'CustomTool', icon: '<span>🔮</span>' }}
     >
       <div>
         <button
-          style={{ border: "none", cursor: "pointer" }}
+          style={{ border: 'none', cursor: 'pointer' }}
           onClick={handleClick}
         >
           button
@@ -136,12 +136,12 @@ const customTool = createPlugin(<CustomTool />);
 const customInlineTool = createPlugin(<CustomInlineTool />);
 const customBlockTune = createPlugin(<CustomBlockTune />);
 
-const e = document.createElement("div");
-e.id = "editorjs";
+const e = document.createElement('div');
+e.id = 'editorjs';
 document.body.appendChild(e);
 
 new EditorJS({
-  holder: "editorjs",
+  holder: 'editorjs',
   tools: {
     customTool,
     CustomInlineTool: { class: customInlineTool },
@@ -181,15 +181,15 @@ Sample code
 
 ```tsx
 /* @jsx h */
-import { h, createPlugin } from "@bento-editor/plugin-declarative";
-import type { PDJSX } from "@bento-editor/plugin-declarative";
-import EditorJS from "@editorjs/editorjs";
+import { h, createPlugin } from '@bento-editor/plugin-declarative';
+import type { PDJSX } from '@bento-editor/plugin-declarative';
+import EditorJS from '@editorjs/editorjs';
 
 const CustomTool: PDJSX.Tool = () => {
   const handleClick = () => {
-    console.log("clicked");
+    console.log('clicked');
   };
-  const handleSave: PDJSX.ToolAttributes<{ value: string }>["save"] = (
+  const handleSave: PDJSX.ToolAttributes<{ value: string }>['save'] = (
     blockContent
   ) => console.log(blockContent.value);
   return (
@@ -206,7 +206,7 @@ const CustomTool: PDJSX.Tool = () => {
       static_get_conversionConfig={undefined}
       static_get_enableLineBreaks={undefined}
       static_get_isReadOnlySupported={undefined}
-      static_get_toolbox={{ title: "CustomTool", icon: "<span>🔮</span>" }}
+      static_get_toolbox={{ title: 'CustomTool', icon: '<span>🔮</span>' }}
     >
       <div>
         <button onClick={handleClick}>button</button>
@@ -261,12 +261,12 @@ const customTool = createPlugin(<CustomTool />, null);
 const customInlineTool = createPlugin(<CustomInlineTool />, null);
 const customBlockTune = createPlugin(<CustomBlockTune />, null);
 
-const e = document.createElement("div");
-e.id = "editorjs";
+const e = document.createElement('div');
+e.id = 'editorjs';
 document.body.appendChild(e);
 
 new EditorJS({
-  holderId: "editorjs",
+  holderId: 'editorjs',
   tools: {
     customTool,
     CustomInlineTool: { class: customInlineTool },

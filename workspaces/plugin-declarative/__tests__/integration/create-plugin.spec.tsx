@@ -1,8 +1,8 @@
 /* @jsx h */
-import { h, createPlugin, VNode } from "../../lib";
+import { h, createPlugin, VNode } from '../../lib';
 
-describe("createPlugin", () => {
-  it("should create a plugin class", () => {
+describe('createPlugin', () => {
+  it('should create a plugin class', () => {
     const Plugin = () => (
       <tool save={() => {}}>
         <div></div>

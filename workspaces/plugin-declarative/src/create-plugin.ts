@@ -1,21 +1,21 @@
-import type { ToolConstructable } from "@editorjs/editorjs";
-import { createElement, Fragment } from "./create-element";
-import { PDJSX, Props, VNode } from "./types";
-import { pluginMethodPrefixes } from "./constants";
+import type { ToolConstructable } from '@editorjs/editorjs';
+import { createElement, Fragment } from './create-element';
+import { PDJSX, Props, VNode } from './types';
+import { pluginMethodPrefixes } from './constants';
 import {
   hasOwnProperty,
   isWhiteSpace,
   isEditorJSVNode,
   parseObjectToCssText,
-} from "./helpers";
+} from './helpers';
 // import type { UnionToIntersection } from "type-fest";
 // import { isObjectFactory } from "./helpers";
 
 const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
-  if (hasOwnProperty(vNode, "parent") && parent) {
+  if (hasOwnProperty(vNode, 'parent') && parent) {
     vNode.parent = parent;
   }
-  if (typeof vNode.type === "function") {
+  if (typeof vNode.type === 'function') {
     const childlen = vNode.type(vNode.props);
     if (Array.isArray(childlen)) {
       for (const v of childlen) {
@@ -26,7 +26,7 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
     } else {
       return null;
     }
-  } else if (typeof vNode.type === "string" && isEditorJSVNode(vNode.type)) {
+  } else if (typeof vNode.type === 'string' && isEditorJSVNode(vNode.type)) {
     const { children, ...pluginProps } = vNode.props;
 
     for (const child of children) {
@@ -35,22 +35,22 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
 
     vNode.isRoot = true;
     vNode.children = children.filter((child: VNode) =>
-      hasOwnProperty(child, "type")
+      hasOwnProperty(child, 'type')
     );
     vNode.pluginProps = pluginProps as PDJSX.PluginAttributes;
     vNode.parent = null;
 
     return vNode;
-  } else if (typeof vNode.type === "string") {
+  } else if (typeof vNode.type === 'string') {
     // for HTMLElement
     const element = document.createElement(vNode.type);
     const { children, ...otherProps } = vNode.props;
 
     // check children type
     for (const child of children) {
-      if (typeof child === "string" && !isWhiteSpace(child)) {
+      if (typeof child === 'string' && !isWhiteSpace(child)) {
         const textVNode: VNode = {
-          type: "text",
+          type: 'text',
           key: undefined,
           ref: undefined,
           props: {} as unknown as Props,
@@ -73,7 +73,7 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
         }
       } else {
         vNode.children = children.filter((child: VNode) =>
-          hasOwnProperty(child, "type")
+          hasOwnProperty(child, 'type')
         );
         traverseNodes(child, vNode);
       }
@@ -81,12 +81,12 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
 
     // attach event handler
     for (const [k, v] of Object.entries(otherProps)) {
-      if (k === "className") {
+      if (k === 'className') {
         element.className = v;
-      } else if (k === "style") {
+      } else if (k === 'style') {
         element.style.cssText = parseObjectToCssText(v);
-      } else if (k === "onClick") {
-        element.addEventListener("click", v);
+      } else if (k === 'onClick') {
+        element.addEventListener('click', v);
       } else {
         // @ts-expect-error
         element[k.toLowerCase()] = v;
@@ -116,17 +116,17 @@ const createNodes = (vNode: VNode): VNode => {
 };
 
 const mapPluginProps = (
-  pluginProps: NonNullable<VNode["pluginProps"]>,
+  pluginProps: NonNullable<VNode['pluginProps']>,
   Plugin: ToolConstructable
 ) => {
   const { STATIC_GETTER, STATIC_METHOD } = pluginMethodPrefixes;
 
   for (const [k, v] of Object.entries(pluginProps)) {
     if (k.startsWith(STATIC_GETTER)) {
-      const key = k.replace(STATIC_GETTER, "");
+      const key = k.replace(STATIC_GETTER, '');
       Plugin[key as keyof typeof Plugin] = v;
     } else if (k.startsWith(STATIC_METHOD)) {
-      const key = k.replace(STATIC_METHOD, "");
+      const key = k.replace(STATIC_METHOD, '');
       Plugin[key as keyof typeof Plugin] = v;
     } else {
       Plugin.prototype[k] = v;

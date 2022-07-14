@@ -1,4 +1,4 @@
-import { PDJSXVNodeType } from "./types";
+import { PDJSXVNodeType } from './types';
 
 export const emptyVNode: {
   [K in PDJSXVNodeType]: null;
@@ -9,6 +9,6 @@ export const emptyVNode: {
 } as const;
 
 export const pluginMethodPrefixes = {
-  STATIC_GETTER: "static_get_",
-  STATIC_METHOD: "static_",
+  STATIC_GETTER: 'static_get_',
+  STATIC_METHOD: 'static_',
 } as const;

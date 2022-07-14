@@ -8,5 +8,5 @@ if (!canvasElm) {
 }
 
 new Editor({
-  holder: canvasElm
+  holder: canvasElm,
 });

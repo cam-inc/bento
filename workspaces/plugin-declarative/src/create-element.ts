@@ -1,4 +1,4 @@
-import { Key, Ref, VNodeProps, VNode, Props } from "./types";
+import { Key, Ref, VNodeProps, VNode, Props } from './types';
 
 const createVNode = ({ type, props, key, ref, original }: VNodeProps) => {
   const vNode: VNode = {
@@ -24,7 +24,7 @@ const createVNode = ({ type, props, key, ref, original }: VNodeProps) => {
 };
 
 export const createElement = (
-  type: VNode["type"],
+  type: VNode['type'],
   config: { [key: string]: any } | null,
   /*
    * NOTE: We replaced original implementations using `arguments`
@@ -37,9 +37,9 @@ export const createElement = (
   let key: Key | undefined = undefined;
   let ref: Ref | undefined = undefined;
   for (let i in config) {
-    if (i === "key") {
+    if (i === 'key') {
       key = config[i];
-    } else if (i === "ref") {
+    } else if (i === 'ref') {
       ref = config[i];
     } else {
       props[i] = config[i];
@@ -59,4 +59,4 @@ export const createElement = (
   });
 };
 
-export const Fragment = (props: VNode["props"]) => props.children;
+export const Fragment = (props: VNode['props']) => props.children;

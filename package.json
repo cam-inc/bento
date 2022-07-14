@@ -12,6 +12,7 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
+    "format": "prettier --single-quote --write \"**/*.{ts,tsx,js,md}\"",
     "graph": "turbo run build test lint format --graph=task-graph.png"
   },
   "workspaces": [
@@ -26,6 +27,7 @@
     "husky": "^8.0.1",
     "mkdirp": "^1.0.4",
     "npm-run-all": "^4.1.5",
+    "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "turbo": "^1.3.1",
     "typescript": "^4.7.3"
