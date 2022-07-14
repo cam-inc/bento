@@ -27,6 +27,6 @@
     "budo": "^11.7.0"
   },
   "dependencies": {
-    "@bento-editor/plugin-declarative": "file:workspaces/plugin-declarative"
+    "@bento-editor/plugin-declarative": "*"
   }
 }
