@@ -1,4 +1,12 @@
-import { PasteEvent } from "@editorjs/editorjs";
+import {
+  PasteEvent,
+  BlockToolConstructorOptions,
+  InlineToolConstructorOptions,
+  API,
+  ToolConfig,
+  BlockAPI,
+} from "@editorjs/editorjs";
+import { BlockTuneData } from "@editorjs/editorjs/types/block-tunes/block-tune-data";
 
 export type ComponentClass<P = {}, _S = {}> = {
   new (props: P, context?: unknown): unknown;
@@ -56,12 +64,20 @@ export namespace PDJSX {
 
   export interface BlockTune<P = {}> extends FunctionComponent<P> {}
 
-  export interface ToolAttributes<C = any> {
+  export interface CommonPluginAttributes {
     children: {
       type: string | ComponentType<any>;
       props: VNodeProps;
       key: Key | null;
     };
+  }
+
+  type PluginInitializer<P = { [key: string]: any }> = (params: P) => void;
+
+  export interface ToolAttributes<C = any> {
+    initializer: (
+      params: PluginInitializer<BlockToolConstructorOptions>
+    ) => void;
     save: (blockContent: C) => void;
     validate?: boolean;
     // TODO: JSX as props
@@ -87,6 +103,9 @@ export namespace PDJSX {
   }
 
   export interface InlineToolAttributes {
+    initializer: (
+      params: PluginInitializer<InlineToolConstructorOptions>
+    ) => void;
     surround: (range: { [key: string]: any }) => void;
     checkState: (selection: { [key: string]: any }) => void;
     renderActions?: () => JSX.IntrinsicElements;
@@ -101,6 +120,17 @@ export namespace PDJSX {
   }
 
   export interface BlockTuneAttributes<C = any> {
+    /**
+     * @see https://github.com/codex-team/editor.js/blob/6f36707f67e498ec0933144df2c72ba07ab1899d/types/block-tunes/block-tune.d.ts#L54...L59
+     */
+    initializer: (
+      params: PluginInitializer<{
+        api: API;
+        config?: ToolConfig;
+        block: BlockAPI;
+        data: BlockTuneData;
+      }>
+    ) => void;
     save?: () => { [key: string]: any };
     wrap?: (blockContent: C) => JSX.IntrinsicElements;
 
@@ -111,9 +141,8 @@ export namespace PDJSX {
     static_reset?: () => void | Promise<void>;
   }
 
-  export type PluginAttributes = ToolAttributes &
-    InlineToolAttributes &
-    BlockTuneAttributes;
+  export type PluginAttributes = CommonPluginAttributes &
+    (ToolAttributes | InlineToolAttributes | BlockTuneAttributes);
 
   export interface EditorJSToolAttributes {}
 

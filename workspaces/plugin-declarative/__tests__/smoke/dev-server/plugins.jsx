@@ -5,9 +5,15 @@ const CustomTool = () => {
   const handleClick = () => {
     console.log("clicked");
   };
-  const handleSave = (blockContent) => console.log(blockContent.value);
+  const handleSave = (blockContent) => {
+    console.log(blockContent.value);
+  };
+  const initializer = (params) => {
+    console.log(params);
+  };
   return (
     <tool
+      initializer={initializer}
       save={handleSave}
       validate={undefined}
       renderSettings={undefined}
@@ -35,8 +41,12 @@ const CustomTool = () => {
 };
 
 const CustomInlineTool = () => {
+  const initializer = (params) => {
+    console.log(params);
+  };
   return (
     <inlineTool
+      initializer={initializer}
       surround={() => {}}
       checkState={() => {}}
       renderActions={undefined}
@@ -54,8 +64,12 @@ const CustomInlineTool = () => {
 };
 
 const CustomBlockTune = () => {
+  const initializer = (params) => {
+    console.log(params);
+  };
   return (
     <blockTune
+      initializer={initializer}
       save={undefined}
       wrap={undefined}
       static_get_isTune={true}

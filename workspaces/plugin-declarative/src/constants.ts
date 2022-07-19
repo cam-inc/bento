@@ -11,4 +11,5 @@ export const emptyVNode: {
 export const pluginMethodPrefixes = {
   STATIC_GETTER: "static_get_",
   STATIC_METHOD: "static_",
+  CONSTRUCTOR: "initializer",
 } as const;
