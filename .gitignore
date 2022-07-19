@@ -138,3 +138,7 @@ dist
 
 # Jest
 **/coverage/
+
+# Turborepo (https://turborepo.org/docs/getting-started#edit-gitignore)
+.turbo
+task-graph.png

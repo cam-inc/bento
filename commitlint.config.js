@@ -4,4 +4,4 @@ module.exports = {
   rules: {
     'scope-enum': [2, 'always', []],
   },
-}
+};

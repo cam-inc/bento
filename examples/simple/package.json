@@ -4,7 +4,7 @@
   "description": "Simple example for bento-editor",
   "scripts": {
     "clear": "rimraf dist && mkdirp dist",
-    "develop": "vite --host"
+    "dev": "vite --host"
   },
   "repository": {
     "type": "git",
