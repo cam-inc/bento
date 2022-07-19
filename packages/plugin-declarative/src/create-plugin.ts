@@ -185,8 +185,10 @@ const createDomTree = (vNode: VNode) => {
 /**
  * @description Remove `replaceNode` from params because of using this directory as API
  */
-export const createPlugin = (vNode: VNode): ToolConstructable => {
-  const initialVNode = createElement(Fragment, null, vNode);
+export const createPlugin = (
+  vNode: VNode | Substitutional.Element
+): ToolConstructable => {
+  const initialVNode = createElement(Fragment, null, vNode as VNode);
 
   const initialNodes = traverseNodes(initialVNode);
 
@@ -195,7 +197,9 @@ export const createPlugin = (vNode: VNode): ToolConstructable => {
   if (initialNodes?.pluginProps != null) {
     class Plugin {
       constructor(params: any) {
-        initialNodes?.pluginProps?.initializer(params);
+        if (initialNodes?.pluginProps?.initializer) {
+          initialNodes?.pluginProps?.initializer(params);
+        }
       }
     }
     // TODO: JSX as props

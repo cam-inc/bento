@@ -64,21 +64,16 @@ export namespace PDJSX {
 
   export interface BlockTune<P = {}> extends FunctionComponent<P> {}
 
-  export interface CommonPluginAttributes {
+  type PluginInitializer<P = { [key: string]: any }> = (params: P) => void;
+
+  export interface ToolAttributes<C = any> {
     children: {
       type: string | ComponentType<any>;
       props: VNodeProps;
       key: Key | null;
     };
-  }
-
-  type PluginInitializer<P = { [key: string]: any }> = (params: P) => void;
-
-  export interface ToolAttributes<C = any> {
-    initializer: (
-      params: PluginInitializer<BlockToolConstructorOptions>
-    ) => void;
     save: (blockContent: C) => void;
+    initializer?: PluginInitializer<BlockToolConstructorOptions>;
     validate?: boolean;
     // TODO: JSX as props
     renderSettings?: { name: string; icon: string }[];
@@ -103,12 +98,15 @@ export namespace PDJSX {
   }
 
   export interface InlineToolAttributes {
-    initializer: (
-      params: PluginInitializer<InlineToolConstructorOptions>
-    ) => void;
+    children: {
+      type: string | ComponentType<any>;
+      props: VNodeProps;
+      key: Key | null;
+    };
     surround: (range: { [key: string]: any }) => void;
     checkState: (selection: { [key: string]: any }) => void;
     renderActions?: () => JSX.IntrinsicElements;
+    initializer?: PluginInitializer<InlineToolConstructorOptions>;
     clear?: () => void;
 
     // getter
@@ -120,17 +118,20 @@ export namespace PDJSX {
   }
 
   export interface BlockTuneAttributes<C = any> {
+    children: {
+      type: string | ComponentType<any>;
+      props: VNodeProps;
+      key: Key | null;
+    };
     /**
      * @see https://github.com/codex-team/editor.js/blob/6f36707f67e498ec0933144df2c72ba07ab1899d/types/block-tunes/block-tune.d.ts#L54...L59
      */
-    initializer: (
-      params: PluginInitializer<{
-        api: API;
-        config?: ToolConfig;
-        block: BlockAPI;
-        data: BlockTuneData;
-      }>
-    ) => void;
+    initializer?: PluginInitializer<{
+      api: API;
+      config?: ToolConfig;
+      block: BlockAPI;
+      data: BlockTuneData;
+    }>;
     save?: () => { [key: string]: any };
     wrap?: (blockContent: C) => JSX.IntrinsicElements;
 
@@ -141,8 +142,10 @@ export namespace PDJSX {
     static_reset?: () => void | Promise<void>;
   }
 
-  export type PluginAttributes = CommonPluginAttributes &
-    (ToolAttributes | InlineToolAttributes | BlockTuneAttributes);
+  export type PluginAttributes =
+    | ToolAttributes
+    | InlineToolAttributes
+    | BlockTuneAttributes;
 
   export interface EditorJSToolAttributes {}
 
@@ -154,6 +157,16 @@ export namespace PDJSX {
 }
 
 declare global {
+  namespace Substitutional {
+    export interface Element<P = any> {
+      type: ComponentType<P> | string;
+      props: P & { children: VNode | string | number | null };
+      key: Key;
+      ref?: Ref<any> | null;
+      startTime?: number;
+      endTime?: number;
+    }
+  }
   // sourced for IntrinsicElements: https://github.com/preactjs/preact/blob/43d79c0e8f727e9ac745a50c3a61868adb2dcfe7/src/jsx.d.ts
   namespace JSX {
     type TargetedEvent<
@@ -492,6 +505,8 @@ declare global {
     interface HTMLAttributes<RefType extends EventTarget = EventTarget>
       extends ClassAttributes<RefType>,
         DOMAttributes<RefType> {
+      // Added for this plugin
+      children?: Substitutional.Element | Substitutional.Element[] | string;
       // Standard HTML Attributes
       accept?: string;
       acceptCharset?: string;

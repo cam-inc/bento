@@ -1,14 +1,15 @@
-const { h, createPlugin } = require("../../../dist/lib");
-const EditorJS = require("@editorjs/editorjs");
+/* @jsx h */
+import { h, createPlugin, PDJSX } from '../../../../dist/lib';
+import EditorJS from '@editorjs/editorjs';
 
 const CustomTool = () => {
   const handleClick = () => {
-    console.log("clicked");
+    console.log('clicked');
   };
-  const handleSave = (blockContent) => {
+  const handleSave = (blockContent: any) => {
     console.log(blockContent.value);
   };
-  const initializer = (params) => {
+  const initializer: PDJSX.ToolAttributes['initializer'] = (params) => {
     console.log(params);
   };
   return (
@@ -26,11 +27,11 @@ const CustomTool = () => {
       static_get_conversionConfig={undefined}
       static_get_enableLineBreaks={undefined}
       static_get_isReadOnlySupported={undefined}
-      static_get_toolbox={{ title: "CustomTool", icon: "<span>🔮</span>" }}
+      static_get_toolbox={{ title: 'CustomTool', icon: '<span>🔮</span>' }}
     >
       <div>
         <button
-          style={{ border: "none", cursor: "pointer" }}
+          style={{ border: 'none', cursor: 'pointer' }}
           onClick={handleClick}
         >
           button
@@ -41,7 +42,7 @@ const CustomTool = () => {
 };
 
 const CustomInlineTool = () => {
-  const initializer = (params) => {
+  const initializer: PDJSX.InlineToolAttributes['initializer'] = (params) => {
     console.log(params);
   };
   return (
@@ -64,7 +65,7 @@ const CustomInlineTool = () => {
 };
 
 const CustomBlockTune = () => {
-  const initializer = (params) => {
+  const initializer: PDJSX.BlockTuneAttributes['initializer'] = (params) => {
     console.log(params);
   };
   return (
@@ -83,11 +84,12 @@ const CustomBlockTune = () => {
         </div>
         <span />
         <div>
-          <button>button</button> {/* inserted block */}
-          <button>button</button> {/* inserted block */}
-          <button>button</button> {/* inserted block */}
-          <button>button</button> {/* inserted block */}
-          <button>button</button> {/* inserted block */}
+          {/* test comment */}
+          <button>button</button>
+          <button>button</button>
+          <button>button</button>
+          <button>button</button>
+          <button>button</button>
         </div>
       </div>
     </blockTune>
@@ -98,12 +100,12 @@ const customTool = createPlugin(<CustomTool />);
 const customInlineTool = createPlugin(<CustomInlineTool />);
 const customBlockTune = createPlugin(<CustomBlockTune />);
 
-const e = document.createElement("div");
-e.id = "editorjs";
+const e = document.createElement('div');
+e.id = 'editorjs';
 document.body.appendChild(e);
 
 new EditorJS({
-  holder: "editorjs",
+  holder: 'editorjs',
   tools: {
     customTool,
     CustomInlineTool: { class: customInlineTool },
