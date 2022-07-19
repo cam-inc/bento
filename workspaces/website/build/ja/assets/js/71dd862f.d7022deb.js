@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_bento_editor_website=self.webpackChunk_bento_editor_website||[]).push([[1865],{4424:e=>{e.exports=JSON.parse('{"label":"facebook","permalink":"/bento/ja/blog/tags/facebook","allTagsPath":"/bento/ja/blog/tags","count":1}')}}]);
