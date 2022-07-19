@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_bento_editor_website=self.webpackChunk_bento_editor_website||[]).push([[5781],{276:e=>{e.exports=JSON.parse('{"label":"docusaurus","permalink":"/bento/blog/tags/docusaurus","allTagsPath":"/bento/blog/tags","count":4}')}}]);

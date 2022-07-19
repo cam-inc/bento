@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_bento_editor_website=self.webpackChunk_bento_editor_website||[]).push([[4538],{3610:e=>{e.exports=JSON.parse('{"permalink":"/bento/ja/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
