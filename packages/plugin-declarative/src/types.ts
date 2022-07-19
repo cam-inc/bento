@@ -163,8 +163,6 @@ declare global {
       props: P & { children: VNode | string | number | null };
       key: Key;
       ref?: Ref<any> | null;
-      startTime?: number;
-      endTime?: number;
     }
   }
   // sourced for IntrinsicElements: https://github.com/preactjs/preact/blob/43d79c0e8f727e9ac745a50c3a61868adb2dcfe7/src/jsx.d.ts
