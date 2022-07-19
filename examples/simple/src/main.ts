@@ -1,4 +1,4 @@
-import { Editor } from '@bento-editor/core';
+import Editor from '@editorjs/editorjs';
 import './style.css';
 
 const canvasElm = document.querySelector<HTMLDivElement>('#canvas');

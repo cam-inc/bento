@@ -1,7 +1,7 @@
 {
-  "name": "@bento-editor/core",
-  "version": "0.0.3",
-  "description": "JSON Schema based block-styled editor.",
+  "name": "@bento-editor/block-paragraph",
+  "version": "0.0.1",
+  "description": "TODO",
   "keywords": [
     "TODO"
   ],
@@ -22,7 +22,7 @@
     "test": "jest",
     "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
   },
-  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/core",
+  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/block-paragraph",
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },
@@ -49,9 +49,7 @@
     "ts-node": "^10.8.1"
   },
   "peerDependencies": {
-    "@editorjs/editorjs": "^2.25.0"
   },
   "dependencies": {
-    "@bento-editor/shared": "*"
   }
 }
