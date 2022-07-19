@@ -135,3 +135,6 @@ dist
 # Cypress
 **/cypress/screenshots/
 **/cypress/videos/
+
+# Jest
+**/coverage/
