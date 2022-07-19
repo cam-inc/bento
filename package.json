@@ -12,7 +12,7 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
-    "format": "prettier --single-quote --write \"**/*.{ts,tsx,js,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,js,md}\"",
     "graph": "turbo run build --dry-run --graph=task-graph.png"
   },
   "workspaces": [
