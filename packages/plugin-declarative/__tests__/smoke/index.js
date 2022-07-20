@@ -1,5 +1,5 @@
 'use strict';
-const { run } = require('./dev-server');
+const { run } = require('./dev-server/server');
 
 (() => {
   try {

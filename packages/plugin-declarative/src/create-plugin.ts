@@ -119,7 +119,7 @@ const mapPluginProps = (
   pluginProps: NonNullable<VNode['pluginProps']>,
   Plugin: ToolConstructable
 ) => {
-  const { STATIC_GETTER, STATIC_METHOD } = pluginMethodPrefixes;
+  const { STATIC_GETTER, STATIC_METHOD, CONSTRUCTOR } = pluginMethodPrefixes;
 
   for (const [k, v] of Object.entries(pluginProps)) {
     if (k.startsWith(STATIC_GETTER)) {
@@ -128,7 +128,7 @@ const mapPluginProps = (
     } else if (k.startsWith(STATIC_METHOD)) {
       const key = k.replace(STATIC_METHOD, '');
       Plugin[key as keyof typeof Plugin] = v;
-    } else {
+    } else if (!k.startsWith(CONSTRUCTOR)) {
       Plugin.prototype[k] = v;
     }
   }
@@ -185,16 +185,23 @@ const createDomTree = (vNode: VNode) => {
 /**
  * @description Remove `replaceNode` from params because of using this directory as API
  */
-export const createPlugin = (vNode: VNode): ToolConstructable => {
-  const initialVNode = createElement(Fragment, null, vNode);
+export const createPlugin = (
+  vNode: VNode | Substitutional.Element
+): ToolConstructable => {
+  const initialVNode = createElement(Fragment, null, vNode as VNode);
 
   const initialNodes = traverseNodes(initialVNode);
 
   // TODO: diff & commit
 
-  class Plugin {}
-
   if (initialNodes?.pluginProps != null) {
+    class Plugin {
+      constructor(params: any) {
+        if (initialNodes?.pluginProps?.initializer) {
+          initialNodes?.pluginProps?.initializer(params);
+        }
+      }
+    }
     // TODO: JSX as props
     // transformPluginProps(nodes?.pluginProps);
 
