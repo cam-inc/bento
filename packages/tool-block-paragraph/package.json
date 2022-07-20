@@ -1,5 +1,5 @@
 {
-  "name": "@bento-editor/block-paragraph",
+  "name": "@bento-editor/tool-block-paragraph",
   "version": "0.0.1",
   "description": "TODO",
   "keywords": [
@@ -22,7 +22,7 @@
     "test": "jest",
     "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
   },
-  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/block-paragraph",
+  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/tool-block-paragraph",
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },
@@ -49,6 +49,7 @@
     "ts-node": "^10.8.1"
   },
   "peerDependencies": {
+    "@bento-editor/core": "*"
   },
   "dependencies": {
   }
