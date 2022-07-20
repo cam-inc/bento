@@ -8,15 +8,6 @@ export type Config = {
 };
 type Container = HTMLDivElement;
 
-type AAA = BlockToolConstructorOptions<Data, Config>;
-const aaa: AAA = {
-  api: {} as API,
-  data: {} as Data,
-  readOnly: true,
-  config: {} as Config,
-}
-console.log(aaa);
-
 export default class Paragraph implements BlockTool {
   static get toolbox(): ToolboxConfig {
     return {
@@ -49,9 +40,19 @@ export default class Paragraph implements BlockTool {
     }
   }
 
+  validate(data: BlockToolData<Data>) {
+    return !!data.value;
+  }
+
   render(): Container {
     console.log('called: render');
-    this.container.innerHTML = 'aaaaaaa';
+    this.container.innerHTML = this.data.value;
+    if (this.readOnly) {
+      this.container.contentEditable = 'false';
+    } else {
+      this.container.contentEditable = 'true';
+    }
+
     return this.container;
   }
 

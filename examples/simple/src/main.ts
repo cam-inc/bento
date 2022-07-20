@@ -13,8 +13,32 @@ new Editor({
   holder: canvasElm,
   tools: {
     myparagraph: {
+      // TODO: fix type error
       class: ToolBlockParagraph,
     }
+  },
+  data: {
+    // TODO: より厳密に型を。
+    blocks: [
+      {
+        type: 'myparagraph',
+        data: {
+          value: 'initial paragraph 01'
+        }
+      },
+      {
+        type: 'myparagraph',
+        data: {
+          value: 'initial paragraph 02'
+        }
+      }
+    ]
+  },
+  onReady: () => {
+    console.log('Editor.js is ready to work!');
+  },
+  onChange: (api, event) => {
+    console.log('Now I know that Editor\'s content changed!', event);
   },
   // @see: https://editorjs.io/configuration#change-the-default-block
   //defaultBlock: 'myparagraph',
