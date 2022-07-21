@@ -504,7 +504,15 @@ declare global {
       extends ClassAttributes<RefType>,
         DOMAttributes<RefType> {
       // Added for this plugin
-      children?: Substitutional.Element | Substitutional.Element[] | string;
+      children?:
+        | Substitutional.Element
+        | Substitutional.Element[]
+        | string
+        | number
+        | null
+        | object
+        | boolean
+        | undefined;
       // Standard HTML Attributes
       accept?: string;
       acceptCharset?: string;

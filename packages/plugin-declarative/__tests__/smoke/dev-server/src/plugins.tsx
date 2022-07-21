@@ -1,10 +1,13 @@
 /* @jsx h */
-import { h, createPlugin, PDJSX } from '../../../../dist/lib';
+import { h, createPlugin, PDJSX, useState } from '../../../../dist/lib';
 import EditorJS from '@editorjs/editorjs';
 
 const CustomTool = () => {
+  const [count, setCount] = useState(0);
   const handleClick = () => {
     console.log('clicked');
+    setCount(count + 1);
+    console.log(count);
   };
   const handleSave = (blockContent: any) => {
     console.log(blockContent.value);
@@ -36,6 +39,7 @@ const CustomTool = () => {
         >
           button
         </button>
+        <div>{count}</div>
       </div>
     </tool>
   );
