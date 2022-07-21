@@ -6,8 +6,10 @@ const CustomTool = () => {
   const handleClick = () => {
     console.log('clicked');
   };
-  const handleSave = (blockContent: any) => {
-    console.log(blockContent.value);
+  const handleSave = (blockContent: HTMLElement) => {
+    return {
+      text: blockContent.innerText,
+    };
   };
   const initializer: PDJSX.ToolAttributes['initializer'] = (params) => {
     console.log(params);
