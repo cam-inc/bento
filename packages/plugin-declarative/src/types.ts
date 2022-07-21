@@ -20,6 +20,15 @@ export type FunctionComponent<P = {}> = {
 };
 export type ComponentType<P = {}> = FunctionComponent<P>;
 
+export type ComponentChild =
+  | Substitutional.Element
+  | string
+  | number
+  | null
+  | object
+  | boolean
+  | undefined;
+
 export type Props = {
   children?: any;
 } & { [key: string]: any };
@@ -67,11 +76,7 @@ export namespace PDJSX {
   type PluginInitializer<P = { [key: string]: any }> = (params: P) => void;
 
   export interface ToolAttributes<C = any> {
-    children: {
-      type: string | ComponentType<any>;
-      props: VNodeProps;
-      key: Key | null;
-    };
+    children: ComponentChild | ComponentChild[];
     save: (blockContent: C) => void;
     initializer?: PluginInitializer<BlockToolConstructorOptions>;
     validate?: boolean;
@@ -98,11 +103,7 @@ export namespace PDJSX {
   }
 
   export interface InlineToolAttributes {
-    children: {
-      type: string | ComponentType<any>;
-      props: VNodeProps;
-      key: Key | null;
-    };
+    children: ComponentChild | ComponentChild[];
     surround: (range: { [key: string]: any }) => void;
     checkState: (selection: { [key: string]: any }) => void;
     renderActions?: () => JSX.IntrinsicElements;
@@ -118,11 +119,7 @@ export namespace PDJSX {
   }
 
   export interface BlockTuneAttributes<C = any> {
-    children: {
-      type: string | ComponentType<any>;
-      props: VNodeProps;
-      key: Key | null;
-    };
+    children: ComponentChild | ComponentChild[];
     /**
      * @see https://github.com/codex-team/editor.js/blob/6f36707f67e498ec0933144df2c72ba07ab1899d/types/block-tunes/block-tune.d.ts#L54...L59
      */
@@ -504,15 +501,7 @@ declare global {
       extends ClassAttributes<RefType>,
         DOMAttributes<RefType> {
       // Added for this plugin
-      children?:
-        | Substitutional.Element
-        | Substitutional.Element[]
-        | string
-        | number
-        | null
-        | object
-        | boolean
-        | undefined;
+      children?: ComponentChild | ComponentChild[];
       // Standard HTML Attributes
       accept?: string;
       acceptCharset?: string;

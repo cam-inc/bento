@@ -3,11 +3,8 @@ import { h, createPlugin, PDJSX, useState } from '../../../../dist/lib';
 import EditorJS from '@editorjs/editorjs';
 
 const CustomTool = () => {
-  const [count, setCount] = useState(0);
   const handleClick = () => {
     console.log('clicked');
-    setCount(count + 1);
-    console.log(count);
   };
   const handleSave = (blockContent: any) => {
     console.log(blockContent.value);
@@ -39,7 +36,47 @@ const CustomTool = () => {
         >
           button
         </button>
-        <div>{count}</div>
+      </div>
+    </tool>
+  );
+};
+
+const SampleWithHooks = () => {
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState('Hello');
+  const handleClick = () => {
+    setShow(!show);
+  };
+  const handleChange = (e: Event) => {
+    if (e.target instanceof HTMLInputElement) {
+      setText(e.target.value);
+    }
+  };
+  return (
+    <tool
+      save={() => {}}
+      static_get_toolbox={{ title: 'SampleWithHooks', icon: '<span>🧪</span>' }}
+    >
+      <div style={{ position: 'relative' }}>
+        <span onClick={handleClick}>{text}</span>
+        {show && (
+          <div
+            style={{
+              position: 'absolute',
+              width: '128px',
+              height: '64px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: 'gray',
+              color: 'white',
+            }}
+          >
+            <form style={{ width: '100%', padding: '8px' }}>
+              <input style={{ width: '100%' }} onChange={handleChange} />
+            </form>
+          </div>
+        )}
       </div>
     </tool>
   );
@@ -101,6 +138,7 @@ const CustomBlockTune = () => {
 };
 
 const customTool = createPlugin(<CustomTool />);
+const sampleWithHooks = createPlugin(<SampleWithHooks />);
 const customInlineTool = createPlugin(<CustomInlineTool />);
 const customBlockTune = createPlugin(<CustomBlockTune />);
 
@@ -112,6 +150,7 @@ new EditorJS({
   holder: 'editorjs',
   tools: {
     customTool,
+    sampleWithHooks,
     CustomInlineTool: { class: customInlineTool },
     CustomBlockTune: { class: customBlockTune },
   },
