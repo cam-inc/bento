@@ -1,5 +1,6 @@
 import { emptyVNode } from './constants';
 import { PDJSXVNodeType } from './types';
+import { noCase, paramCase } from 'change-case';
 
 export const isWhiteSpace = (str: string) => str === ' ';
 export const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
@@ -27,7 +28,7 @@ export const isObjectFactory = (o: unknown) => {
 export const parseObjectToCssText = (o: { [key: string]: any }) => {
   let cssText = '';
   for (const [k, v] of Object.entries(o)) {
-    cssText += `${k}: ${v};`;
+    cssText += `${paramCase(k)}: ${v};`;
   }
   return cssText;
 };

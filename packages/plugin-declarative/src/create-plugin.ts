@@ -138,14 +138,14 @@ const mapPluginProps = (
 
 const createDomTree = (vNode: VNode) => {
   // NOTE: create DOM node
-  let domTree: HTMLElement | null = null;
+  const domTree = document.createDocumentFragment();
   if (
     isEditorJSVNode(vNode.type as string) &&
     vNode.isRoot &&
-    vNode.children?.length === 1
+    vNode.children != null
   ) {
     for (const child of vNode.children) {
-      domTree = createNodes(child).dom as HTMLElement;
+      domTree.appendChild(createNodes(child).dom as HTMLElement);
     }
     return domTree;
   }
@@ -154,6 +154,7 @@ const createDomTree = (vNode: VNode) => {
   //   return nodes.dom as HTMLElement;
   // }
   else {
+    console.log(vNode);
     throw new Error();
   }
 };
