@@ -10,11 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/cam-inc/bento.git"
   },
-  "bugs": {
-    "url": "https://github.com/cam-inc/bento/issues"
-  },
-  "homepage": "https://github.com/cam-inc/bento#readme",
   "dependencies": {
+    "@bento-editor/tool-block-paragraph": "*",
     "@bento-editor/core": "*"
   },
   "devDependencies": {
