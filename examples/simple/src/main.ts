@@ -1,5 +1,6 @@
 import ToolBlockParagraph from '@bento-editor/tool-block-paragraph';
 import type { Data as ToolBlockParagraphData } from '@bento-editor/tool-block-paragraph';
+import ToolInlineMarker from '@bento-editor/tool-inline-marker';
 import Editor, { LogLevels } from '@editorjs/editorjs';
 import './style.css';
 
@@ -17,6 +18,9 @@ const editor = new Editor({
       // TODO: fix type error
       class: ToolBlockParagraph,
       inlineToolbar: true,
+    },
+    marker: {
+      class: ToolInlineMarker,
     }
   },
   data: {

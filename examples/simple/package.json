@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@bento-editor/tool-block-paragraph": "*",
+    "@bento-editor/tool-inline-marker": "*",
     "@bento-editor/core": "*"
   },
   "devDependencies": {
