@@ -8,7 +8,7 @@
     "strict": true,
     /* Modules */
     "module": "ESNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Node",
     "rootDir": "src",
     /* Emit */
     "declaration": true,

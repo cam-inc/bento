@@ -50,6 +50,7 @@ const editor = new Editor({
   //defaultBlock: 'myparagraph',
   autofocus: true,
   placeholder: 'Let`s write an awesome story!',
+  // TODO: 実行時にundefinedになる問題を解決
   //logLevel: LogLevels.VERBOSE,
 });
 
