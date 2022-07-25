@@ -18,7 +18,10 @@ export type FunctionComponent<P = {}> = {
   displayName?: string;
   defaultProps?: Partial<P>;
 };
-export type ComponentType<P = {}> = FunctionComponent<P>;
+export type Component = {
+  renderCallbacks: Array<() => void>;
+};
+export type ComponentType<P = {}> = Component | FunctionComponent<P>;
 
 export type ComponentChild =
   | Substitutional.Element
@@ -49,7 +52,7 @@ export type VNode<P = {}> = VNodeProps<P> & {
   children: Array<VNode> | null;
   parent: VNode | null;
   depth: number | null;
-  dom: HTMLElement | { [key: string]: any } | null;
+  dom: PDJSX.Element | null;
   nextDom: { [key: string]: any } | null;
   component: { [key: string]: any } | null;
   hydrating: boolean | null;
@@ -67,6 +70,15 @@ export type Original = VNode | string | number | null;
 export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
 
 export namespace PDJSX {
+  export interface Element extends HTMLElement {
+    _children?: VNode | null;
+    _pluginProps?:
+      | ToolAttributes
+      | InlineToolAttributes
+      | BlockTuneAttributes
+      | null;
+  }
+
   export interface Tool<P = {}> extends FunctionComponent<P> {}
 
   export interface InlineTool<P = {}> extends FunctionComponent<P> {}
