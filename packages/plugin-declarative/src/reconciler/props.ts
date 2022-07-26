@@ -1,13 +1,37 @@
 import { ToolConstructable } from '@editorjs/editorjs';
+import { isEditorJSVNode } from '../helpers';
 import { pluginMethodPrefixes } from '../constants';
 import { VNode } from '../types';
 // import type { UnionToIntersection } from "type-fest";
 // import { isObjectFactory } from "./helpers";
 
-export const mapPluginProps = (vNode: VNode) => {
-  // TODO: Fix this. It'll be null.
-  const pluginProps = vNode.pluginProps;
+export const getPluginProps = (vNode: VNode): VNode['pluginProps'] | null => {
+  if (typeof vNode.type === 'string' && isEditorJSVNode(vNode.type)) {
+    const { children, ...pluginProps } = vNode.props;
+    vNode.pluginProps = pluginProps as VNode['pluginProps'];
+    vNode.isRoot = true;
+    return vNode.pluginProps;
+  }
 
+  if (typeof vNode.type === 'function') {
+    const children = vNode.type(vNode.props);
+    if (Array.isArray(children)) {
+      for (const child of children) {
+        return getPluginProps(child);
+      }
+    } else if (children) {
+      return getPluginProps(children);
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+
+  return null;
+};
+
+export const mapPluginProps = (pluginProps: VNode['pluginProps']) => {
   if (pluginProps) {
     const { STATIC_GETTER, STATIC_METHOD, CONSTRUCTOR } = pluginMethodPrefixes;
 

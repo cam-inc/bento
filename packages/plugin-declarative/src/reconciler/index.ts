@@ -24,7 +24,6 @@ export const reconcile = ({
   commitQueue,
 }: ReconcileParams) => {
   const newType = newVNode.type;
-  let newPluginProps: VNode['pluginProps'] = null;
   if (typeof newType === 'function') {
     const newProps = newVNode.props;
 
@@ -40,10 +39,7 @@ export const reconcile = ({
     newVNode.dom = reconcileElements({});
   }
 
-  return {
-    dom: newVNode.dom,
-    pluginProps: newPluginProps as unknown as NonNullable<VNode['pluginProps']>,
-  };
+  return newVNode.dom;
 };
 
 export const commitRoot = (queue: ComponentType[]) => {};
