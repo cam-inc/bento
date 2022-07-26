@@ -2,7 +2,7 @@ import type { ToolConstructable } from '@editorjs/editorjs';
 import { createElement, Fragment } from './create-element';
 import { ComponentType, PDJSX, VNode } from './types';
 import { commitRoot, reconcile } from './reconciler';
-import { getPluginProps, mapPluginProps } from './reconciler/props';
+import { getPluginProps, setPluginProps } from './reconciler/props';
 
 // NOTE: Removed `replaceNode` from params because of using this directory as API
 export const createPlugin = (
@@ -13,7 +13,7 @@ export const createPlugin = (
 
   const initialVNode = createElement(Fragment, null, vNode as VNode);
   const parentDom = { _children: initialVNode } as PDJSX.Element;
-  const PluginDeclarative = mapPluginProps(getPluginProps(initialVNode));
+  const PluginDeclarative = setPluginProps(getPluginProps(initialVNode));
 
   // TODO: JSX as props
   // transformPluginProps(nodes?.pluginProps);

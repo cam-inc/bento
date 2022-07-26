@@ -9,6 +9,7 @@ export const getPluginProps = (vNode: VNode): VNode['pluginProps'] | null => {
   if (typeof vNode.type === 'string' && isEditorJSVNode(vNode.type)) {
     const { children, ...pluginProps } = vNode.props;
     vNode.pluginProps = pluginProps as VNode['pluginProps'];
+    // NOTE: PDJSXElement should be a root element.
     vNode.isRoot = true;
     return vNode.pluginProps;
   }
@@ -31,7 +32,7 @@ export const getPluginProps = (vNode: VNode): VNode['pluginProps'] | null => {
   return null;
 };
 
-export const mapPluginProps = (pluginProps: VNode['pluginProps']) => {
+export const setPluginProps = (pluginProps: VNode['pluginProps']) => {
   if (pluginProps) {
     const { STATIC_GETTER, STATIC_METHOD, CONSTRUCTOR } = pluginMethodPrefixes;
 

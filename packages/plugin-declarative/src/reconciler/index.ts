@@ -30,7 +30,7 @@ export const reconcile = ({
     if (oldVNode?.component) {
       newVNode.component = oldVNode.component;
     } else {
-      // NOTE: We only support functional component.
+      // NOTE: We only support the functional component.
       newVNode.component = newType(newProps);
     }
 
