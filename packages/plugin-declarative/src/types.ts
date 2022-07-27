@@ -77,6 +77,7 @@ export namespace PDJSX {
       | InlineToolAttributes
       | BlockTuneAttributes
       | null;
+    _data?: string | number;
   }
 
   export interface Tool<P = {}> extends FunctionComponent<P> {}

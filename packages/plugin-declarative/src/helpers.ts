@@ -1,8 +1,9 @@
 import { emptyVNode } from './constants';
-import { PDJSXVNodeType } from './types';
-import { noCase, paramCase } from 'change-case';
+import { PDJSX, PDJSXVNodeType } from './types';
+import { paramCase } from 'change-case';
 
 export const isWhiteSpace = (str: string) => str === ' ';
+
 export const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
   Object.prototype.hasOwnProperty.call(thisArg, key);
 
@@ -32,3 +33,13 @@ export const parseObjectToCssText = (o: { [key: string]: any }) => {
   }
   return cssText;
 };
+
+export const isReadOnlyHtmlAttribute = (key: string, dom: PDJSX.Element) =>
+  key !== 'list' &&
+  key !== 'tagName' &&
+  key !== 'form' &&
+  key !== 'type' &&
+  key !== 'size' &&
+  key !== 'download' &&
+  key !== 'href' &&
+  hasOwnProperty(dom, key as keyof PDJSX.Element);

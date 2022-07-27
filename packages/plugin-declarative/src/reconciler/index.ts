@@ -8,6 +8,8 @@ import {
 import { reconcileElements } from './elements';
 import { reconcileChildren } from './childlen';
 
+export { getPluginProps, setPluginProps } from './props';
+
 type ReconcileParams = {
   parentDom: PDJSX.Element;
   oldDom: Substitutional.Element | null;
@@ -26,6 +28,7 @@ export const reconcile = ({
   const newType = newVNode.type;
   if (typeof newType === 'function') {
     const newProps = newVNode.props;
+    console.log(newProps);
 
     if (oldVNode?.component) {
       newVNode.component = oldVNode.component;
@@ -36,7 +39,12 @@ export const reconcile = ({
 
     reconcileChildren({});
   } else {
-    newVNode.dom = reconcileElements({});
+    newVNode.dom = reconcileElements({
+      dom: oldVNode?.dom ?? null,
+      newVNode,
+      oldVNode,
+      commitQueue,
+    }) as PDJSX.Element;
   }
 
   return newVNode.dom;

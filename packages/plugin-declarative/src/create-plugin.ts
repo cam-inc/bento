@@ -1,8 +1,12 @@
 import type { ToolConstructable } from '@editorjs/editorjs';
 import { createElement, Fragment } from './create-element';
 import { ComponentType, PDJSX, VNode } from './types';
-import { commitRoot, reconcile } from './reconciler';
-import { getPluginProps, setPluginProps } from './reconciler/props';
+import {
+  commitRoot,
+  reconcile,
+  getPluginProps,
+  setPluginProps,
+} from './reconciler';
 
 // NOTE: Removed `replaceNode` from params because of using this directory as API
 export const createPlugin = (
