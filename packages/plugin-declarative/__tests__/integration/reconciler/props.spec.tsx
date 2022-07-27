@@ -63,6 +63,26 @@ describe('reconcileProps', () => {
         height: 'auto',
       },
     },
+    {
+      name: 'equal(object -> object)',
+      newStyle: {
+        background: 'red',
+        width: 24,
+        height: '100%',
+        display: 'inline',
+      },
+      oldStyle: {
+        background: 'red',
+        width: 24,
+        height: '100%',
+        display: 'inline',
+      },
+    },
+    {
+      name: 'equal(string -> string)',
+      newStyle: 'background: red; width: 24px; height: 100%; display: inline;',
+      oldStyle: 'background: red; width: 24px; height: 100%; display: inline;',
+    },
   ])(
     '[$name] should apply the style prop to dom',
     ({ name, newStyle, oldStyle }) => {
@@ -76,15 +96,20 @@ describe('reconcileProps', () => {
         oldProps: oldVNode.props,
       });
 
-      console.log(`[${name}]`, dom.style);
-
       expect(dom.style).toBeTruthy();
-      expect((dom.style as any)._values).toMatchObject({
-        background: 'red',
-        width: '24px',
-        height: '100%',
-        display: 'inline',
-      });
+
+      if (name.includes('equal')) {
+        // NOTE: Is it a kind of bug?
+        const { isEmptyObject } = isObjectFactory((dom.style as any)._values);
+        expect(isEmptyObject).toBeTruthy();
+      } else {
+        expect((dom.style as any)._values).toMatchObject({
+          background: 'red',
+          width: '24px',
+          height: '100%',
+          display: 'inline',
+        });
+      }
     }
   );
 });
