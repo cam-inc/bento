@@ -18,17 +18,29 @@ export type FunctionComponent<P = {}> = {
   displayName?: string;
   defaultProps?: Partial<P>;
 };
-export type Component = {
-  renderCallbacks: Array<() => void>;
-};
+export interface Component<P = {}, S = {}> {
+  constructor: ComponentType<P>;
+  state: S;
+  dirty: boolean;
+  renderCallbacks: Array<Component>;
+  base?: PDJSX.Element | null;
+  force?: boolean;
+  globalContext?: any;
+  vNode?: VNode<P> | null;
+  nextState?: S | null;
+  prevState?: S | null;
+  parentDom?: PDJSX.Element | null;
+  processingException?: Component<any, any> | null;
+  pendingError?: Component<any, any> | null;
+}
 export type ComponentType<P = {}> = Component | FunctionComponent<P>;
 
 export type ComponentChild =
+  | VNode
   | Substitutional.Element
   | string
   | number
   | null
-  | object
   | boolean
   | undefined;
 
@@ -42,19 +54,19 @@ type RefCallback<T> = { (instance: T): void; current: undefined };
 export type Ref<T = { [key: string]: any }> = RefObject<T> | RefCallback<T>;
 
 export type VNodeProps<P = {}> = {
-  type: string | ComponentType<P>;
+  type: string | ComponentType<P> | null;
   props: Props;
-  key: Key | undefined;
-  ref: Ref | undefined;
+  key: Key | null;
+  ref: Ref | null;
   original: Original;
 };
 export type VNode<P = {}> = VNodeProps<P> & {
-  children: Array<VNode> | null;
+  children: Array<VNode | null> | null;
   parent: VNode | null;
-  depth: number | null;
+  depth: number;
   dom: PDJSX.Element | null;
-  nextDom: { [key: string]: any } | null;
-  component: { [key: string]: any } | null;
+  nextDom: PDJSX.Element | null;
+  component: Component | null;
   hydrating: boolean | null;
   constructor: typeof Object.prototype.constructor;
   pluginProps:
@@ -65,7 +77,13 @@ export type VNode<P = {}> = VNodeProps<P> & {
   isRoot: boolean;
 };
 
-export type Original = VNode | string | number | null;
+export type Original =
+  | VNode
+  | ComponentChild
+  | ComponentChild[]
+  | string
+  | number
+  | null;
 
 export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
 

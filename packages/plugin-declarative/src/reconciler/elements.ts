@@ -1,4 +1,6 @@
-import { ComponentType, PDJSX, VNode } from 'react';
+import { isEditorJSVNode } from '../helpers';
+import { Component as ComponentType, PDJSX, VNode } from '../types';
+import { reconcileChildren } from './childlen';
 import { reconcileProps } from './props';
 
 export type ReconcileElementsParams = {
@@ -23,22 +25,35 @@ export const reconcileElements = ({
       return document.createTextNode(`${newProps}`);
     }
 
-    dom = document.createElement(newVNode.type as string);
+    if (isEditorJSVNode(newVNode.type as string)) {
+      dom = document.createDocumentFragment() as unknown as HTMLElement;
+    } else {
+      dom = document.createElement(newVNode.type as string);
+    }
   }
 
+  // NOTE: Apply side effects of props to the dom.
   if (newVNode.type === null) {
     const textNodeProps = newProps as unknown as PDJSX.Element['_data'];
     if (newProps !== oldProps && dom._data !== textNodeProps) {
       dom._data = textNodeProps;
     }
   } else {
-    // NOTE: Apply side effects of props to dom.
     reconcileProps({
       dom,
       newProps,
       oldProps,
     });
-    // TODO: diff children
+
+    const children = newVNode.props.children;
+    reconcileChildren({
+      parentDom: dom,
+      renderResult: Array.isArray(children) ? children : [children],
+      newParentVNode: newVNode,
+      oldParentVNode: oldVNode,
+      commitQueue,
+      oldDom: null,
+    });
   }
   return dom;
 };

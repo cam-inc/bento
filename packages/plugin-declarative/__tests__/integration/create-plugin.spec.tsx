@@ -5,6 +5,7 @@ describe('createPlugin', () => {
   it('should create a plugin class', () => {
     const Plugin = () => (
       <tool save={() => {}}>
+        {/*@ts-ignore*/}
         <div></div>
       </tool>
     );

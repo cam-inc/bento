@@ -43,3 +43,10 @@ export const isReadOnlyHtmlAttribute = (key: string, dom: PDJSX.Element) =>
   key !== 'download' &&
   key !== 'href' &&
   hasOwnProperty(dom, key as keyof PDJSX.Element);
+
+export const removeNode = (node: Node) => {
+  const parentNode = node.parentNode;
+  if (parentNode) {
+    parentNode.removeChild(node);
+  }
+};

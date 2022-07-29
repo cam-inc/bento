@@ -51,7 +51,7 @@ export const setProps = ({ dom, key, newValue, oldValue }: SetPropsParams) => {
       if (typeof oldValue === 'string') {
         // NOTE: Remove the old css text for setting style by key & value
         oldValue = '';
-        dom.style.cssText = '';
+        dom.style.cssText = oldValue;
       }
 
       if (oldValue) {

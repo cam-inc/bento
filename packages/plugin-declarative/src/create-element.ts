@@ -1,6 +1,12 @@
-import { Key, Ref, VNodeProps, VNode, Props } from './types';
+import { VNodeProps, VNode, Props } from './types';
 
-const createVNode = ({ type, props, key, ref, original }: VNodeProps) => {
+export const createVNode = ({
+  type,
+  props,
+  key,
+  ref,
+  original,
+}: VNodeProps) => {
   const vNode: VNode = {
     type,
     props,
@@ -34,8 +40,8 @@ export const createElement = (
 ) => {
   const props: { [key: string]: any } = {};
 
-  let key: Key | undefined = undefined;
-  let ref: Ref | undefined = undefined;
+  let key: VNodeProps['key'] = null;
+  let ref: VNodeProps['ref'] = null;
   for (let i in config) {
     if (i === 'key') {
       key = config[i];

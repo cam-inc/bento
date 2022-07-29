@@ -1,21 +1,52 @@
-import { ComponentType, PDJSX, VNode, Props } from '../types';
+import {
+  PDJSX,
+  VNode,
+  Props,
+  Component as ComponentType,
+  FunctionComponent,
+} from '../types';
 import {
   hasOwnProperty,
   isEditorJSVNode,
   isWhiteSpace,
   parseObjectToCssText,
+  removeNode,
 } from '../helpers';
 import { reconcileElements } from './elements';
 import { reconcileChildren } from './childlen';
+import { Fragment } from '../../src/create-element';
+import { Component } from '../component';
 
 export { getPluginProps, setPluginProps } from './props';
 
 type ReconcileParams = {
   parentDom: PDJSX.Element;
-  oldDom: Substitutional.Element | null;
+  oldDom: PDJSX.Element | null;
   newVNode: VNode;
   oldVNode: VNode | null;
   commitQueue: ComponentType[];
+};
+
+type RenderParams = {
+  props: VNode['props'];
+  state: ComponentType['state'];
+  context: ComponentType['globalContext'];
+};
+
+export interface IComponent extends ComponentType {
+  render?: (
+    renderFunc: VNode['type'],
+    params: RenderParams
+  ) => VNode['children'];
+  props?: VNode['props'];
+}
+
+const renderProxy: NonNullable<IComponent['render']> = function (
+  type,
+  { props, state, context }
+) {
+  // @ts-expect-error As functional component.
+  return type(props, context);
 };
 
 export const reconcile = ({
@@ -27,17 +58,83 @@ export const reconcile = ({
 }: ReconcileParams) => {
   const newType = newVNode.type;
   if (typeof newType === 'function') {
+    // NOTE: This mutable variable will include a lot of side effects.
+    // So, we named it with `dirty` prefix.
+    let dirtyComponent = {} as IComponent;
+
     const newProps = newVNode.props;
-    console.log(newProps);
 
     if (oldVNode?.component) {
       newVNode.component = oldVNode.component;
+      dirtyComponent = newVNode.component;
     } else {
-      // NOTE: We only support the functional component.
-      newVNode.component = newType(newProps);
+      if (
+        hasOwnProperty(newType, 'prototype' as keyof FunctionComponent) &&
+        hasOwnProperty(newType.prototype, 'render')
+      ) {
+        // @ts-expect-error The newType is a class component
+        dirtyComponent = new newType(newProps);
+        newVNode.component = dirtyComponent;
+      } else {
+        // NOTE: Component transform function into class.
+        dirtyComponent = new Component(newProps) as unknown as IComponent;
+        newVNode.component = dirtyComponent;
+
+        dirtyComponent.render = renderProxy;
+      }
+
+      dirtyComponent.props = newProps;
+      if (!dirtyComponent.state) {
+        dirtyComponent.state = {};
+      }
+      dirtyComponent.dirty = true;
+      dirtyComponent.renderCallbacks = [];
     }
 
-    reconcileChildren({});
+    // TODO: life cycle methods
+    if (dirtyComponent.nextState == null) {
+      dirtyComponent.nextState = dirtyComponent.state;
+    }
+
+    dirtyComponent.props = newProps;
+    dirtyComponent.state = dirtyComponent.nextState;
+
+    dirtyComponent.dirty = false;
+    dirtyComponent.vNode = newVNode;
+    dirtyComponent.parentDom = parentDom;
+
+    const rendered = (
+      dirtyComponent.render
+        ? dirtyComponent.render(newType, {
+            props: dirtyComponent.props,
+            state: dirtyComponent.state,
+            context: dirtyComponent.globalContext,
+          })
+        : null
+    ) as VNode | null;
+
+    dirtyComponent.state = dirtyComponent.nextState;
+
+    const isRootFragment =
+      rendered != null && rendered.type === Fragment && rendered.key == null;
+    const renderResult =
+      isRootFragment ||
+      (typeof newType === 'string' && isEditorJSVNode(newType))
+        ? rendered?.props.children
+        : rendered;
+
+    reconcileChildren({
+      parentDom,
+      renderResult: Array.isArray(renderResult) ? renderResult : [renderResult],
+      newParentVNode: newVNode,
+      oldParentVNode: oldVNode,
+      commitQueue,
+      oldDom,
+    });
+
+    if (dirtyComponent.renderCallbacks.length) {
+      commitQueue.push(dirtyComponent);
+    }
   } else {
     newVNode.dom = reconcileElements({
       dom: oldVNode?.dom ?? null,
@@ -50,7 +147,49 @@ export const reconcile = ({
   return newVNode.dom;
 };
 
-export const commitRoot = (queue: ComponentType[]) => {};
+export const commitRoot = (commitQueue: ComponentType[]) => {
+  commitQueue.some((component) => {
+    commitQueue = component.renderCallbacks;
+    component.renderCallbacks = [];
+    commitQueue.some((cb) => {
+      // @ts-expect-error The cb is callable.
+      cb.call(component);
+    });
+  });
+};
+
+export const unmount = (
+  vNode: VNode,
+  parentVNode: VNode,
+  skipRemove: boolean
+) => {
+  let dirtyComponent: VNode['component'];
+  let dom: PDJSX.Element | null = null;
+  if (!skipRemove && typeof vNode.type !== 'function') {
+    dom = vNode.dom;
+    skipRemove = dom != null;
+  }
+
+  vNode.nextDom = null;
+  vNode.dom = vNode.nextDom;
+
+  dirtyComponent = vNode.component;
+  if (dirtyComponent != null) {
+    dirtyComponent.parentDom = null;
+    dirtyComponent.base = null;
+  }
+
+  dirtyComponent = vNode.children as unknown as ComponentType;
+  if (dirtyComponent && Array.isArray(dirtyComponent)) {
+    dirtyComponent.forEach((d) => {
+      unmount(d, parentVNode, skipRemove);
+    });
+  }
+
+  if (dom != null) {
+    removeNode(dom);
+  }
+};
 
 /*
  * @deprecated
@@ -95,8 +234,8 @@ export const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
       if (typeof child === 'string' && !isWhiteSpace(child)) {
         const textVNode: VNode = {
           type: 'text',
-          key: undefined,
-          ref: undefined,
+          key: null,
+          ref: null,
           props: {} as unknown as Props,
           dom: document.createTextNode(child) as unknown as PDJSX.Element,
           original: null,

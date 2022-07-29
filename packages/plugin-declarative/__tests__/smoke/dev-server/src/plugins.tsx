@@ -44,7 +44,7 @@ const CustomTool = () => {
 };
 
 const SampleWithHooks = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [text, setText] = useState('Hello');
   const handleClick = () => {
     setShow(!show);

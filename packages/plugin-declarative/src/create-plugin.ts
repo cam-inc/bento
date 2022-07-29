@@ -1,6 +1,6 @@
 import type { ToolConstructable } from '@editorjs/editorjs';
 import { createElement, Fragment } from './create-element';
-import { ComponentType, PDJSX, VNode } from './types';
+import { Component as ComponentType, PDJSX, VNode } from './types';
 import {
   commitRoot,
   reconcile,
@@ -16,7 +16,7 @@ export const createPlugin = (
   let commitQueue: ComponentType[] = [];
 
   const initialVNode = createElement(Fragment, null, vNode as VNode);
-  const parentDom = { _children: initialVNode } as PDJSX.Element;
+  const parentDom = { children: initialVNode } as unknown as PDJSX.Element;
   const PluginDeclarative = setPluginProps(getPluginProps(initialVNode));
 
   // TODO: JSX as props
