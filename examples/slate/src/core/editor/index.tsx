@@ -1,4 +1,7 @@
+import { css, injectGlobal } from '@emotion/css';
 import React, { useCallback, useMemo } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BaseEditor, createEditor, Descendant } from 'slate';
 import { ReactEditor, Slate, withReact } from 'slate-react';
 import { Editable, EditableProps } from '../editable';
@@ -9,6 +12,14 @@ import { Default, DefaultElement } from '../default';
 import { Paragraph, ParagraphElement } from '../../paragraph';
 import { Heading, HeadingElement } from '../../heading';
 import { Bold, BoldLeaf } from '../../bold';
+
+injectGlobal`
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+`;
 
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
 type CustomElement = DefaultElement | ParagraphElement | HeadingElement;
@@ -79,8 +90,15 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
   }, []);
 
   return (
-    <Slate editor={editor} value={initialValue} onChange={handleChange}>
-      <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
-    </Slate>
+    <div className={css({
+      padding: '4px',
+      border: '2px solid gray'
+    })}>
+      <DndProvider backend={HTML5Backend}>
+        <Slate editor={editor} value={initialValue} onChange={handleChange}>
+          <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
+        </Slate>
+      </DndProvider>
+    </div>
   );
 };
