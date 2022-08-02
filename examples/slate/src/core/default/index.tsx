@@ -1,18 +1,15 @@
 import React from 'react';
 import { BaseElement } from 'slate'
-import { RenderElementProps } from 'slate-react';
 
 export type DefaultElement = BaseElement & {
   type: 'default';
 };
-export type DefaultProps = RenderElementProps & {
+export type DefaultProps = {
   element: DefaultElement;
+  children: React.ReactNode;
 };
-export const Default: React.FC<DefaultProps> = ({ attributes, element, children }) => {
+export const Default: React.FC<DefaultProps> = ({ children }) => {
   return (
-    <div>
-      <div>I am of type {element.type}</div>
-      <div {...attributes}>{children}</div>
-    </div>
+    <div>{children}</div>
   );
 };

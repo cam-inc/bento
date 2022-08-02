@@ -2,7 +2,9 @@ import React, { useCallback, useMemo } from 'react';
 import { BaseEditor, createEditor, Descendant } from 'slate';
 import { ReactEditor, Slate, withReact } from 'slate-react';
 import { Editable, EditableProps } from '../editable';
+import { ElementWrapper } from '../elementWrapper';
 import { Default, DefaultElement } from '../default';
+
 
 import { Paragraph, ParagraphElement } from '../../paragraph';
 import { Heading, HeadingElement } from '../../heading';
@@ -33,20 +35,34 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
   }, []);
 
   const renderElement = useCallback<EditableProps['renderElement']>((props) => {
-    switch (props.element.type) {
-      case 'paragraph':
-        return (
-          <Paragraph {...props} />
-        );
-      case 'heading':
-        return (
-          <Heading {...props} />
-        );
-      default:
-        return (
-          <Default {...props} />
-        );
-    }
+    // TODO: refactorしてシンプルにかく。
+    const element = (() => {
+      switch (props.element.type) {
+        case 'paragraph':
+          return (
+            <Paragraph element={props.element}>
+              {props.children}
+            </Paragraph>
+          );
+        case 'heading':
+          return (
+            <Heading element={props.element}>
+              {props.children}
+            </Heading>
+          );
+        default:
+          return (
+            <Default element={props.element}>
+              {props.children}
+            </Default>
+          );
+      }
+    })();
+    return (
+      <ElementWrapper {...props}>
+        {element}
+      </ElementWrapper>
+    );
   }, []);
 
   const renderLeaf = useCallback<EditableProps['renderLeaf']>((props) => {

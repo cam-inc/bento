@@ -1,29 +1,16 @@
 import React from 'react';
-import { BaseElement } from 'slate'
-import { RenderElementProps } from 'slate-react';
+import { BaseElement } from 'slate';
 
 export type ParagraphElement = BaseElement & {
   type: 'paragraph';
 };
-export type ParagraphProps = RenderElementProps & {
+export type ParagraphProps = {
   element: ParagraphElement;
+  children: React.ReactNode;
 };
 
-export const Paragraph: React.FC<ParagraphProps> = ({ attributes, element, children }) => {
+export const Paragraph: React.FC<ParagraphProps> = ({ children }) => {
   return (
-    <div {...attributes}>
-      <div contentEditable={false}>I am of type {element.type}</div>
-      <div style={{ paddingLeft: '12px' }}>{children}</div>
-    </div>
-  );
-};
-
-
-const Wrapper: React.FC = ({ children }) => {
-  return (
-    <div>
-      <div></div>
-      <div>{children}</div>
-    </div>
+    <div>{children}</div>
   );
 };
