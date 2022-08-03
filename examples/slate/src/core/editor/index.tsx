@@ -9,7 +9,9 @@ import { ElementWrapper } from '../elementWrapper';
 import { TextWrapper } from '../textWrapper';
 import { Toolbar } from '../toolbar';
 
-
+// TODO: 使用者側から受け取るように。
+import { Container, ContainerElement } from '../../container';
+import { ContainerItem, ContainerItemElement } from '../../container/item';
 import { Paragraph, ParagraphElement } from '../../paragraph';
 import { Heading, HeadingElement } from '../../heading';
 import { Format, FormatText } from '../../format';
@@ -51,6 +53,18 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
     // TODO: refactorしてシンプルにかく。
     const element = (() => {
       switch (props.element.type) {
+        case 'container':
+          return (
+            <Container element={props.element}>
+              {props.children}
+            </Container>
+          );
+        case 'container-item':
+          return (
+            <ContainerItem element={props.element}>
+              {props.children}
+            </ContainerItem>
+          );
         case 'paragraph':
           return (
             <Paragraph element={props.element}>

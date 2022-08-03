@@ -28,15 +28,22 @@ const initialValue: BentoEditorProps['initialValue'] = [
     ],
   },
   {
-    type: 'paragraph',
+    type: 'container',
     children: [
       {
-        type: 'paragraph',
-        children: [{ text: 'nested??' }],
+        type: 'container-item',
+        grow: 1,
+        children: [{ text: 'itemA' }],
       },
       {
-        type: 'paragraph',
-        children: [{ text: 'nested??' }],
+        type: 'container-item',
+        grow: 2,
+        children: [{ text: 'itemB' }],
+      },
+      {
+        type: 'container-item',
+        grow: 3,
+        children: [{ text: 'itemC' }],
       }
     ],
   },
