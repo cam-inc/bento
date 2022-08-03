@@ -1,18 +1,19 @@
+import { css } from '@emotion/css';
 import React from 'react';
 import { BaseText } from 'slate';
-import { RenderLeafProps } from 'slate-react';
 
-export type BoldLeaf = BaseText & {
+export type BoldText = BaseText & {
   type: 'bold';
   active?: boolean;
 };
-export type BoldText = BoldLeaf;
-export type BoldProps = RenderLeafProps & {
-  leaf: BoldLeaf;
+export type BoldProps = {
   text: BoldText;
+  children: React.ReactNode;
 };
-export const Bold: React.FC<BoldProps> = ({ attributes, children }) => {
+export const Bold: React.FC<BoldProps> = ({ text, children }) => {
   return (
-    <span {...attributes}>{children}</span>
+    <span className={css({
+      fontWeight: text.active ? 'bold' : 'normal'
+    })}>{children}</span>
   );
 };

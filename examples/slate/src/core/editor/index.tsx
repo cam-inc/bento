@@ -6,13 +6,15 @@ import { BaseEditor, createEditor, Descendant } from 'slate';
 import { ReactEditor, Slate, withReact } from 'slate-react';
 import { Editable, EditableProps } from '../editable';
 import { ElementWrapper } from '../elementWrapper';
-import { Default, DefaultElement } from '../default';
+import { TextWrapper } from '../textWrapper';
 import { Toolbar } from '../toolbar';
 
 
 import { Paragraph, ParagraphElement } from '../../paragraph';
 import { Heading, HeadingElement } from '../../heading';
-import { Bold, BoldLeaf } from '../../bold';
+import { Bold, BoldText } from '../../bold';
+import { Italic, ItalicText } from '../../italic';
+import { Emoji, EmojiText } from '../../emoji';
 
 injectGlobal`
 * {
@@ -23,8 +25,8 @@ injectGlobal`
 `;
 
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
-type CustomElement = DefaultElement | ParagraphElement | HeadingElement;
-type CustomText = BoldLeaf;
+type CustomElement = ParagraphElement | HeadingElement;
+type CustomText = BoldText | ItalicText | EmojiText;
 declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor;
@@ -64,9 +66,9 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
           );
         default:
           return (
-            <Default element={props.element}>
+            <div>
               {props.children}
-            </Default>
+            </div>
           );
       }
     })();
@@ -78,16 +80,38 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
   }, []);
 
   const renderLeaf = useCallback<EditableProps['renderLeaf']>((props) => {
-    switch (props.leaf.type) {
-      case 'bold':
-        return (
-          <Bold {...props} />
-        );
-      default:
-        return (
-          <span {...props.attributes}>{props.children}</span>
-        );
-    }
+    // TODO: refactorしてシンプルにかく。
+    const text = (() => {
+      switch (props.text.type) {
+        case 'bold':
+          return (
+            <Bold text={props.text}>
+              {props.children}
+            </Bold>
+          );
+        case 'italic':
+          return (
+            <Italic text={props.text}>
+              {props.children}
+            </Italic>
+          );
+        case 'emoji':
+          return (
+            <Emoji text={props.text} />
+          );
+        default:
+          return (
+            <span>
+              {props.children}
+            </span>
+          );
+      }
+    })();
+    return (
+      <TextWrapper {...props}>
+        {text}
+      </TextWrapper>
+    );
   }, []);
 
   return (

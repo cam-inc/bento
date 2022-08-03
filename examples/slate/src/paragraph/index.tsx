@@ -1,9 +1,11 @@
 import React from 'react';
-import { BaseElement } from 'slate';
+import { BaseElement, Text } from 'slate';
 
 export type ParagraphElement = BaseElement & {
   type: 'paragraph';
+  children: Text[];
 };
+
 export type ParagraphProps = {
   element: ParagraphElement;
   children: React.ReactNode;

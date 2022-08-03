@@ -1,8 +1,9 @@
 import React from 'react';
-import { BaseElement } from 'slate'
+import { BaseElement, Text } from 'slate'
 
 export type HeadingElement = BaseElement & {
   type: 'heading';
+  children: Text[];
 };
 export type HeadingProps = {
   element: HeadingElement;

@@ -10,7 +10,26 @@ if (!canvas) {
 const initialValue: BentoEditorProps['initialValue'] = [
   {
     type: 'paragraph',
-    children: [{ text: 'A line of text in a paragraph.' }],
+    children: [
+      {
+        text: 'A line of text in a paragraph.'
+      },
+      {
+        type: 'emoji',
+        code: 'sad',
+        text: ''
+      },
+      {
+        type: 'bold',
+        active: true,
+        text: 'A line of text in a paragraph.'
+      },
+      {
+        type: 'italic',
+        active: true,
+        text: 'A line of text in a paragraph.'
+      }
+    ],
   },
   {
     type: 'paragraph',
@@ -24,7 +43,11 @@ const initialValue: BentoEditorProps['initialValue'] = [
         children: [{ text: 'nested??' }],
       }
     ],
-  }
+  },
+  {
+    type: 'heading',
+    children: [{ text: 'A line of text in a paragraph.' }],
+  },
 ];
 
 const root = ReactDOM.createRoot(canvas);
