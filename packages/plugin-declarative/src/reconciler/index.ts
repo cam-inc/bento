@@ -14,8 +14,9 @@ import {
 } from '../helpers';
 import { reconcileElements } from './elements';
 import { reconcileChildren } from './childlen';
-import { Fragment } from '../../src/create-element';
+import { Fragment } from '../create-element';
 import { Component } from '../component';
+import { options } from '../options';
 
 export { getPluginProps, setPluginProps } from './props';
 
@@ -56,12 +57,16 @@ export const reconcile = ({
   oldVNode,
   commitQueue,
 }: ReconcileParams) => {
+  // NOTE: This mutable variable will include a lot of side effects.
+  // So, we named it with `dirty` prefix.
+  let dirtyComponent = {} as IComponent;
   const newType = newVNode.type;
-  if (typeof newType === 'function') {
-    // NOTE: This mutable variable will include a lot of side effects.
-    // So, we named it with `dirty` prefix.
-    let dirtyComponent = {} as IComponent;
 
+  if (options.diff) {
+    options.diff(newVNode);
+  }
+
+  if (typeof newType === 'function') {
     const newProps = newVNode.props;
 
     if (oldVNode?.component) {
@@ -77,7 +82,7 @@ export const reconcile = ({
         newVNode.component = dirtyComponent;
       } else {
         // NOTE: Component transform function into class.
-        dirtyComponent = new Component(newProps) as unknown as IComponent;
+        dirtyComponent = new Component(newProps, {}) as unknown as IComponent;
         newVNode.component = dirtyComponent;
 
         dirtyComponent.render = renderProxy;
@@ -102,6 +107,10 @@ export const reconcile = ({
     dirtyComponent.dirty = false;
     dirtyComponent.vNode = newVNode;
     dirtyComponent.parentDom = parentDom;
+
+    if (options.render) {
+      options.render(newVNode);
+    }
 
     const rendered = (
       dirtyComponent.render
@@ -142,12 +151,19 @@ export const reconcile = ({
       oldVNode,
       commitQueue,
     }) as PDJSX.Element;
+
+    if (options.diffed) {
+      options.diffed(newVNode);
+    }
   }
 
   return newVNode.dom;
 };
 
-export const commitRoot = (commitQueue: ComponentType[]) => {
+export const commitRoot = (commitQueue: ComponentType[], root?: VNode) => {
+  if (options.commit && root) {
+    options.commit(root, commitQueue);
+  }
   commitQueue.some((component) => {
     commitQueue = component.renderCallbacks;
     component.renderCallbacks = [];
@@ -165,6 +181,11 @@ export const unmount = (
 ) => {
   let dirtyComponent: VNode['component'];
   let dom: PDJSX.Element | null = null;
+
+  if (options.commit) {
+    options.commit(vNode, []);
+  }
+
   if (!skipRemove && typeof vNode.type !== 'function') {
     dom = vNode.dom;
     skipRemove = dom != null;

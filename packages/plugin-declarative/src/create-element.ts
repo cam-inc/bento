@@ -1,5 +1,7 @@
 import { VNodeProps, VNode, Props } from './types';
 
+let vNodeId = 0;
+
 export const createVNode = ({
   type,
   props,
@@ -21,7 +23,7 @@ export const createVNode = ({
     hydrating: null,
     // @ts-expect-error
     constructor: undefined,
-    original, // NOTE: absolutely null? : https://github.com/preactjs/preact/blob/master/src/create-element.js#L40
+    original: original == null ? vNodeId++ : original,
     pluginProps: null,
     isRoot: false,
   };

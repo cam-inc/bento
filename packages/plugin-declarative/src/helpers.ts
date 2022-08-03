@@ -50,3 +50,13 @@ export const removeNode = (node: Node) => {
     parentNode.removeChild(node);
   }
 };
+
+export const assign = (
+  obj: { [key: string]: any },
+  props: { [key: string]: any }
+) => {
+  for (const i in props) {
+    obj[i] = props[i];
+  }
+  return obj;
+};

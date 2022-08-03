@@ -18,7 +18,7 @@ export type FunctionComponent<P = {}> = {
   displayName?: string;
   defaultProps?: Partial<P>;
 };
-export interface Component<P = {}, S = {}> {
+export interface Component<P = {}, S = {}> extends PDJSX.Component {
   constructor: ComponentType<P>;
   state: S;
   dirty: boolean;
@@ -88,6 +88,47 @@ export type Original =
 export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
 
 export namespace PDJSX {
+  export interface Component<P = {}, S = {}> {
+    componentWillMount?(): void;
+    componentDidMount?(): void;
+    componentWillUnmount?(): void;
+    getChildContext?(): object;
+    componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
+    shouldComponentUpdate?(
+      nextProps: Readonly<P>,
+      nextState: Readonly<S>,
+      nextContext: any
+    ): boolean;
+    componentWillUpdate?(
+      nextProps: Readonly<P>,
+      nextState: Readonly<S>,
+      nextContext: any
+    ): void;
+    getSnapshotBeforeUpdate?(oldProps: Readonly<P>, oldState: Readonly<S>): any;
+    componentDidUpdate?(
+      previousProps: Readonly<P>,
+      previousState: Readonly<S>,
+      snapshot: any
+    ): void;
+    componentDidCatch?(
+      error: any,
+      errorInfo: {
+        componentStack?: string;
+      }
+    ): void;
+  }
+  export abstract class Component<P, S> {
+    constructor(props?: P, context?: any) {}
+
+    setState<K extends keyof S>(
+      state: (
+        prevState: Readonly<S>,
+        props: Readonly<P>
+      ) => Pick<S, K> | Partial<S> | null,
+      callback?: () => void
+    ): void {}
+  }
+
   export interface Element extends HTMLElement {
     _children?: VNode | null;
     _pluginProps?:
@@ -95,7 +136,7 @@ export namespace PDJSX {
       | InlineToolAttributes
       | BlockTuneAttributes
       | null;
-    _data?: string | number;
+    data?: string | number;
   }
 
   export interface Tool<P = {}> extends FunctionComponent<P> {}

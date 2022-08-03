@@ -34,9 +34,9 @@ export const reconcileElements = ({
 
   // NOTE: Apply side effects of props to the dom.
   if (newVNode.type === null) {
-    const textNodeProps = newProps as unknown as PDJSX.Element['_data'];
-    if (newProps !== oldProps && dom._data !== textNodeProps) {
-      dom._data = textNodeProps;
+    const textNodeProps = newProps as unknown as PDJSX.Element['data'];
+    if (newProps !== oldProps && dom.data !== textNodeProps) {
+      dom.data = textNodeProps;
     }
   } else {
     reconcileProps({

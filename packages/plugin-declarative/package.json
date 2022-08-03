@@ -7,7 +7,7 @@
   "types": "dist/lib/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "run-p test:unit test:integration test:smoke",
+    "test": "run-p build test:unit test:integration test:smoke",
     "test:unit": "jest ./__tests__/unit",
     "test:integration": "jest ./__tests__/integration",
     "test:smoke": "node ./__tests__/smoke",

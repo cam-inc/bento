@@ -7,6 +7,7 @@ import {
   getPluginProps,
   setPluginProps,
 } from './reconciler';
+import { options } from './options';
 
 // NOTE: Removed `replaceNode` from params because of using this directory as API
 export const createPlugin = (
@@ -17,7 +18,17 @@ export const createPlugin = (
 
   const initialVNode = createElement(Fragment, null, vNode as VNode);
   const parentDom = { children: initialVNode } as unknown as PDJSX.Element;
-  const PluginDeclarative = setPluginProps(getPluginProps(initialVNode));
+  // TODO: fix get plugin props
+  // const PluginDeclarative = setPluginProps(getPluginProps(initialVNode));
+  class PluginDeclarative {
+    static get toolbox() {
+      return {
+        icon: 'aaa',
+        title: 'hoge',
+      };
+    }
+    render() {}
+  }
 
   // TODO: JSX as props
   // transformPluginProps(nodes?.pluginProps);
@@ -27,7 +38,7 @@ export const createPlugin = (
     // So, we call the reconcle function in this.
     // This is referred in https://editorjs.io/tools-api#render that
     // the render function should call document.createElement and return the result of it.
-    const dom = reconcile({
+    options.dom = reconcile({
       parentDom,
       newVNode: initialVNode,
       oldVNode: null,
@@ -35,8 +46,8 @@ export const createPlugin = (
       oldDom: null,
     });
 
-    if (dom) {
-      return dom;
+    if (options.dom) {
+      return options.dom;
     } else {
       throw new Error('The new dom is empty.');
     }
@@ -45,5 +56,5 @@ export const createPlugin = (
   // TODO: commit queue
   commitRoot(commitQueue);
 
-  return PluginDeclarative;
+  return PluginDeclarative as unknown as ToolConstructable;
 };
