@@ -12,8 +12,7 @@ import { Toolbar } from '../toolbar';
 
 import { Paragraph, ParagraphElement } from '../../paragraph';
 import { Heading, HeadingElement } from '../../heading';
-import { Bold, BoldText } from '../../bold';
-import { Italic, ItalicText } from '../../italic';
+import { Format, FormatText } from '../../format';
 import { Emoji, EmojiText } from '../../emoji';
 
 injectGlobal`
@@ -26,7 +25,7 @@ injectGlobal`
 
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
 type CustomElement = ParagraphElement | HeadingElement;
-type CustomText = BoldText | ItalicText | EmojiText;
+type CustomText = FormatText | EmojiText;
 declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor;
@@ -83,17 +82,11 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
     // TODO: refactorしてシンプルにかく。
     const text = (() => {
       switch (props.text.type) {
-        case 'bold':
+        case 'format':
           return (
-            <Bold text={props.text}>
+            <Format text={props.text}>
               {props.children}
-            </Bold>
-          );
-        case 'italic':
-          return (
-            <Italic text={props.text}>
-              {props.children}
-            </Italic>
+            </Format>
           );
         case 'emoji':
           return (

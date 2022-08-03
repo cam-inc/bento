@@ -20,13 +20,9 @@ const initialValue: BentoEditorProps['initialValue'] = [
         text: ''
       },
       {
-        type: 'bold',
-        active: true,
-        text: 'A line of text in a paragraph.'
-      },
-      {
-        type: 'italic',
-        active: true,
+        type: 'format',
+        bold: true,
+        italic: true,
         text: 'A line of text in a paragraph.'
       }
     ],
