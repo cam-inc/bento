@@ -7,6 +7,7 @@ import { ReactEditor, Slate, withReact } from 'slate-react';
 import { Editable, EditableProps } from '../editable';
 import { ElementWrapper } from '../elementWrapper';
 import { Default, DefaultElement } from '../default';
+import { Toolbar } from '../toolbar';
 
 
 import { Paragraph, ParagraphElement } from '../../paragraph';
@@ -94,11 +95,12 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
       padding: '4px',
       border: '2px solid gray'
     })}>
-      <DndProvider backend={HTML5Backend}>
-        <Slate editor={editor} value={initialValue} onChange={handleChange}>
+      <Slate editor={editor} value={initialValue} onChange={handleChange}>
+        <DndProvider backend={HTML5Backend}>
+          <Toolbar />
           <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
-        </Slate>
-      </DndProvider>
+        </DndProvider>
+      </Slate>
     </div>
   );
 };
