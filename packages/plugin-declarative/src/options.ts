@@ -1,5 +1,4 @@
-import { Component, EditorJSConfigs, EditorJSTools, VNode } from './types';
-import EditorJS, { EditorConfig } from '@editorjs/editorjs';
+import { Component, VNode } from './types';
 
 export type Options = {
   diff: (vNode: VNode) => void;
@@ -11,6 +10,7 @@ export type Options = {
   hook: (component: Component, index: number, type: number) => void;
   requestAnimationFrame: typeof requestAnimationFrame;
   debounceRendering?: (cb: () => void) => void;
+  skipEffects?: boolean;
 
   pluginName: string | null;
 };

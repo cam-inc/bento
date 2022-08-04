@@ -1,5 +1,12 @@
 /* @jsx h */
-import { h, render, PDJSX, useState, VNode } from '../../../../dist/lib';
+import {
+  h,
+  render,
+  PDJSX,
+  useState,
+  VNode,
+  useEffect,
+} from '../../../../dist/lib';
 import EditorJS from '@editorjs/editorjs';
 
 const CustomTool = () => {
@@ -54,6 +61,9 @@ const SampleWithHooks = () => {
       setText(e.target.value);
     }
   };
+  useEffect(() => {
+    console.log(text);
+  }, [text]);
   return (
     <tool
       save={() => {}}

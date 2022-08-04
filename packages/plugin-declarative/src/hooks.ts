@@ -1,4 +1,4 @@
-import { Component as ComponentType, VNode } from './types';
+import { Component as ComponentType } from './types';
 import { options } from './options';
 
 type Effect = () => void | Cleanup;
@@ -97,6 +97,14 @@ const afterPaint = (newQueueLength: number) => {
     prevRaf = options.requestAnimationFrame;
     (prevRaf || afterNextFrame)(flushAfterPaintEffects);
   }
+};
+
+const argsChanged = (oldArgs: any[] | undefined, newArgs: any[]) => {
+  return (
+    !oldArgs ||
+    oldArgs.length !== newArgs.length ||
+    newArgs.some((arg, index) => arg !== oldArgs[index])
+  );
 };
 
 const invokeOrReturn = (param: any, f: any) => {
@@ -292,4 +300,12 @@ export const useState = <S = undefined>(initialState: S) => {
   ];
 };
 
-export const useEffect = (callback: Effect, params: any[]) => {};
+export const useEffect = (callback: Effect, args: any[]) => {
+  const state = getHookState(currentIndex++, 3);
+  if (!options.skipEffects && state && argsChanged(state.args, args)) {
+    state.value = callback;
+    state.pendingArgs = args;
+
+    currentComponent?.renderCallbacks.push(state as Component);
+  }
+};
