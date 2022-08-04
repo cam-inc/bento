@@ -5,6 +5,7 @@ import {
   API,
   ToolConfig,
   BlockAPI,
+  EditorConfig,
 } from '@editorjs/editorjs';
 import { BlockTuneData } from '@editorjs/editorjs/types/block-tunes/block-tune-data';
 
@@ -32,6 +33,7 @@ export interface Component<P = {}, S = {}> extends PDJSX.Component {
   parentDom?: PDJSX.Element | null;
   processingException?: Component<any, any> | null;
   pendingError?: Component<any, any> | null;
+  pluginName: string | null;
 }
 export type ComponentType<P = {}> = Component | FunctionComponent<P>;
 
@@ -75,6 +77,7 @@ export type VNode<P = {}> = VNodeProps<P> & {
     | PDJSX.BlockTuneAttributes
     | null;
   isRoot: boolean;
+  pluginName: string | null;
 };
 
 export type Original =
@@ -86,6 +89,9 @@ export type Original =
   | null;
 
 export type PDJSXVNodeType = keyof PDJSX.EditorJSToolElements;
+
+export type EditorJSTools = NonNullable<EditorConfig['tools']>;
+export type EditorJSConfigs = Omit<EditorConfig, 'tools'>;
 
 export namespace PDJSX {
   export interface Component<P = {}, S = {}> {

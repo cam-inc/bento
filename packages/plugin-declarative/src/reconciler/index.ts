@@ -62,6 +62,10 @@ export const reconcile = ({
   let dirtyComponent = {} as IComponent;
   const newType = newVNode.type;
 
+  if (newVNode.pluginName) {
+    options.pluginName = newVNode.pluginName;
+  }
+
   if (options.diff) {
     options.diff(newVNode);
   }
@@ -265,6 +269,7 @@ export const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
           constructor: Object.prototype.constructor,
           depth: 0,
           isRoot: false,
+          pluginName: null,
           hydrating: null,
           nextDom: null,
           pluginProps: null,

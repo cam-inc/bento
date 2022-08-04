@@ -1,5 +1,5 @@
 /* @jsx h */
-import { h, createPlugin, PDJSX, useState } from '../../../../dist/lib';
+import { h, render, PDJSX, useState, VNode } from '../../../../dist/lib';
 import EditorJS from '@editorjs/editorjs';
 
 const CustomTool = () => {
@@ -47,7 +47,7 @@ const SampleWithHooks = () => {
   const [show, setShow] = useState(true);
   const [text, setText] = useState('Hello');
   const handleClick = () => {
-    setShow(!show);
+    setShow((prevState) => !prevState);
   };
   const handleChange = (e: Event) => {
     if (e.target instanceof HTMLInputElement) {
@@ -59,12 +59,11 @@ const SampleWithHooks = () => {
       save={() => {}}
       static_get_toolbox={{ title: 'SampleWithHooks', icon: '<span>🧪</span>' }}
     >
-      <div style={{ position: 'relative' }}>
+      <div>
         <span onClick={handleClick}>{text}</span>
         {show && (
           <div
             style={{
-              position: 'absolute',
               width: '128px',
               height: '64px',
               display: 'flex',
@@ -139,21 +138,29 @@ const CustomBlockTune = () => {
   );
 };
 
-const customTool = createPlugin(<CustomTool />);
-const sampleWithHooks = createPlugin(<SampleWithHooks />);
-const customInlineTool = createPlugin(<CustomInlineTool />);
-const customBlockTune = createPlugin(<CustomBlockTune />);
-
 const e = document.createElement('div');
 e.id = 'editorjs';
 document.body.appendChild(e);
 
-new EditorJS({
-  holder: 'editorjs',
-  tools: {
-    customTool,
-    sampleWithHooks,
-    CustomInlineTool: { class: customInlineTool },
-    CustomBlockTune: { class: customBlockTune },
-  },
-});
+render(
+  [
+    {
+      pluginName: 'customTool',
+      element: <CustomTool />,
+    },
+    {
+      pluginName: 'sampleWithHooks',
+      element: <SampleWithHooks />,
+    },
+    {
+      pluginName: 'customInlineTool',
+      element: <CustomInlineTool />,
+    },
+    {
+      pluginName: 'customBlockTune',
+      element: <CustomBlockTune />,
+    },
+  ],
+  EditorJS,
+  { holder: 'editorjs' }
+);

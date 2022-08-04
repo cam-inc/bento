@@ -16,6 +16,7 @@ export class Component implements PDJSX.Component {
   public vNode: VNode | null = null;
   public renderCallbacks: ComponentType['renderCallbacks'] = [];
   public dirty: boolean = false;
+  public pluginName: string | null = null;
 
   constructor(props: VNode['props'], context: ComponentType['globalContext']) {
     this.props = props;
@@ -79,8 +80,14 @@ const renderComponent = (component: ComponentType) => {
     });
     commitRoot(commitQueue, vNode);
 
+    if (options.pluginName !== null) {
+      const target = document.getElementById(options.pluginName);
+      if (target && newDom) {
+        target.appendChild(newDom);
+      }
+    }
+
     if (newDom != oldDom) {
-      options.dom = newDom;
       updateParentDomPointers(vNode);
     }
   }

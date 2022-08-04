@@ -1,4 +1,4 @@
-import { Component as ComponentType } from './types';
+import { Component as ComponentType, VNode } from './types';
 import { options } from './options';
 
 type Effect = () => void | Cleanup;
@@ -124,6 +124,13 @@ const getHookState = (index: number, type: number) => {
   }
 };
 
+const getSiblingPluginName = (): string | undefined => {
+  if (currentComponent !== null && currentComponent.parentDom?.children) {
+    // @ts-expect-error The children is VNode.
+    return currentComponent.parentDom.children.pluginName;
+  }
+};
+
 options.diff = (vNode) => {
   currentComponent = null;
   if (oldBeforeDiff) {
@@ -136,8 +143,14 @@ options.render = (vNode) => {
     oldBeforeRender(vNode);
   }
 
+  if (vNode.component) {
+    vNode.component.pluginName = vNode.pluginName;
+  }
+
   currentComponent = vNode.component;
   currentIndex = 0;
+
+  options.pluginName = getSiblingPluginName() ?? null;
 
   const hooks = currentComponent?.hooks ?? null;
   if (hooks !== null) {
