@@ -1,5 +1,5 @@
 /* @jsx h */
-import { h, createPlugin, VNode, render } from '../../lib';
+import { h, createPlugin, VNode } from '../../lib';
 
 describe('createPlugin', () => {
   it('should create a plugin class', () => {

@@ -1,24 +1,15 @@
 import {
   PDJSX,
   VNode,
-  Props,
   Component as ComponentType,
   FunctionComponent,
 } from '../types';
-import {
-  hasOwnProperty,
-  isEditorJSVNode,
-  isWhiteSpace,
-  parseObjectToCssText,
-  removeNode,
-} from '../helpers';
+import { hasOwnProperty, isEditorJSVNode, removeNode } from '../helpers';
 import { reconcileElements } from './elements';
 import { reconcileChildren } from './childlen';
 import { Fragment } from '../create-element';
 import { Component } from '../component';
 import { options } from '../options';
-
-export { getPluginProps, setPluginProps } from './props';
 
 type ReconcileParams = {
   parentDom: PDJSX.Element;
@@ -214,97 +205,4 @@ export const unmount = (
   if (dom != null) {
     removeNode(dom);
   }
-};
-
-/*
- * @deprecated
- */
-export const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
-  if (hasOwnProperty(vNode, 'parent') && parent) {
-    vNode.parent = parent;
-  }
-  if (typeof vNode.type === 'function') {
-    const childlen = vNode.type(vNode.props);
-    if (Array.isArray(childlen)) {
-      for (const v of childlen) {
-        return traverseNodes(v, vNode);
-      }
-    } else if (childlen != null) {
-      return traverseNodes(childlen, vNode);
-    } else {
-      return null;
-    }
-  } else if (typeof vNode.type === 'string' && isEditorJSVNode(vNode.type)) {
-    const { children, ...pluginProps } = vNode.props;
-
-    for (const child of children) {
-      traverseNodes(child, vNode);
-    }
-
-    vNode.isRoot = true;
-    vNode.children = children.filter((child: VNode) =>
-      hasOwnProperty(child, 'type')
-    );
-    vNode.pluginProps = pluginProps as PDJSX.PluginAttributes;
-    vNode.parent = null;
-
-    return vNode;
-  } else if (typeof vNode.type === 'string') {
-    // for HTMLElement
-    const element = document.createElement(vNode.type);
-    const { children, ...otherProps } = vNode.props;
-
-    // check children type
-    for (const child of children) {
-      if (typeof child === 'string' && !isWhiteSpace(child)) {
-        const textVNode: VNode = {
-          type: 'text',
-          key: null,
-          ref: null,
-          props: {} as unknown as Props,
-          dom: document.createTextNode(child) as unknown as PDJSX.Element,
-          original: null,
-          children: null,
-          component: null,
-          constructor: Object.prototype.constructor,
-          depth: 0,
-          isRoot: false,
-          pluginName: null,
-          hydrating: null,
-          nextDom: null,
-          pluginProps: null,
-          parent: vNode,
-        };
-        if (vNode.children === null) {
-          vNode.children = [textVNode];
-        } else {
-          vNode.children = [...vNode.children, textVNode];
-        }
-      } else {
-        vNode.children = children.filter((child: VNode) =>
-          hasOwnProperty(child, 'type')
-        );
-        traverseNodes(child, vNode);
-      }
-    }
-
-    // attach event handler
-    for (const [k, v] of Object.entries(otherProps)) {
-      if (k === 'className') {
-        element.className = v;
-      } else if (k === 'style') {
-        element.style.cssText = parseObjectToCssText(v);
-      } else if (k === 'onClick') {
-        element.addEventListener('click', v);
-      } else {
-        // @ts-expect-error
-        element[k.toLowerCase()] = v;
-      }
-    }
-
-    vNode.dom = element;
-    // append dom
-    return vNode;
-  }
-  return vNode;
 };

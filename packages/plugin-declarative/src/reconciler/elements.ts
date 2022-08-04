@@ -27,6 +27,8 @@ export const reconcileElements = ({
 
     if (isEditorJSVNode(newVNode.type as string)) {
       dom = document.createDocumentFragment() as unknown as HTMLElement;
+      const { children, ...pluginProps } = newProps;
+      dom._pluginProps = pluginProps as VNode['pluginProps'];
     } else {
       dom = document.createElement(newVNode.type as string);
     }

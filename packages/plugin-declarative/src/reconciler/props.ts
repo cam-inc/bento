@@ -103,6 +103,9 @@ export const setProps = ({ dom, key, newValue, oldValue }: SetPropsParams) => {
     key !== 'dangerouslySetInnerHTML'
   ) {
     dom.setAttribute(key, newValue);
+  } else {
+    // @ts-expect-error
+    dom._pluginProps[key] = newValue;
   }
 };
 
@@ -144,34 +147,7 @@ export const reconcileProps = ({
   }
 };
 
-export const getPluginProps = (vNode: VNode): VNode['pluginProps'] | null => {
-  if (typeof vNode.type === 'string' && isEditorJSVNode(vNode.type)) {
-    const { children, ...pluginProps } = vNode.props;
-    vNode.pluginProps = pluginProps as VNode['pluginProps'];
-    // NOTE: PDJSXElement should be a root element.
-    vNode.isRoot = true;
-    return vNode.pluginProps;
-  }
-
-  if (typeof vNode.type === 'function') {
-    const children = vNode.type(vNode.props);
-    if (Array.isArray(children)) {
-      for (const child of children) {
-        return getPluginProps(child);
-      }
-    } else if (children) {
-      return getPluginProps(children);
-    } else {
-      return null;
-    }
-  } else {
-    return null;
-  }
-
-  return null;
-};
-
-export const setPluginProps = (pluginProps: VNode['pluginProps']) => {
+export const createPluginClass = (pluginProps: VNode['pluginProps']) => {
   if (pluginProps) {
     const { STATIC_GETTER, STATIC_METHOD, CONSTRUCTOR } = pluginMethodPrefixes;
 

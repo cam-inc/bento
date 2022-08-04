@@ -1,6 +1,7 @@
-import { emptyVNode } from './constants';
-import { PDJSX, PDJSXVNodeType } from './types';
+import { emptyVNode, pluginMethodPrefixes } from './constants';
+import { PDJSX, PDJSXVNodeType, VNode } from './types';
 import { paramCase } from 'change-case';
+import { ToolConstructable } from '@editorjs/editorjs';
 
 export const isWhiteSpace = (str: string) => str === ' ';
 
@@ -59,4 +60,35 @@ export const assign = (
     obj[i] = props[i];
   }
   return obj;
+};
+
+export const createPluginClass = (pluginProps: VNode['pluginProps']) => {
+  if (pluginProps) {
+    const { STATIC_GETTER, STATIC_METHOD, CONSTRUCTOR } = pluginMethodPrefixes;
+
+    class PluginDeclarative {
+      constructor(params: any) {
+        if (pluginProps?.initializer) {
+          pluginProps.initializer(params);
+        }
+      }
+    }
+
+    for (const [k, v] of Object.entries(pluginProps)) {
+      if (k.startsWith(STATIC_GETTER)) {
+        const key = k.replace(STATIC_GETTER, '');
+        PluginDeclarative[key as keyof typeof PluginDeclarative] = v;
+      } else if (k.startsWith(STATIC_METHOD)) {
+        const key = k.replace(STATIC_METHOD, '');
+        PluginDeclarative[key as keyof typeof PluginDeclarative] = v;
+      } else if (!k.startsWith(CONSTRUCTOR)) {
+        // @ts-expect-error Class should have a property of the prototype.
+        PluginDeclarative.prototype[k] = v;
+      }
+    }
+
+    return PluginDeclarative as ToolConstructable;
+  } else {
+    return class {} as unknown as ToolConstructable;
+  }
 };

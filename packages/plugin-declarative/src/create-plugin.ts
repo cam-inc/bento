@@ -1,19 +1,8 @@
-import type { EditorConfig, ToolConstructable } from '@editorjs/editorjs';
-import EditorJS from '@editorjs/editorjs';
+import type { ToolConstructable } from '@editorjs/editorjs';
 import { createElement, Fragment } from './create-element';
-import {
-  Component as ComponentType,
-  EditorJSConfigs,
-  EditorJSTools,
-  PDJSX,
-  VNode,
-} from './types';
-import {
-  commitRoot,
-  reconcile,
-  getPluginProps,
-  setPluginProps,
-} from './reconciler';
+import { Component as ComponentType, PDJSX, VNode } from './types';
+import { commitRoot, reconcile } from './reconciler';
+import { createPluginClass } from './helpers';
 
 // NOTE: Removed `replaceNode` from params because of using this directory as API
 export const createPlugin = (
@@ -22,24 +11,17 @@ export const createPlugin = (
   // NOTE: An array for collecting side effects.
   let commitQueue: ComponentType[] = [];
 
-  const initialVNode = createElement(Fragment, null, vNode as VNode);
-  const parentDom = { children: initialVNode } as unknown as PDJSX.Element;
-  // TODO: fix get plugin props
-  // const PluginDeclarative = setPluginProps(getPluginProps(initialVNode));
-  class PluginDeclarative {
-    static get toolbox() {
-      return {
-        icon: 'aaa',
-        title: 'hoge',
-      };
-    }
-    render() {}
-  }
-
   // TODO: JSX as props
   // transformPluginProps(nodes?.pluginProps);
 
-  PluginDeclarative.prototype.render = function () {
+  const render = function () {
+    const id = `${Date.now()}`;
+
+    const initialVNode = createElement(Fragment, null, vNode as VNode);
+    const parentDom = { children: initialVNode } as unknown as PDJSX.Element;
+
+    initialVNode.pluginName = id;
+
     // NOTE: It is need to create DOM in this render function.
     // So, we call the reconcle function in this.
     // This is referred in https://editorjs.io/tools-api#render that
@@ -53,85 +35,32 @@ export const createPlugin = (
     });
 
     if (dom) {
-      return dom;
+      const wrapper = document.createElement('x-pd');
+      wrapper.id = id;
+      wrapper.appendChild(dom);
+      return wrapper;
     } else {
       throw new Error('The new dom is empty.');
     }
   };
 
-  // TODO: commit queue
+  // NOTE: The _initialVNode and _parentDom are created for get pluginProps.
+  // So, we won't use those for the reconciliation.
+  const _initialVNode = createElement(Fragment, null, vNode as VNode);
+  const _parentDom = { children: _initialVNode } as unknown as PDJSX.Element;
+  const PluginDeclarative = createPluginClass(
+    reconcile({
+      parentDom: _parentDom,
+      newVNode: _initialVNode,
+      oldVNode: null,
+      commitQueue: [],
+      oldDom: null,
+    })?._pluginProps ?? null
+  );
+
+  PluginDeclarative.prototype.render = render;
+
   commitRoot(commitQueue);
 
   return PluginDeclarative as unknown as ToolConstructable;
-};
-
-export const render = (
-  plugins: Array<{
-    pluginName: string;
-    element: VNode | Substitutional.Element | JSX.Element;
-  }>,
-  Container: typeof EditorJS,
-  configs: EditorJSConfigs = {}
-) => {
-  const editorjsTools: EditorJSTools = {};
-
-  plugins.forEach(({ pluginName, element }) => {
-    // NOTE: An array for collecting side effects.
-    let commitQueue: ComponentType[] = [];
-
-    // TODO: fix get plugin props
-    // const PluginDeclarative = setPluginProps(getPluginProps(initialVNode));
-    class PluginDeclarative {
-      static get toolbox() {
-        return {
-          icon: 'aaa',
-          title: 'hoge',
-        };
-      }
-      render() {}
-    }
-
-    // TODO: JSX as props
-    // transformPluginProps(nodes?.pluginProps);
-
-    PluginDeclarative.prototype.render = function () {
-      const id = Date.now();
-      const vNode = element as VNode;
-
-      const initialVNode = createElement(Fragment, null, vNode);
-      const parentDom = { children: initialVNode } as unknown as PDJSX.Element;
-
-      initialVNode.pluginName = pluginName + id;
-
-      // NOTE: It is need to create DOM in this render function.
-      // So, we call the reconcle function in this.
-      // This is referred in https://editorjs.io/tools-api#render that
-      // the render function should call document.createElement and return the result of it.
-      const dom = reconcile({
-        parentDom,
-        newVNode: initialVNode,
-        oldVNode: null,
-        commitQueue,
-        oldDom: null,
-      });
-
-      if (dom) {
-        const wrapper = document.createElement('x-pd');
-        wrapper.id = pluginName + id;
-        wrapper.appendChild(dom);
-        return wrapper;
-      } else {
-        throw new Error('The new dom is empty.');
-      }
-    };
-
-    commitRoot(commitQueue);
-
-    editorjsTools[pluginName] = PluginDeclarative;
-  });
-
-  return new Container({
-    tools: editorjsTools,
-    ...configs,
-  });
 };

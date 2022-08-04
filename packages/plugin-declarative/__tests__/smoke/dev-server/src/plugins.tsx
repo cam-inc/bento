@@ -1,11 +1,10 @@
 /* @jsx h */
 import {
   h,
-  render,
   PDJSX,
   useState,
-  VNode,
   useEffect,
+  createPlugin,
 } from '../../../../dist/lib';
 import EditorJS from '@editorjs/editorjs';
 
@@ -152,25 +151,40 @@ const e = document.createElement('div');
 e.id = 'editorjs';
 document.body.appendChild(e);
 
-render(
-  [
-    {
-      pluginName: 'customTool',
-      element: <CustomTool />,
-    },
-    {
-      pluginName: 'sampleWithHooks',
-      element: <SampleWithHooks />,
-    },
-    {
-      pluginName: 'customInlineTool',
-      element: <CustomInlineTool />,
-    },
-    {
-      pluginName: 'customBlockTune',
-      element: <CustomBlockTune />,
-    },
-  ],
-  EditorJS,
-  { holder: 'editorjs' }
-);
+const customTool = createPlugin(<CustomTool />);
+const sampleWithHooks = createPlugin(<SampleWithHooks />);
+const customInlineTool = createPlugin(<CustomInlineTool />);
+const customBlockTune = createPlugin(<CustomBlockTune />);
+
+new EditorJS({
+  holder: 'editorjs',
+  tools: {
+    customTool,
+    sampleWithHooks,
+    customInlineTool,
+    customBlockTune,
+  },
+});
+
+// render(
+//   [
+//     {
+//       pluginName: 'customTool',
+//       element: <CustomTool />,
+//     },
+//     {
+//       pluginName: 'sampleWithHooks',
+//       element: <SampleWithHooks />,
+//     },
+//     {
+//       pluginName: 'customInlineTool',
+//       element: <CustomInlineTool />,
+//     },
+//     {
+//       pluginName: 'customBlockTune',
+//       element: <CustomBlockTune />,
+//     },
+//   ],
+//   EditorJS,
+//   { holder: 'editorjs' }
+// );

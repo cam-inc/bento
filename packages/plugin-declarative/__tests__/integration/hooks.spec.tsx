@@ -6,11 +6,14 @@ describe('useState', () => {
     const App = () => {
       const [text, setText] = useState('ping');
 
-      return <span onClick={() => setText('pong')}>{text}</span>;
+      return <span id="test">{text}</span>;
     };
 
     const plugin = createPlugin((<App />) as VNode);
+    // @ts-ignore
+    const target = new plugin().render().querySelector('#test');
 
     expect(plugin).toBeTruthy();
+    expect(target?.innerHTML).toMatch('ping');
   });
 });
