@@ -147,37 +147,6 @@ export const reconcileProps = ({
   }
 };
 
-export const createPluginClass = (pluginProps: VNode['pluginProps']) => {
-  if (pluginProps) {
-    const { STATIC_GETTER, STATIC_METHOD, CONSTRUCTOR } = pluginMethodPrefixes;
-
-    class PluginDeclarative {
-      constructor(params: any) {
-        if (pluginProps?.initializer) {
-          pluginProps.initializer(params);
-        }
-      }
-    }
-
-    for (const [k, v] of Object.entries(pluginProps)) {
-      if (k.startsWith(STATIC_GETTER)) {
-        const key = k.replace(STATIC_GETTER, '');
-        PluginDeclarative[key as keyof typeof PluginDeclarative] = v;
-      } else if (k.startsWith(STATIC_METHOD)) {
-        const key = k.replace(STATIC_METHOD, '');
-        PluginDeclarative[key as keyof typeof PluginDeclarative] = v;
-      } else if (!k.startsWith(CONSTRUCTOR)) {
-        // @ts-expect-error Class should have a property of the prototype.
-        PluginDeclarative.prototype[k] = v;
-      }
-    }
-
-    return PluginDeclarative as ToolConstructable;
-  } else {
-    return class {} as unknown as ToolConstructable;
-  }
-};
-
 // TODO: JSX as props
 // const transformPluginProps = (
 //   pluginProps: NonNullable<VNode["pluginProps"]>
