@@ -165,26 +165,3 @@ new EditorJS({
     customBlockTune,
   },
 });
-
-// render(
-//   [
-//     {
-//       pluginName: 'customTool',
-//       element: <CustomTool />,
-//     },
-//     {
-//       pluginName: 'sampleWithHooks',
-//       element: <SampleWithHooks />,
-//     },
-//     {
-//       pluginName: 'customInlineTool',
-//       element: <CustomInlineTool />,
-//     },
-//     {
-//       pluginName: 'customBlockTune',
-//       element: <CustomBlockTune />,
-//     },
-//   ],
-//   EditorJS,
-//   { holder: 'editorjs' }
-// );
