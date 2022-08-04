@@ -14,8 +14,6 @@ import {
   getPluginProps,
   setPluginProps,
 } from './reconciler';
-import { v4 as uuidV4 } from 'uuid';
-import { options } from './options';
 
 // NOTE: Removed `replaceNode` from params because of using this directory as API
 export const createPlugin = (
@@ -97,7 +95,7 @@ export const render = (
     // transformPluginProps(nodes?.pluginProps);
 
     PluginDeclarative.prototype.render = function () {
-      const id = uuidV4();
+      const id = Date.now();
       const vNode = element as VNode;
 
       const initialVNode = createElement(Fragment, null, vNode);
