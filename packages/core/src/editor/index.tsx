@@ -2,7 +2,9 @@ import React, { useCallback, useMemo } from 'react';
 import { BaseEditor, createEditor } from 'slate';
 import { ReactEditor, Slate, withReact } from 'slate-react';
 import { Editable, EditableProps } from '../editable';
-import { /*themeClass,*/ exampleStyle } from './index.css';
+import { Modal, useModal } from '../portals/modal';
+import { ModalContainer } from '../portals/modal/container';
+import { /*themeClass,*/ styles } from './index.css';
 
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
 //type CustomElement = { type: 'paragraph' }
@@ -43,11 +45,21 @@ export const Editor: React.FC<EditorProps> = ({ initialValue }) => {
     );
   }, []);
 
+  const modal = useModal();
+  const handleModalOpenerClick = useCallback(() => {
+    modal.open();
+  }, [modal]);
+
   return (
-    <Slate editor={editor} value={initialValue} onChange={handleChange}>
-      <div className={exampleStyle}>
-        <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
-      </div>
-    </Slate>
+    <>
+      <Slate editor={editor} value={initialValue} onChange={handleChange}>
+        <div className={styles.container}>
+          <ModalContainer />
+          <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
+        </div>
+      </Slate>
+      <button onClick={handleModalOpenerClick}>open odal</button>
+      <Modal {...modal.bind}>hello</Modal>
+    </>
   );
 };

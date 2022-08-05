@@ -9,9 +9,11 @@ export const [themeClass, vars] = createTheme({
   }
 });
 
-export const exampleStyle = style({
-  //  backgroundColor: vars.color.brand,
-  //  fontFamily: vars.font.body,
-  color: 'blue',
-  padding: 10
-});
+export const styles = {
+  container: style({
+    //  backgroundColor: vars.color.brand,
+    //  fontFamily: vars.font.body,
+    position: 'relative',
+    padding: 10
+  })
+}
