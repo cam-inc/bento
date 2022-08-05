@@ -6,8 +6,7 @@
     "TODO"
   ],
   "exports": {
-    "require": "dist/index.cjs",
-    "import": "dist/index.mjs",
+    "require": "dist/index.cjs.js",
     "module": "dist/index.esm.js"
   },
   "types": "./dist/index.d.ts",
@@ -17,8 +16,8 @@
   "scripts": {
     "prepublishOnly": "run-s clear build",
     "clear": "rimraf dist && mkdirp dist",
-    "dev": "bunchee ./src/index.ts --watch",
-    "build": "bunchee ./src/index.ts",
+    "dev": "rollup --config rollup.config.js --watch",
+    "build": "rollup --config rollup.config.js",
     "test": "jest",
     "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
   },
@@ -42,16 +41,26 @@
     "url": "git+https://github.com/cam-inc/bento.git"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.4",
     "@types/jest": "^28.1.1",
-    "bunchee": "^1.9.0",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "jest": "^28.1.1",
+    "rollup": "^2.77.2",
     "ts-jest": "^28.0.5",
-    "ts-node": "^10.8.1"
-  },
-  "peerDependencies": {
-    "@editorjs/editorjs": "^2.25.0"
+    "ts-node": "^10.8.1",
+    "tsdx": "^0.14.1"
   },
   "dependencies": {
-    "@bento-editor/shared": "*"
+    "@vanilla-extract/css": "^1.7.2",
+    "@vanilla-extract/rollup-plugin": "^1.1.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "slate": "^0.82.0",
+    "slate-react": "^0.82.0"
   }
 }

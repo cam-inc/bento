@@ -1,14 +1,14 @@
 {
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "rollup.config.ts"],
   "compilerOptions": {
     /* Type Checking */
-    "exactOptionalPropertyTypes": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
     /* Modules */
-    "module": "ES2022",
-    "moduleResolution": "Node16",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
     "rootDir": "src",
     /* Emit */
     "declaration": true,
@@ -25,7 +25,7 @@
     /* Backwards Compatibility */
     // ...none
     /* Language and Environment */
-    "target": "ES2022",
+    "target": "ESNext",
     /* Compiler Diagnostics */
     // ...none
     /* Projects */
@@ -34,6 +34,7 @@
     "noErrorTruncation": true,
     /* Completeness */
     "skipLibCheck": true,
+    "jsx": "react",
     /* Command Line */
     // ...none
   },
