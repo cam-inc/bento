@@ -50,8 +50,7 @@
     "jest": "^28.1.1",
     "rollup": "^2.77.2",
     "ts-jest": "^28.0.5",
-    "ts-node": "^10.8.1",
-    "tsdx": "^0.14.1"
+    "ts-node": "^10.8.1"
   },
   "dependencies": {
     "@vanilla-extract/css": "^1.7.2",

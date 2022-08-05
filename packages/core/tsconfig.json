@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*", "rollup.config.ts"],
+  "include": ["src/**/*"],
   "compilerOptions": {
     /* Type Checking */
     "noUnusedLocals": true,
