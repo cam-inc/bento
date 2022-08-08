@@ -37,7 +37,7 @@ export class Component implements PDJSX.Component {
       update = update(assign({}, state), this.props) as SetStateUpdate;
     }
 
-    if (update) {
+    if (update != null) {
       assign(state, update);
     }
 
