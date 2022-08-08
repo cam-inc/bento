@@ -2,13 +2,13 @@
   "include": ["src/**/*"],
   "compilerOptions": {
     /* Type Checking */
-    "exactOptionalPropertyTypes": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
     /* Modules */
     "module": "ESNext",
     "moduleResolution": "Node",
+    "resolveJsonModule": true,
     "rootDir": "src",
     /* Emit */
     "declaration": true,
@@ -34,6 +34,7 @@
     "noErrorTruncation": true,
     /* Completeness */
     "skipLibCheck": true,
+    "jsx": "react",
     /* Command Line */
     // ...none
   },
