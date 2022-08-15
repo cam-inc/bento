@@ -10,10 +10,13 @@ export const [themeClass, vars] = createTheme({
 });
 
 export const styles = {
-  container: style({
+  root: style({
     //  backgroundColor: vars.color.brand,
     //  fontFamily: vars.font.body,
     position: 'relative',
-    padding: 10
-  })
+    padding: 10,
+  }),
+  container: style({
+    position: 'relative',
+  }),
 }

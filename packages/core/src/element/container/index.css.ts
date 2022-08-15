@@ -2,10 +2,9 @@ import { style } from '@vanilla-extract/css';
 
 export const styles = {
   root: style({
-    display: 'flex'
+    display: 'flex',
   }),
-  container: style({
-    position: 'relative',
-    padding: 10
+  utils: style({
+    display: 'flex',
   })
 }

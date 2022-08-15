@@ -9,6 +9,7 @@
     "@bento-editor/core": "*",
     "@bento-editor/element-heading": "*",
     "@bento-editor/element-paragraph": "*",
+    "@bento-editor/text-format": "*",
     "next": "^12.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
