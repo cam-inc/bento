@@ -1,48 +1,59 @@
-import React, { useCallback } from 'react';
-import { Path, Transforms } from 'slate';
-import { useSlate } from 'slate-react';
-import { Config } from '../config';
+import React, { useEffect, useState } from 'react';
+import { Editor, Range } from 'slate';
+import { useFocused, useSlate } from 'slate-react';
+import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
 
-export type ToolbarProps = {
-  path: Path;
-}
-export const Toolbar: React.FC<ToolbarProps> = ({ path }) => {
+export type ToolbarProps = {};
+export const Toolbar: React.FC<ToolbarProps> = () => {
+  const editor = useSlate();
+  const isFocused = useFocused();
+  const popover = usePopover<HTMLDivElement>();
+
+  const [rect, setRect] = useState<DOMRect>();
+
+  useEffect(() => {
+    const { selection } = editor;
+
+    const isToShow = (() => {
+      if (!isFocused || !selection || Range.isCollapsed(selection) || Editor.string(editor, selection) === '') {
+        return false;
+      }
+      return true;
+    })();
+
+    if (!isToShow) {
+      return;
+    }
+
+    const domSelection = window.getSelection()
+    const domRange = domSelection?.getRangeAt(0);
+    const rect = domRange?.getBoundingClientRect();
+    if (rect) {
+      setRect(rect);
+    }
+    popover.open();
+  }, [isFocused, editor.selection]);
+
   const config = useConfigGlobalStateValue();
 
   return (
-    <div>
-      <div>
-        <div>elements:</div>
-        <ul>
-          {config.elements.map((element) => (
-            <li key={element.type}>
-              <Button path={path} element={element} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
+    <>
+      <div ref={popover.targetRef} style={{
+        pointerEvents: 'none',
+        position: 'fixed',
+        width: `${rect?.width}px`,
+        height: `${rect?.height}px`,
+        top: `${rect?.top}px`,
+        left: `${rect?.left}px`,
+      }} />
+      <Popover {...popover.bind}>
+        <div>{config.texts.map(text => (
+          <React.Fragment key={text.type}>
+            <text.toolbar.Icon />
+          </React.Fragment>
+        ))}</div>
+      </Popover>
+    </>
+  )
 };
-
-const Button: React.FC<{
-  path: Path;
-  element: Config['elements'][number];
-}> = ({ path, element }) => {
-  const editor = useSlate();
-  const handleClick = useCallback(() => {
-    const nextPath = Path.next(path);
-    console.log(path, nextPath);
-    Transforms.insertNodes(editor, {
-      type: element.type,
-      children: [{ text: element.type }]
-    }, {
-      at: nextPath
-    });
-  }, [editor, path, element]);
-
-  return (
-    <button onClick={handleClick}>{element.type}</button>
-  );
-}

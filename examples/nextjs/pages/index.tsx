@@ -1,69 +1,60 @@
-import { Config, Editor, EditorProps } from '@bento-editor/core';
-import { ParagraphElement } from '@bento-editor/element-paragraph';
-import { HeadingElement } from '@bento-editor/element-heading';
-import { FormatText } from '@bento-editor/text-format';
-import type { NextPage } from 'next'
+import { Editor, EditorProps } from '@bento-editor/core';
+import elementParagraph from '@bento-editor/element-paragraph';
+import elementHeading from '@bento-editor/element-heading';
+import textFormat from '@bento-editor/text-format';
+import type { NextPage } from 'next';
+import { useCallback, useMemo } from 'react';
 
-const initialValue: EditorProps['initialValue'] = [
-  {
-    type: 'paragraph',
-    children: [
-      {
-        type: 'format',
-        text: 'paragraph 01'
-      }
+const Home: NextPage = () => {
+  const config = useMemo<EditorProps['config']>(() => ({
+    elements: [
+      elementParagraph,
+      elementHeading,
+    ],
+    texts: [
+      textFormat,
     ]
-  },
-  {
-    type: 'heading',
-    children: [
-      {
-        type: 'format',
-        text: 'heading'
-      }
-    ]
-  },
-  {
-    type: 'paragraph',
-    children: [
-      {
-        type: 'format',
-        text: 'paragraph 02'
-      }
-    ]
-  }
-];
+  }), []);
 
-const config: Config = {
-  elements: [
+  const initialValue = useMemo<EditorProps['initialValue']>(() => ([
     {
       type: 'paragraph',
-      Component: ParagraphElement,
+      children: [
+        {
+          type: 'format',
+          text: 'paragraph 01'
+        }
+      ]
     },
     {
       type: 'heading',
-      Component: HeadingElement,
-    }
-  ],
-  texts: [
+      children: [
+        {
+          type: 'format',
+          text: 'heading'
+        }
+      ]
+    },
     {
-      type: 'format',
-      Component: FormatText,
-      Toolbar: () => {
-        return (
-          <div>clickme</div>
-        );
-      }
+      type: 'paragraph',
+      children: [
+        {
+          type: 'format',
+          text: 'paragraph 02'
+        }
+      ]
     }
-  ]
-};
+  ]), []);
 
-const Home: NextPage = () => {
+  const handleChange = useCallback<EditorProps['onChange']>((value) => {
+    console.log(value);
+  }, []);
+
   return (
     <div>
-      <Editor initialValue={initialValue} config={config} />
+      <Editor config={config} initialValue={initialValue} onChange={handleChange} />
     </div>
   )
 }
 
-export default Home
+export default Home;

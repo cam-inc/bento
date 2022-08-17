@@ -1,15 +1,25 @@
 import React from 'react';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
 
-type Element = {
+export type Element = {
   type: string;
-  Component: React.FC<RenderElementProps>;
+  editable: {
+    Component: React.FC<RenderElementProps>;
+    defaultValue: unknown[];
+  },
+  toolbox: {
+    Icon: React.FC;
+  };
 };
 
-type Text = {
+export type Text = {
   type: string;
-  Component: React.FC<RenderLeafProps>;
-  Toolbar: React.FC;
+  editable: {
+    Component: React.FC<RenderLeafProps>;
+  },
+  toolbar: {
+    Icon: React.FC;
+  };
 };
 
 export type Config = {

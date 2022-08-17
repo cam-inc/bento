@@ -1,10 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
 import { Popover, usePopover } from '../../portals/popover';
-import { Toolbar } from '../../toolbar';
+import { Toolbox } from '../../toolbox';
 import { styles } from './index.css';
 
 export type ElementContainerProps = RenderElementProps
@@ -22,7 +21,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     popover.open();
   }, [popover]);
 
-
+  // TODO: SlateとReactDnDのonDropがバッティングする問題。
   const [{ isDragging }, dragRef] = useDrag(() => {
     return {
       type: 'Element',
@@ -60,7 +59,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         <div>{props.children}</div>
       </div>
       <Popover {...popover.bind}>
-        <Toolbar path={path} />
+        <Toolbox path={path} />
       </Popover>
     </>
   );
