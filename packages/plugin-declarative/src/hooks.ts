@@ -245,47 +245,49 @@ export const useReducer = <S>(
   const hookState = getHookState(currentIndex++, 2);
   if (hookState != null) {
     hookState.reducer = reducer;
-    hookState.value = [
-      initilizer == null
-        ? invokeOrReturn(undefined, initialState)
-        : initilizer(initialState),
-      (action: S | StateUpdater<S>) => {
-        if (hookState.reducer && hookState.component) {
-          const currentValue = Array.isArray(hookState.nextValue)
-            ? hookState.nextValue[0]
-            : Array.isArray(hookState.value)
-            ? hookState.value[0]
-            : null;
-          const nextValue = hookState.reducer(currentValue, action);
+    if (!hookState.component) {
+      hookState.value = [
+        initilizer == null
+          ? invokeOrReturn(undefined, initialState)
+          : initilizer(initialState),
+        (action: S | StateUpdater<S>) => {
+          if (hookState.reducer && hookState.component) {
+            const currentValue = Array.isArray(hookState.nextValue)
+              ? hookState.nextValue[0]
+              : Array.isArray(hookState.value)
+              ? hookState.value[0]
+              : null;
+            const nextValue = hookState.reducer(currentValue, action);
 
-          if (currentValue !== nextValue && Array.isArray(hookState.value)) {
-            hookState.nextValue = [nextValue, hookState.value[1]];
-            hookState.component.setState({} as any);
+            if (currentValue !== nextValue && Array.isArray(hookState.value)) {
+              hookState.nextValue = [nextValue, hookState.value[1]];
+              hookState.component.setState({} as any);
+            }
           }
-        }
-      },
-    ];
+        },
+      ];
 
-    hookState.component =
-      currentComponent !== null ? currentComponent : undefined;
+      hookState.component =
+        currentComponent !== null ? currentComponent : undefined;
 
-    if (hookState.component) {
-      hookState.component.shouldComponentUpdate = () => {
-        if (!hookState.nextValue) {
-          return true;
-        }
+      if (hookState.component) {
+        hookState.component.shouldComponentUpdate = () => {
+          if (!hookState.nextValue) {
+            return true;
+          }
 
-        const currentValue = Array.isArray(hookState.value)
-          ? hookState.value[0]
-          : undefined;
-        hookState.value = hookState.nextValue;
-        hookState.nextValue = undefined;
+          const currentValue = Array.isArray(hookState.value)
+            ? hookState.value[0]
+            : undefined;
+          hookState.value = hookState.nextValue;
+          hookState.nextValue = undefined;
 
-        return (
-          currentValue !==
-          (Array.isArray(hookState.value) ? hookState.value[0] : undefined)
-        );
-      };
+          return (
+            currentValue !==
+            (Array.isArray(hookState.value) ? hookState.value[0] : undefined)
+          );
+        };
+      }
     }
   }
 

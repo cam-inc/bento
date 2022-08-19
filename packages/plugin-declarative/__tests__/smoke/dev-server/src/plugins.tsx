@@ -63,9 +63,14 @@ const SampleWithHooks = () => {
   useEffect(() => {
     console.log(text);
   }, [text]);
+  const save = (blockContent: HTMLElement) => {
+    return {
+      text: blockContent.innerText,
+    };
+  };
   return (
     <tool
-      save={() => {}}
+      save={save}
       static_get_toolbox={{ title: 'SampleWithHooks', icon: '<span>🧪</span>' }}
     >
       <div>
@@ -156,7 +161,7 @@ const sampleWithHooks = createPlugin(<SampleWithHooks />);
 const customInlineTool = createPlugin(<CustomInlineTool />);
 const customBlockTune = createPlugin(<CustomBlockTune />);
 
-new EditorJS({
+const editor = new EditorJS({
   holder: 'editorjs',
   tools: {
     customTool,
@@ -164,4 +169,17 @@ new EditorJS({
     customInlineTool,
     customBlockTune,
   },
+});
+
+editor.isReady.then(() => {
+  const saveButton = document.createElement('button');
+  saveButton.innerText = 'save';
+  saveButton.addEventListener('click', () => {
+    editor.save().then((output) => {
+      const outputContainer = document.createElement('pre');
+      outputContainer.innerText = JSON.stringify(output);
+      document.body.appendChild(outputContainer);
+    });
+  });
+  document.body.appendChild(saveButton);
 });
