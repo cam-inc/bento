@@ -62,7 +62,7 @@ export type ColorScheme = typeof COLOR_SCHEME[keyof typeof COLOR_SCHEME];
 export const atomColorScheme = atom<ColorScheme>({
   key: 'colorScheme',
   default: COLOR_SCHEME.LIGHT,
-  effects_UNSTABLE: [
+  effects: [
     localStoragePersistence<ColorScheme>(KEY.COLOR_SCHEME, COLOR_SCHEME.LIGHT),
   ],
 });

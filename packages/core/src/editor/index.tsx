@@ -59,9 +59,14 @@ const Root: React.FC<RootProps> = ({ config }) => {
   const setColorScheme = useColorSchemeGlobalStateSet();
   // Watch `prefers-color-scheme`.
   useEffect(() => {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => {
       setColorScheme(e.matches ? COLOR_SCHEME.DARK : COLOR_SCHEME.LIGHT);
-    });
+    };
+    mediaQueryList.addEventListener('change', handler);
+    return () => {
+      mediaQueryList.removeEventListener('change', handler);
+    };
   }, []);
 
   const setConfig = useConfigGlobalStateSet();
