@@ -36,7 +36,8 @@ const Button: React.FC<{
     const nextPath = Path.next(path);
     Transforms.insertNodes(editor, {
       type: element.type,
-      children: element.editable.defaultValue,
+      children: [],
+      //children: element.editable.defaultValue,
     }, {
       at: nextPath
     });

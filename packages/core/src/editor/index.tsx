@@ -14,6 +14,7 @@ import { debounce } from '../utils';
 import { styles } from './index.css';
 
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
+// TODO: Element毎により詳細に指定可能に。
 type CustomElement = { type: string };
 type CustomText = { type: string }
 declare module 'slate' {

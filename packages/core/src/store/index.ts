@@ -30,6 +30,7 @@ export const atomConfig = atom<Config>({
   default: {
     elements: [],
     texts: [],
+    themeToken: {},
   },
 });
 export const useConfigGlobalState = () => useGlobalState(atomConfig);
