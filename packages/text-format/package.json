@@ -1,12 +1,10 @@
 {
-  "name": "@bento-editor/core",
-  "version": "0.0.3",
-  "description": "JSON Schema based block-styled editor.",
+  "name": "@bento-editor/text-format",
+  "version": "0.0.1",
+  "description": "TODO",
   "keywords": [
     "TODO"
   ],
-  "main": "./dist/cjs.js",
-  "module": "./dist/es.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
@@ -31,7 +29,7 @@
     "test": "jest",
     "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
   },
-  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/core",
+  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/text-format",
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },
@@ -52,25 +50,13 @@
   },
   "devDependencies": {
     "@types/jest": "^28.1.1",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
     "@vanilla-extract/vite-plugin": "^3.3.0",
     "jest": "^28.1.1",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.1",
     "vite": "^2.9.14"
   },
-  "dependencies": {
-    "@vanilla-extract/css": "^1.7.2",
-    "just-debounce-it": "^3.1.1",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
-    "recoil": "^0.7.5"
-  },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "slate": "^0.82.0",
-    "slate-react": "^0.82.0"
+    "@bento-editor/core": "*"
   }
 }

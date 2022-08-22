@@ -3,7 +3,7 @@
   "name": "bento-editor",
   "version": "0.0.1",
   "volta": {
-    "node": "16.14.2"
+    "node": "18.7.0"
   },
   "license": "MIT",
   "scripts": {
