@@ -7,6 +7,7 @@ export type Element = {
   type: string;
   editable: {
     Component: React.FC<RenderElementProps>;
+    // TODO: Element毎により詳細に指定可能に。
     defaultValue: unknown[];
   },
   toolbox: {

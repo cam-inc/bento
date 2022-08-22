@@ -22,7 +22,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, [popover]);
 
   // TODO: SlateとReactDnDのonDropがバッティングする問題。
-  const [{ isDragging }, dragRef] = useDrag(() => {
+  const [_, dragRef] = useDrag(() => {
     return {
       type: 'Element',
       item: {
