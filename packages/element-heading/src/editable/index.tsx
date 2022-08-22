@@ -1,12 +1,13 @@
 import { Element, ElementContainer } from '@bento-editor/core';
 import React from 'react';
+import { styles } from './index.css';
 
 const editable: Element['editable'] = {
   defaultValue: [{ text: 'default value' }],
   Component: (props) => {
     return (
       <ElementContainer {...props}>
-        <h1 {...props.attributes}>{props.children}</h1>
+        <h1 className={styles.root}>{props.children}</h1>
       </ElementContainer>
     );
   },
