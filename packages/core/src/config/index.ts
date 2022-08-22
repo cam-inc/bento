@@ -1,5 +1,7 @@
 import React from 'react';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
+import { PartialDeep } from 'type-fest';
+import { ThemeToken } from '../theme/index.css';
 
 export type Element = {
   type: string;
@@ -25,4 +27,5 @@ export type Text = {
 export type Config = {
   elements: Element[];
   texts: Text[];
+  themeToken: PartialDeep<ThemeToken>;
 };

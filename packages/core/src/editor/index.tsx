@@ -7,10 +7,11 @@ import { Config } from '../config';
 import { Editable } from '../editable';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
-import { GlobalStateProvider, useConfigGlobalStateSet, useScreenGlobalStateSet } from '../store';
+import { COLOR_SCHEME, GlobalStateProvider, useColorSchemeGlobalStateSet, useConfigGlobalStateSet, useScreenGlobalStateSet } from '../store';
+import { Theme } from '../theme';
 import { Toolbar } from '../toolbar';
 import { debounce } from '../utils';
-import { /*themeClass,*/ styles } from './index.css';
+import { styles } from './index.css';
 
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
 type CustomElement = { type: string };
@@ -55,6 +56,14 @@ type RootProps = {
   config: Config;
 };
 const Root: React.FC<RootProps> = ({ config }) => {
+  const setColorScheme = useColorSchemeGlobalStateSet();
+  // Watch `prefers-color-scheme`.
+  useEffect(() => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      setColorScheme(e.matches ? COLOR_SCHEME.DARK : COLOR_SCHEME.LIGHT);
+    });
+  }, []);
+
   const setConfig = useConfigGlobalStateSet();
   useEffect(() => {
     setConfig(config);
@@ -86,15 +95,17 @@ const Root: React.FC<RootProps> = ({ config }) => {
   }, [setScreen]);
 
   return (
-    <>
-      <div className={styles.root}>
-        <div className={styles.container}>
-          <Editable />
+    <Theme token={config.themeToken} render={(style) => (
+      <>
+        <div className={styles.root} style={style}>
+          <div className={styles.container}>
+            <Editable />
+          </div>
+          <ModalContainer />
+          <PopoverContainer />
         </div>
-        <ModalContainer />
-        <PopoverContainer />
-      </div>
-      <Toolbar />
-    </>
+        <Toolbar />
+      </>
+    )} />
   );
 };

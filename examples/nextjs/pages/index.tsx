@@ -13,7 +13,27 @@ const Home: NextPage = () => {
     ],
     texts: [
       textFormat,
-    ]
+    ],
+    themeToken: {
+      color: {
+        /**
+         * uncomment this to set colors forcibly no matter it's dark mode or not.
+        background: 'darkblue',
+        backgroundOn: 'lightblue',
+        */
+        /**
+          * uncomment this to set colors separately for light and dark modes.
+        light: {
+          background: 'lightgreen',
+          backgroundOn: 'darkgreen',
+        },
+        dark: {
+          background: 'darkgreen',
+          backgroundOn: 'lightgreen',
+        },
+        */
+      }
+    },
   }), []);
 
   const initialValue = useMemo<EditorProps['initialValue']>(() => ([
