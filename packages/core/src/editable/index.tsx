@@ -1,4 +1,6 @@
 import React, { useCallback } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Editable as SlateReactEditable } from 'slate-react';
 import { useConfigGlobalStateValue } from '../store';
 
@@ -43,7 +45,16 @@ export const Editable: React.FC<EditableProps> = () => {
     }
   }, [config]);
 
+  // `react-dnd` and `slate-react` don't work well each other.
+  // Override the default `drop` handler to skip its own logic.
+  // @see: https://docs.slatejs.org/libraries/slate-react#event-handling
+  const handleDrop = useCallback(() => {
+    return true;
+  }, []);
+
   return (
-    <SlateReactEditable renderElement={renderElement} renderLeaf={renderLeaf} />
+    <DndProvider backend={HTML5Backend}>
+      <SlateReactEditable renderElement={renderElement} renderLeaf={renderLeaf} onDrop={handleDrop} />
+    </DndProvider>
   );
 };

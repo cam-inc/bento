@@ -15,6 +15,9 @@
     "@bento-editor/element-paragraph#build": {
       "dependsOn": ["@bento-editor/core#build"]
     },
+    "@bento-editor/element-list#build": {
+      "dependsOn": ["@bento-editor/core#build"]
+    },
     "@bento-editor/text-format#build": {
       "dependsOn": ["@bento-editor/core#build"]
     },

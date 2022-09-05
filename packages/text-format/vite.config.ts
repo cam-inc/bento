@@ -12,6 +12,7 @@ export default defineConfig({
       fileName: (format) => `${format}.js`,
     },
     outDir: path.resolve(__dirname, './dist'),
+    sourcemap: true,
     emptyOutDir: false,
     rollupOptions: {
       external: Object.keys(pkg.peerDependencies),

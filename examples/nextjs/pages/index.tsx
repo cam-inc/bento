@@ -1,6 +1,7 @@
 import { Editor, EditorProps } from '@bento-editor/core';
 import elementParagraph from '@bento-editor/element-paragraph';
 import elementHeading from '@bento-editor/element-heading';
+import { list as elementList, listItem as elementListItem } from '@bento-editor/element-list';
 import textFormat from '@bento-editor/text-format';
 import type { NextPage } from 'next';
 import { useCallback, useMemo } from 'react';
@@ -10,6 +11,8 @@ const Home: NextPage = () => {
     elements: [
       elementParagraph,
       elementHeading,
+      elementList,
+      elementListItem
     ],
     texts: [
       textFormat,
@@ -17,7 +20,7 @@ const Home: NextPage = () => {
     themeToken: {
       color: {
         /**
-         * uncomment this to set colors forcibly no matter it's dark mode or not.
+          * uncomment this to set colors forcibly no matter it's dark mode or not.
         background: 'darkblue',
         backgroundOn: 'lightblue',
         */
@@ -61,6 +64,40 @@ const Home: NextPage = () => {
         {
           type: 'format',
           text: 'paragraph 02'
+        }
+      ]
+    },
+    {
+      type: 'list',
+      attributes: {
+        listStyleType: 'disc',
+      },
+      children: [
+        {
+          type: 'list-item',
+          children: [
+            {
+              type: 'format',
+              text: 'AAA'
+            },
+            {
+              type: 'format',
+              text: 'BBB'
+            }
+          ]
+        },
+        {
+          type: 'list-item',
+          children: [
+            {
+              type: 'format',
+              text: 'CCC'
+            },
+            {
+              type: 'format',
+              text: 'DDD'
+            }
+          ]
         }
       ]
     }

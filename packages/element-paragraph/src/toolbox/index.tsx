@@ -7,6 +7,5 @@ const toolbox: Element['toolbox'] = {
       <div>P</div>
     );
   },
-
 };
 export default toolbox;

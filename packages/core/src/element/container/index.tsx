@@ -2,6 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
+import { DotsIcon } from '../../components/icons/dots';
+import { PlusIcon } from '../../components/icons/plus';
 import { Popover, usePopover } from '../../portals/popover';
 import { Toolbox } from '../../toolbox';
 import { styles } from './index.css';
@@ -21,7 +23,6 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     popover.open();
   }, [popover]);
 
-  // TODO: SlateとReactDnDのonDropがバッティングする問題。
   const [_, dragRef] = useDrag(() => {
     return {
       type: 'Element',
@@ -50,13 +51,20 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
 
   return (
     <>
-      <div {...props.attributes} className={styles.root}>
-        <div contentEditable={false} className={styles.utils}>
-          <button ref={popover.targetRef} onClick={handleAddButtonClick}>add</button>
-          <button contentEditable={false} ref={dragRef}>drag</button>
-          <div contentEditable={false} ref={dropRef}>drop</div>
+      <div {...props.attributes} data-type={props.element.type} className={styles.root}>
+        <div className={styles.body}>{props.children}</div>
+        <div contentEditable={false} className={styles.utilsContainer}>
+          <div className={styles.utils}>
+            <button className={styles.button} ref={popover.targetRef} onClick={handleAddButtonClick}>
+              <PlusIcon />
+            </button>
+            <button className={styles.button} ref={dragRef}>
+              <DotsIcon />
+            </button>
+            <div ref={dropRef}>drop</div>
+          </div>
         </div>
-        <div>{props.children}</div>
+
       </div>
       <Popover {...popover.bind}>
         <Toolbox path={path} />
