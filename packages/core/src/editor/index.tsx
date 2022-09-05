@@ -1,13 +1,19 @@
 import React, { useEffect, useMemo } from 'react';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BaseEditor, createEditor } from 'slate';
 import { ReactEditor, Slate, withReact } from 'slate-react';
 import { Config } from '../config';
 import { Editable } from '../editable';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
-import { COLOR_SCHEME, GlobalStateProvider, useColorSchemeGlobalStateSet, useConfigGlobalStateSet, useScreenGlobalStateSet } from '../store';
+import {
+  COLOR_SCHEME,
+  GlobalStateProvider,
+  useColorSchemeGlobalStateSet,
+  useConfigGlobalStateSet,
+  useScreenGlobalStateSet,
+} from '../store';
 import { Theme } from '../theme';
 import { Toolbar } from '../toolbar';
 import { debounce } from '../utils';
@@ -15,8 +21,11 @@ import { styles } from './index.css';
 
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
 // TODO: Element毎により詳細に指定可能に。
-type CustomElement = { type: string };
-type CustomText = { type: string }
+export type CustomElement = {
+  type: string;
+  children: (CustomElement | CustomText)[];
+};
+export type CustomText = { type: string; text: string };
 declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor;
@@ -34,7 +43,11 @@ export type EditorProps = {
   initialValue: SlateProps['value'];
   onChange: NonNullable<SlateProps['onChange']>;
 };
-export const Editor: React.FC<EditorProps> = ({ config, initialValue, onChange }) => {
+export const Editor: React.FC<EditorProps> = ({
+  config,
+  initialValue,
+  onChange,
+}) => {
   const editor = useMemo(() => {
     return withReact(createEditor());
   }, []);
@@ -101,17 +114,20 @@ const Root: React.FC<RootProps> = ({ config }) => {
   }, [setScreen]);
 
   return (
-    <Theme token={config.themeToken} render={(style) => (
-      <>
-        <div className={styles.root} style={style}>
-          <div className={styles.container}>
-            <Editable />
+    <Theme
+      token={config.themeToken}
+      render={(style) => (
+        <>
+          <div className={styles.root} style={style}>
+            <div className={styles.container}>
+              <Editable />
+            </div>
+            <ModalContainer />
+            <PopoverContainer />
           </div>
-          <ModalContainer />
-          <PopoverContainer />
-        </div>
-        <Toolbar />
-      </>
-    )} />
+          <Toolbar />
+        </>
+      )}
+    />
   );
 };
