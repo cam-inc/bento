@@ -1,5 +1,6 @@
 import React from 'react';
-import { CustomElement, EditorProps } from '../editor';
+import { Element } from 'slate';
+import { EditorProps } from '../editor';
 
 type Type = 'paragraph' | 'heading' | 'format';
 
@@ -17,24 +18,28 @@ type Props = {
 
 type Data = Props['data'][number];
 
-const hasChildren = (data: Data): data is CustomElement => {
+const hasChildren = (data: Data): data is Element => {
   return Object.prototype.hasOwnProperty.call(data, 'children');
 };
 
 const createRenderer = (renderers: Props['renderers']) => {
   const renderRecursivly = (data: Data): ReturnType<React.FC> => {
-    const Renderer = renderers[data.type];
-    if (Renderer !== undefined) {
-      if (hasChildren(data)) {
-        for (const child of data.children) {
-          return <Renderer>{renderRecursivly(child)}</Renderer>;
+    if (data.type !== undefined) {
+      const Renderer = renderers[data.type];
+      if (Renderer !== undefined) {
+        if (hasChildren(data)) {
+          for (const child of data.children) {
+            return <Renderer>{renderRecursivly(child)}</Renderer>;
+          }
+        } else {
+          return <Renderer>{data.text}</Renderer>;
         }
       } else {
-        return <Renderer>{data.text}</Renderer>;
+        return null;
+        // throw new Error("Renderer isn't provided.");
       }
     } else {
       return null;
-      // throw new Error("Renderer isn't provided.");
     }
     return null;
   };

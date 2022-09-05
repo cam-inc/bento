@@ -1,15 +1,16 @@
 import {
-  atom, AtomEffect, RecoilRoot, useRecoilState,
+  atom, /*AtomEffect,*/ RecoilRoot, useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from 'recoil';
 import { Config } from '../config';
-import { get, Key, KEY, set } from '../helpers/storage';
+//import { get, Key, KEY, set } from '../helpers/storage';
 
 // For detail about Atom Effects,
 // @see: https://recoiljs.org/docs/guides/atom-effects
 
 // Make atom data in sync with local stored data for persistence.
+/*
 const localStoragePersistence = <T>(key: Key, fallback: T): AtomEffect<T> => ({ trigger, setSelf, onSet }) => {
   if (trigger === 'get') {
     setSelf(get<T>(key) ?? fallback);
@@ -18,6 +19,7 @@ const localStoragePersistence = <T>(key: Key, fallback: T): AtomEffect<T> => ({ 
     set<T>(key, newValue);
   });
 };
+*/
 
 export const GlobalStateProvider = RecoilRoot;
 export const useGlobalState = useRecoilState;
@@ -64,7 +66,8 @@ export const atomColorScheme = atom<ColorScheme>({
   key: 'colorScheme',
   default: COLOR_SCHEME.LIGHT,
   effects: [
-    localStoragePersistence<ColorScheme>(KEY.COLOR_SCHEME, COLOR_SCHEME.LIGHT),
+    // TODO: de/hydration差異を解決すること。
+    //localStoragePersistence<ColorScheme>(KEY.COLOR_SCHEME, COLOR_SCHEME.LIGHT),
   ],
 });
 export const useColorSchemelobalState = () => useGlobalState(atomColorScheme);
