@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { BaseEditor, createEditor } from 'slate';
-import { ReactEditor, Slate, withReact } from 'slate-react';
+import { createEditor, Element } from 'slate';
+import { Slate, withReact } from 'slate-react';
 import { Config } from '../config';
 import { Editable } from '../editable';
 import { ModalContainer } from '../portals/modal/container';
@@ -13,17 +11,7 @@ import { Toolbar } from '../toolbar';
 import { debounce } from '../utils';
 import { styles } from './index.css';
 
-// @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
-// TODO: Element毎により詳細に指定可能に。
-type CustomElement = { type: string };
-type CustomText = { type: string }
-declare module 'slate' {
-  interface CustomTypes {
-    Editor: BaseEditor & ReactEditor;
-    Element: CustomElement;
-    Text: CustomText;
-  }
-}
+export const EditorClassName = styles.root;
 
 // `SlateProps` is not exported from `slate-react`.
 // Below is just a workaround of this.
@@ -31,22 +19,45 @@ type SlateProps = React.ComponentProps<typeof Slate>;
 
 export type EditorProps = {
   config: Config;
+  // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
+  // @see:
   initialValue: SlateProps['value'];
   onChange: NonNullable<SlateProps['onChange']>;
 };
 export const Editor: React.FC<EditorProps> = ({ config, initialValue, onChange }) => {
   const editor = useMemo(() => {
-    return withReact(createEditor());
-  }, []);
+    const editor = withReact(createEditor());
+
+    // Set domain specific constraints.
+    // @see: https://docs.slatejs.org/concepts/11-normalizing
+    const originalNormalizeNode = editor.normalizeNode;
+    editor.normalizeNode = (entry) => {
+      const [node] = entry;
+      if (Element.isElement(node)) {
+        const { elements } = config;
+        const element = elements.find((element) => {
+          return element.type === node.type;
+        });
+        if (element && element.normalizeNode) {
+          const isToReturn = element.normalizeNode(editor, entry);
+          if (isToReturn) {
+            // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
+            return;
+          }
+        }
+      }
+      // Fall back to the original `normalizeNode` to enforce other constraints.
+      originalNormalizeNode(entry);
+    };
+    return editor;
+  }, [config]);
 
   return (
     <>
       <Slate editor={editor} value={initialValue} onChange={onChange}>
         <GlobalStateProvider>
-          <DndProvider backend={HTML5Backend}>
-            {/* Need to wrap with a react component to encapsulate all state related processes inside the RecoilRoot component. */}
-            <Root config={config} />
-          </DndProvider>
+          {/* Need to wrap with a react component to encapsulate all state related processes inside the RecoilRoot component. */}
+          <Root config={config} />
         </GlobalStateProvider>
       </Slate>
     </>
@@ -61,6 +72,7 @@ const Root: React.FC<RootProps> = ({ config }) => {
   // Watch `prefers-color-scheme`.
   useEffect(() => {
     const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+    setColorScheme(mediaQueryList.matches ? COLOR_SCHEME.DARK : COLOR_SCHEME.LIGHT);
     const handler = (e: MediaQueryListEvent) => {
       setColorScheme(e.matches ? COLOR_SCHEME.DARK : COLOR_SCHEME.LIGHT);
     };

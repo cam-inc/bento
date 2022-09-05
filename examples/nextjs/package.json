@@ -8,6 +8,7 @@
     "@bento-editor/core": "*",
     "@bento-editor/element-heading": "*",
     "@bento-editor/element-paragraph": "*",
+    "@bento-editor/element-list": "*",
     "@bento-editor/text-format": "*",
     "next": "^12.2.4",
     "react": "^18.2.0",
