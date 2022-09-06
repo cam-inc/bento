@@ -1,5 +1,5 @@
 import list from './list';
 import listItem from './item';
-export { ListRenderer } from './renderer';
+export * from './renderer';
 
 export { list, listItem };

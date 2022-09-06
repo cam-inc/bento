@@ -10,9 +10,10 @@ import elementParagraph, {
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
+  LiRenderer,
   list as elementList,
   listItem as elementListItem,
-  ListRenderer,
+  UlRenderer,
 } from '@bento-editor/element-list';
 import type { NextPage } from 'next';
 import { useCallback, useMemo, useState } from 'react';
@@ -140,8 +141,8 @@ const Home: NextPage = () => {
       paragraph: ParagraphRenderer,
       heading: HeadingRenderer,
       format: TextFormatRenderer,
-      list: ListRenderer.ul,
-      'list-item': ListRenderer.li,
+      list: UlRenderer,
+      'list-item': LiRenderer,
     }),
     []
   );
