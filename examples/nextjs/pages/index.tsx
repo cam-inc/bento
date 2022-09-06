@@ -12,6 +12,7 @@ import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   list as elementList,
   listItem as elementListItem,
+  ListRenderer,
 } from '@bento-editor/element-list';
 import type { NextPage } from 'next';
 import { useCallback, useMemo, useState } from 'react';
@@ -29,12 +30,12 @@ const Home: NextPage = () => {
       themeToken: {
         color: {
           /**
-          * uncomment this to set colors forcibly no matter it's dark mode or not.
+         * uncomment this to set colors forcibly no matter it's dark mode or not.
         background: 'darkblue',
         backgroundOn: 'lightblue',
-        */
+         */
           /**
-          * uncomment this to set colors separately for light and dark modes.
+         * uncomment this to set colors separately for light and dark modes.
         light: {
           background: 'lightgreen',
           backgroundOn: 'darkgreen',
@@ -43,7 +44,7 @@ const Home: NextPage = () => {
           background: 'darkgreen',
           backgroundOn: 'lightgreen',
         },
-        */
+         */
         },
       },
     }),
@@ -92,6 +93,11 @@ const Home: NextPage = () => {
                 type: 'format',
                 text: 'AAA',
               },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
               {
                 type: 'format',
                 text: 'BBB',
@@ -105,6 +111,11 @@ const Home: NextPage = () => {
                 type: 'format',
                 text: 'CCC',
               },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
               {
                 type: 'format',
                 text: 'DDD',
@@ -129,6 +140,8 @@ const Home: NextPage = () => {
       paragraph: ParagraphRenderer,
       heading: HeadingRenderer,
       format: TextFormatRenderer,
+      list: ListRenderer.ul,
+      'list-item': ListRenderer.li,
     }),
     []
   );

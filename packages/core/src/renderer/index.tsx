@@ -2,17 +2,12 @@ import React from 'react';
 import { Element } from 'slate';
 import { EditorProps } from '../editor';
 
-type Type = 'paragraph' | 'heading' | 'format';
-
 export type Renderers = {
-  [key in Type]?: React.FC<{ children: React.ReactNode }>;
-};
-type CustomRenderers = {
   [key: string]: React.FC<{ children: React.ReactNode }>;
 };
 
 type Props = {
-  renderers: Renderers & CustomRenderers;
+  renderers: Renderers;
   data: EditorProps['initialValue'];
 };
 
@@ -23,27 +18,31 @@ const hasChildren = (data: Data): data is Element => {
 };
 
 const createRenderer = (renderers: Props['renderers']) => {
-  const renderRecursivly = (data: Data): ReturnType<React.FC> => {
+  const renderRecursively = (data: Data): ReturnType<React.FC> => {
     if (data.type !== undefined) {
       const Renderer = renderers[data.type];
       if (Renderer !== undefined) {
         if (hasChildren(data)) {
-          for (const child of data.children) {
-            return <Renderer>{renderRecursivly(child)}</Renderer>;
-          }
+          const children: ReturnType<React.FC>[] = [];
+          data.children.forEach((child, index) => {
+            children.push(
+              <React.Fragment key={index}>
+                {renderRecursively(child)}
+              </React.Fragment>
+            );
+          });
+          return <Renderer>{children}</Renderer>;
         } else {
           return <Renderer>{data.text}</Renderer>;
         }
       } else {
         return null;
-        // throw new Error("Renderer isn't provided.");
       }
     } else {
       return null;
     }
-    return null;
   };
-  return renderRecursivly;
+  return renderRecursively;
 };
 
 export const EditorRenderer: React.FC<Props> = ({ renderers, data }) => {
