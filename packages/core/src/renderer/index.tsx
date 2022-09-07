@@ -22,26 +22,26 @@ const hasChildren = (data: Data): data is Element => {
   return Object.prototype.hasOwnProperty.call(data, 'children');
 };
 
+const DefaultRenderer: React.FC<RendererProps> = ({ children, attributes }) => {
+  return <React.Fragment {...attributes}>{children}</React.Fragment>;
+};
+
 const createRenderer = (renderers: Props['renderers']) => {
   const renderRecursively = (data: Data): ReturnType<React.FC> => {
     if (data.type !== undefined) {
-      const Renderer = renderers[data.type];
-      if (Renderer !== undefined) {
-        if (hasChildren(data)) {
-          const children: ReturnType<React.FC>[] = [];
-          data.children.forEach((child, index) => {
-            children.push(
-              <React.Fragment key={index}>
-                {renderRecursively(child)}
-              </React.Fragment>
-            );
-          });
-          return <Renderer attributes={data.attributes}>{children}</Renderer>;
-        } else {
-          return <Renderer attributes={data.attributes}>{data.text}</Renderer>;
-        }
+      const Renderer = renderers[data.type] ?? DefaultRenderer;
+      if (hasChildren(data)) {
+        const children: ReturnType<React.FC>[] = [];
+        data.children.forEach((child, index) => {
+          children.push(
+            <React.Fragment key={index}>
+              {renderRecursively(child)}
+            </React.Fragment>
+          );
+        });
+        return <Renderer attributes={data.attributes}>{children}</Renderer>;
       } else {
-        return null;
+        return <Renderer attributes={data.attributes}>{data.text}</Renderer>;
       }
     } else {
       return null;
