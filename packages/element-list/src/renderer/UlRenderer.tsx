@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
+import { RendererProps } from '@bento-editor/core';
+import { Attributes } from '../list/attributes';
 
-type Props = {
-  children: React.ReactNode
-}
-
-export const UlRenderer: React.FC<Props> = ({ children }) => {
-  return <ul>{children}</ul>;
-}
+export const UlRenderer: React.FC<RendererProps<Attributes>> = ({
+  children,
+  attributes,
+}) => {
+  return <ul style={{ ...attributes }}>{children}</ul>;
+};

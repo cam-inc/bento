@@ -1,9 +1,9 @@
 import React from 'react';
+import { RendererProps } from '@bento-editor/core';
+import { Attributes } from '../attributes';
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export const ParagraphRenderer: React.FC<Props> = ({ children }) => {
+export const ParagraphRenderer: React.FC<RendererProps<Attributes>> = ({
+  children,
+}) => {
   return <p>{children}</p>;
 };

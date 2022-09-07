@@ -1,9 +1,6 @@
-import React from "react";
+import React from 'react';
+import { RendererProps } from '@bento-editor/core';
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export const LiRenderer: React.FC<Props> = ({children}) => {
+export const LiRenderer: React.FC<RendererProps> = ({ children }) => {
   return <li>{children}</li>;
-}
+};

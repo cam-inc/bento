@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
+import { RendererProps } from '@bento-editor/core';
+import { Attributes } from '../list/attributes';
 
-type Props = {
-  children: React.ReactNode
-}
-
-export const OlRenderer: React.FC<Props> = ({children}) => {
-  return <ol>{children}</ol>;
-}
+export const OlRenderer: React.FC<RendererProps<Attributes>> = ({
+  children,
+  attributes,
+}) => {
+  return <ol style={{ ...attributes }}>{children}</ol>;
+};

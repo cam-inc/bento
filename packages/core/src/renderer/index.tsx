@@ -2,8 +2,13 @@ import React from 'react';
 import { Element } from 'slate';
 import { EditorProps } from '../editor';
 
+export type RendererProps<Attributes extends Record<string, any> = {}> = {
+  children: React.ReactNode;
+  attributes?: Attributes;
+};
+
 export type Renderers = {
-  [key: string]: React.FC<{ children: React.ReactNode }>;
+  [key: string]: React.FC<RendererProps>;
 };
 
 type Props = {
@@ -31,9 +36,9 @@ const createRenderer = (renderers: Props['renderers']) => {
               </React.Fragment>
             );
           });
-          return <Renderer>{children}</Renderer>;
+          return <Renderer attributes={data.attributes}>{children}</Renderer>;
         } else {
-          return <Renderer>{data.text}</Renderer>;
+          return <Renderer attributes={data.attributes}>{data.text}</Renderer>;
         }
       } else {
         return null;

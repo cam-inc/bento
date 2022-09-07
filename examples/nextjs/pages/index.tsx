@@ -55,6 +55,39 @@ const Home: NextPage = () => {
   const initialValue = useMemo<EditorProps['initialValue']>(
     () => [
       {
+        type: 'heading',
+        children: [
+          {
+            type: 'format',
+            text: 'heading 1',
+          },
+        ],
+      },
+      {
+        type: 'heading',
+        children: [
+          {
+            type: 'format',
+            text: 'heading 2',
+          },
+        ],
+        attributes: {
+          level: 2,
+        },
+      },
+      {
+        type: 'heading',
+        children: [
+          {
+            type: 'format',
+            text: 'heading 3',
+          },
+        ],
+        attributes: {
+          level: 3,
+        },
+      },
+      {
         type: 'paragraph',
         children: [
           {
@@ -64,11 +97,11 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'heading',
+        type: 'paragraph',
         children: [
           {
             type: 'format',
-            text: 'heading',
+            text: 'paragraph 02',
           },
         ],
       },
@@ -77,7 +110,25 @@ const Home: NextPage = () => {
         children: [
           {
             type: 'format',
-            text: 'paragraph 02',
+            text: 'italic',
+            attributes: {
+              italic: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'bold',
+            attributes: {
+              bold: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'italic+bold',
+            attributes: {
+              bold: true,
+              italic: true,
+            },
           },
         ],
       },
