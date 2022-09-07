@@ -1,0 +1,58 @@
+{
+  "name": "@bento-editor/element-emoji",
+  "version": "0.0.1",
+  "description": "TODO",
+  "keywords": ["TODO"],
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/es.js",
+      "require": "./dist/cjs.js"
+    },
+    "./styles": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "prepublishOnly": "run-s clear build",
+    "clear": "rimraf dist && mkdirp dist",
+    "dev": "run-p dev:*",
+    "dev:lib": "vite build --watch",
+    "dev:type": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types --watch",
+    "build": "vite build && tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "test": "jest",
+    "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
+  },
+  "homepage": "https://github.com/cam-inc/bento#readme",
+  "bugs": {
+    "url": "https://github.com/cam-inc/bento/issues"
+  },
+  "license": "MIT",
+  "contributers": [
+    {
+      "name": "Go Ohtani",
+      "url": "https://github.com/cathcheeno"
+    },
+    {
+      "name": "Shuta Hirai",
+      "url": "https://github.com/shuta13"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cam-inc/bento.git"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "@vanilla-extract/vite-plugin": "^3.3.1",
+    "jest": "^29.0.2",
+    "ts-jest": "^28.0.8",
+    "ts-node": "^10.9.1",
+    "vite": "^3.1.0"
+  },
+  "peerDependencies": {
+    "@bento-editor/core": "*"
+  }
+}
