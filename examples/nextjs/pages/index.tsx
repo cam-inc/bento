@@ -124,10 +124,26 @@ const Home: NextPage = () => {
           },
           {
             type: 'format',
-            text: 'italic+bold',
+            text: 'underline',
+            attributes: {
+              underline: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'strikethrough',
+            attributes: {
+              strikethrough: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'all',
             attributes: {
               bold: true,
               italic: true,
+              underline: true,
+              strikethrough: true,
             },
           },
         ],

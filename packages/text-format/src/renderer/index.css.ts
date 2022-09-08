@@ -11,7 +11,7 @@ export const styles = {
     textDecoration: 'line-through',
   }),
   underline: style({
-    textDecoration: 'underline',
+    borderBottom: '0.05em solid',
   }),
   inherit: style({
     fontWeight: 'inherit',
