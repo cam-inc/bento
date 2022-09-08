@@ -1,5 +1,5 @@
 import React from 'react';
-import { Element, Text } from 'slate';
+import { Descendant, Element, Text } from 'slate';
 import { EditorProps } from '../editor';
 
 export type RendererProps<Attributes extends Record<string, any> = {}> = {
@@ -16,25 +16,25 @@ type Props = {
   data: EditorProps['initialValue'];
 };
 
-type Data = Props['data'][number];
-
-const isText = (data: Data): data is Text => {
-  return Object.prototype.hasOwnProperty.call(data, 'text');
+const DefaultElementRenderer: React.FC<RendererProps> = ({
+  children,
+  attributes,
+}) => {
+  return <div {...attributes}>{children}</div>;
 };
 
-const isElement = (data: Data): data is Element => {
-  return Object.prototype.hasOwnProperty.call(data, 'children');
-};
-
-const DefaultRenderer: React.FC<RendererProps> = ({ children, attributes }) => {
-  return <React.Fragment {...attributes}>{children}</React.Fragment>;
+const DefaultTextRenderer: React.FC<RendererProps> = ({
+  children,
+  attributes,
+}) => {
+  return <span {...attributes}>{children}</span>;
 };
 
 const createRenderer = (renderers: Props['renderers']) => {
-  const renderRecursively = (data: Data): ReturnType<React.FC> => {
+  const renderRecursively = (data: Descendant): ReturnType<React.FC> => {
     if (data.type !== undefined) {
-      const Renderer = renderers[data.type] ?? DefaultRenderer;
-      if (isElement(data)) {
+      if (Element.isElement(data)) {
+        const Renderer = renderers[data.type] ?? DefaultElementRenderer;
         const children: ReturnType<React.FC>[] = [];
         data.children.forEach((child, index) => {
           children.push(
@@ -44,7 +44,8 @@ const createRenderer = (renderers: Props['renderers']) => {
           );
         });
         return <Renderer attributes={data.attributes}>{children}</Renderer>;
-      } else if (isText(data)) {
+      } else if (Text.isText(data)) {
+        const Renderer = renderers[data.type] ?? DefaultTextRenderer;
         return <Renderer attributes={data.attributes}>{data.text}</Renderer>;
       } else {
         return null;
