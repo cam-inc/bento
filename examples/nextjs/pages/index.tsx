@@ -1,14 +1,23 @@
-import { Editor, EditorProps } from '@bento-editor/core';
-import elementParagraph from '@bento-editor/element-paragraph';
-import elementHeading from '@bento-editor/element-heading';
-import elementEmoji from '@bento-editor/element-emoji';
 import {
+  Editor,
+  EditorProps,
+  EditorRenderer,
+  Renderers,
+} from '@bento-editor/core';
+import elementParagraph, {
+  ParagraphRenderer,
+} from '@bento-editor/element-paragraph';
+import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
+import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
+import {
+  LiRenderer,
   list as elementList,
   listItem as elementListItem,
+  UlRenderer,
 } from '@bento-editor/element-list';
-import textFormat from '@bento-editor/text-format';
+import elementEmoji from '@bento-editor/element-emoji';
 import type { NextPage } from 'next';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 const Home: NextPage = () => {
   const config = useMemo<EditorProps['config']>(
@@ -24,12 +33,12 @@ const Home: NextPage = () => {
       themeToken: {
         color: {
           /**
-          * uncomment this to set colors forcibly no matter it's dark mode or not.
+         * uncomment this to set colors forcibly no matter it's dark mode or not.
         background: 'darkblue',
         backgroundOn: 'lightblue',
-        */
+         */
           /**
-          * uncomment this to set colors separately for light and dark modes.
+         * uncomment this to set colors separately for light and dark modes.
         light: {
           background: 'lightgreen',
           backgroundOn: 'darkgreen',
@@ -48,6 +57,39 @@ const Home: NextPage = () => {
   const initialValue = useMemo<EditorProps['initialValue']>(
     () => [
       {
+        type: 'heading',
+        children: [
+          {
+            type: 'format',
+            text: 'heading 1',
+          },
+        ],
+      },
+      {
+        type: 'heading',
+        children: [
+          {
+            type: 'format',
+            text: 'heading 2',
+          },
+        ],
+        attributes: {
+          level: 2,
+        },
+      },
+      {
+        type: 'heading',
+        children: [
+          {
+            type: 'format',
+            text: 'heading 3',
+          },
+        ],
+        attributes: {
+          level: 3,
+        },
+      },
+      {
         type: 'paragraph',
         children: [
           {
@@ -57,11 +99,11 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'heading',
+        type: 'paragraph',
         children: [
           {
             type: 'format',
-            text: 'heading',
+            text: 'paragraph 02',
           },
         ],
       },
@@ -70,7 +112,41 @@ const Home: NextPage = () => {
         children: [
           {
             type: 'format',
-            text: 'paragraph 02',
+            text: 'italic',
+            attributes: {
+              italic: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'bold',
+            attributes: {
+              bold: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'underline',
+            attributes: {
+              underline: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'strikethrough',
+            attributes: {
+              strikethrough: true,
+            },
+          },
+          {
+            type: 'format',
+            text: 'all',
+            attributes: {
+              bold: true,
+              italic: true,
+              underline: true,
+              strikethrough: true,
+            },
           },
         ],
       },
@@ -87,6 +163,11 @@ const Home: NextPage = () => {
                 type: 'format',
                 text: 'AAA',
               },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
               {
                 type: 'format',
                 text: 'BBB',
@@ -100,6 +181,11 @@ const Home: NextPage = () => {
                 type: 'format',
                 text: 'CCC',
               },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
               {
                 type: 'format',
                 text: 'DDD',
@@ -112,9 +198,23 @@ const Home: NextPage = () => {
     []
   );
 
+  const [value, setValue] = useState(initialValue);
+
   const handleChange = useCallback<EditorProps['onChange']>((value) => {
     console.log(value);
+    setValue(value);
   }, []);
+
+  const renderers = useMemo<Renderers>(
+    () => ({
+      paragraph: ParagraphRenderer,
+      heading: HeadingRenderer,
+      format: TextFormatRenderer,
+      list: UlRenderer,
+      'list-item': LiRenderer,
+    }),
+    []
+  );
 
   return (
     <div>
@@ -123,6 +223,7 @@ const Home: NextPage = () => {
         initialValue={initialValue}
         onChange={handleChange}
       />
+      <EditorRenderer renderers={renderers} data={value} />
     </div>
   );
 };

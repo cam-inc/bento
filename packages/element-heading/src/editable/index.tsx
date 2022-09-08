@@ -4,7 +4,7 @@ import { Attributes } from '../attributes';
 import { styles } from './index.css';
 
 const editable: Element<Attributes>['editable'] = {
-  defaultValue: [{ text: 'default value' }],
+  defaultValue: [{ type: 'format', text: 'default value' }],
   Component: (props) => {
     return (
       <ElementContainer {...props}>
@@ -12,6 +12,5 @@ const editable: Element<Attributes>['editable'] = {
       </ElementContainer>
     );
   },
-
 };
 export default editable;

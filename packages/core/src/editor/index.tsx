@@ -5,7 +5,13 @@ import { Config } from '../config';
 import { Editable } from '../editable';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
-import { COLOR_SCHEME, GlobalStateProvider, useColorSchemeGlobalStateSet, useConfigGlobalStateSet, useScreenGlobalStateSet } from '../store';
+import {
+  COLOR_SCHEME,
+  GlobalStateProvider,
+  useColorSchemeGlobalStateSet,
+  useConfigGlobalStateSet,
+  useScreenGlobalStateSet,
+} from '../store';
 import { Theme } from '../theme';
 import { Toolbar } from '../toolbar';
 import { debounce } from '../utils';
@@ -24,7 +30,11 @@ export type EditorProps = {
   initialValue: SlateProps['value'];
   onChange: NonNullable<SlateProps['onChange']>;
 };
-export const Editor: React.FC<EditorProps> = ({ config, initialValue, onChange }) => {
+export const Editor: React.FC<EditorProps> = ({
+  config,
+  initialValue,
+  onChange,
+}) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());
 
@@ -72,7 +82,9 @@ const Root: React.FC<RootProps> = ({ config }) => {
   // Watch `prefers-color-scheme`.
   useEffect(() => {
     const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-    setColorScheme(mediaQueryList.matches ? COLOR_SCHEME.DARK : COLOR_SCHEME.LIGHT);
+    setColorScheme(
+      mediaQueryList.matches ? COLOR_SCHEME.DARK : COLOR_SCHEME.LIGHT
+    );
     const handler = (e: MediaQueryListEvent) => {
       setColorScheme(e.matches ? COLOR_SCHEME.DARK : COLOR_SCHEME.LIGHT);
     };
@@ -113,17 +125,20 @@ const Root: React.FC<RootProps> = ({ config }) => {
   }, [setScreen]);
 
   return (
-    <Theme token={config.themeToken} render={(style) => (
-      <>
-        <div className={styles.root} style={style}>
-          <div className={styles.container}>
-            <Editable />
+    <Theme
+      token={config.themeToken}
+      render={(style) => (
+        <>
+          <div className={styles.root} style={style}>
+            <div className={styles.container}>
+              <Editable />
+            </div>
+            <ModalContainer />
+            <PopoverContainer />
           </div>
-          <ModalContainer />
-          <PopoverContainer />
-        </div>
-        <Toolbar />
-      </>
-    )} />
+          <Toolbar />
+        </>
+      )}
+    />
   );
 };

@@ -16,6 +16,9 @@ export default defineConfig({
     emptyOutDir: false,
     rollupOptions: {
       external: Object.keys(pkg.peerDependencies),
+      output: {
+        exports: 'named',
+      },
     },
   },
   plugins: [vanillaExtractPlugin()],
