@@ -4,26 +4,6 @@ import { RendererProps } from '@bento-editor/core';
 import defaultAttributes, { Attributes } from '../attributes';
 import { styles } from './index.css';
 
-// const getFontWeight = (
-//   attributes: Attributes
-// ): NonNullable<React.CSSProperties['fontWeight']> => {
-//   if (attributes.bold) {
-//     return 'bold';
-//   } else {
-//     return 'inherit';
-//   }
-// };
-//
-// const getFontStyle = (
-//   attributes: Attributes
-// ): NonNullable<React.CSSProperties['fontStyle']> => {
-//   if (attributes.italic) {
-//     return 'italic';
-//   } else {
-//     return 'inherit';
-//   }
-// };
-
 export const TextFormatRenderer: React.FC<RendererProps<Attributes>> = ({
   children,
   attributes,
