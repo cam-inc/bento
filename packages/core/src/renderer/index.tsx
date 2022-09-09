@@ -1,6 +1,7 @@
 import React from 'react';
-import { Descendant, Element, Text } from 'slate';
+import { Descendant } from 'slate';
 import { EditorProps } from '../editor';
+import { isElement, isText } from '../utils';
 
 export type RendererProps<Attributes extends Record<string, any> = {}> = {
   children: React.ReactNode;
@@ -33,7 +34,7 @@ const DefaultTextRenderer: React.FC<RendererProps> = ({
 const createRenderer = (renderers: Props['renderers']) => {
   const renderRecursively = (data: Descendant): ReturnType<React.FC> => {
     if (data.type !== undefined) {
-      if (Element.isElement(data)) {
+      if (isElement(data)) {
         const Renderer = renderers[data.type] ?? DefaultElementRenderer;
         const children: ReturnType<React.FC>[] = [];
         data.children.forEach((child, index) => {
@@ -44,7 +45,7 @@ const createRenderer = (renderers: Props['renderers']) => {
           );
         });
         return <Renderer attributes={data.attributes}>{children}</Renderer>;
-      } else if (Text.isText(data)) {
+      } else if (isText(data)) {
         const Renderer = renderers[data.type] ?? DefaultTextRenderer;
         return <Renderer attributes={data.attributes}>{data.text}</Renderer>;
       } else {

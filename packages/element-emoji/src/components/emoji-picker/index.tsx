@@ -3,12 +3,14 @@
  */
 import React from 'react';
 import { Picker, PickerProps } from 'emoji-mart';
+import data from '@emoji-mart/data';
+import i18n from '@emoji-mart/data/i18n/ja.json';
 
 declare module 'emoji-mart' {
   export class Picker {
     constructor(
       _params: PickerProps & {
-        data: Record<string, any>;
+        data: typeof data;
         ref?: HTMLElement;
       }
     );
@@ -26,13 +28,8 @@ export const EmojiPicker: React.FC<Props> = (props) => {
   const onElementLoaded = (ref: HTMLDivElement | null) => {
     const picker = new Picker({
       ...props,
-      // https://github.com/missive/emoji-mart/tree/main#fetched-remotely
-      data: async () => {
-        const response = await fetch(
-          'https://cdn.jsdelivr.net/npm/@emoji-mart/data'
-        );
-        return response.json();
-      },
+      data,
+      i18n,
     });
 
     // Inspired: https://github.com/missive/emoji-mart/tree/main#browser

@@ -6,7 +6,7 @@ import { useConfigGlobalStateValue } from '../store';
 
 export type ToolboxProps = {
   path: Path;
-}
+};
 export const Toolbox: React.FC<ToolboxProps> = ({ path }) => {
   const config = useConfigGlobalStateValue();
 
@@ -34,16 +34,22 @@ const Button: React.FC<{
   const editor = useSlate();
   const handleClick = useCallback(() => {
     const nextPath = Path.next(path);
-    Transforms.insertNodes(editor, {
-      type: element.type,
-      attributes: element.attributes.defaultValue,
-      children: element.editable.defaultValue,
-    }, {
-      at: nextPath
-    });
+    Transforms.insertNodes(
+      editor,
+      {
+        type: element.type,
+        attributes: element.attributes.defaultValue,
+        children: element.editable.defaultValue,
+      },
+      {
+        at: nextPath,
+      }
+    );
   }, [editor, path, element]);
 
   return (
-    <button onClick={handleClick}><element.toolbox.Icon /></button>
+    <button onClick={handleClick}>
+      <element.toolbox.Icon />
+    </button>
   );
-}
+};

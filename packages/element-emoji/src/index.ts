@@ -4,7 +4,7 @@ import editable from './editable';
 import toolbox from './toolbox';
 
 const element: Element<Attributes> = {
-  type: 'paragraph',
+  type: 'emoji',
   attributes,
   editable,
   toolbox,
