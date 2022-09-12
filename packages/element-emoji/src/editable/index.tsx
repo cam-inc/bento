@@ -1,10 +1,10 @@
 import { Element, ElementContainer, isText } from '@bento-editor/core';
 import React from 'react';
 import defaultAttributes, { Attributes } from '../attributes';
-import { EmojiPicker } from '../components/emoji-picker';
+import { EmojiPickerContainer } from '../components/emoji-picker/container';
 import { styles } from './index.css';
 
-const PREFIX_OPEN_PICKER = ':';
+const PATTERN_OPEN_PICKER = /:/;
 
 const editable: Element<Attributes>['editable'] = {
   defaultValue: [
@@ -23,19 +23,23 @@ const editable: Element<Attributes>['editable'] = {
     const pickerStatus =
       props.element.attributes?.['picker-status'] ??
       defaultAttributes.defaultValue['picker-status'];
+
     let isOpened = pickerStatus === 'open';
+
+    let searchString = '';
     const child = props.element.children[0];
     if (isText(child)) {
-      isOpened = child.text.startsWith(PREFIX_OPEN_PICKER);
+      isOpened = !!child.text.match(PATTERN_OPEN_PICKER);
+      const [_, value] = child.text.split(':');
+      searchString = value;
     }
 
     return (
-      <>
-        <ElementContainer {...props}>
+      <ElementContainer {...props}>
+        <EmojiPickerContainer isOpened={isOpened} searchString={searchString}>
           <span className={styles.root}>{props.children}</span>
-        </ElementContainer>
-        {isOpened && <EmojiPicker onEmojiSelect={console.log} />}
-      </>
+        </EmojiPickerContainer>
+      </ElementContainer>
     );
   },
 };
