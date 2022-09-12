@@ -3,14 +3,16 @@ import { Editor, Range } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
+import { styles } from './index.css';
 
 export type ToolbarProps = {};
 export const Toolbar: React.FC<ToolbarProps> = () => {
   const editor = useSlate();
   const isFocused = useFocused();
-  const popover = usePopover<HTMLDivElement>();
 
+  const popover = usePopover<HTMLDivElement>();
   const [rect, setRect] = useState<DOMRect>();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const { selection } = editor;
@@ -23,17 +25,26 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     })();
 
     if (!isToShow) {
+      setIsVisible(false);
       return;
     }
 
-    const domSelection = window.getSelection()
+    const domSelection = window.getSelection();
     const domRange = domSelection?.getRangeAt(0);
     const rect = domRange?.getBoundingClientRect();
     if (rect) {
       setRect(rect);
+      setIsVisible(true);
     }
-    popover.open();
   }, [isFocused, editor.selection]);
+
+  useEffect(() => {
+    if (isVisible) {
+      popover.open();
+    } else {
+      popover.close();
+    }
+  }, [popover, isVisible]);
 
   const config = useConfigGlobalStateValue();
 
@@ -48,11 +59,18 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
         left: `${rect?.left}px`,
       }} />
       <Popover {...popover.bind}>
-        <div>{config.texts.map(text => (
-          <React.Fragment key={text.type}>
-            <text.toolbar.Icon />
-          </React.Fragment>
-        ))}</div>
+        <div className={styles.root}>
+          <ul className={styles.list}>{config.texts.map(text => (
+            <React.Fragment key={text.type}>
+              <li className={styles.item} >
+                <text.toolbar.Component />
+              </li>
+              <li className={styles.item} >
+                <text.toolbar.Component />
+              </li>
+            </React.Fragment>
+          ))}</ul>
+        </div>
       </Popover>
     </>
   )

@@ -19,18 +19,24 @@ export const Theme: React.FC<ThemeProps> = ({ token, render }) => {
     extend(true, _token, defaultThemeToken);
     if (colorScheme === 'light') {
       extend(true, _token, {
-        color: {
-          background: themeVars.color.light.background,
-          backgroundOn: themeVars.color.light.backgroundOn,
-        }
+        color: (() => {
+          const keys = Object.keys(themeVars.color.light) as (keyof typeof themeVars.color.light)[];
+          return keys.reduce<Partial<typeof themeVars.color>>((prev, curr) => {
+            prev[curr] = themeVars.color.light[curr];
+            return prev;
+          }, {});
+        })(),
       });
     }
     if (colorScheme === 'dark') {
       extend(true, _token, {
-        color: {
-          background: themeVars.color.dark.background,
-          backgroundOn: themeVars.color.dark.backgroundOn,
-        }
+        color: (() => {
+          const keys = Object.keys(themeVars.color.dark) as (keyof typeof themeVars.color.dark)[];
+          return keys.reduce<Partial<typeof themeVars.color>>((prev, curr) => {
+            prev[curr] = themeVars.color.dark[curr];
+            return prev;
+          }, {});
+        })(),
       });
     }
     extend(true, _token, token);

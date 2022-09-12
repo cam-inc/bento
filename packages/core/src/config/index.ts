@@ -31,6 +31,9 @@ export type Element<Attributes extends Record<string, any> = {}> = {
   },
   toolbox: {
     Icon: React.FC;
+    Thumb: React.FC;
+    title: string;
+    description: string;
   };
   // The boolean value returned from this function is to be used to determine whether to kiff off a new normalization path.
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
@@ -53,7 +56,7 @@ export type Text<Attributes extends Record<string, any> = {}> = {
     }>;
   },
   toolbar: {
-    Icon: React.FC;
+    Component: React.FC;
   };
 };
 
