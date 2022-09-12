@@ -580,4 +580,5 @@ globalStyle(`
 ${styles.root} button
 `, {
   backgroundColor: 'transparent',
+  padding: 0,
 });

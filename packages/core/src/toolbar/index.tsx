@@ -30,6 +30,10 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     }
 
     const domSelection = window.getSelection();
+    if (!domSelection?.rangeCount) {
+      setIsVisible(false);
+      return;
+    }
     const domRange = domSelection?.getRangeAt(0);
     const rect = domRange?.getBoundingClientRect();
     if (rect) {
@@ -42,7 +46,8 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     if (isVisible) {
       popover.open();
     } else {
-      popover.close();
+      // TODO
+      //popover.close();
     }
   }, [popover, isVisible]);
 
@@ -63,10 +68,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           <ul className={styles.list}>{config.texts.map(text => (
             <React.Fragment key={text.type}>
               <li className={styles.item} >
-                <text.toolbar.Component />
-              </li>
-              <li className={styles.item} >
-                <text.toolbar.Component />
+                <text.toolbar.Component editor={editor} />
               </li>
             </React.Fragment>
           ))}</ul>
