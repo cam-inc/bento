@@ -1,14 +1,14 @@
 import { Text } from '@bento-editor/core';
 import attributes, { Attributes } from './attributes';
 import editable from './editable';
-import toolbar from './toolbar';
+import toolbox from './toolbox';
 export { EmojiRenderer } from './renderer';
 
 const element: Text<Attributes> = {
   type: 'emoji',
   attributes,
   editable,
-  toolbar,
+  toolbox,
 };
 
 export default element;

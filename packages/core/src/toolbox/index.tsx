@@ -11,15 +11,20 @@ export type ToolboxProps = {
   path: Path;
 };
 export const Toolbox: React.FC<ToolboxProps> = ({ path }) => {
-  const config = useConfigGlobalStateValue();
+  const { elements, texts } = useConfigGlobalStateValue();
+
+  const textsWithToolbox = texts.filter((text) =>
+    Object.prototype.hasOwnProperty.call(text, 'toolbox')
+  );
+  const nodes = [...elements, ...textsWithToolbox];
 
   return (
     <div className={styles.root}>
       <div>
         <ul>
-          {config.elements.map((element) => (
-            <li key={element.type}>
-              <Button path={path} element={element} />
+          {nodes.map((node) => (
+            <li key={node.type}>
+              <Button path={path} node={node} />
             </li>
           ))}
         </ul>
@@ -30,23 +35,23 @@ export const Toolbox: React.FC<ToolboxProps> = ({ path }) => {
 
 const Button: React.FC<{
   path: Path;
-  element: Config['elements'][number];
-}> = ({ path, element }) => {
+  node: Config['elements'][number] | Config['texts'][number];
+}> = ({ path, node }) => {
   const editor = useSlate();
   const handleClick = useCallback(() => {
     const nextPath = Path.next(path);
     Transforms.insertNodes(
       editor,
       {
-        type: element.type,
-        attributes: element.attributes.defaultValue,
-        children: element.editable.defaultValue,
+        type: node.type,
+        attributes: node.attributes.defaultValue,
+        children: node.editable.defaultValue ?? [],
       },
       {
         at: nextPath,
       }
     );
-  }, [editor, path, element]);
+  }, [editor, path, node]);
 
   const popover = usePopover<HTMLButtonElement>();
   const handleMouseEnter = useCallback(() => {
@@ -67,14 +72,18 @@ const Button: React.FC<{
       >
         <div className={styles.buttonBG} />
         <div className={styles.buttonContainer}>
-          <div className={styles.buttonIcon}>
-            <element.toolbox.Icon />
-          </div>
-          <div className={styles.buttonTitle}>{element.toolbox.title}</div>
+          {node.toolbox && (
+            <>
+              <div className={styles.buttonIcon}>
+                <node.toolbox.Icon />
+              </div>
+              <div className={styles.buttonTitle}>{node.toolbox.title}</div>
+            </>
+          )}
         </div>
       </button>
       <Popover {...popover.bind}>
-        <ToolboxPreview element={element} />
+        <ToolboxPreview element={node} />
       </Popover>
     </>
   );

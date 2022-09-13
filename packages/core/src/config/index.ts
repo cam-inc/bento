@@ -66,11 +66,18 @@ export type Text<Attributes extends Record<string, any> = {}> = {
         };
       }
     >;
+    defaultValue?: Descendant[];
   };
-  toolbar: {
+  toolbar?: {
     Component: React.FC<{
       editor: Editor;
     }>;
+  };
+  toolbox?: {
+    Icon: React.FC;
+    Thumb: React.FC;
+    title: string;
+    description: string;
   };
 };
 

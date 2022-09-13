@@ -18,7 +18,12 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     const { selection } = editor;
 
     const isToShow = (() => {
-      if (!isFocused || !selection || Range.isCollapsed(selection) || Editor.string(editor, selection) === '') {
+      if (
+        !isFocused ||
+        !selection ||
+        Range.isCollapsed(selection) ||
+        Editor.string(editor, selection) === ''
+      ) {
         return false;
       }
       return true;
@@ -55,25 +60,30 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
   return (
     <>
-      <div ref={popover.targetRef} style={{
-        pointerEvents: 'none',
-        position: 'fixed',
-        width: `${rect?.width}px`,
-        height: `${rect?.height}px`,
-        top: `${rect?.top}px`,
-        left: `${rect?.left}px`,
-      }} />
+      <div
+        ref={popover.targetRef}
+        style={{
+          pointerEvents: 'none',
+          position: 'fixed',
+          width: `${rect?.width}px`,
+          height: `${rect?.height}px`,
+          top: `${rect?.top}px`,
+          left: `${rect?.left}px`,
+        }}
+      />
       <Popover {...popover.bind}>
         <div className={styles.root}>
-          <ul className={styles.list}>{config.texts.map(text => (
-            <React.Fragment key={text.type}>
-              <li className={styles.item} >
-                <text.toolbar.Component editor={editor} />
-              </li>
-            </React.Fragment>
-          ))}</ul>
+          <ul className={styles.list}>
+            {config.texts.map((text) => (
+              <React.Fragment key={text.type}>
+                <li className={styles.item}>
+                  {text.toolbar && <text.toolbar.Component editor={editor} />}
+                </li>
+              </React.Fragment>
+            ))}
+          </ul>
         </div>
       </Popover>
     </>
-  )
+  );
 };
