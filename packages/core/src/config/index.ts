@@ -6,12 +6,12 @@ import { ThemeToken } from '../theme/index.css';
 
 // All the custom elements and texts must follow this type.
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
-type CustomElement<Attributes extends Record<string, any> = {}> = {
+export type CustomElement<Attributes extends Record<string, any> = {}> = {
   type?: string;
   attributes?: Attributes;
   children: Descendant[];
 };
-type CustomText<Attributes extends Record<string, any> = {}> = {
+export type CustomText<Attributes extends Record<string, any> = {}> = {
   type?: string;
   attributes?: Attributes;
   text: string;
@@ -41,6 +41,9 @@ export type Element<Attributes extends Record<string, any> = {}> = {
   };
   toolbox: {
     Icon: React.FC;
+    Thumb: React.FC;
+    title: string;
+    description: string;
   };
   // The boolean value returned from this function is to be used to determine whether to kiff off a new normalization path.
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
@@ -65,7 +68,9 @@ export type Text<Attributes extends Record<string, any> = {}> = {
     >;
   };
   toolbar: {
-    Icon: React.FC;
+    Component: React.FC<{
+      editor: Editor;
+    }>;
   };
 };
 
