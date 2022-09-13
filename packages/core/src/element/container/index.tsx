@@ -6,6 +6,7 @@ import { DotsIcon } from '../../components/icons/dots';
 import { PlusIcon } from '../../components/icons/plus';
 import { Popover, usePopover } from '../../portals/popover';
 import { Toolbox } from '../../toolbox';
+import { Toolmenu } from '../../toolmenu';
 import { styles } from './index.css';
 
 export type ElementContainerProps = RenderElementProps
@@ -17,11 +18,15 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     return path;
   }, [editor, props.element]);
 
-  const popover = usePopover<HTMLButtonElement>();
+  const popoverToolbox = usePopover<HTMLDivElement>();
+  const handlePlusButtonClick = useCallback(() => {
+    popoverToolbox.open();
+  }, [popoverToolbox]);
 
-  const handleAddButtonClick = useCallback(() => {
-    popover.open();
-  }, [popover]);
+  const popoverToolmenu = usePopover<HTMLDivElement>();
+  const handleDotsButtonClick = useCallback(() => {
+    popoverToolmenu.open();
+  }, [popoverToolmenu]);
 
   const [_, dragRef] = useDrag(() => {
     return {
@@ -55,20 +60,50 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         <div className={styles.body}>{props.children}</div>
         <div contentEditable={false} className={styles.utilsContainer}>
           <div className={styles.utils}>
-            <button className={styles.button} ref={popover.targetRef} onClick={handleAddButtonClick}>
-              <PlusIcon />
-            </button>
-            <button className={styles.button} ref={dragRef}>
-              <DotsIcon />
-            </button>
+            <div ref={popoverToolbox.targetRef} >
+              <PlusButton onClick={handlePlusButtonClick} />
+            </div>
+            <div ref={dragRef}>
+              <div ref={popoverToolmenu.targetRef} >
+                <DotsButton onClick={handleDotsButtonClick} />
+              </div>
+            </div>
             <div ref={dropRef}>drop</div>
           </div>
         </div>
-
       </div>
-      <Popover {...popover.bind}>
+      <Popover {...popoverToolbox.bind}>
         <Toolbox path={path} />
       </Popover>
+      <Popover {...popoverToolmenu.bind}>
+        <Toolmenu path={path} />
+      </Popover>
     </>
+  );
+};
+
+const PlusButton: React.FC<{
+  onClick: () => void;
+}> = ({ onClick }) => {
+  return (
+    <button className={styles.button} onClick={onClick}>
+      <div className={styles.buttonBG} />
+      <div className={styles.buttonIcon}>
+        <PlusIcon />
+      </div>
+    </button>
+  );
+};
+
+const DotsButton: React.FC<{
+  onClick: () => void;
+}> = ({ onClick }) => {
+  return (
+    <button className={styles.button} onClick={onClick}>
+      <div className={styles.buttonBG} />
+      <div className={styles.buttonIcon}>
+        <DotsIcon />
+      </div>
+    </button>
   );
 };
