@@ -1,12 +1,11 @@
 import { helpers, Text } from '@bento-editor/core';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
 
 const toolbar: Text<Attributes>['toolbar'] = {
   Component: ({ editor }) => {
-    // TODO: hooks使うとバグる問題。
-    const createHandler = (format: keyof Attributes) => {
+    const createHandler = useCallback((format: keyof Attributes) => {
       return () => {
         helpers.Transforms.setNodes(
           editor,
@@ -18,7 +17,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
           { match: n => helpers.Text.isText(n), split: true }
         )
       };
-    };
+    }, []);
     const handleBoldClick = createHandler('bold');
     const handleItalicClick = createHandler('italic');
     const handleStrikethroughClick = createHandler('strikethrough');

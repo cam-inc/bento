@@ -15,7 +15,10 @@ export default defineConfig({
     sourcemap: true,
     emptyOutDir: false,
     rollupOptions: {
-      external: Object.keys(pkg.peerDependencies),
+      external: [...Object.keys(pkg.peerDependencies), 'react'],
+      output: {
+        exports: 'named',
+      },
     },
   },
   plugins: [vanillaExtractPlugin()],
