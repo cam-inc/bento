@@ -1,13 +1,9 @@
 import { Element } from '@bento-editor/core';
 
-export type Attributes = {
-  'picker-status': 'open' | 'close';
-};
+export type Attributes = {};
 
 const attributes: Element<Attributes>['attributes'] = {
-  defaultValue: {
-    'picker-status': 'close',
-  },
+  defaultValue: {},
 };
 
 export default attributes;

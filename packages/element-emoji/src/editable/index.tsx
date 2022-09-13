@@ -1,6 +1,6 @@
 import { Element, ElementContainer, isText } from '@bento-editor/core';
 import React from 'react';
-import defaultAttributes, { Attributes } from '../attributes';
+import { Attributes } from '../attributes';
 import { EmojiPickerContainer } from '../components/emoji-picker/container';
 import { styles } from './index.css';
 
@@ -20,11 +20,7 @@ const editable: Element<Attributes>['editable'] = {
     },
   ],
   Component: (props) => {
-    const pickerStatus =
-      props.element.attributes?.['picker-status'] ??
-      defaultAttributes.defaultValue['picker-status'];
-
-    let isOpened = pickerStatus === 'open';
+    let isOpened = false;
 
     let searchString = '';
     const child = props.element.children[0];
