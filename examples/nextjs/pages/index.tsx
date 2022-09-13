@@ -15,7 +15,7 @@ import {
   listItem as elementListItem,
   UlRenderer,
 } from '@bento-editor/element-list';
-import elementEmoji, { EmojiRenderer } from '@bento-editor/element-emoji';
+import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -27,9 +27,8 @@ const Home: NextPage = () => {
         elementHeading,
         elementList,
         elementListItem,
-        elementEmoji,
       ],
-      texts: [textFormat],
+      texts: [textFormat, textEmoji],
       themeToken: {
         color: {
           /**
@@ -195,13 +194,10 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'emoji',
-        attributes: {
-          'picker-status': 'close',
-        },
+        type: 'paragraph',
         children: [
           {
-            type: 'format',
+            type: 'emoji',
             text: '',
           },
         ],
