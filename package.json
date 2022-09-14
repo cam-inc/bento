@@ -12,6 +12,7 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
+    "changelog": "turbo run changelog",
     "format": "prettier --write \"**/*.{ts,tsx,js,md}\"",
     "graph": "turbo run build --dry-run --graph=task-graph.png"
   },

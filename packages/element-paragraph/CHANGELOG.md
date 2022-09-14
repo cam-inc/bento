@@ -1,20 +1,12 @@
-## [0.0.4](https://github.com/cam-inc/bento/compare/@bento-editor/core/v0.0.2...@bento-editor/core/0.0.4) (2022-09-14)
+## 0.0.1 (2022-09-14)
 
 
 ### Features
 
-* **@bento-editor/block-paragraph:** init ([ee00c3b](https://github.com/cam-inc/bento/commit/ee00c3b4d3eb74a43725f1cae9486ba65ba6be9f))
-* **@bento-editor/core:** custom error / logger / portals ([9365d44](https://github.com/cam-inc/bento/commit/9365d446a21234e12137622d17f98554d10b4e10))
 * **@bento-editor/core:** design system ([4f0c401](https://github.com/cam-inc/bento/commit/4f0c401392d6adc575b42e0b2dc9740e03ce792a))
 * add renderer ([843105e](https://github.com/cam-inc/bento/commit/843105e95fe68fe666d01ccc97d0c2b86d982a51))
 * add renderers for list ([f90414d](https://github.com/cam-inc/bento/commit/f90414ddc8392cbc3bf0818a657adcad92f001b5))
 * attributes ([392c85d](https://github.com/cam-inc/bento/commit/392c85d893ef463d236fbf449c24a849ea9d7818))
 * element-list ([f8128cc](https://github.com/cam-inc/bento/commit/f8128ccf1dd5e3079a263d54fe9203093a4a781e))
 * toolbox / toolbar / toolmenu ([d06b4e9](https://github.com/cam-inc/bento/commit/d06b4e9a0d09fd29c5a2eaf7f613381afa904d11))
-
-
-### Bug Fixes
-
-* **@bento-editor/core:** pr review ([d1613ce](https://github.com/cam-inc/bento/commit/d1613cef300dafdf6e5bd3aee2d10fa5cc971e98))
-* build error ([3f5fccb](https://github.com/cam-inc/bento/commit/3f5fccb92a072788ecfa5665ab5e7d037c1cf816))
 

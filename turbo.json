@@ -29,6 +29,7 @@
       "dependsOn": [],
       "output": []
     },
-    "format": {}
+    "format": {},
+    "changelog": {}
   }
 }

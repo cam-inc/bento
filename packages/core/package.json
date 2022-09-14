@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "JSON Schema based block-styled editor.",
   "keywords": [
     "TODO"
