@@ -9,6 +9,9 @@ const element: Text<Attributes> = {
   attributes,
   editable,
   toolbox,
+  normalizeNode: () => {
+    return false;
+  },
 };
 
 export default element;

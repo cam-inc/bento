@@ -74,13 +74,16 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
       <Popover {...popover.bind}>
         <div className={styles.root}>
           <ul className={styles.list}>
-            {config.texts.map((text) => (
-              <React.Fragment key={text.type}>
-                <li className={styles.item}>
-                  {text.toolbar && <text.toolbar.Component editor={editor} />}
-                </li>
-              </React.Fragment>
-            ))}
+            {config.texts.map(
+              (text) =>
+                text.toolbar && (
+                  <React.Fragment key={text.type}>
+                    <li className={styles.item}>
+                      <text.toolbar.Component editor={editor} />
+                    </li>
+                  </React.Fragment>
+                )
+            )}
           </ul>
         </div>
       </Popover>

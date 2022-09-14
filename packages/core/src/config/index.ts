@@ -79,6 +79,7 @@ export type Text<Attributes extends Record<string, any> = {}> = {
     title: string;
     description: string;
   };
+  normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
 };
 
 export type Config = {

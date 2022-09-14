@@ -1,7 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
-import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
+import {
+  ReactEditor,
+  RenderElementProps,
+  RenderLeafProps,
+  useSlate,
+} from 'slate-react';
 import { DotsIcon } from '../../components/icons/dots';
 import { PlusIcon } from '../../components/icons/plus';
 import { Popover, usePopover } from '../../portals/popover';
@@ -9,14 +14,23 @@ import { Toolbox } from '../../toolbox';
 import { Toolmenu } from '../../toolmenu';
 import { styles } from './index.css';
 
-export type ElementContainerProps = RenderElementProps
+export type ElementContainerProps = RenderElementProps | RenderLeafProps;
+
+const isRenderElement = (
+  props: ElementContainerProps
+): props is RenderElementProps => {
+  return Object.prototype.hasOwnProperty.call(props, 'element');
+};
+
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const editor = useSlate();
 
+  const node = isRenderElement(props) ? props.element : props.text;
+
   const path = useMemo(() => {
-    const path = ReactEditor.findPath(editor, props.element);
+    const path = ReactEditor.findPath(editor, node);
     return path;
-  }, [editor, props.element]);
+  }, [editor, node]);
 
   const popoverToolbox = usePopover<HTMLDivElement>();
   const handlePlusButtonClick = useCallback(() => {
@@ -33,38 +47,38 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       type: 'Element',
       item: {
         from: path,
-        element: props.element,
+        element: node,
       },
       collect: (monitor) => ({
-        isDragging: monitor.isDragging()
+        isDragging: monitor.isDragging(),
       }),
     };
   }, [path]);
 
   const [, dropRef] = useDrop(() => {
-    const path = ReactEditor.findPath(editor, props.element);
+    const path = ReactEditor.findPath(editor, node);
     return {
       accept: 'Element',
       drop: (item: { from: Path }) => {
         Transforms.moveNodes(editor, {
           at: item.from,
-          to: path
-        })
-      }
-    }
-  }, [editor, props.element]);
+          to: path,
+        });
+      },
+    };
+  }, [editor, node]);
 
   return (
     <>
-      <div {...props.attributes} data-type={props.element.type} className={styles.root}>
+      <div {...props.attributes} data-type={node.type} className={styles.root}>
         <div className={styles.body}>{props.children}</div>
         <div contentEditable={false} className={styles.utilsContainer}>
           <div className={styles.utils}>
-            <div ref={popoverToolbox.targetRef} >
+            <div ref={popoverToolbox.targetRef}>
               <PlusButton onClick={handlePlusButtonClick} />
             </div>
             <div ref={dragRef}>
-              <div ref={popoverToolmenu.targetRef} >
+              <div ref={popoverToolmenu.targetRef}>
                 <DotsButton onClick={handleDotsButtonClick} />
               </div>
             </div>
