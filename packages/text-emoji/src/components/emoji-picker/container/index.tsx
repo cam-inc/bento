@@ -1,28 +1,53 @@
-import React, { useState, useCallback } from 'react';
-import { EmojiPicker } from '..';
+import { UseModalReturn } from '@bento-editor/core';
+import type { Data } from 'emoji-mart';
+import React, { useState, useCallback, useEffect } from 'react';
+import { EmojiPicker, Emoji } from '..';
 
 type Props = {
-  isOpened: boolean;
-  searchString: string;
-  children: React.ReactNode;
+  insertText: (emojiNative: string) => void;
+  onRequestClose: UseModalReturn['close'];
+  children?: React.ReactNode;
+};
+
+const fetchEmojiData = async (): Promise<Data> => {
+  const response = await fetch('https://cdn.jsdelivr.net/npm/@emoji-mart/data');
+
+  return response.json();
 };
 
 export const EmojiPickerContainer: React.FC<Props> = ({
-  isOpened,
-  searchString,
+  insertText,
+  onRequestClose,
   children,
 }) => {
-  const [selectedEmoji, setSelectedEmoji] = useState<any | null>(null);
+  const [emojiData, setEmojiData] = useState<Data | null>(null);
 
-  const selectEmoji = useCallback((emoji: any) => {
-    setSelectedEmoji(emoji);
+  useEffect(() => {
+    fetchEmojiData().then((res) => {
+      setEmojiData(res);
+    });
   }, []);
+
+  const handleEmojiSelect = useCallback(
+    (emoji: Emoji) => {
+      insertText(emoji.native);
+    },
+    [insertText]
+  );
+
+  const handleClickOutside = useCallback(() => {
+    onRequestClose();
+  }, [onRequestClose]);
 
   return (
     <div>
-      {selectedEmoji !== null ? <span>selectedEmoji.unicode</span> : children}
-      {isOpened && (
-        <EmojiPicker searchString={searchString} selectEmoji={selectEmoji} />
+      {children}
+      {emojiData !== null && (
+        <EmojiPicker
+          onEmojiSelect={handleEmojiSelect}
+          data={emojiData}
+          onClickOutside={handleClickOutside}
+        />
       )}
     </div>
   );

@@ -35,6 +35,7 @@ export type Element<Attributes extends Record<string, any> = {}> = {
         element: {
           attributes?: Attributes;
         };
+        editor: Editor;
       }
     >;
     defaultValue: Descendant[];
@@ -64,6 +65,7 @@ export type Text<Attributes extends Record<string, any> = {}> = {
         leaf: {
           attributes?: Attributes;
         };
+        editor: Editor;
       }
     >;
     defaultValue?: Descendant[];

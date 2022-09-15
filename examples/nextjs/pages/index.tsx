@@ -194,8 +194,17 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'emoji',
-        text: '😃',
+        type: 'paragraph',
+        children: [
+          {
+            type: 'format',
+            text: 'paragraph with emoji',
+          },
+          {
+            type: 'emoji',
+            text: '😃',
+          },
+        ],
       },
     ],
     []

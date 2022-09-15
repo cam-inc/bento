@@ -1,28 +1,38 @@
-import { ElementContainer, Text } from '@bento-editor/core';
-import React, { useState, useEffect } from 'react';
+import { helpers, Popover, Text, usePopover } from '@bento-editor/core';
+import React, { useEffect, useCallback } from 'react';
 import { Attributes } from '../attributes';
 import { EmojiPickerContainer } from '../components/emoji-picker/container';
 import { styles } from './index.css';
 
-// const PATTERN_OPEN_PICKER = /:/;
-
 const editable: Text<Attributes>['editable'] = {
   defaultValue: [{ type: 'emoji', text: '' }],
   Component: (props) => {
-    const [isOpened, setIsOpened] = useState(false);
-    const [searchString, setSearchString] = useState('');
+    const popover = usePopover<HTMLSpanElement>();
 
     useEffect(() => {
-      setIsOpened(true);
-      setSearchString('');
+      popover.open();
     }, []);
 
+    const createInsertText = useCallback(() => {
+      return (emojiNative: string) => {
+        helpers.Editor.insertText(props.editor, emojiNative);
+      };
+    }, []);
+
+    const insertText = createInsertText();
+
     return (
-      <ElementContainer {...props}>
-        <EmojiPickerContainer isOpened={isOpened} searchString={searchString}>
-          <span className={styles.root}>{props.children}</span>
-        </EmojiPickerContainer>
-      </ElementContainer>
+      <>
+        <span className={styles.root} ref={popover.targetRef}>
+          {props.children}
+        </span>
+        <Popover {...popover.bind}>
+          <EmojiPickerContainer
+            insertText={insertText}
+            onRequestClose={popover.close}
+          />
+        </Popover>
+      </>
     );
   },
 };
