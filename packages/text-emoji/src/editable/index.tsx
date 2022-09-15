@@ -23,9 +23,7 @@ const editable: Text<Attributes>['editable'] = {
 
     return (
       <>
-        <span className={styles.root} ref={popover.targetRef}>
-          {props.children}
-        </span>
+        <span className={styles.root} ref={popover.targetRef} />
         <Popover {...popover.bind}>
           <EmojiPickerContainer
             insertText={insertText}
