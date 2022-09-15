@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-list",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "TODO",
   "keywords": [
     "TODO"
@@ -26,8 +26,7 @@
     "dev:lib": "vite build --watch",
     "dev:type": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types --watch",
     "build": "vite build && tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
-    "test": "jest",
-    "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
+    "test": "jest"
   },
   "homepage": "https://github.com/cam-inc/bento/tree/main/packages/element-list",
   "bugs": {
@@ -57,6 +56,6 @@
     "vite": "^2.9.14"
   },
   "peerDependencies": {
-    "@bento-editor/core": "*"
+    "@bento-editor/core": "0.0.5"
   }
 }

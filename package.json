@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "bento-editor",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "volta": {
     "node": "18.7.0"
   },
@@ -12,6 +12,7 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
+    "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --same-file",
     "format": "prettier --write \"**/*.{ts,tsx,js,md}\"",
     "graph": "turbo run build --dry-run --graph=task-graph.png"
   },
