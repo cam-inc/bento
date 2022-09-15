@@ -1,7 +1,11 @@
 import React, { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Editable as SlateReactEditable, useSlate } from 'slate-react';
+import {
+  Editable as SlateReactEditable,
+  useSlate,
+  ReactEditor,
+} from 'slate-react';
 import { useConfigGlobalStateValue } from '../store';
 
 // `EditableProps` is not exported from `slate-react`.
@@ -23,8 +27,9 @@ export const Editable: React.FC<EditableProps> = () => {
       });
 
       if (element) {
+        const path = ReactEditor.findPath(editor, props.element);
         return (
-          <element.editable.Component {...props} editor={editor}>
+          <element.editable.Component {...props} editor={editor} path={path}>
             {props.children}
           </element.editable.Component>
         );
@@ -44,8 +49,9 @@ export const Editable: React.FC<EditableProps> = () => {
         return text.type === props.text.type;
       });
       if (text) {
+        const path = ReactEditor.findPath(editor, props.text);
         return (
-          <text.editable.Component {...props} editor={editor}>
+          <text.editable.Component {...props} editor={editor} path={path}>
             {props.children}
           </text.editable.Component>
         );

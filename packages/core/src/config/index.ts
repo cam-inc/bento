@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseEditor, Descendant, Editor, NodeEntry } from 'slate';
+import { BaseEditor, Descendant, Editor, NodeEntry, Path } from 'slate';
 import { ReactEditor, RenderElementProps, RenderLeafProps } from 'slate-react';
 import { PartialDeep } from 'type-fest';
 import { ThemeToken } from '../theme/index.css';
@@ -36,6 +36,7 @@ export type Element<Attributes extends Record<string, any> = {}> = {
           attributes?: Attributes;
         };
         editor: Editor;
+        path: Path;
       }
     >;
     defaultValue: Descendant[];
@@ -66,6 +67,7 @@ export type Text<Attributes extends Record<string, any> = {}> = {
           attributes?: Attributes;
         };
         editor: Editor;
+        path: Path;
       }
     >;
     defaultValue?: Descendant[];
