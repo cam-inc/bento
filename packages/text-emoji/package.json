@@ -2,9 +2,7 @@
   "name": "@bento-editor/text-emoji",
   "version": "0.0.1",
   "description": "TODO",
-  "keywords": [
-    "TODO"
-  ],
+  "keywords": ["TODO"],
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
@@ -16,9 +14,7 @@
       "require": "./dist/style.css"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "prepublishOnly": "run-s clear build",
     "clear": "rimraf dist && mkdirp dist",
@@ -26,8 +22,7 @@
     "dev:lib": "vite build --watch",
     "dev:type": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types --watch",
     "build": "vite build && tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
-    "test": "jest",
-    "changelog": "conventional-changelog --preset conventionalcommits --release-count 0 --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --tag-prefix ${npm_package_name}/ --same-file"
+    "test": "jest"
   },
   "homepage": "https://github.com/cam-inc/bento#readme",
   "bugs": {
