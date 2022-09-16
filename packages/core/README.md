@@ -16,7 +16,7 @@ and try out Notion.
 ### `Editor`
 - is a root-level object of Bento.
 - is a block-styled editor: composition of block-level and inline-level components.
-- takes initial data, configuration, design tokens, and etc.
+- takes initial data, configuration, style values such as color and font known as design tokens, and etc.
 
 ### `Editable`
 is the main UI field to display user-editted data, think it as a canvas on which you edit content.
