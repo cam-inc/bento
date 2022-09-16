@@ -1,7 +1,7 @@
 # @bento-editor/core
 
 ## Introduction
-Bento is build on top of [Slate](https://docs.slatejs.org/). Bento's primary objective is to provide [Notion](https://www.notion.so/help/writing-and-editing-basics)-like editor using Slate APIs. For Bento having this aim, you'll find Bento is similar to Slate and Notion regarding its terminology, function, etc.
+Bento is build on top of [Slate](https://docs.slatejs.org/). Bento's primary objective is to provide [Notion](https://www.notion.so/help/writing-and-editing-basics)-like editor using Slate APIs. For Bento having this aim, you'll find Bento similar to Slate and Notion regarding its terminology, function, etc.
 
 To better understand Bento, we highly recommend you to read Slate's documents:
 - [Introduction](https://docs.slatejs.org/)
@@ -22,16 +22,16 @@ and try out Notion.
 is the main UI field to display user-editted data, think it as a canvas on which you edit content.
 
 ### `Element`
-Though for users who have experience using Notion or Notion-like editor the term `Block` would be familiar, we stick to using the term `Element` so as to follow [the Slate's definition](https://docs.slatejs.org/concepts/04-transforms). Block and Element are the same, anyway.
+Though for users who have experience using Notion or Notion-like editors the term `Block` would be their familiar, we stick to using the term `Element` so as to follow [the Slate's definition](https://docs.slatejs.org/concepts/04-transforms). Block and Element are the same, anyway.
 
 ### `Text`(, or `Leaf`)
-On the same reason we call inline-level components as Text. Because Slate uses the term `Leaf` to, we guess, refer to the same component and we think that's redundant, we stick to using only `Text` as many situations as possible.
+On the same reason we call inline-level components as Text. Because Slate uses the term `Leaf` to, we guess, refer to the same component and we think that's redundant, we stick to using only `Text` in as many situations as possible.
 
 ### `Node`
 refers to both Element and Text. Read [the first section of this Slate's doc](https://docs.slatejs.org/concepts/02-nodes) to see the difference between them.
 
 ### `Attributes`
-Each Node has its own set of attributes and their set, or structure, varies depending on which Node type they are. One example for an attribute is the `level` attribute of `@bento-editor/element-heading` which is used to set its sectioning level; `level: 1` would be regarded as `<h1 />`, `level: 2` as `<h2 />`, and so on.
+Each Node has its own set of attributes and their set, or structure, that varies depending on which Node type they are of. One example for an attribute is the `level` attribute of `@bento-editor/element-heading` which is used to set its sectioning level; `level: 1` would be regarded as `<h1 />`, `level: 2` as `<h2 />`, and so on.
 
 ### `Package`
 is a deliverable parcel which contains a single Node, is to be plugged in to Bento, and can be owned by Bento or you. Examples are Bento-owned packages on the npm registory like [@bento-editor/element-paragraph](https://www.npmjs.com/package/@bento-editor/element-paragraph), and any package you create tailored to your service domain like `element-{Your Service Name}-media` to handle your-service-specific media objects.
@@ -45,7 +45,7 @@ First of all, please read [Notion's document of 'Writing & editing basics'](http
 
 ## How to Create Your Package
 Bento has specific types for Node: `type Element` and `type Text` in this [file](../src/config/index.ts).
-Bento restricts all packages, including yours, to follow those types, but they are simple and straight-forward; You'll just need to define some of characters found on [the erminology section](./#Terminology) one-by-one :)
+Bento restricts all packages, including yours, to follow those types, but they are simple and straight-forward; You'll just need to define some of the characters found on [the Terminology section](./#Terminology) one-by-one :)
 
 You can read their code of [all the Bento-owned packages prefixed with `element-` or `text-`](../) as examples when creating your own package.
 
