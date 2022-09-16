@@ -3,10 +3,10 @@
 Bento is a react library for Notion-like block-style editor build on top of [Slate](https://github.com/ianstormtaylor/slate).
 
 ## Packages
-- core
-- heading
-- paragraph
-- and more!
+- [core](./packages/core)
+- [heading](./packages/heading)
+- [paragraph](./packages/paragraph)
+- [and more!](./packages)
 
 ## Quick Start
 
