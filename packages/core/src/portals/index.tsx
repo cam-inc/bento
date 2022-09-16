@@ -4,6 +4,9 @@ import { GeneralError } from '../helpers/error';
 import { error } from '../helpers/logger';
 import { isBrower } from '../utils';
 
+export * from './modal';
+export * from './popover';
+
 export const TARGET = {
   MODAL: 'bento-portal-container-modal',
   POPOVER: 'bento-portal-container-popover',

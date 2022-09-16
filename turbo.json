@@ -21,6 +21,9 @@
     "@bento-editor/text-format#build": {
       "dependsOn": ["@bento-editor/core#build"]
     },
+    "@bento-editor/text-emoji#build": {
+      "dependsOn": ["@bento-editor/core#build"]
+    },
     "test": {
       "dependsOn": ["build"],
       "output": []

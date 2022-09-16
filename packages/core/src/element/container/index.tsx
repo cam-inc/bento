@@ -9,7 +9,8 @@ import { Toolbox } from '../../toolbox';
 import { Toolmenu } from '../../toolmenu';
 import { styles } from './index.css';
 
-export type ElementContainerProps = RenderElementProps
+export type ElementContainerProps = RenderElementProps;
+
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const editor = useSlate();
 
@@ -36,7 +37,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         element: props.element,
       },
       collect: (monitor) => ({
-        isDragging: monitor.isDragging()
+        isDragging: monitor.isDragging(),
       }),
     };
   }, [path]);
@@ -48,23 +49,27 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       drop: (item: { from: Path }) => {
         Transforms.moveNodes(editor, {
           at: item.from,
-          to: path
-        })
-      }
-    }
+          to: path,
+        });
+      },
+    };
   }, [editor, props.element]);
 
   return (
     <>
-      <div {...props.attributes} data-type={props.element.type} className={styles.root}>
+      <div
+        {...props.attributes}
+        data-type={props.element.type}
+        className={styles.root}
+      >
         <div className={styles.body}>{props.children}</div>
         <div contentEditable={false} className={styles.utilsContainer}>
           <div className={styles.utils}>
-            <div ref={popoverToolbox.targetRef} >
+            <div ref={popoverToolbox.targetRef}>
               <PlusButton onClick={handlePlusButtonClick} />
             </div>
             <div ref={dragRef}>
-              <div ref={popoverToolmenu.targetRef} >
+              <div ref={popoverToolmenu.targetRef}>
                 <DotsButton onClick={handleDotsButtonClick} />
               </div>
             </div>

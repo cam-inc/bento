@@ -1,5 +1,12 @@
 import React from 'react';
-import { BaseEditor, Descendant, Editor, NodeEntry } from 'slate';
+import {
+  BaseEditor,
+  Descendant,
+  Editor,
+  NodeEntry,
+  Path,
+  Text as SlateText,
+} from 'slate';
 import { ReactEditor, RenderElementProps, RenderLeafProps } from 'slate-react';
 import { PartialDeep } from 'type-fest';
 import { ThemeToken } from '../theme/index.css';
@@ -35,6 +42,8 @@ export type Element<Attributes extends Record<string, any> = {}> = {
         element: {
           attributes?: Attributes;
         };
+        editor: Editor;
+        path: Path;
       }
     >;
     defaultValue: Descendant[];
@@ -64,14 +73,24 @@ export type Text<Attributes extends Record<string, any> = {}> = {
         leaf: {
           attributes?: Attributes;
         };
+        editor: Editor;
+        path: Path;
       }
     >;
+    defaultValue?: SlateText[];
   };
-  toolbar: {
+  toolbar?: {
     Component: React.FC<{
       editor: Editor;
     }>;
   };
+  toolbox?: {
+    Icon: React.FC;
+    Thumb: React.FC;
+    title: string;
+    description: string;
+  };
+  normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
 };
 
 export type Config = {
