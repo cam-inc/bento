@@ -74,7 +74,7 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = (props) => {
     }
     `;
 
-    //@ts-expect-error
+    //@ts-expect-error For overriding #root selector.
     pickerInstance.current.shadowRoot.appendChild(styleElem);
 
     return () => {

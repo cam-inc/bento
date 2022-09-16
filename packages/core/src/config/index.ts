@@ -1,5 +1,12 @@
 import React from 'react';
-import { BaseEditor, Descendant, Editor, NodeEntry, Path } from 'slate';
+import {
+  BaseEditor,
+  Descendant,
+  Editor,
+  NodeEntry,
+  Path,
+  Text as SlateText,
+} from 'slate';
 import { ReactEditor, RenderElementProps, RenderLeafProps } from 'slate-react';
 import { PartialDeep } from 'type-fest';
 import { ThemeToken } from '../theme/index.css';
@@ -70,7 +77,7 @@ export type Text<Attributes extends Record<string, any> = {}> = {
         path: Path;
       }
     >;
-    defaultValue?: Descendant[];
+    defaultValue?: SlateText[];
   };
   toolbar?: {
     Component: React.FC<{

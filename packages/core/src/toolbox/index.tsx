@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Path, Transforms } from 'slate';
+import { Path, Transforms, Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { Config } from '../config';
 import { Popover, usePopover } from '../portals/popover';
@@ -40,13 +40,19 @@ const Button: React.FC<{
   const editor = useSlate();
   const handleClick = useCallback(() => {
     const nextPath = Path.next(path);
+    if (node.editable.defaultValue === undefined) {
+      throw new Error('node.editable.defaultValue is empty.');
+    }
+    const defaultValue = Array.isArray(node.editable.defaultValue)
+      ? { children: node.editable.defaultValue }
+      : { text: node.editable.defaultValue };
     Transforms.insertNodes(
       editor,
       {
         type: node.type,
         attributes: node.attributes.defaultValue,
-        children: node.editable.defaultValue ?? [],
-      },
+        ...defaultValue,
+      } as Node,
       {
         at: nextPath,
       }
