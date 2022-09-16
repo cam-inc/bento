@@ -5,6 +5,8 @@
 import React, { useRef, useEffect } from 'react';
 import { Data, Picker, PickerProps, BaseEmoji } from 'emoji-mart';
 import { styles } from './index.css';
+import i18n from '@emoji-mart/data/i18n/ja.json';
+import { themeVars } from '@bento-editor/core';
 
 export type Emoji = Data['emojis'][number] & BaseEmoji;
 
@@ -23,6 +25,9 @@ declare module 'emoji-mart' {
     data: Data;
     onEmojiSelect: (emoji: Emoji) => void;
     onClickOutside: () => void;
+    navPosition: 'top' | 'bottom' | 'none';
+    previewPosition: 'top' | 'bottom' | 'none';
+    skinTonePosition: 'top' | 'bottom' | 'none';
   }
 }
 
@@ -40,7 +45,37 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = (props) => {
     pickerInstance.current = new Picker({
       ...props,
       ref: pickerRef,
+      i18n,
     });
+
+    const styleElem = document.createElement('style');
+    styleElem.innerHTML = `#root {
+      --em-rgb-background: ${themeVars.color.background};
+      --em-color-border: ${themeVars.color.background};
+    
+      border: solid 1px ${themeVars.color.backgroundOnSlight};
+    }
+
+    .search {
+      border: solid 1px ${themeVars.color.backgroundOnSlight};
+      border-radius: ${themeVars.radius.small};
+    }
+
+    .spacer {
+      height: ${themeVars.space[4]};
+    }
+
+    .sticky {
+      font-weight: bold;
+    }
+
+    .padding-small {
+      padding: ${themeVars.space[4]} var(--padding-small);
+    }
+    `;
+
+    //@ts-expect-error
+    pickerInstance.current.shadowRoot.appendChild(styleElem);
 
     return () => {
       pickerInstance.current = null;

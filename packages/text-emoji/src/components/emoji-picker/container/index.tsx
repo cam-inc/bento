@@ -47,6 +47,9 @@ export const EmojiPickerContainer: React.FC<Props> = ({
           onEmojiSelect={handleEmojiSelect}
           data={emojiData}
           onClickOutside={handleClickOutside}
+          navPosition="none"
+          previewPosition="none"
+          skinTonePosition="none"
         />
       )}
     </div>
