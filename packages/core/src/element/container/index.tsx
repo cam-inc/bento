@@ -1,12 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
-import {
-  ReactEditor,
-  RenderElementProps,
-  RenderLeafProps,
-  useSlate,
-} from 'slate-react';
+import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
 import { DotsIcon } from '../../components/icons/dots';
 import { PlusIcon } from '../../components/icons/plus';
 import { Popover, usePopover } from '../../portals/popover';
@@ -14,23 +9,15 @@ import { Toolbox } from '../../toolbox';
 import { Toolmenu } from '../../toolmenu';
 import { styles } from './index.css';
 
-export type ElementContainerProps = RenderElementProps | RenderLeafProps;
-
-const isRenderElement = (
-  props: ElementContainerProps
-): props is RenderElementProps => {
-  return Object.prototype.hasOwnProperty.call(props, 'element');
-};
+export type ElementContainerProps = RenderElementProps;
 
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const editor = useSlate();
 
-  const node = isRenderElement(props) ? props.element : props.text;
-
   const path = useMemo(() => {
-    const path = ReactEditor.findPath(editor, node);
+    const path = ReactEditor.findPath(editor, props.element);
     return path;
-  }, [editor, node]);
+  }, [editor, props.element]);
 
   const popoverToolbox = usePopover<HTMLDivElement>();
   const handlePlusButtonClick = useCallback(() => {
@@ -47,7 +34,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       type: 'Element',
       item: {
         from: path,
-        element: node,
+        element: props.element,
       },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
@@ -56,7 +43,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, [path]);
 
   const [, dropRef] = useDrop(() => {
-    const path = ReactEditor.findPath(editor, node);
+    const path = ReactEditor.findPath(editor, props.element);
     return {
       accept: 'Element',
       drop: (item: { from: Path }) => {
@@ -66,11 +53,15 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         });
       },
     };
-  }, [editor, node]);
+  }, [editor, props.element]);
 
   return (
     <>
-      <div {...props.attributes} data-type={node.type} className={styles.root}>
+      <div
+        {...props.attributes}
+        data-type={props.element.type}
+        className={styles.root}
+      >
         <div className={styles.body}>{props.children}</div>
         <div contentEditable={false} className={styles.utilsContainer}>
           <div className={styles.utils}>
