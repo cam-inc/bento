@@ -9,6 +9,7 @@ import elementParagraph, {
 } from '@bento-editor/element-paragraph';
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
 import elementNote, { NoteRenderer } from '@bento-editor/element-note';
+import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   LiRenderer,
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
         elementList,
         elementListItem,
         elementNote,
+        elementCallout,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -105,6 +107,19 @@ const Home: NextPage = () => {
           {
             type: 'format',
             text: 'paragraph 02',
+          },
+        ],
+      },
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'format',
+            text: 'paragraph with emoji',
+          },
+          {
+            type: 'emoji',
+            text: '😃',
           },
         ],
       },
@@ -205,15 +220,11 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'paragraph',
+        type: 'callout',
         children: [
           {
             type: 'format',
-            text: 'paragraph with emoji',
-          },
-          {
-            type: 'emoji',
-            text: '😃',
+            text: 'default value',
           },
         ],
       },
@@ -235,6 +246,7 @@ const Home: NextPage = () => {
       list: UlRenderer,
       'list-item': LiRenderer,
       note: NoteRenderer,
+      callout: CalloutRenderer,
       format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),
