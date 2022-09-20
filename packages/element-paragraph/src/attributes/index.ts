@@ -1,12 +1,8 @@
 import { Element } from '@bento-editor/core';
 
-export type Attributes = {
-  foo: 'hoge' | 'bar';
-};
+export type Attributes = {};
 
 const attributes: Element<Attributes>['attributes'] = {
-  defaultValue: {
-    foo: 'hoge'
-  }
+  defaultValue: {},
 };
 export default attributes;
