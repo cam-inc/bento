@@ -8,6 +8,7 @@ import elementParagraph, {
   ParagraphRenderer,
 } from '@bento-editor/element-paragraph';
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
+import elementNote, { NoteRenderer } from '@bento-editor/element-note';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   LiRenderer,
@@ -27,6 +28,7 @@ const Home: NextPage = () => {
         elementHeading,
         elementList,
         elementListItem,
+        elementNote,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -194,6 +196,15 @@ const Home: NextPage = () => {
         ],
       },
       {
+        type: 'note',
+        children: [
+          {
+            type: 'format',
+            text: 'default value',
+          },
+        ],
+      },
+      {
         type: 'paragraph',
         children: [
           {
@@ -221,9 +232,10 @@ const Home: NextPage = () => {
     () => ({
       paragraph: ParagraphRenderer,
       heading: HeadingRenderer,
-      format: TextFormatRenderer,
       list: UlRenderer,
       'list-item': LiRenderer,
+      note: NoteRenderer,
+      format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),
     []
@@ -236,7 +248,7 @@ const Home: NextPage = () => {
         initialValue={initialValue}
         onChange={handleChange}
       />
-      <EditorRenderer renderers={renderers} data={value} />
+      <EditorRenderer renderers={renderers} data={value} config={config} />
     </div>
   );
 };
