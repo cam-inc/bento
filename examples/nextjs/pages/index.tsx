@@ -10,10 +10,12 @@ import elementParagraph, {
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
-  LiRenderer,
   list as elementList,
   listItem as elementListItem,
+  orderedList as elementOrderedList,
+  LiRenderer,
   UlRenderer,
+  OlRenderer,
 } from '@bento-editor/element-list';
 import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
@@ -27,6 +29,7 @@ const Home: NextPage = () => {
         elementHeading,
         elementList,
         elementListItem,
+        elementOrderedList,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -194,6 +197,47 @@ const Home: NextPage = () => {
         ],
       },
       {
+        type: 'ordered-list',
+        children: [
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'AAA',
+              },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'BBB',
+              },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'CCC',
+              },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'DDD',
+              },
+            ],
+          },
+        ],
+      },
+      {
         type: 'paragraph',
         children: [
           {
@@ -223,6 +267,7 @@ const Home: NextPage = () => {
       heading: HeadingRenderer,
       format: TextFormatRenderer,
       list: UlRenderer,
+      'ordered-list': OlRenderer,
       'list-item': LiRenderer,
       emoji: EmojiRenderer,
     }),
