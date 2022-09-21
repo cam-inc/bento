@@ -13,9 +13,13 @@ import {
   list as elementList,
   listItem as elementListItem,
   orderedList as elementOrderedList,
+  todoList as elementTodoList,
+  todoListItem as elementTodoListItem,
   LiRenderer,
   UlRenderer,
   OlRenderer,
+  TodoListRenderer,
+  TodoListItemRenderer,
 } from '@bento-editor/element-list';
 import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
@@ -30,6 +34,8 @@ const Home: NextPage = () => {
         elementList,
         elementListItem,
         elementOrderedList,
+        elementTodoList,
+        elementTodoListItem,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -106,6 +112,19 @@ const Home: NextPage = () => {
           {
             type: 'format',
             text: 'paragraph 02',
+          },
+        ],
+      },
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'format',
+            text: 'paragraph with emoji',
+          },
+          {
+            type: 'emoji',
+            text: '😃',
           },
         ],
       },
@@ -238,15 +257,43 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'paragraph',
+        type: 'todo-list',
         children: [
           {
-            type: 'format',
-            text: 'paragraph with emoji',
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'AAA',
+              },
+            ],
           },
           {
-            type: 'emoji',
-            text: '😃',
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'BBB',
+              },
+            ],
+          },
+          {
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'CCC',
+              },
+            ],
+          },
+          {
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'DDD',
+              },
+            ],
           },
         ],
       },
@@ -265,10 +312,12 @@ const Home: NextPage = () => {
     () => ({
       paragraph: ParagraphRenderer,
       heading: HeadingRenderer,
-      format: TextFormatRenderer,
       list: UlRenderer,
       'ordered-list': OlRenderer,
       'list-item': LiRenderer,
+      'todo-list': TodoListRenderer,
+      'todo-list-item': TodoListItemRenderer,
+      format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),
     []
