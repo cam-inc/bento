@@ -1,9 +1,10 @@
 import React from 'react';
 import { RendererProps } from '@bento-editor/core';
+import {styles} from "./index.css"
 
 export const TodoListRenderer: React.FC<RendererProps> = ({ children }) => {
   return (
-    <ul style={{ listStyleType: 'none', padding: 0, paddingLeft: '1rem' }}>
+    <ul className={styles.root}>
       {children}
     </ul>
   );

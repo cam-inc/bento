@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckboxIcon, RendererProps } from '@bento-editor/core';
 import { Attributes } from '../attributes';
+import {styles} from "./index.css"
 
 export const TodoListItemRenderer: React.FC<RendererProps<Attributes>> = ({
   children,
@@ -10,9 +11,9 @@ export const TodoListItemRenderer: React.FC<RendererProps<Attributes>> = ({
 
   return (
     <li>
-      <div style={{ display: 'flex' }}>
+      <div className={styles.root}>
         <span
-          style={{ display: 'block', width: 18, height: 18 }}
+          className={styles.checkbox}
           contentEditable={false}
         >
           <CheckboxIcon checked={checked} disabled={true} />
