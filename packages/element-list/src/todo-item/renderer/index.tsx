@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckboxIcon, RendererProps } from '@bento-editor/core';
-import { Attributes } from '../todo-item/attributes';
+import { Attributes } from '../attributes';
 
 export const TodoListItemRenderer: React.FC<RendererProps<Attributes>> = ({
   children,

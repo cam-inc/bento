@@ -2,6 +2,7 @@ import { Element, helpers } from '@bento-editor/core';
 import attributes, { Attributes } from './attributes';
 import editable from './editable';
 import toolbox from './toolbox';
+export * from './renderer';
 
 const element: Element<Attributes> = {
   type: 'list',
@@ -19,17 +20,17 @@ const element: Element<Attributes> = {
             'Element removed.',
             {
               from: [node, path],
-              target: [child, childPath]
-            }
-          ]
+              target: [child, childPath],
+            },
+          ],
         });
         helpers.Transforms.removeNodes(editor, {
-          at: childPath
+          at: childPath,
         });
         isNormalized = true;
       }
     }
     return isNormalized;
-  }
+  },
 };
 export default element;

@@ -1,9 +1,18 @@
-import list from './list';
-import orderedList from './ordered';
-import todoList from './todo';
-import listItem from './item';
-import todoListItem from './todo-item';
+import list, { ListRenderer } from './list';
+import orderedList, { OrderedListRenderer } from './ordered';
+import todoList, { TodoListRenderer } from './todo';
+import listItem, { ListItemRenderer } from './item';
+import todoListItem, { TodoListItemRenderer } from './todo-item';
 
-export * from './renderer';
-
-export { list, orderedList, listItem, todoList, todoListItem };
+export {
+  list,
+  orderedList,
+  listItem,
+  todoList,
+  todoListItem,
+  ListRenderer,
+  ListItemRenderer,
+  OrderedListRenderer,
+  TodoListRenderer,
+  TodoListItemRenderer,
+};

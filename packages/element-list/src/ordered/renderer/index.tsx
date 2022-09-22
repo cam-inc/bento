@@ -1,8 +1,8 @@
 import React from 'react';
 import { RendererProps } from '@bento-editor/core';
-import { Attributes } from '../list/attributes';
+import { Attributes } from '../attributes';
 
-export const OlRenderer: React.FC<RendererProps<Attributes>> = ({
+export const OrderedListRenderer: React.FC<RendererProps<Attributes>> = ({
   children,
   attributes,
 }) => {
