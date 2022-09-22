@@ -1,7 +1,10 @@
 import React from 'react';
 import { Descendant } from 'slate';
+import { Config } from '../config';
 import { EditorProps } from '../editor';
 import { helpers } from '../helpers';
+import { GlobalStateProvider } from '../store';
+import { Theme } from '../theme';
 
 export type RendererProps<Attributes extends Record<string, any> = {}> = {
   children: React.ReactNode;
@@ -13,6 +16,7 @@ export type Renderers = {
 };
 
 type Props = {
+  config: Config;
   renderers: Renderers;
   data: EditorProps['initialValue'];
 };
@@ -58,13 +62,24 @@ const createRenderer = (renderers: Props['renderers']) => {
   return renderRecursively;
 };
 
-export const EditorRenderer: React.FC<Props> = ({ renderers, data }) => {
+export const EditorRenderer: React.FC<Props> = ({
+  config,
+  renderers,
+  data,
+}) => {
   const render = createRenderer(renderers);
   return (
-    <div>
-      {data.map((d, index) => (
-        <React.Fragment key={index}>{render(d)}</React.Fragment>
-      ))}
-    </div>
+    <GlobalStateProvider>
+      <Theme
+        token={config.themeToken}
+        render={(style) => (
+          <div style={style}>
+            {data.map((d, index) => (
+              <React.Fragment key={index}>{render(d)}</React.Fragment>
+            ))}
+          </div>
+        )}
+      />
+    </GlobalStateProvider>
   );
 };

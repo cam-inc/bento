@@ -8,6 +8,8 @@ import elementParagraph, {
   ParagraphRenderer,
 } from '@bento-editor/element-paragraph';
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
+import elementNote, { NoteRenderer } from '@bento-editor/element-note';
+import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   list as elementList,
@@ -36,6 +38,8 @@ const Home: NextPage = () => {
         elementOrderedList,
         elementTodoList,
         elementTodoListItem,
+        elementNote,
+        elementCallout,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -297,6 +301,24 @@ const Home: NextPage = () => {
           },
         ],
       },
+      {
+        type: 'note',
+        children: [
+          {
+            type: 'format',
+            text: 'default value',
+          },
+        ],
+      },
+      {
+        type: 'callout',
+        children: [
+          {
+            type: 'format',
+            text: 'default value',
+          },
+        ],
+      },
     ],
     []
   );
@@ -317,6 +339,8 @@ const Home: NextPage = () => {
       'list-item': ListItemRenderer,
       'todo-list': TodoListRenderer,
       'todo-list-item': TodoListItemRenderer,
+      note: NoteRenderer,
+      callout: CalloutRenderer,
       format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),
@@ -330,7 +354,7 @@ const Home: NextPage = () => {
         initialValue={initialValue}
         onChange={handleChange}
       />
-      <EditorRenderer renderers={renderers} data={value} />
+      <EditorRenderer renderers={renderers} data={value} config={config} />
     </div>
   );
 };
