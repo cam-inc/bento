@@ -10,7 +10,7 @@ const element: Element<Attributes> = {
   editable,
   toolbox,
   normalizeNode: (editor, entry) => {
-    // Allow only elements of type `list-item`.
+    // Allow only elements of type `todo-list-item`.
     let isNormalized: boolean = false;
     const [node, path] = entry;
     for (const [child, childPath] of helpers.Node.children(editor, path)) {
