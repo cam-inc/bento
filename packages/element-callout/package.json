@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-callout",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "TODO",
   "keywords": ["TODO"],
   "types": "./dist/types/index.d.ts",
