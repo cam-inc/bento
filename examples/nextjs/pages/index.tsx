@@ -12,10 +12,16 @@ import elementNote, { NoteRenderer } from '@bento-editor/element-note';
 import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
-  LiRenderer,
   list as elementList,
   listItem as elementListItem,
-  UlRenderer,
+  orderedList as elementOrderedList,
+  todoList as elementTodoList,
+  todoListItem as elementTodoListItem,
+  ListItemRenderer,
+  ListRenderer,
+  OrderedListRenderer,
+  TodoListRenderer,
+  TodoListItemRenderer,
 } from '@bento-editor/element-list';
 import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
@@ -29,6 +35,9 @@ const Home: NextPage = () => {
         elementHeading,
         elementList,
         elementListItem,
+        elementOrderedList,
+        elementTodoList,
+        elementTodoListItem,
         elementNote,
         elementCallout,
       ],
@@ -211,6 +220,88 @@ const Home: NextPage = () => {
         ],
       },
       {
+        type: 'ordered-list',
+        children: [
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'AAA',
+              },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'BBB',
+              },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'CCC',
+              },
+            ],
+          },
+          {
+            type: 'list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'DDD',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'todo-list',
+        children: [
+          {
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'AAA',
+              },
+            ],
+          },
+          {
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'BBB',
+              },
+            ],
+          },
+          {
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'CCC',
+              },
+            ],
+          },
+          {
+            type: 'todo-list-item',
+            children: [
+              {
+                type: 'format',
+                text: 'DDD',
+              },
+            ],
+          },
+        ],
+      },
+      {
         type: 'note',
         children: [
           {
@@ -243,8 +334,11 @@ const Home: NextPage = () => {
     () => ({
       paragraph: ParagraphRenderer,
       heading: HeadingRenderer,
-      list: UlRenderer,
-      'list-item': LiRenderer,
+      list: ListRenderer,
+      'ordered-list': OrderedListRenderer,
+      'list-item': ListItemRenderer,
+      'todo-list': TodoListRenderer,
+      'todo-list-item': TodoListItemRenderer,
       note: NoteRenderer,
       callout: CalloutRenderer,
       format: TextFormatRenderer,

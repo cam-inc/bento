@@ -5,16 +5,19 @@ import toolbox from './toolbox';
 export * from './renderer';
 
 const element: Element<Attributes> = {
-  type: 'list',
+  type: 'todo-list',
   attributes,
   editable,
   toolbox,
   normalizeNode: (editor, entry) => {
-    // Allow only elements of type `list-item`.
+    // Allow only elements of type `todo-list-item`.
     let isNormalized: boolean = false;
     const [node, path] = entry;
     for (const [child, childPath] of helpers.Node.children(editor, path)) {
-      if (!helpers.Element.isElement(child) || child.type !== 'list-item') {
+      if (
+        !helpers.Element.isElement(child) ||
+        child.type !== 'todo-list-item'
+      ) {
         helpers.logger.warn({
           messages: [
             'Element removed.',
@@ -33,4 +36,5 @@ const element: Element<Attributes> = {
     return isNormalized;
   },
 };
+
 export default element;
