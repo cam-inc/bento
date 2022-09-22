@@ -1,4 +1,9 @@
-import { Element, ElementContainer, helpers } from '@bento-editor/core';
+import {
+  CheckboxIcon,
+  Element,
+  ElementContainer,
+  helpers,
+} from '@bento-editor/core';
 import React, { useCallback } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
@@ -15,7 +20,7 @@ const editable: Element<Attributes>['editable'] = {
     const checked = !!props.element.attributes?.checked;
 
     const setNodes = helpers.useTransformsSetNodes(props.element);
-    const handleCheckboxChange = useCallback(() => {
+    const handleCheckboxClick = useCallback(() => {
       setNodes({
         attributes: {
           checked: !checked,
@@ -26,11 +31,9 @@ const editable: Element<Attributes>['editable'] = {
     return (
       <ElementContainer {...props}>
         <div className={styles.root}>
-          <input
-            type="checkbox"
-            checked={checked}
-            onChange={handleCheckboxChange}
-          />
+          <span className={styles.checkbox} contentEditable={false}>
+            <CheckboxIcon checked={checked} onClick={handleCheckboxClick} />
+          </span>
           {props.children}
         </div>
       </ElementContainer>
