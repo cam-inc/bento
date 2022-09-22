@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export type CheckboxIconProps = {
   checked?: boolean;
-  onClick?: React.MouseEventHandler;
+  onClick?: (state: boolean) => void;
   disabled?: boolean;
 };
 
@@ -43,10 +43,12 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
         return;
       }
 
-      if (onClick !== undefined) {
-        onClick(event);
-      }
-      setChecked((prevState) => !prevState);
+      setChecked((prevState) => {
+        if (onClick !== undefined) {
+          onClick(!prevState);
+        }
+        return !prevState;
+      });
     },
     [disabled, onClick]
   );
@@ -56,38 +58,40 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
       if (!!disabled) {
         event.preventDefault();
         return;
+      } else {
+        if (event.key === 'Tab') {
+          checkboxRef.current?.focus();
+        }
       }
-
-      console.log(event);
 
       if (event.key === 'Enter') {
-        setChecked((prevState) => !prevState);
+        setChecked((prevState) => {
+          if (onClick !== undefined) {
+            onClick(!prevState);
+          }
+          return !prevState;
+        });
       }
     },
-    [disabled]
+    [disabled, onClick]
   );
+
+  const handleCheckboxFocus = useCallback(() => {
+    checkboxRef.current?.addEventListener('keydown', handleCheckboxKeydown);
+  }, [checkboxRef]);
 
   useEffect(() => {
     setChecked(!!initialChecked);
   }, [initialChecked]);
 
-  useEffect(() => {
-    checkboxRef.current?.addEventListener('keydown', handleCheckboxKeydown);
-
-    return () => {
-      checkboxRef.current?.removeEventListener(
-        'keydown',
-        handleCheckboxKeydown
-      );
-    };
-  }, []);
-
   return (
     <span
-      tabIndex={!!disabled ? -1 : 0}
+      tabIndex={0}
       onClick={handleCheckboxClick}
       role="checkbox"
       aria-checked={checked}
+      ref={checkboxRef}
+      onFocus={handleCheckboxFocus}
     >
       {checked ? <CheckedIcon /> : <OutlineIcon />}
     </span>

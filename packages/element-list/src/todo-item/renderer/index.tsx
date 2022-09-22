@@ -15,7 +15,7 @@ export const TodoListItemRenderer: React.FC<RendererProps<Attributes>> = ({
           style={{ display: 'block', width: 18, height: 18 }}
           contentEditable={false}
         >
-          <CheckboxIcon checked={checked} disabled={checked} />
+          <CheckboxIcon checked={checked} disabled={true} />
         </span>
         {children}
       </div>

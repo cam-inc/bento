@@ -20,13 +20,16 @@ const editable: Element<Attributes>['editable'] = {
     const checked = !!props.element.attributes?.checked;
 
     const setNodes = helpers.useTransformsSetNodes(props.element);
-    const handleCheckboxClick = useCallback(() => {
-      setNodes({
-        attributes: {
-          checked: !checked,
-        },
-      });
-    }, [checked]);
+    const handleCheckboxClick = useCallback(
+      (checkboxState: boolean) => {
+        setNodes({
+          attributes: {
+            checked: checkboxState,
+          },
+        });
+      },
+      [checked]
+    );
 
     return (
       <ElementContainer {...props}>
