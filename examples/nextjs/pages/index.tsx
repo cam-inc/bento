@@ -8,6 +8,8 @@ import elementParagraph, {
   ParagraphRenderer,
 } from '@bento-editor/element-paragraph';
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
+import elementNote, { NoteRenderer } from '@bento-editor/element-note';
+import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   LiRenderer,
@@ -27,6 +29,8 @@ const Home: NextPage = () => {
         elementHeading,
         elementList,
         elementListItem,
+        elementNote,
+        elementCallout,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -103,6 +107,19 @@ const Home: NextPage = () => {
           {
             type: 'format',
             text: 'paragraph 02',
+          },
+        ],
+      },
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'format',
+            text: 'paragraph with emoji',
+          },
+          {
+            type: 'emoji',
+            text: '😃',
           },
         ],
       },
@@ -194,15 +211,20 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'paragraph',
+        type: 'note',
         children: [
           {
             type: 'format',
-            text: 'paragraph with emoji',
+            text: 'default value',
           },
+        ],
+      },
+      {
+        type: 'callout',
+        children: [
           {
-            type: 'emoji',
-            text: '😃',
+            type: 'format',
+            text: 'default value',
           },
         ],
       },
@@ -221,9 +243,11 @@ const Home: NextPage = () => {
     () => ({
       paragraph: ParagraphRenderer,
       heading: HeadingRenderer,
-      format: TextFormatRenderer,
       list: UlRenderer,
       'list-item': LiRenderer,
+      note: NoteRenderer,
+      callout: CalloutRenderer,
+      format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),
     []
@@ -236,7 +260,7 @@ const Home: NextPage = () => {
         initialValue={initialValue}
         onChange={handleChange}
       />
-      <EditorRenderer renderers={renderers} data={value} />
+      <EditorRenderer renderers={renderers} data={value} config={config} />
     </div>
   );
 };

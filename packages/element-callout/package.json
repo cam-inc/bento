@@ -1,0 +1,58 @@
+{
+  "name": "@bento-editor/element-callout",
+  "version": "0.0.5",
+  "description": "TODO",
+  "keywords": ["TODO"],
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/es.js",
+      "require": "./dist/cjs.js"
+    },
+    "./styles": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "prepublishOnly": "run-s clear build",
+    "clear": "rimraf dist && mkdirp dist",
+    "dev": "run-p dev:*",
+    "dev:lib": "vite build --watch",
+    "dev:type": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types --watch",
+    "build": "vite build && tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "test": "jest"
+  },
+  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/element-heading",
+  "bugs": {
+    "url": "https://github.com/cam-inc/bento/issues"
+  },
+  "license": "MIT",
+  "contributers": [
+    {
+      "name": "Go Ohtani",
+      "url": "https://github.com/cathcheeno"
+    },
+    {
+      "name": "Shuta Hirai",
+      "url": "https://github.com/shuta13"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cam-inc/bento.git"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "@vanilla-extract/vite-plugin": "^3.3.0",
+    "jest": "^28.1.1",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.1",
+    "vite": "^2.9.14"
+  },
+  "peerDependencies": {
+    "@vanilla-extract/css": "^1.7.2",
+    "@bento-editor/core": "0.0.5"
+  }
+}
