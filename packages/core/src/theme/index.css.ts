@@ -5,7 +5,7 @@ export const defaultThemeToken = {
   // @see: https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale
   space: {
     '0': '0',
-    'px': '1px',
+    px: '1px',
     '0.5': '0.125rem',
     '1': '0.25rem',
     '2': '0.5rem',
@@ -60,6 +60,10 @@ export const defaultThemeToken = {
     errorOnLow: '#FF897D',
     errorOnSlight: '#DE3730',
     errorOnFaint: '#93000A',
+    accentXXC60: '#FFAF33',
+    accentXXD90: '#FFF6CC',
+    accentXXJ95: '#FFE9E5',
+    accentXXJ70: '#FF7B66',
     light: {
       background: '#FFFFFF',
       backgroundOnHigh: '#1C1E34',
@@ -91,6 +95,10 @@ export const defaultThemeToken = {
       errorOnLow: '#FF897D',
       errorOnSlight: '#DE3730',
       errorOnFaint: '#93000A',
+      accentXXC60: '#FFAF33',
+      accentXXD90: '#FFF6CC',
+      accentXXJ95: '#FFE9E5',
+      accentXXJ70: '#FF7B66',
     },
     dark: {
       background: '#1C1E34',
@@ -123,6 +131,10 @@ export const defaultThemeToken = {
       errorOnLow: '#DE3730',
       errorOnSlight: '#FF897D',
       errorOnFaint: '#FFEDEA',
+      accentXXC60: '#FFAF33',
+      accentXXD90: '#FFF6CC',
+      accentXXJ95: '#FFE9E5',
+      accentXXJ70: '#FF7B66',
     },
   },
 };

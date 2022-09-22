@@ -1,12 +1,13 @@
 import React from 'react';
+import { themeVars } from '../../../theme/index.css';
 
 export type ExclamationIconProps = {
   type: 'note' | 'callout';
 };
 
 export const iconColorMap = new Map<ExclamationIconProps['type'], string>([
-  ['note', '#FFBA50'],
-  ['callout', '#FF6C54'],
+  ['note', themeVars.color.accentXXC60],
+  ['callout', themeVars.color.accentXXJ70],
 ]);
 
 export const ExclamationIcon: React.FC<ExclamationIconProps> = ({ type }) => {
