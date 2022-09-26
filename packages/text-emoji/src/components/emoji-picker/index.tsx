@@ -42,40 +42,44 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = (props) => {
   }
 
   useEffect(() => {
-    pickerInstance.current = new Picker({
-      ...props,
-      ref: pickerRef,
-      i18n,
+    // Use dynamic import for surpressing the error related with SSR.
+    // Refered: https://github.com/missive/emoji-mart/issues/575#issuecomment-1111323710
+    import('emoji-mart').then((EmojiMart) => {
+      pickerInstance.current = new EmojiMart.Picker({
+        ...props,
+        ref: pickerRef,
+        i18n,
+      });
+
+      const styleElem = document.createElement('style');
+      styleElem.innerHTML = `#root {
+        --em-rgb-background: ${themeVars.color.background};
+        --em-color-border: ${themeVars.color.background};
+      
+        border: solid 1px ${themeVars.color.backgroundOnSlight};
+      }
+
+      .search {
+        border: solid 1px ${themeVars.color.backgroundOnSlight};
+        border-radius: ${themeVars.radius.small};
+      }
+
+      .spacer {
+        height: ${themeVars.space[4]};
+      }
+
+      .sticky {
+        font-weight: bold;
+      }
+
+      .padding-small {
+        padding: ${themeVars.space[4]} var(--padding-small);
+      }
+      `;
+
+      //@ts-expect-error For overriding #root selector.
+      pickerInstance.current.shadowRoot.appendChild(styleElem);
     });
-
-    const styleElem = document.createElement('style');
-    styleElem.innerHTML = `#root {
-      --em-rgb-background: ${themeVars.color.background};
-      --em-color-border: ${themeVars.color.background};
-    
-      border: solid 1px ${themeVars.color.backgroundOnSlight};
-    }
-
-    .search {
-      border: solid 1px ${themeVars.color.backgroundOnSlight};
-      border-radius: ${themeVars.radius.small};
-    }
-
-    .spacer {
-      height: ${themeVars.space[4]};
-    }
-
-    .sticky {
-      font-weight: bold;
-    }
-
-    .padding-small {
-      padding: ${themeVars.space[4]} var(--padding-small);
-    }
-    `;
-
-    //@ts-expect-error For overriding #root selector.
-    pickerInstance.current.shadowRoot.appendChild(styleElem);
 
     return () => {
       pickerInstance.current = null;
