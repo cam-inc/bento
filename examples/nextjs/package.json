@@ -12,6 +12,7 @@
     "@bento-editor/element-list": "*",
     "@bento-editor/element-note": "*",
     "@bento-editor/element-callout": "*",
+    "@bento-editor/element-link": "*",
     "@bento-editor/text-format": "*",
     "@bento-editor/text-emoji": "*",
     "next": "^12.2.4",

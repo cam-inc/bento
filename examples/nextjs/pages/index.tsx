@@ -10,7 +10,6 @@ import elementParagraph, {
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
 import elementNote, { NoteRenderer } from '@bento-editor/element-note';
 import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
-import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   list as elementList,
   listItem as elementListItem,
@@ -23,6 +22,11 @@ import {
   TodoListRenderer,
   TodoListItemRenderer,
 } from '@bento-editor/element-list';
+import {
+  normalLink as elementLink,
+  NormalLinkRenderer as LinkRenderer,
+} from '@bento-editor/element-link';
+import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
 import { useCallback, useMemo, useState } from 'react';
@@ -40,6 +44,7 @@ const Home: NextPage = () => {
         elementTodoListItem,
         elementNote,
         elementCallout,
+        elementLink,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -319,6 +324,16 @@ const Home: NextPage = () => {
           },
         ],
       },
+      {
+        type: 'link',
+        attributes: {},
+        children: [
+          {
+            type: 'format',
+            text: '',
+          },
+        ],
+      },
     ],
     []
   );
@@ -341,6 +356,7 @@ const Home: NextPage = () => {
       'todo-list-item': TodoListItemRenderer,
       note: NoteRenderer,
       callout: CalloutRenderer,
+      link: LinkRenderer,
       format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),
