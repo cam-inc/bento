@@ -5,6 +5,8 @@ import { themeVars } from '../../theme/index.css';
 const root = style({
   selectors: {
     [`${editorStyles.root} &`]: {
+      display: 'block',
+      width: '100%',
       position: 'relative',
       overflow: 'hidden',
     }
@@ -39,7 +41,6 @@ const bg = style({
       right: 0,
       bottom: 0,
       left: 0,
-      borderRadius: themeVars.radius.small,
     },
   }
 });
@@ -47,6 +48,7 @@ const bg = style({
 const container = style({
   selectors: {
     [`${editorStyles.root} &`]: {
+      position: 'relative',
     }
   }
 });

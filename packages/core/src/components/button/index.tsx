@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { styles } from './index.css';
 
 export const BUTTON_RADIUS = {
+  NONE: 'none',
   SMALL: 'small',
   MEDIUM: 'medium',
 } as const;
@@ -14,7 +15,7 @@ export type ButtonProps = {
   children: React.ReactNode;
 };
 
-export const Button: React.FC<ButtonProps> = ({ radius, onClick, children }) => {
+export const Button: React.FC<ButtonProps> = ({ radius = BUTTON_RADIUS.NONE, onClick, children }) => {
   const handleClick = useCallback(() => {
     onClick();
   }, [onClick]);

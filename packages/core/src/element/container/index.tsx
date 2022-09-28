@@ -1,6 +1,7 @@
 import classnames from 'classnames';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import { Path, Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
 import { Button } from '../../components/button';
@@ -24,19 +25,26 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const handlePlusButtonClick = useCallback(() => {
     popoverToolbox.open();
   }, [popoverToolbox]);
+  const handleToolboxDone = useCallback(() => {
+    popoverToolbox.close();
+  }, [popoverToolbox]);
 
   const popoverToolmenu = usePopover<HTMLDivElement>();
   const handleDotsButtonClick = useCallback(() => {
     popoverToolmenu.open();
   }, [popoverToolmenu]);
+  const handleToolmenuDone = useCallback(() => {
+    popoverToolmenu.close();
+  }, [popoverToolmenu]);
 
   // DnD
+  const type = 'Element';
   type Item = {
     from: Path
   };
-  const [_, dragRef] = useDrag<Item>(() => {
+  const [_, dragRef, dragPreview] = useDrag<Item>(() => {
     return {
-      type: 'Element',
+      type,
       item: {
         from: path,
       },
@@ -45,17 +53,47 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       }),
     };
   }, [path.toString()]);
-  const [{
-    isDroppable,
-    isOver,
-  }, dropRef] = useDrop<Item, void, { isDroppable: boolean; isOver: boolean }>(() => {
+  const [aboveCollect, aboveDropRef] = useDrop<Item, void, { isDroppable: boolean; isOver: boolean }>(() => {
     return {
-      accept: 'Element',
+      accept: type,
       drop: (item) => {
-        console.log(item.from, path)
         Transforms.moveNodes(editor, {
           at: item.from,
           to: path,
+        });
+      },
+      canDrop: (/*item, monitor*/) => {
+        const lastIndex = path[path.length - 1];
+        if (lastIndex === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      collect: (monitor) => ({
+        isDroppable: monitor.canDrop(),
+        isOver: !!monitor.isOver(),
+      }),
+    };
+  }, [editor, path.toString()]);
+  const [belowCollect, belowDropRef] = useDrop<Item, void, { isDroppable: boolean; isOver: boolean }>(() => {
+    return {
+      accept: type,
+      drop: (item) => {
+        const result = Path.compare(item.from, path);
+        let to: Path;
+        switch (result) {
+          case -1:
+          case 0:
+            to = path;
+            break;
+          case 1:
+            to = Path.next(path);
+            break;
+        }
+        Transforms.moveNodes(editor, {
+          at: item.from,
+          to,
         });
       },
       collect: (monitor) => ({
@@ -64,6 +102,19 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       }),
     };
   }, [editor, path.toString()]);
+  const bodyRef = useRef(null);
+  useEffect(() => {
+    //dragPreview(getEmptyImage());
+    dragPreview(bodyRef.current);
+  }, []);
+
+  const [isOver, setIsOver] = useState<boolean>(false);
+  const handleMouseOver = useCallback((/*e: React.MouseEvent*/) => {
+    setIsOver(true);
+  }, []);
+  const handleMouseOut = useCallback((/*e: React.MouseEvent*/) => {
+    setIsOver(false);
+  }, []);
 
   return (
     <>
@@ -72,14 +123,24 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         data-type={props.element.type}
         data-path={path.toString()}
         className={styles.root}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
       >
-        <div className={styles.body}>{props.children}</div>
         <div className={classnames({
           [styles.dropArea]: true,
-          [styles.dropAreaDroppable]: isDroppable,
-          [styles.dropAreaOver]: isOver,
-        })} ref={dropRef} />
-        <div contentEditable={false} className={styles.utilsContainer}>
+          [styles.dropAreaDroppable]: aboveCollect.isDroppable,
+          [styles.dropAreaOver]: aboveCollect.isOver,
+        })} ref={aboveDropRef} />
+        <div className={styles.body} ref={bodyRef}>{props.children}</div>
+        <div className={classnames({
+          [styles.dropArea]: true,
+          [styles.dropAreaDroppable]: belowCollect.isDroppable,
+          [styles.dropAreaOver]: belowCollect.isOver,
+        })} ref={belowDropRef} />
+        <div contentEditable={false} className={classnames({
+          [styles.utilsContainer]: true,
+          [styles.utilsContainerOver]: isOver,
+        })}>
           <div className={styles.utils}>
             <div ref={popoverToolbox.targetRef}>
               <PlusButton onClick={handlePlusButtonClick} />
@@ -93,10 +154,10 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         </div>
       </div>
       <Popover {...popoverToolbox.bind}>
-        <Toolbox path={path} />
+        <Toolbox path={path} onDone={handleToolboxDone} />
       </Popover>
       <Popover {...popoverToolmenu.bind}>
-        <Toolmenu path={path} />
+        <Toolmenu path={path} onDone={handleToolmenuDone} />
       </Popover>
     </>
   );

@@ -15,46 +15,55 @@ const root = style({
   }
 });
 
-const button = style({
-  selectors: {
-    [`${editorStyles.root} &`]: {
-      display: 'block',
-      width: '100%',
-      padding: `${themeVars.space['2']} ${themeVars.space['3']}`,
-      position: 'relative',
-    },
-  }
-});
-
-const buttonBG = style({
-  selectors: {
-    [`${editorStyles.root} ${button}:hover &`]: {
-      backgroundColor: themeVars.color.brand,
-      opacity: 0.08,
-    },
-    [`${editorStyles.root} &`]: {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-    },
-  }
-});
-
-const buttonContainer = style({
+const search = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      gap: themeVars.space['3'],
+      padding: themeVars.space['2'],
     }
   }
 });
 
-const buttonIcon = style({
+const searchIcon = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      position: 'absolute',
+      width: 20,
+      height: 20,
+      margin: 'auto',
+      top: 0,
+      bottom: 0,
+      left: themeVars.space['4'],
+      color: themeVars.color.brand,
+    }
+  }
+});
+
+const searchInput = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      display: 'block',
+      width: '100%',
+      border: `1px solid ${themeVars.color.surfaceOnSlight}`,
+      borderRadius: themeVars.radius.small,
+      padding: `${themeVars.space['2']} ${themeVars.space['2']} ${themeVars.space['2']} ${themeVars.space['9']}`,
+    }
+  }
+});
+
+const itemContainer = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      gap: themeVars.space['3'],
+      padding: `${themeVars.space['2']} ${themeVars.space['3']}`,
+    }
+  }
+});
+
+const itemIcon = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       width: 32,
@@ -70,7 +79,7 @@ const buttonIcon = style({
   }
 });
 
-const buttonTitle = style({
+const itemTitle = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       color: themeVars.color.surfaceOn,
@@ -81,9 +90,10 @@ const buttonTitle = style({
 
 export const styles = {
   root,
-  button,
-  buttonBG,
-  buttonContainer,
-  buttonIcon,
-  buttonTitle,
+  search,
+  searchIcon,
+  searchInput,
+  itemContainer,
+  itemIcon,
+  itemTitle,
 };

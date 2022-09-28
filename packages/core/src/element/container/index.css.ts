@@ -49,9 +49,14 @@ const utilsContainer = style({
       width: 0,
       height: 0,
     },
-    [`${editorStyles.root} ${root}:hover &`]: {
+  }
+});
+
+const utilsContainerOver = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
       display: 'block',
-    }
+    },
   }
 });
 
@@ -82,5 +87,5 @@ const button = style({
 });
 
 export const styles = {
-  root, dropArea, dropAreaDroppable, dropAreaOver, body, utilsContainer, utils, button,
+  root, dropArea, dropAreaDroppable, dropAreaOver, body, utilsContainer, utilsContainerOver, utils, button,
 };
