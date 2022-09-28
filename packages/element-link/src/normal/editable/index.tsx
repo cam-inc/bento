@@ -3,6 +3,7 @@ import {
   ElementContainer,
   helpers,
   BentoButton,
+  BentoSwitch,
 } from '@bento-editor/core';
 import React, { useCallback, useState } from 'react';
 import { Textbox } from '../../shared';
@@ -58,10 +59,9 @@ const editable: Element<Attributes>['editable'] = {
               placeholder={placeholder}
               onChange={handleTextboxChange}
             />
-            <div>
+            <div className={styles.switchContainer}>
               <label>新しいタブで開く</label>
-              <input
-                type="checkbox"
+              <BentoSwitch
                 onChange={handleCheckboxChange}
                 checked={openInNew}
               />

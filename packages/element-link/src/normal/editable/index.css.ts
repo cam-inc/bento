@@ -12,6 +12,10 @@ export const styles = {
     justifyContent: 'right',
     marginRight: themeVars.space[4],
   }),
+  switchContainer: style({
+    display: 'flex',
+    alignItems: 'center',
+  }),
   buttonContainer: style({}),
 };
 
