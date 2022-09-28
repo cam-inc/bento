@@ -17,6 +17,11 @@ export const defaultThemeToken = {
     small: '4px',
     medium: '8px',
   },
+  opacity: {
+    none: '0',
+    hover: '0.08',
+    active: '0.12',
+  },
   fontSize: {
     heading: {
       large: '32px',

@@ -1,7 +1,9 @@
+import classnames from 'classnames';
 import React, { useCallback, useMemo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
+import { Button } from '../../components/button';
 import { DotsIcon } from '../../components/icons/dots';
 import { PlusIcon } from '../../components/icons/plus';
 import { Popover, usePopover } from '../../portals/popover';
@@ -13,11 +15,10 @@ export type ElementContainerProps = RenderElementProps;
 
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const editor = useSlate();
-
-  const path = useMemo(() => {
-    const path = ReactEditor.findPath(editor, props.element);
-    return path;
-  }, [editor, props.element]);
+  const path = useMemo(
+    () => ReactEditor.findPath(editor, props.element),
+    [JSON.stringify(editor), JSON.stringify(props.element)]
+  );
 
   const popoverToolbox = usePopover<HTMLDivElement>();
   const handlePlusButtonClick = useCallback(() => {
@@ -29,40 +30,55 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     popoverToolmenu.open();
   }, [popoverToolmenu]);
 
-  const [_, dragRef] = useDrag(() => {
+  // DnD
+  type Item = {
+    from: Path
+  };
+  const [_, dragRef] = useDrag<Item>(() => {
     return {
       type: 'Element',
       item: {
         from: path,
-        element: props.element,
       },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
       }),
     };
-  }, [path]);
-
-  const [, dropRef] = useDrop(() => {
-    const path = ReactEditor.findPath(editor, props.element);
+  }, [path.toString()]);
+  const [{
+    isDroppable,
+    isOver,
+  }, dropRef] = useDrop<Item, void, { isDroppable: boolean; isOver: boolean }>(() => {
     return {
       accept: 'Element',
-      drop: (item: { from: Path }) => {
+      drop: (item) => {
+        console.log(item.from, path)
         Transforms.moveNodes(editor, {
           at: item.from,
           to: path,
         });
       },
+      collect: (monitor) => ({
+        isDroppable: monitor.canDrop(),
+        isOver: !!monitor.isOver(),
+      }),
     };
-  }, [editor, props.element]);
+  }, [editor, path.toString()]);
 
   return (
     <>
       <div
         {...props.attributes}
         data-type={props.element.type}
+        data-path={path.toString()}
         className={styles.root}
       >
         <div className={styles.body}>{props.children}</div>
+        <div className={classnames({
+          [styles.dropArea]: true,
+          [styles.dropAreaDroppable]: isDroppable,
+          [styles.dropAreaOver]: isOver,
+        })} ref={dropRef} />
         <div contentEditable={false} className={styles.utilsContainer}>
           <div className={styles.utils}>
             <div ref={popoverToolbox.targetRef}>
@@ -73,7 +89,6 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
                 <DotsButton onClick={handleDotsButtonClick} />
               </div>
             </div>
-            <div ref={dropRef}>drop</div>
           </div>
         </div>
       </div>
@@ -91,12 +106,11 @@ const PlusButton: React.FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
-      <div className={styles.buttonBG} />
-      <div className={styles.buttonIcon}>
+    <Button onClick={onClick}>
+      <div className={styles.button}>
         <PlusIcon />
       </div>
-    </button>
+    </Button>
   );
 };
 
@@ -104,11 +118,10 @@ const DotsButton: React.FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
-      <div className={styles.buttonBG} />
-      <div className={styles.buttonIcon}>
+    <Button onClick={onClick}>
+      <div className={styles.button}>
         <DotsIcon />
       </div>
-    </button>
+    </Button>
   );
 };
