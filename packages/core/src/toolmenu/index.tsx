@@ -1,19 +1,33 @@
 import React, { useCallback } from 'react';
-import { Path } from 'slate';
+import { Node, Path, Transforms } from 'slate';
+import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
 import { DustboxIcon } from '../components/icons/dustbox';
 import { styles } from './index.css';
 
 export type ToolmenuProps = {
   path: Path;
+  onDone: () => void;
 }
-export const Toolmenu: React.FC<ToolmenuProps> = (/*{ path }*/) => {
-  const handleDeleteClick = useCallback(() => { }, [
-    // TODO
-  ]);
-  const handleCopyClick = useCallback(() => { }, [
-    // TODO
-  ]);
+export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
+  const editor = useSlate();
+
+  const handleDeleteClick = useCallback(() => {
+    Transforms.removeNodes(editor, {
+      at: path
+    });
+    onDone();
+  }, [editor, path, onDone]);
+
+  const handleCopyClick = useCallback(() => {
+    const node = Node.get(editor, path);
+    // TODO: There seems to be no API for copying. Replace this workaround if any found.
+    const copiedNode = JSON.parse(JSON.stringify(node));
+    Transforms.insertNodes(editor, copiedNode, {
+      at: Path.next(path),
+    });
+    onDone();
+  }, [editor, path, onDone]);
 
   return (
     <div className={styles.root}>
