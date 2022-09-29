@@ -1,7 +1,6 @@
 import classnames from 'classnames';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
 import { Path, Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
 import { Button } from '../../components/button';
@@ -104,7 +103,6 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, [editor, path.toString()]);
   const bodyRef = useRef(null);
   useEffect(() => {
-    //dragPreview(getEmptyImage());
     dragPreview(bodyRef.current);
   }, []);
 
