@@ -1,4 +1,4 @@
-import { themeVars } from '@bento-editor/core';
+import { themeVars } from '../../theme/index.css';
 import { style } from '@vanilla-extract/css';
 
 export const styles = {

@@ -4,7 +4,7 @@ import { styles } from './index.css';
 import defaultAttributes, { Attributes } from '../attributes';
 import { Link } from '../components';
 
-export const NormalLinkRenderer: React.FC<RendererProps<Attributes>> = ({
+export const LinkRenderer: React.FC<RendererProps<Attributes>> = ({
   attributes,
 }) => {
   attributes = { ...defaultAttributes.defaultValue, ...attributes };

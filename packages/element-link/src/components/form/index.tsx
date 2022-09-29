@@ -1,6 +1,5 @@
-import { BentoButton, BentoSwitch } from '@bento-editor/core';
+import { BentoButton, BentoSwitch, Textbox } from '@bento-editor/core';
 import React from 'react';
-import { Textbox } from '../../../shared';
 import { styles } from './index.css';
 
 type FormProps = {

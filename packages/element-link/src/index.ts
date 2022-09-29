@@ -1,3 +1,18 @@
-import normalLink, { NormalLinkRenderer } from './normal';
+import { Element } from '@bento-editor/core';
+import attributes, { Attributes } from './attributes';
+import editable from './editable';
+import toolbox from './toolbox';
+export * from './renderer';
 
-export { normalLink, NormalLinkRenderer };
+const element: Element<Attributes> = {
+  type: 'link',
+  attributes,
+  editable,
+  toolbox,
+  normalizeNode: () => {
+    // TODO: Allow valid link.
+    return false;
+  },
+};
+
+export default element;

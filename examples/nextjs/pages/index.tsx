@@ -22,10 +22,7 @@ import {
   TodoListRenderer,
   TodoListItemRenderer,
 } from '@bento-editor/element-list';
-import {
-  normalLink as elementLink,
-  NormalLinkRenderer as LinkRenderer,
-} from '@bento-editor/element-link';
+import elementLink, { LinkRenderer } from '@bento-editor/element-link';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
