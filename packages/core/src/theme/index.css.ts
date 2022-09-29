@@ -11,6 +11,7 @@ export const defaultThemeToken = {
     '2': '0.5rem',
     '3': '0.75rem',
     '4': '1rem',
+    '8': '2rem',
     '40': '10rem',
   },
   radius: {

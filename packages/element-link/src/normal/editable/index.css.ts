@@ -1,38 +1,39 @@
 import { themeVars } from '@bento-editor/core';
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const styles = {
   root: style({
     color: themeVars.color.backgroundOn,
-    display: 'flex',
+    width: 'fit-content',
   }),
-  form: style({
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'right',
-    marginRight: themeVars.space[4],
+  linkContainer: style({
+    position: 'relative',
   }),
-  switchContainer: style({
+  spacer: style({
+    position: 'absolute',
+    top: themeVars.space[4],
+    left: 0,
+    width: '100%',
+    height: themeVars.space[4],
+    cursor: 'pointer',
+  }),
+  editButton: style({
+    position: 'absolute',
+    top: themeVars.space[8],
+    right: 0,
     display: 'flex',
     alignItems: 'center',
+    backgroundColor: `${themeVars.color.surface} !important`,
+    border: `solid 1px ${themeVars.color.surfaceOnSlight} !important`,
+    borderRadius: `${themeVars.radius.medium} !important`,
+    padding: `${themeVars.space[4]} !important`,
+    whiteSpace: 'nowrap',
+    width: 'auto',
   }),
-  buttonContainer: style({}),
+  editIcon: style({
+    display: 'block',
+    width: 18,
+    height: 18,
+    marginRight: themeVars.space[4],
+  }),
 };
-
-globalStyle(`${styles.form} input[type="text"]`, {
-  marginBottom: themeVars.space[4],
-});
-
-globalStyle(`${styles.form} label`, {
-  color: themeVars.color.backgroundOn,
-  fontSize: themeVars.fontSize.label.medium,
-  marginRight: themeVars.space[4],
-});
-
-globalStyle(`${styles.buttonContainer} button`, {
-  backgroundColor: `${themeVars.color.brand}`,
-  fontWeight: 'bold',
-  padding: `${themeVars.space[2]} ${themeVars.space[4]}`,
-  fontSize: themeVars.fontSize.label.medium,
-  color: themeVars.color.brandOnHigh,
-});

@@ -1,7 +1,8 @@
 import React from 'react';
-import { RendererProps, OpenInNewIcon } from '@bento-editor/core';
+import { RendererProps } from '@bento-editor/core';
 import { styles } from './index.css';
 import defaultAttributes, { Attributes } from '../attributes';
+import { Link } from '../components';
 
 export const NormalLinkRenderer: React.FC<RendererProps<Attributes>> = ({
   attributes,
@@ -16,16 +17,7 @@ export const NormalLinkRenderer: React.FC<RendererProps<Attributes>> = ({
 
   return (
     <div className={styles.root}>
-      <a href={href} target={target}>
-        <div className={styles.container}>
-          {href}
-          {target === '_blank' && (
-            <span className={styles.openInNewIcon}>
-              <OpenInNewIcon />
-            </span>
-          )}
-        </div>
-      </a>
+      <Link href={href} target={target} />
     </div>
   );
 };

@@ -6,15 +6,21 @@ type BentoButtonProps = {
   onClick: React.MouseEventHandler;
   children: React.ReactNode | string;
   disabled?: boolean;
+  className?: string;
 };
 
 export const BentoButton: React.FC<BentoButtonProps> = ({
   onClick,
   children,
   disabled,
+  className,
 }) => {
   return (
-    <button onClick={onClick} disabled={disabled} className={styles.root}>
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(styles.root, className)}
+    >
       {children}
     </button>
   );

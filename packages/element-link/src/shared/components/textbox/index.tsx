@@ -3,14 +3,16 @@ import { styles } from './index.css';
 
 type TextboxProps = {
   onChange: React.ChangeEventHandler;
-  href?: string;
+  value?: string;
   placeholder?: string;
+  autoFocus?: boolean;
 };
 
 export const Textbox: React.FC<TextboxProps> = ({
-  href,
+  value,
   placeholder,
   onChange,
+  autoFocus,
 }) => {
   const handleTextboxClick = useCallback(
     (e: React.MouseEvent<HTMLInputElement>) => {
@@ -24,9 +26,10 @@ export const Textbox: React.FC<TextboxProps> = ({
       type="text"
       placeholder={placeholder}
       className={styles.root}
-      value={href}
+      value={value}
       onChange={onChange}
       onClick={handleTextboxClick}
+      autoFocus={autoFocus}
     />
   );
 };

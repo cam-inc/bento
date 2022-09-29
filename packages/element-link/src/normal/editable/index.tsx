@@ -2,12 +2,12 @@ import {
   Element,
   ElementContainer,
   helpers,
+  EditIcon,
   BentoButton,
-  BentoSwitch,
 } from '@bento-editor/core';
 import React, { useCallback, useState } from 'react';
-import { Textbox } from '../../shared';
 import attributes, { Attributes } from '../attributes';
+import { Link, Form } from '../components';
 import { styles } from './index.css';
 
 const editable: Element<Attributes>['editable'] = {
@@ -29,10 +29,42 @@ const editable: Element<Attributes>['editable'] = {
 
     const [openInNew, setOpenInNew] = useState(target === '_blank');
     const [newHref, setNewHref] = useState(href);
+    const [showEdit, setShowEdit] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
 
-    const handleCheckboxChange = useCallback(() => {
-      setOpenInNew((prevState) => !prevState);
+    const handleLinkMouseEnter = useCallback(() => {
+      setShowEdit(true);
     }, []);
+
+    const handleLinkMouseLeave = useCallback(() => {
+      setShowEdit(!isHovering);
+    }, [isHovering]);
+
+    const handleLinkMouseOver = useCallback(() => {
+      setIsHovering(true);
+    }, []);
+
+    const handleFormSubmit = useCallback(
+      (event: React.FormEvent) => {
+        event.preventDefault();
+        setNodes({
+          attributes: {
+            href: newHref,
+            target: openInNew ? '_blank' : '_self',
+          },
+        });
+
+        if (isEditing) {
+          setIsEditing(false);
+        }
+
+        if (showEdit) {
+          setShowEdit(false);
+        }
+      },
+      [setNodes]
+    );
 
     const handleTextboxChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,37 +73,63 @@ const editable: Element<Attributes>['editable'] = {
       []
     );
 
-    const handleButtonClick = useCallback(() => {
-      setNodes({
-        attributes: {
-          href: newHref,
-          target: openInNew ? '_blank' : '_self',
-        },
-      });
-    }, [setNodes]);
+    const handleCheckboxChange = useCallback(() => {
+      setOpenInNew((prevState) => !prevState);
+    }, []);
+
+    const handleEditButtonClick = useCallback(() => {
+      setIsEditing(true);
+    }, []);
+
+    const handleFormButtonClick = useCallback((event: React.MouseEvent) => {
+      event.stopPropagation();
+    }, []);
 
     return (
       <ElementContainer {...props}>
-        <div className={styles.root}>
-          <div className={styles.form} contentEditable={false}>
-            <Textbox
-              href={newHref}
-              placeholder={placeholder}
-              onChange={handleTextboxChange}
-            />
-            <div className={styles.switchContainer}>
-              <label>新しいタブで開く</label>
-              <BentoSwitch
-                onChange={handleCheckboxChange}
-                checked={openInNew}
-              />
+        <div contentEditable={false} className={styles.root}>
+          {href != null && href !== '' && !isEditing ? (
+            <div
+              className={styles.linkContainer}
+              onMouseEnter={handleLinkMouseEnter}
+              onMouseLeave={handleLinkMouseLeave}
+              onMouseOver={handleLinkMouseOver}
+            >
+              <Link href={href} target={target} />
+              {showEdit && (
+                <>
+                  <span
+                    className={styles.spacer}
+                    onClick={handleEditButtonClick}
+                    role="button"
+                  />
+                  <BentoButton
+                    className={styles.editButton}
+                    onClick={handleEditButtonClick}
+                  >
+                    <span className={styles.editIcon}>
+                      <EditIcon />
+                    </span>
+                    <span>編集</span>
+                  </BentoButton>
+                </>
+              )}
             </div>
-          </div>
-          <div contentEditable={false} className={styles.buttonContainer}>
-            <BentoButton onClick={handleButtonClick}>
-              リンクを作成する
-            </BentoButton>
-          </div>
+          ) : (
+            <Form
+              handleFormSubmit={handleFormSubmit}
+              handleTextboxChange={handleTextboxChange}
+              handleCheckboxChange={handleCheckboxChange}
+              handleButtonClick={handleFormButtonClick}
+              labelValue="新しいタブで開く"
+              checked={openInNew}
+              buttonValue={isEditing ? '保存する' : 'リンクを作成する'}
+              textboxValue={newHref}
+              placeholder={placeholder}
+              buttonDisabled={newHref == null || newHref === ''}
+              textboxFocus={isEditing}
+            />
+          )}
         </div>
       </ElementContainer>
     );
