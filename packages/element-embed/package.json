@@ -1,12 +1,10 @@
 {
-  "name": "@bento-editor/core",
+  "name": "@bento-editor/element-embed",
   "version": "0.0.5",
-  "description": "JSON Schema based block-styled editor.",
+  "description": "TODO",
   "keywords": [
     "TODO"
   ],
-  "main": "./dist/cjs.js",
-  "module": "./dist/es.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
@@ -30,7 +28,7 @@
     "build": "vite build && tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
     "test": "jest"
   },
-  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/core",
+  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/element-embed",
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },
@@ -51,33 +49,14 @@
   },
   "devDependencies": {
     "@types/jest": "^28.1.1",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@types/validator": "^13.7.7",
     "@vanilla-extract/vite-plugin": "^3.3.0",
     "jest": "^28.1.1",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.1",
     "vite": "^2.9.14"
   },
-  "dependencies": {
-    "@rmwc/switch": "^8.0.1",
-    "just-debounce-it": "^3.1.1",
-    "just-deep-map-values": "^1.1.1",
-    "just-extend": "^6.1.1",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
-    "recoil": "^0.7.5",
-    "store2": "^2.14.2",
-    "type-fest": "^2.18.1",
-    "validator": "^13.7.0"
-  },
   "peerDependencies": {
-    "@vanilla-extract/css": "^1.7.2",
-    "@vanilla-extract/dynamic": "^2.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "slate": "^0.82.0",
-    "slate-react": "^0.82.0"
+    "@bento-editor/core": "0.0.5",
+    "@vanilla-extract/css": "^1.7.2"
   }
 }

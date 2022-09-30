@@ -1,5 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
-import { EditorClassName } from '../../editor';
+import { style } from '@vanilla-extract/css';
 import { themeVars } from '../../theme/index.css';
 
 export const styles = {
@@ -7,15 +6,11 @@ export const styles = {
     display: 'block',
     width: '100%',
     boxSizing: 'border-box',
-    padding: themeVars.space[4],
     cursor: 'pointer',
     color: 'inherit',
+    fontWeight: 'bold',
+    fontSize: `${themeVars.fontSize.label.medium} !important`,
+    padding: `${themeVars.space[2]} ${themeVars.space[4]} !important`,
+    borderRadius: themeVars.radius.full,
   }),
 };
-
-globalStyle(`${EditorClassName} button`, {
-  fontWeight: 'bold',
-  fontSize: themeVars.fontSize.label.medium,
-  padding: `${themeVars.space[2]} ${themeVars.space[4]}`,
-  borderRadius: themeVars.radius.full,
-});

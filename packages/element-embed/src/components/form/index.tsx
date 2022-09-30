@@ -1,34 +1,35 @@
-import { BentoButton, BentoSwitch, Textbox } from '@bento-editor/core';
+import { BentoButton, Textbox } from '@bento-editor/core';
 import React from 'react';
-import { styles } from './index.css';
 import classnames from 'classnames';
+import { styles } from './index.css';
 
 type FormProps = {
   handleFormSubmit: React.FormEventHandler;
   handleTextboxChange: React.ChangeEventHandler;
-  handleCheckboxChange: React.FormEventHandler;
   handleButtonClick: React.MouseEventHandler;
   labelValue: string;
-  switchChecked: boolean;
   buttonValue: string;
   textboxValue?: string;
-  textboxFocus?: boolean;
   placeholder?: string;
   buttonDisabled?: boolean;
+  errors?: FormErrors | null;
+};
+
+export type FormErrors = {
+  reason: string;
+  message: string;
 };
 
 export const Form: React.FC<FormProps> = ({
   handleFormSubmit,
   handleTextboxChange,
-  handleCheckboxChange,
   handleButtonClick,
-  textboxValue,
-  textboxFocus,
-  placeholder,
   labelValue,
-  switchChecked,
   buttonValue,
+  textboxValue,
+  placeholder,
   buttonDisabled,
+  errors,
 }) => {
   return (
     <form className={styles.root} onSubmit={handleFormSubmit}>
@@ -37,15 +38,11 @@ export const Form: React.FC<FormProps> = ({
           value={textboxValue}
           placeholder={placeholder}
           onChange={handleTextboxChange}
-          autoFocus={textboxFocus}
         />
-        <div className={styles.switchContainer}>
-          <label>{labelValue}</label>
-          <BentoSwitch
-            onChange={handleCheckboxChange}
-            checked={switchChecked}
-          />
-        </div>
+        {errors != null && (
+          <span className={styles.errorMessage}>{errors.message}</span>
+        )}
+        <label>{labelValue}</label>
       </div>
       <div className={styles.buttonContainer}>
         <BentoButton

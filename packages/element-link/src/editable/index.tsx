@@ -46,7 +46,7 @@ const editable: Element<Attributes>['editable'] = {
     }, []);
 
     const handleFormSubmit = useCallback(
-      (event: React.FormEvent) => {
+      (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setNodes({
           attributes: {
@@ -63,7 +63,7 @@ const editable: Element<Attributes>['editable'] = {
           setShowEdit(false);
         }
       },
-      [setNodes]
+      [setNodes, isEditing, isHovering]
     );
 
     const handleTextboxChange = useCallback(
@@ -81,9 +81,12 @@ const editable: Element<Attributes>['editable'] = {
       setIsEditing(true);
     }, []);
 
-    const handleFormButtonClick = useCallback((event: React.MouseEvent) => {
-      event.stopPropagation();
-    }, []);
+    const handleFormButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+      },
+      []
+    );
 
     return (
       <ElementContainer {...props}>
@@ -122,7 +125,7 @@ const editable: Element<Attributes>['editable'] = {
               handleCheckboxChange={handleCheckboxChange}
               handleButtonClick={handleFormButtonClick}
               labelValue="新しいタブで開く"
-              checked={openInNew}
+              switchChecked={openInNew}
               buttonValue={isEditing ? '保存する' : 'リンクを作成する'}
               textboxValue={newHref}
               placeholder={placeholder}
