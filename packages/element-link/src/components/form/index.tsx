@@ -15,6 +15,12 @@ type FormProps = {
   textboxFocus?: boolean;
   placeholder?: string;
   buttonDisabled?: boolean;
+  errors?: FormErrors | null;
+};
+
+export type FormErrors = {
+  reason: string;
+  message: string;
 };
 
 export const Form: React.FC<FormProps> = ({
@@ -29,6 +35,7 @@ export const Form: React.FC<FormProps> = ({
   switchChecked,
   buttonValue,
   buttonDisabled,
+  errors,
 }) => {
   return (
     <form className={styles.root} onSubmit={handleFormSubmit}>
@@ -39,6 +46,9 @@ export const Form: React.FC<FormProps> = ({
           onChange={handleTextboxChange}
           autoFocus={textboxFocus}
         />
+        {errors != null && (
+          <span className={styles.errorMessage}>{errors.message}</span>
+        )}
         <div className={styles.switchContainer}>
           <label>{labelValue}</label>
           <BentoSwitch

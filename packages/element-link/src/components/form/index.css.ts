@@ -24,6 +24,11 @@ export const styles = {
     color: `${themeVars.color.backgroundOnSlight} !important`,
     backgroundColor: `${themeVars.color.backgroundOnFaint} !important`,
   }),
+  errorMessage: style({
+    color: themeVars.color.error,
+    fontSize: themeVars.fontSize.label.small,
+    marginBottom: themeVars.space[2],
+  }),
 };
 
 globalStyle(`${styles.field} input[type="text"]`, {

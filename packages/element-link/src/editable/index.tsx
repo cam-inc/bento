@@ -4,10 +4,11 @@ import {
   helpers,
   EditIcon,
   BentoButton,
+  isUrl,
 } from '@bento-editor/core';
 import React, { useCallback, useState } from 'react';
 import attributes, { Attributes } from '../attributes';
-import { Link, Form } from '../components';
+import { Link, Form, FormErrors } from '../components';
 import { styles } from './index.css';
 
 const editable: Element<Attributes>['editable'] = {
@@ -32,6 +33,7 @@ const editable: Element<Attributes>['editable'] = {
     const [showEdit, setShowEdit] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
+    const [errors, setErrors] = useState<FormErrors | null>(null);
 
     const handleLinkMouseEnter = useCallback(() => {
       setShowEdit(true);
@@ -48,12 +50,20 @@ const editable: Element<Attributes>['editable'] = {
     const handleFormSubmit = useCallback(
       (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setNodes({
-          attributes: {
-            href: newHref,
-            target: openInNew ? '_blank' : '_self',
-          },
-        });
+
+        if (newHref !== undefined && isUrl(newHref)) {
+          setNodes({
+            attributes: {
+              href: newHref,
+              target: openInNew ? '_blank' : '_self',
+            },
+          });
+        } else {
+          setErrors({
+            reason: 'Invalid url.',
+            message: '有効なURLを入力してください。',
+          });
+        }
 
         if (isEditing) {
           setIsEditing(false);
@@ -69,6 +79,10 @@ const editable: Element<Attributes>['editable'] = {
     const handleTextboxChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewHref(event.target.value);
+
+        if (event.target.value === '') {
+          setErrors(null);
+        }
       },
       []
     );
@@ -131,6 +145,7 @@ const editable: Element<Attributes>['editable'] = {
               placeholder={placeholder}
               buttonDisabled={newHref == null || newHref === ''}
               textboxFocus={isEditing}
+              errors={errors}
             />
           )}
         </div>
