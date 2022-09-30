@@ -1,6 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import { Path, Transforms, Node } from 'slate';
 import { useSlate } from 'slate-react';
+import { Button } from '../components/button';
+import { SearchIcon } from '../components/icons/search';
 import { Config } from '../config';
 import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
@@ -9,22 +11,42 @@ import { styles } from './index.css';
 
 export type ToolboxProps = {
   path: Path;
+  onDone: () => void;
 };
-export const Toolbox: React.FC<ToolboxProps> = ({ path }) => {
+export const Toolbox: React.FC<ToolboxProps> = ({ path, onDone }) => {
   const { elements, texts } = useConfigGlobalStateValue();
 
-  const textsWithToolbox = texts.filter((text) =>
-    Object.prototype.hasOwnProperty.call(text, 'toolbox')
-  );
-  const nodes = [...elements, ...textsWithToolbox];
+  const [searchValue, setSearchValue] = useState('');
+  const handleSearchValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value);
+  }, []);
+
+  const nodes = useMemo(() => {
+    const textsWithToolbox = texts.filter((text) =>
+      Object.prototype.hasOwnProperty.call(text, 'toolbox')
+    );
+    const nodes = [...elements, ...textsWithToolbox];
+    if (!searchValue) {
+      return nodes;
+    }
+    return nodes.filter((node) => {
+      return node.toolbox?.title.includes(searchValue);
+    });
+  }, [elements, texts, searchValue])
 
   return (
     <div className={styles.root}>
+      <div className={styles.search}>
+        <div className={styles.searchIcon}>
+          <SearchIcon />
+        </div>
+        <input className={styles.searchInput} value={searchValue} onChange={handleSearchValueChange} />
+      </div>
       <div>
         <ul>
           {nodes.map((node) => (
             <li key={node.type}>
-              <Button path={path} node={node} />
+              <Item path={path} node={node} onDone={onDone} />
             </li>
           ))}
         </ul>
@@ -33,10 +55,11 @@ export const Toolbox: React.FC<ToolboxProps> = ({ path }) => {
   );
 };
 
-const Button: React.FC<{
+const Item: React.FC<{
   path: Path;
   node: Config['elements'][number] | Config['texts'][number];
-}> = ({ path, node }) => {
+  onDone: () => void;
+}> = ({ path, node, onDone }) => {
   const editor = useSlate();
   const handleClick = useCallback(() => {
     const nextPath = Path.next(path);
@@ -57,9 +80,10 @@ const Button: React.FC<{
         at: nextPath,
       }
     );
-  }, [editor, path, node]);
+    onDone();
+  }, [editor, path, node, onDone]);
 
-  const popover = usePopover<HTMLButtonElement>();
+  const popover = usePopover<HTMLDivElement>();
   const handleMouseEnter = useCallback(() => {
     popover.open();
   }, [popover]);
@@ -69,25 +93,24 @@ const Button: React.FC<{
 
   return (
     <>
-      <button
-        className={styles.button}
+      <div
         ref={popover.targetRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
       >
-        <div className={styles.buttonBG} />
-        <div className={styles.buttonContainer}>
-          {node.toolbox && (
-            <>
-              <div className={styles.buttonIcon}>
-                <node.toolbox.Icon />
-              </div>
-              <div className={styles.buttonTitle}>{node.toolbox.title}</div>
-            </>
-          )}
-        </div>
-      </button>
+        <Button onClick={handleClick}>
+          <div className={styles.itemContainer}>
+            {node.toolbox && (
+              <>
+                <div className={styles.itemIcon}>
+                  <node.toolbox.Icon />
+                </div>
+                <div className={styles.itemTitle}>{node.toolbox.title}</div>
+              </>
+            )}
+          </div>
+        </Button>
+      </div>
       <Popover {...popover.bind}>
         <ToolboxPreview element={node} />
       </Popover>

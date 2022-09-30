@@ -12,12 +12,18 @@ export const defaultThemeToken = {
     '3': '0.75rem',
     '4': '1rem',
     '8': '2rem',
+    '9': '2.25rem',
     '40': '10rem',
   },
   radius: {
     small: '4px',
     medium: '8px',
     full: '9999px',
+  },
+  opacity: {
+    none: '0',
+    hover: '0.08',
+    active: '0.12',
   },
   fontSize: {
     heading: {
