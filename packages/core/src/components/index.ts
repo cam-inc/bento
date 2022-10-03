@@ -1,4 +1,4 @@
 export * from './icons';
-export * from './bento-button';
-export * from './bento-switch';
+export * from './button';
 export * from './textbox';
+export * from './switch';

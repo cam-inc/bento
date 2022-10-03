@@ -3,7 +3,7 @@ import {
   ElementContainer,
   helpers,
   EditIcon,
-  BentoButton,
+  Button,
   isUrl,
 } from '@bento-editor/core';
 import React, { useCallback, useState } from 'react';
@@ -73,7 +73,7 @@ const editable: Element<Attributes>['editable'] = {
           setShowEdit(false);
         }
       },
-      [setNodes, isEditing, isHovering]
+      [setNodes, isEditing, isHovering, newHref, openInNew]
     );
 
     const handleTextboxChange = useCallback(
@@ -120,15 +120,14 @@ const editable: Element<Attributes>['editable'] = {
                     onClick={handleEditButtonClick}
                     role="button"
                   />
-                  <BentoButton
-                    className={styles.editButton}
-                    onClick={handleEditButtonClick}
-                  >
-                    <span className={styles.editIcon}>
-                      <EditIcon />
-                    </span>
-                    <span>編集</span>
-                  </BentoButton>
+                  <span className={styles.editButton}>
+                    <Button onClick={handleEditButtonClick}>
+                      <span className={styles.editIcon}>
+                        <EditIcon />
+                      </span>
+                      <span>編集</span>
+                    </Button>
+                  </span>
                 </>
               )}
             </div>

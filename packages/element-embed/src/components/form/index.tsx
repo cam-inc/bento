@@ -1,6 +1,5 @@
-import { BentoButton, Textbox } from '@bento-editor/core';
+import { Button, Textbox } from '@bento-editor/core';
 import React from 'react';
-import classnames from 'classnames';
 import { styles } from './index.css';
 
 type FormProps = {
@@ -45,15 +44,13 @@ export const Form: React.FC<FormProps> = ({
         <label>{labelValue}</label>
       </div>
       <div className={styles.buttonContainer}>
-        <BentoButton
+        <Button
           onClick={handleButtonClick}
           disabled={buttonDisabled}
-          className={classnames({
-            [styles.buttonDisabled]: !!buttonDisabled,
-          })}
+          radius="full"
         >
           {buttonValue}
-        </BentoButton>
+        </Button>
       </div>
     </form>
   );

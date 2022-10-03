@@ -19,11 +19,6 @@ export const styles = {
     justifyContent: 'right',
   }),
   buttonContainer: style({}),
-  buttonDisabled: style({
-    cursor: 'not-allowed',
-    color: `${themeVars.color.backgroundOnSlight} !important`,
-    backgroundColor: `${themeVars.color.backgroundOnFaint} !important`,
-  }),
   errorMessage: style({
     color: themeVars.color.error,
     fontSize: themeVars.fontSize.label.small,
@@ -44,4 +39,6 @@ globalStyle(`${styles.field} label`, {
 globalStyle(`${styles.buttonContainer} button`, {
   color: themeVars.color.brandOnHigh,
   backgroundColor: `${themeVars.color.brand}`,
+  padding: `${themeVars.space[2]} ${themeVars.space[4]}`,
+  fontWeight: 'bold',
 });

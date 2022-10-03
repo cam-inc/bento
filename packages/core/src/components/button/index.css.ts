@@ -9,24 +9,33 @@ const root = style({
       width: '100%',
       position: 'relative',
       overflow: 'hidden',
-    }
-  }
+      cursor: 'pointer',
+    },
+  },
 });
 
 const rootRadiusSmall = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       borderRadius: themeVars.radius.small,
-    }
-  }
+    },
+  },
 });
 
 const rootRadiusMedium = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       borderRadius: themeVars.radius.medium,
-    }
-  }
+    },
+  },
+});
+
+const rootRadiusFull = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      borderRadius: themeVars.radius.full,
+    },
+  },
 });
 
 const bg = style({
@@ -42,15 +51,29 @@ const bg = style({
       bottom: 0,
       left: 0,
     },
-  }
+  },
 });
 
 const container = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       position: 'relative',
-    }
-  }
+    },
+  },
 });
 
-export const styles = { root, rootRadiusSmall, rootRadiusMedium, bg, container };
+const disabled = style({
+  cursor: 'not-allowed',
+  color: `${themeVars.color.backgroundOnSlight} !important`,
+  backgroundColor: `${themeVars.color.backgroundOnFaint} !important`,
+});
+
+export const styles = {
+  root,
+  rootRadiusSmall,
+  rootRadiusMedium,
+  rootRadiusFull,
+  bg,
+  container,
+  disabled,
+};

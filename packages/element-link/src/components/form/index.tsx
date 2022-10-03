@@ -1,7 +1,6 @@
-import { BentoButton, BentoSwitch, Textbox } from '@bento-editor/core';
+import { Button, Switch, Textbox } from '@bento-editor/core';
 import React from 'react';
 import { styles } from './index.css';
-import classnames from 'classnames';
 
 type FormProps = {
   handleFormSubmit: React.FormEventHandler;
@@ -51,22 +50,17 @@ export const Form: React.FC<FormProps> = ({
         )}
         <div className={styles.switchContainer}>
           <label>{labelValue}</label>
-          <BentoSwitch
-            onChange={handleCheckboxChange}
-            checked={switchChecked}
-          />
+          <Switch onChange={handleCheckboxChange} checked={switchChecked} />
         </div>
       </div>
       <div className={styles.buttonContainer}>
-        <BentoButton
+        <Button
           onClick={handleButtonClick}
           disabled={buttonDisabled}
-          className={classnames({
-            [styles.buttonDisabled]: !!buttonDisabled,
-          })}
+          radius="full"
         >
           {buttonValue}
-        </BentoButton>
+        </Button>
       </div>
     </form>
   );

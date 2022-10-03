@@ -1,5 +1,5 @@
 import { themeVars } from '@bento-editor/core';
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 export const styles = {
   root: style({
@@ -17,19 +17,7 @@ export const styles = {
     height: themeVars.space[4],
     cursor: 'pointer',
   }),
-  editButton: style({
-    position: 'absolute',
-    top: themeVars.space[8],
-    right: 0,
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: `${themeVars.color.surface} !important`,
-    border: `solid 1px ${themeVars.color.surfaceOnSlight} !important`,
-    borderRadius: `${themeVars.radius.medium} !important`,
-    padding: `${themeVars.space[4]} !important`,
-    whiteSpace: 'nowrap',
-    width: 'auto',
-  }),
+  editButton: style({}),
   editIcon: style({
     display: 'block',
     width: 18,
@@ -37,3 +25,19 @@ export const styles = {
     marginRight: themeVars.space[4],
   }),
 };
+
+globalStyle(`${styles.editButton} button`, {
+  top: themeVars.space[2],
+  right: 0,
+  backgroundColor: `${themeVars.color.surface} !important`,
+  border: `solid 1px ${themeVars.color.surfaceOnSlight} !important`,
+  borderRadius: `${themeVars.radius.medium} !important`,
+  padding: `${themeVars.space[4]} !important`,
+  whiteSpace: 'nowrap',
+  width: 'auto !important',
+});
+
+globalStyle(`${styles.editButton} button > div`, {
+  display: 'flex',
+  alignItems: 'center',
+});
