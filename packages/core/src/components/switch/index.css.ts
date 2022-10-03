@@ -10,16 +10,16 @@ export const styles = {
   }),
 };
 
-globalStyle('.mdc-switch__track', {
+globalStyle(`${styles.root} .mdc-switch__track`, {
   height: 24,
   width: 40,
   borderRadius: themeVars.radius.full,
-  opacity: '1 !important',
+  opacity: 1,
 });
 
-globalStyle('.mdc-switch__thumb', {
-  backgroundColor: `${themeVars.color.background} !important`,
-  borderColor: `${themeVars.color.background} !important`,
+globalStyle(`.mdc-switch.mdc-switch--checked .mdc-switch__thumb`, {
+  backgroundColor: themeVars.color.background,
+  borderColor: themeVars.color.background,
 });
 
 globalStyle('.mdc-switch__thumb-underlay', {

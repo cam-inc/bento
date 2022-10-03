@@ -107,28 +107,25 @@ const editable: Element<Attributes>['editable'] = {
         <div contentEditable={false} className={styles.root}>
           {href != null && href !== '' && !isEditing ? (
             <div
-              className={styles.linkContainer}
               onMouseEnter={handleLinkMouseEnter}
               onMouseLeave={handleLinkMouseLeave}
               onMouseOver={handleLinkMouseOver}
             >
               <Link href={href} target={target} />
               {showEdit && (
-                <>
+                <span className={styles.editButton}>
                   <span
                     className={styles.spacer}
                     onClick={handleEditButtonClick}
                     role="button"
                   />
-                  <span className={styles.editButton}>
-                    <Button onClick={handleEditButtonClick}>
-                      <span className={styles.editIcon}>
-                        <EditIcon />
-                      </span>
-                      <span>編集</span>
-                    </Button>
-                  </span>
-                </>
+                  <Button onClick={handleEditButtonClick}>
+                    <span className={styles.editIcon}>
+                      <EditIcon />
+                    </span>
+                    <span>編集</span>
+                  </Button>
+                </span>
               )}
             </div>
           ) : (

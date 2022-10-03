@@ -64,8 +64,12 @@ const container = style({
 
 const disabled = style({
   cursor: 'not-allowed',
-  color: `${themeVars.color.backgroundOnSlight} !important`,
-  backgroundColor: `${themeVars.color.backgroundOnFaint} !important`,
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      color: themeVars.color.backgroundOnSlight,
+      backgroundColor: themeVars.color.backgroundOnFaint,
+    },
+  },
 });
 
 export const styles = {
