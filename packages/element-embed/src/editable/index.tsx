@@ -135,6 +135,7 @@ var id='embedly-platform', n = 'script';
               placeholder={placeholder}
               buttonDisabled={newHref == null || newHref === ''}
               errors={errors}
+              embedTitle={embedTitle}
             />
           )}
         </div>

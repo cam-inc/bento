@@ -1,5 +1,5 @@
 import { Button, Textbox } from '@bento-editor/core';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { styles } from './index.css';
 
 type FormProps = {
@@ -12,6 +12,7 @@ type FormProps = {
   placeholder?: string;
   buttonDisabled?: boolean;
   errors?: FormErrors | null;
+  embedTitle?: string | null;
 };
 
 export type FormErrors = {
@@ -29,9 +30,22 @@ export const Form: React.FC<FormProps> = ({
   placeholder,
   buttonDisabled,
   errors,
+  embedTitle,
 }) => {
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  // The submit event will be called for the second time.
+  // Emitting this for doing setNodes without re-rendering recursively.
+  useEffect(() => {
+    if (embedTitle != null && embedTitle !== '') {
+      formRef.current?.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true })
+      );
+    }
+  }, [formRef, embedTitle]);
+
   return (
-    <form className={styles.root} onSubmit={handleFormSubmit}>
+    <form ref={formRef} className={styles.root} onSubmit={handleFormSubmit}>
       <div className={styles.field}>
         <Textbox
           value={textboxValue}
