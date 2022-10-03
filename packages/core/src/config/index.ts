@@ -57,6 +57,7 @@ export type Element<Attributes extends Record<string, any> = {}> = {
   // The boolean value returned from this function is to be used to determine whether to kiff off a new normalization path.
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
   normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
+  isVoid?: boolean;
 };
 
 export type Text<Attributes extends Record<string, any> = {}> = {

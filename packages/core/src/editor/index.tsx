@@ -59,6 +59,20 @@ export const Editor: React.FC<EditorProps> = ({
       // Fall back to the original `normalizeNode` to enforce other constraints.
       originalNormalizeNode(entry);
     };
+
+    // Set non-void or void setting.
+    const originalIsVoid = editor.isVoid;
+    editor.isVoid = (elementNode) => {
+      const { elements } = config;
+      const element = elements.find((element) => {
+        return element.type === elementNode.type;
+      });
+      if (element && element.isVoid) {
+        return true;
+      }
+      return originalIsVoid(elementNode);
+    };
+
     return editor;
   }, [config]);
 

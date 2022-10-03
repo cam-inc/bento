@@ -32,6 +32,7 @@ export const defaultThemeToken = {
     label: {
       large: '16px',
       medium: '14px',
+      small: '12px',
     },
   },
   color: {

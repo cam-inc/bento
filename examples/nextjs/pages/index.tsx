@@ -10,6 +10,16 @@ import elementParagraph, {
 import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
 import elementNote, { NoteRenderer } from '@bento-editor/element-note';
 import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
+import elementDivider, { DividerRenderer } from '@bento-editor/element-divider';
+import elementQuote, { QuoteRenderer } from '@bento-editor/element-quote';
+import {
+  container as elementToggleContainer,
+  head as elementToggleHead,
+  body as elementToggleBody,
+  ContainerRenderer as ToggleContainerRenderer,
+  HeadRenderer as ToggleHeadRenderer,
+  BodyRenderer as ToggleBodyRenderer,
+} from '@bento-editor/element-toggle';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   list as elementList,
@@ -40,6 +50,11 @@ const Home: NextPage = () => {
         elementTodoListItem,
         elementNote,
         elementCallout,
+        elementDivider,
+        elementQuote,
+        elementToggleContainer,
+        elementToggleHead,
+        elementToggleBody,
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
@@ -319,6 +334,48 @@ const Home: NextPage = () => {
           },
         ],
       },
+      {
+        type: 'divider',
+        children: [{ text: '', }],
+      },
+      {
+        type: 'quote',
+        attributes: {
+          cite: 'google'
+        },
+        children: [
+          {
+            type: 'format',
+            text: 'default value',
+          },
+        ],
+      },
+      {
+        type: 'toggle',
+        attributes: {
+          isOpen: true,
+        },
+        children: [
+          {
+            type: 'toggle-head',
+            children: [
+              {
+                type: 'format',
+                text: 'toggle head',
+              },
+            ],
+          },
+          {
+            type: 'toggle-body',
+            children: [
+              {
+                type: 'format',
+                text: 'toggle body',
+              },
+            ],
+          },
+        ],
+      },
     ],
     []
   );
@@ -341,6 +398,11 @@ const Home: NextPage = () => {
       'todo-list-item': TodoListItemRenderer,
       note: NoteRenderer,
       callout: CalloutRenderer,
+      divider: DividerRenderer,
+      quote: QuoteRenderer,
+      toggle: ToggleContainerRenderer,
+      'toggle-head': ToggleHeadRenderer,
+      'toggle-body': ToggleBodyRenderer,
       format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),
