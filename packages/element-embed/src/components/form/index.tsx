@@ -37,6 +37,7 @@ export const Form: React.FC<FormProps> = ({
           value={textboxValue}
           placeholder={placeholder}
           onChange={handleTextboxChange}
+          required={true}
         />
         {errors != null && (
           <span className={styles.errorMessage}>{errors.message}</span>

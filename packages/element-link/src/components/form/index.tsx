@@ -44,6 +44,7 @@ export const Form: React.FC<FormProps> = ({
           placeholder={placeholder}
           onChange={handleTextboxChange}
           autoFocus={textboxFocus}
+          required={true}
         />
         {errors != null && (
           <span className={styles.errorMessage}>{errors.message}</span>

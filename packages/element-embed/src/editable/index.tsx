@@ -103,7 +103,7 @@ var id='embedly-platform', n = 'script';
       (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewHref(event.target.value);
 
-        if (event.target.value === '') {
+        if (event.target.checkValidity()) {
           setErrors(null);
         }
       },

@@ -1,18 +1,14 @@
 import React, { useCallback } from 'react';
 import { styles } from './index.css';
 
-type TextboxProps = {
-  onChange: React.ChangeEventHandler;
-  value?: string;
-  placeholder?: string;
-  autoFocus?: boolean;
-};
+type TextboxProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Textbox: React.FC<TextboxProps> = ({
   value,
   placeholder,
   onChange,
   autoFocus,
+  required,
 }) => {
   const handleTextboxClick = useCallback(
     (e: React.MouseEvent<HTMLInputElement>) => {
@@ -30,6 +26,7 @@ export const Textbox: React.FC<TextboxProps> = ({
       onChange={onChange}
       onClick={handleTextboxClick}
       autoFocus={autoFocus}
+      required={required}
     />
   );
 };

@@ -80,7 +80,7 @@ const editable: Element<Attributes>['editable'] = {
       (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewHref(event.target.value);
 
-        if (event.target.value === '') {
+        if (event.target.checkValidity()) {
           setErrors(null);
         }
       },
