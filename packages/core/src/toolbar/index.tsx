@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Editor, Range, Path } from 'slate';
+import { Editor, Range, Path, Node } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
+import { Config } from '../config';
 import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
-// import { Toolbox } from '../toolbox';
+import { Toolbox } from '../toolbox';
 import { Toolmenu } from '../toolmenu';
 import { styles } from './index.css';
 
@@ -31,6 +32,8 @@ const ButtonBox: React.FC<ButtonBoxProps> = ({
   );
 };
 
+export type CustomNode = Config['elements'][number] | Config['texts'][number];
+
 export type ToolbarProps = {};
 
 export const Toolbar: React.FC<ToolbarProps> = () => {
@@ -45,14 +48,28 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const popoverLink = usePopover<HTMLLIElement>();
   const popoverColor = usePopover<HTMLLIElement>();
   const popoverMore = usePopover<HTMLLIElement>();
-  const [path, setPath] = useState<Path>([]);
-  const [blockName, setBlockName] = useState('テキスト');
+  const [path, setPath] = useState<Path>([0]);
+  const [node, setNode] = useState<Node | CustomNode | null>(null);
+  const [blockIcon, setBlockIcon] = useState<React.ReactNode | null>(null);
+  const [blockName, setBlockName] = useState('ブロックを選択');
+
+  const hasToolbox = useCallback(
+    (node: Node | CustomNode | null): node is CustomNode => {
+      return (
+        node !== null && Object.prototype.hasOwnProperty.call(node, 'toolbox')
+      );
+    },
+    [node]
+  );
 
   const handleTransformClick = useCallback(() => {
     popoverTransform.open();
   }, [popoverTransform]);
   const handleTransformDone = useCallback(() => {
     popoverTransform.close();
+    popover.close();
+    setBlockName('ブロックを選択');
+    setBlockIcon(null);
   }, [popoverTransform]);
 
   const handleLinkClick = useCallback(() => {
@@ -74,13 +91,16 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   }, [popoverMore]);
   const handleMoreDone = useCallback(() => {
     popoverMore.close();
+    popover.close();
   }, [popoverMore]);
 
   useEffect(() => {
     const { selection } = editor;
 
     if (selection?.anchor !== undefined) {
-      setPath(Path.parent(selection.anchor.path));
+      const path = selection.anchor.path;
+      setPath(path);
+      setNode(Node.get(editor, Path.parent(path)));
     }
 
     const isToShow = (() => {
@@ -114,6 +134,13 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   }, [isFocused, editor.selection]);
 
   useEffect(() => {
+    if (hasToolbox(node) && node.toolbox !== undefined) {
+      setBlockIcon(<node.toolbox.Icon />);
+      setBlockName(node.toolbox.title);
+    }
+  }, [node]);
+
+  useEffect(() => {
     if (isVisible) {
       popover.open();
     } else {
@@ -143,11 +170,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
             <li className={styles.item} ref={popoverTransform.targetRef}>
               <ButtonBox
                 name={blockName}
-                featureIcon={
-                  <svg viewBox="0 0 20 20">
-                    <path d="M9 16V6H5V4H15V6H11V16H9Z" fill="currentColor" />
-                  </svg>
-                }
+                featureIcon={blockIcon}
                 onClick={handleTransformClick}
               />
             </li>
@@ -201,13 +224,17 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           </ul>
         </div>
       </Popover>
-      {/*
       <Popover {...popoverTransform.bind}>
-        <Toolbox path={path} onDone={handleTransformDone} />
+        <Toolbox
+          path={path}
+          onDone={handleTransformDone}
+          node={node}
+          setNode={setNode}
+          isInToolbar
+        />
       </Popover>
-      */}
       <Popover {...popoverMore.bind}>
-        <Toolmenu path={path} onDone={handleMoreDone} />
+        <Toolmenu path={Path.parent(path)} onDone={handleMoreDone} />
       </Popover>
     </>
   );

@@ -49,7 +49,8 @@ export const styles = {
   featureIcon: style({
     selectors: {
       [`${editorStyles.root} &`]: {
-        display: 'block',
+        display: 'flex',
+        placeItems: 'center',
         width: 20,
         height: 20,
         color: themeVars.color.brand,
