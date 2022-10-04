@@ -20,7 +20,6 @@ import {
   HeadRenderer as ToggleHeadRenderer,
   BodyRenderer as ToggleBodyRenderer,
 } from '@bento-editor/element-toggle';
-import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import {
   list as elementList,
   listItem as elementListItem,
@@ -33,6 +32,9 @@ import {
   TodoListRenderer,
   TodoListItemRenderer,
 } from '@bento-editor/element-list';
+import elementLink, { LinkRenderer } from '@bento-editor/element-link';
+import elementEmbed, { EmbedRenderer } from '@bento-editor/element-embed';
+import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
 import { useCallback, useMemo, useState } from 'react';
@@ -50,6 +52,8 @@ const Home: NextPage = () => {
         elementTodoListItem,
         elementNote,
         elementCallout,
+        elementLink,
+        elementEmbed,
         elementDivider,
         elementQuote,
         elementToggleContainer,
@@ -376,6 +380,26 @@ const Home: NextPage = () => {
           },
         ],
       },
+      {
+        type: 'link',
+        attributes: {},
+        children: [
+          {
+            type: 'format',
+            text: '',
+          }
+        ]
+      },
+      {
+        type: 'embed',
+        attributes: {},
+        children: [
+          {
+            type: 'format',
+            text: '',
+          }
+        ]
+      },
     ],
     []
   );
@@ -403,6 +427,8 @@ const Home: NextPage = () => {
       toggle: ToggleContainerRenderer,
       'toggle-head': ToggleHeadRenderer,
       'toggle-body': ToggleBodyRenderer,
+      link: LinkRenderer,
+      embed: EmbedRenderer,
       format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),

@@ -24,7 +24,7 @@
     "build": "vite build && tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
     "test": "jest"
   },
-  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/element-heading",
+  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/element-note",
   "bugs": {
     "url": "https://github.com/cam-inc/bento/issues"
   },

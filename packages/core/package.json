@@ -53,6 +53,7 @@
     "@types/jest": "^28.1.1",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/validator": "^13.7.7",
     "@vanilla-extract/vite-plugin": "^3.3.0",
     "jest": "^28.1.1",
     "ts-jest": "^28.0.5",
@@ -60,6 +61,7 @@
     "vite": "^2.9.14"
   },
   "dependencies": {
+    "@rmwc/switch": "^8.0.1",
     "just-debounce-it": "^3.1.1",
     "just-deep-map-values": "^1.1.1",
     "just-extend": "^6.1.1",
@@ -67,7 +69,8 @@
     "react-dnd-html5-backend": "^16.0.1",
     "recoil": "^0.7.5",
     "store2": "^2.14.2",
-    "type-fest": "^2.18.1"
+    "type-fest": "^2.18.1",
+    "validator": "^13.7.0"
   },
   "peerDependencies": {
     "@vanilla-extract/css": "^1.7.2",

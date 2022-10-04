@@ -1,7 +1,7 @@
 import { Element } from '@bento-editor/core';
 
 export type Attributes = {
-  isOpen: boolean;
+  isOpen?: boolean;
 };
 
 const attributes: Element<Attributes>['attributes'] = {

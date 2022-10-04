@@ -15,6 +15,8 @@
     "@bento-editor/element-divider": "*",
     "@bento-editor/element-quote": "*",
     "@bento-editor/element-toggle": "*",
+    "@bento-editor/element-link": "*",
+    "@bento-editor/element-embed": "*",
     "@bento-editor/text-format": "*",
     "@bento-editor/text-emoji": "*",
     "next": "^12.2.4",

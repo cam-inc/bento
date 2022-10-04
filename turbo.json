@@ -33,6 +33,12 @@
     "@bento-editor/element-toggle#build": {
       "dependsOn": ["@bento-editor/core#build"]
     },
+    "@bento-editor/element-link#build": {
+      "dependsOn": ["@bento-editor/core#build"]
+    },
+    "@bento-editor/element-embed#build": {
+      "dependsOn": ["@bento-editor/core#build"]
+    },
     "@bento-editor/text-format#build": {
       "dependsOn": ["@bento-editor/core#build"]
     },
