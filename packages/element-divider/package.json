@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-divider",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "TODO",
   "keywords": [
     "TODO"
@@ -56,6 +56,6 @@
     "vite": "^2.9.14"
   },
   "peerDependencies": {
-    "@bento-editor/core": "0.0.5"
+    "@bento-editor/core": "0.0.6"
   }
 }

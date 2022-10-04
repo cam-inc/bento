@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/text-format",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "TODO",
   "keywords": ["TODO"],
   "types": "./dist/types/index.d.ts",
@@ -54,6 +54,6 @@
   },
   "peerDependencies": {
     "@vanilla-extract/css": "^1.7.2",
-    "@bento-editor/core": "0.0.5"
+    "@bento-editor/core": "0.0.6"
   }
 }
