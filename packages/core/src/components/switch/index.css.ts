@@ -6,6 +6,7 @@ export const styles = {
     vars: {
       '--mdc-theme-secondary': themeVars.color.brand,
       '--mdc-theme-on-surface': themeVars.color.surfaceOn,
+      '--mdc-theme-surface': themeVars.color.surface,
     },
   }),
 };
