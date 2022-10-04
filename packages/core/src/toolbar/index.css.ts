@@ -36,4 +36,46 @@ export const styles = {
       },
     },
   }),
+  buttonBox: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        display: 'flex',
+        placeItems: 'center',
+        fontSize: themeVars.fontSize.label.medium,
+        whiteSpace: 'nowrap',
+      },
+    },
+  }),
+  featureIcon: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        display: 'block',
+        width: 20,
+        height: 20,
+        color: themeVars.color.brand,
+        marginRight: themeVars.space[1],
+      },
+    },
+  }),
+  dropDownIcon: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        display: 'block',
+        width: 20,
+        height: 20,
+        color: themeVars.color.backgroundOnSlight,
+        marginLeft: themeVars.space[1],
+      },
+    },
+  }),
+  moreButton: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        display: 'block',
+        width: 20,
+        height: 20,
+        color: themeVars.color.backgroundOnSlight,
+      },
+    },
+  }),
 };
