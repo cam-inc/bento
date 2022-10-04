@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Editor, Range } from 'slate';
+import { Editor, Range, Path } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
+// import { Toolbox } from '../toolbox';
+import { Toolmenu } from '../toolmenu';
 import { styles } from './index.css';
 
 type ButtonBoxProps = {
@@ -39,8 +41,47 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const [rect, setRect] = useState<DOMRect>();
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
+  const popoverTransform = usePopover<HTMLLIElement>();
+  const popoverLink = usePopover<HTMLLIElement>();
+  const popoverColor = usePopover<HTMLLIElement>();
+  const popoverMore = usePopover<HTMLLIElement>();
+  const [path, setPath] = useState<Path>([]);
+  const [blockName, setBlockName] = useState('テキスト');
+
+  const handleTransformClick = useCallback(() => {
+    popoverTransform.open();
+  }, [popoverTransform]);
+  const handleTransformDone = useCallback(() => {
+    popoverTransform.close();
+  }, [popoverTransform]);
+
+  const handleLinkClick = useCallback(() => {
+    popoverLink.open();
+  }, [popoverLink]);
+  const handleLinkDone = useCallback(() => {
+    popoverLink.close();
+  }, [popoverLink]);
+
+  const handleColorClick = useCallback(() => {
+    popoverColor.open();
+  }, [popoverColor]);
+  const handleColorDone = useCallback(() => {
+    popoverColor.close();
+  }, [popoverColor]);
+
+  const handleMoreClick = useCallback(() => {
+    popoverMore.open();
+  }, [popoverMore]);
+  const handleMoreDone = useCallback(() => {
+    popoverMore.close();
+  }, [popoverMore]);
+
   useEffect(() => {
     const { selection } = editor;
+
+    if (selection?.anchor !== undefined) {
+      setPath(Path.parent(selection.anchor.path));
+    }
 
     const isToShow = (() => {
       if (
@@ -83,14 +124,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
   const config = useConfigGlobalStateValue();
 
-  const handleTransformClick = useCallback(() => {}, []);
-
-  const handleLinkClick = useCallback(() => {}, []);
-
-  const handleColorClick = useCallback(() => {}, []);
-
-  const handleMoreClick = useCallback(() => {}, []);
-
   return (
     <>
       <div
@@ -107,9 +140,9 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
       <Popover {...popover.bind}>
         <div className={styles.root}>
           <ul className={styles.list}>
-            <li className={styles.item}>
+            <li className={styles.item} ref={popoverTransform.targetRef}>
               <ButtonBox
-                name="テキスト"
+                name={blockName}
                 featureIcon={
                   <svg viewBox="0 0 20 20">
                     <path d="M9 16V6H5V4H15V6H11V16H9Z" fill="currentColor" />
@@ -118,7 +151,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
                 onClick={handleTransformClick}
               />
             </li>
-            <li className={styles.item}>
+            <li className={styles.item} ref={popoverLink.targetRef}>
               <ButtonBox
                 name="リンク"
                 featureIcon={
@@ -142,7 +175,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
                   </React.Fragment>
                 )
             )}
-            <li className={styles.item}>
+            <li className={styles.item} ref={popoverColor.targetRef}>
               <ButtonBox
                 featureIcon={
                   <svg viewBox="0 0 20 20">
@@ -155,7 +188,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
                 onClick={handleColorClick}
               />
             </li>
-            <li className={styles.item}>
+            <li className={styles.item} ref={popoverMore.targetRef}>
               <button className={styles.moreButton} onClick={handleMoreClick}>
                 <svg viewBox="0 0 20 20">
                   <path
@@ -167,6 +200,14 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
             </li>
           </ul>
         </div>
+      </Popover>
+      {/*
+      <Popover {...popoverTransform.bind}>
+        <Toolbox path={path} onDone={handleTransformDone} />
+      </Popover>
+      */}
+      <Popover {...popoverMore.bind}>
+        <Toolmenu path={path} onDone={handleMoreDone} />
       </Popover>
     </>
   );
