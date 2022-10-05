@@ -8,13 +8,14 @@ import { Toolbox } from '../toolbox';
 import { Toolmenu } from '../toolmenu';
 import { styles } from './index.css';
 
-type ButtonBoxProps = {
+export type CustomNode = Config['elements'][number] | Config['texts'][number];
+
+export type ButtonBoxProps = {
   featureIcon: React.ReactNode;
   onClick: React.MouseEventHandler;
   name?: string;
 };
-
-const ButtonBox: React.FC<ButtonBoxProps> = ({
+export const ButtonBox: React.FC<ButtonBoxProps> = ({
   featureIcon,
   onClick,
   name,
@@ -32,10 +33,7 @@ const ButtonBox: React.FC<ButtonBoxProps> = ({
   );
 };
 
-export type CustomNode = Config['elements'][number] | Config['texts'][number];
-
 export type ToolbarProps = {};
-
 export const Toolbar: React.FC<ToolbarProps> = () => {
   const editor = useSlate();
   const isFocused = useFocused();
@@ -45,7 +43,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const popoverTransform = usePopover<HTMLLIElement>();
-  const popoverLink = usePopover<HTMLLIElement>();
   const popoverColor = usePopover<HTMLLIElement>();
   const popoverMore = usePopover<HTMLLIElement>();
   const [path, setPath] = useState<Path>([0]);
@@ -71,13 +68,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     setBlockName('ブロックを選択');
     setBlockIcon(null);
   }, [popoverTransform]);
-
-  const handleLinkClick = useCallback(() => {
-    popoverLink.open();
-  }, [popoverLink]);
-  const handleLinkDone = useCallback(() => {
-    popoverLink.close();
-  }, [popoverLink]);
 
   const handleColorClick = useCallback(() => {
     popoverColor.open();
@@ -172,20 +162,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
                 name={blockName}
                 featureIcon={blockIcon}
                 onClick={handleTransformClick}
-              />
-            </li>
-            <li className={styles.item} ref={popoverLink.targetRef}>
-              <ButtonBox
-                name="リンク"
-                featureIcon={
-                  <svg viewBox="0 0 20 20">
-                    <path
-                      d="M9.5 18C8.222 18 7.15267 17.545 6.292 16.635C5.43067 15.7257 5 14.639 5 13.375V5.271C5 4.36833 5.316 3.59733 5.948 2.958C6.58 2.31933 7.34733 2 8.25 2C9.18067 2 9.955 2.33667 10.573 3.01C11.191 3.684 11.5 4.47933 11.5 5.396V13.021C11.5 13.5763 11.302 14.045 10.906 14.427C10.51 14.809 10.0413 15 9.5 15C8.91667 15 8.43733 14.7917 8.062 14.375C7.68733 13.9583 7.5 13.4723 7.5 12.917V5H9V13.021C9 13.1597 9.04867 13.2777 9.146 13.375C9.24333 13.4723 9.36133 13.521 9.5 13.521C9.63867 13.521 9.75667 13.4723 9.854 13.375C9.95133 13.2777 10 13.1597 10 13.021V5.271C10 4.785 9.83 4.36833 9.49 4.021C9.14933 3.67367 8.736 3.5 8.25 3.5C7.764 3.5 7.35067 3.677 7.01 4.031C6.67 4.385 6.5 4.812 6.5 5.312V13.521C6.5 14.3543 6.795 15.059 7.385 15.635C7.97567 16.2117 8.68067 16.5 9.5 16.5C10.3613 16.5 11.0767 16.1943 11.646 15.583C12.2153 14.9723 12.5 14.2503 12.5 13.417V5H14V13.521C14 14.771 13.566 15.83 12.698 16.698C11.83 17.566 10.764 18 9.5 18Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                }
-                onClick={handleLinkClick}
               />
             </li>
             {config.texts.map(
