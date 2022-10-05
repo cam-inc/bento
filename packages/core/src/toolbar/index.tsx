@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Editor, Range, Path, Node } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
-import { Config } from '../config';
+import { Config, PickRequired } from '../config';
 import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
 import { Toolbox } from '../toolbox';
@@ -50,7 +50,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const [blockName, setBlockName] = useState('ブロックを選択');
 
   const hasToolbox = useCallback(
-    (node: Node | CustomNode | null): node is CustomNode => {
+    (node: Node | CustomNode | PickRequired<CustomNode, "toolbox"> | null): node is PickRequired<CustomNode, "toolbox"> => {
       return (
         node !== null && Object.prototype.hasOwnProperty.call(node, 'toolbox')
       );
@@ -116,7 +116,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   }, [isFocused, editor.selection]);
 
   useEffect(() => {
-    if (hasToolbox(node) && node.toolbox !== undefined) {
+    if (hasToolbox(node)) {
       setBlockIcon(<node.toolbox.Icon />);
       setBlockName(node.toolbox.title);
     }

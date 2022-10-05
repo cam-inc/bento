@@ -99,3 +99,7 @@ export type Config = {
   texts: Text[];
   themeToken: PartialDeep<ThemeToken>;
 };
+
+export type PickRequired<T extends Record<string, any>, K extends keyof T> = {
+  [P in keyof Omit<T, K>]: Omit<T, K>[P];
+} & { [P in K]-?: T[P] };
