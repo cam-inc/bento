@@ -190,7 +190,7 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
       }
     }
     return PLACEMENT.BOTTOM_LEFT;
-  }, [targetRef, screen, isOpened]);
+  }, [targetRef, screen.width, screen.height, isHorizontal, /* isOpened is required for re-rendering*/isOpened]);
 
   const space = 8;
 
@@ -255,7 +255,7 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
         break;
     }
     return position;
-  }, [targetRef, placement, isOpened]);
+  }, [targetRef, placement, /* isOpened is required for re-rendering*/isOpened]);
 
   const content = useMemo<JSX.Element | null>(() => {
     switch (placement) {
@@ -468,7 +468,7 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
         );
       }
     }
-  }, [placement, position, screen.width, screen.height, children]);
+  }, [placement, position.x, position.y, screen.width, screen.height, children]);
 
   if (!isOpened) {
     return null;

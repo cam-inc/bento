@@ -47,13 +47,6 @@ export const styles = {
       },
     },
   }),
-  contentJustifyStart: style({
-    selectors: {
-      [`${editorStyles.root} &`]: {
-        justifyContent: 'flex-start',
-      },
-    },
-  }),
   contentJustifyCenter: style({
     selectors: {
       [`${editorStyles.root} &`]: {
