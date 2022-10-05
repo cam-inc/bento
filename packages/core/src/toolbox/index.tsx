@@ -145,7 +145,7 @@ const Item: React.FC<{
     }
   }, [editor, path, node, onDone]);
 
-  const popover = usePopover<HTMLDivElement>();
+  const popover = usePopover<HTMLDivElement>({ isHorizontal: true });
   const handleMouseEnter = useCallback(() => {
     popover.open();
   }, [popover]);

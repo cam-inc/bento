@@ -37,6 +37,11 @@ export const defaultThemeToken = {
       small: '12px',
     },
   },
+  boxShadow: {
+    level: {
+      '1': '0px 1px 2px rgba(81, 86, 169, 0.3), 0px 2px 6px rgba(81, 86, 169, 0.15)',
+    },
+  },
   color: {
     // Same values as the ones of light mode.
     background: '#FFFFFF',
