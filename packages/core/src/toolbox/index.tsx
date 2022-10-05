@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo } from 'react';
+import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { Path, Transforms, Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { Button } from '../components/button';
@@ -8,18 +8,30 @@ import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
 import { ToolboxPreview } from './preview';
 import { styles } from './index.css';
+import { CustomNode } from '../toolbar';
 
 export type ToolboxProps = {
   path: Path;
   onDone: () => void;
+  node?: Node | CustomNode | null;
+  isInToolbar?: boolean;
+  setNode?: React.Dispatch<React.SetStateAction<Node | CustomNode | null>>;
 };
-export const Toolbox: React.FC<ToolboxProps> = ({ path, onDone }) => {
+export const Toolbox: React.FC<ToolboxProps> = ({
+  path,
+  onDone,
+  node,
+  isInToolbar,
+  setNode,
+}) => {
   const { elements, texts } = useConfigGlobalStateValue();
-
   const [searchValue, setSearchValue] = useState('');
-  const handleSearchValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value);
-  }, []);
+  const handleSearchValueChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.currentTarget.value);
+    },
+    []
+  );
 
   const nodes = useMemo(() => {
     const textsWithToolbox = texts.filter((text) =>
@@ -32,7 +44,16 @@ export const Toolbox: React.FC<ToolboxProps> = ({ path, onDone }) => {
     return nodes.filter((node) => {
       return node.toolbox?.title.includes(searchValue);
     });
-  }, [elements, texts, searchValue])
+  }, [elements, texts, searchValue]);
+
+  useEffect(() => {
+    if (node != null && setNode !== undefined) {
+      const found = nodes.find((n) => n.type === (node as CustomNode).type);
+      if (found !== undefined) {
+        setNode(found);
+      }
+    }
+  }, [nodes, node, setNode]);
 
   return (
     <div className={styles.root}>
@@ -40,13 +61,22 @@ export const Toolbox: React.FC<ToolboxProps> = ({ path, onDone }) => {
         <div className={styles.searchIcon}>
           <SearchIcon />
         </div>
-        <input className={styles.searchInput} value={searchValue} onChange={handleSearchValueChange} />
+        <input
+          className={styles.searchInput}
+          value={searchValue}
+          onChange={handleSearchValueChange}
+        />
       </div>
       <div>
         <ul>
           {nodes.map((node) => (
             <li key={node.type}>
-              <Item path={path} node={node} onDone={onDone} />
+              <Item
+                path={path}
+                node={node}
+                onDone={onDone}
+                isInToolbar={!!isInToolbar}
+              />
             </li>
           ))}
         </ul>
@@ -58,9 +88,24 @@ export const Toolbox: React.FC<ToolboxProps> = ({ path, onDone }) => {
 const Item: React.FC<{
   path: Path;
   node: Config['elements'][number] | Config['texts'][number];
-  onDone: () => void;
-}> = ({ path, node, onDone }) => {
+  onDone: (params?: {
+    node: Config['elements'][number] | Config['texts'][number];
+  }) => void;
+  isInToolbar: boolean;
+}> = ({ path, node, onDone, isInToolbar }) => {
   const editor = useSlate();
+
+  const findRootPath = useCallback(
+    (path: Path): Path => {
+      if (path.length > 1) {
+        return findRootPath(Path.parent(path));
+      } else {
+        return path;
+      }
+    },
+    [path]
+  );
+
   const handleClick = useCallback(() => {
     const nextPath = Path.next(path);
     if (node.editable.defaultValue === undefined) {
@@ -69,18 +114,35 @@ const Item: React.FC<{
     const defaultValue = Array.isArray(node.editable.defaultValue)
       ? { children: node.editable.defaultValue }
       : { text: node.editable.defaultValue };
-    Transforms.insertNodes(
-      editor,
-      {
-        type: node.type,
-        attributes: node.attributes.defaultValue,
-        ...defaultValue,
-      } as Node,
-      {
-        at: nextPath,
-      }
-    );
-    onDone();
+    if (isInToolbar) {
+      const rootPath = findRootPath(path);
+      Transforms.removeNodes(editor, { at: rootPath });
+      Transforms.insertNodes(
+        editor,
+        {
+          type: node.type,
+          attributes: node.attributes.defaultValue,
+          ...defaultValue,
+        } as Node,
+        {
+          at: rootPath,
+        }
+      );
+      onDone();
+    } else {
+      Transforms.insertNodes(
+        editor,
+        {
+          type: node.type,
+          attributes: node.attributes.defaultValue,
+          ...defaultValue,
+        } as Node,
+        {
+          at: nextPath,
+        }
+      );
+      onDone();
+    }
   }, [editor, path, node, onDone]);
 
   const popover = usePopover<HTMLDivElement>({ isHorizontal: true });

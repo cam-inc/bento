@@ -1,3 +1,4 @@
+import { themeVars } from '@bento-editor/core';
 import { style } from '@vanilla-extract/css';
 
 export const styles = {
@@ -16,5 +17,9 @@ export const styles = {
   inherit: style({
     fontWeight: 'inherit',
     fontStyle: 'inherit',
+  }),
+  href: style({
+    color: themeVars.color.brand,
+    textDecoration: `underline 0.1em ${themeVars.color.brand}`,
   }),
 };

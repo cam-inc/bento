@@ -7,3 +7,4 @@ export * from './renderer';
 export * from './utils';
 export * from './portals';
 export * from './components';
+export * from './toolbar';
