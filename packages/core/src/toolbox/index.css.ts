@@ -6,11 +6,14 @@ const root = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       width: 260,
+      maxHeight: '100%',
       backgroundColor: themeVars.color.surface,
       color: themeVars.color.surfaceOn,
       borderRadius: themeVars.radius.medium,
       border: `1px solid ${themeVars.color.surfaceOnSlight}`,
-      overflow: 'hidden',
+      boxShadow: themeVars.boxShadow.level['1'],
+      overflow: 'scroll',
+      overscrollBehavior: 'contain',
     }
   }
 });

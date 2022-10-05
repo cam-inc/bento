@@ -1,16 +1,75 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
+import { styles as editorStyles } from '../../editor/index.css';
 
 export const styles = {
   root: style({
-    pointerEvents: 'auto',
-    position: 'absolute',
-    width: 0,
-    height: 0,
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        position: 'absolute',
+        width: 0,
+        height: 0,
+      },
+    },
+  }),
+  contentWrapper: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        position: 'absolute',
+      },
+    },
   }),
   content: style({
-    padding: '8px',
-    border: '1px solid gray',
-    overflow: 'scroll',
-    overscrollBehavior: 'contain',
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        height: '100%',
+        display: 'flex',
+      },
+    },
+  }),
+  contentAlignStart: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        alignItems: 'flex-start',
+      },
+    },
+  }),
+  contentAlignCenter: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        alignItems: 'center',
+      },
+    },
+  }),
+  contentAlignEnd: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        alignItems: 'flex-end',
+      },
+    },
+  }),
+  contentJustifyStart: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        justifyContent: 'flex-start',
+      },
+    },
+  }),
+  contentJustifyCenter: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        justifyContent: 'center',
+      },
+    },
+  }),
+  contentJustifyEnd: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        justifyContent: 'flex-end',
+      },
+    },
   }),
 };
+
+globalStyle(`${styles.content} > *`, {
+  pointerEvents: 'auto',
+});
