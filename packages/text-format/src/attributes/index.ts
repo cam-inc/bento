@@ -5,6 +5,9 @@ export type Attributes = {
   italic?: boolean;
   strikethrough?: boolean;
   underline?: boolean;
+  href?: string;
+  target?: React.HTMLAttributeAnchorTarget;
+  color?: string;
 };
 
 const attributes: Text<Attributes>['attributes'] = {

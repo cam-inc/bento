@@ -1,5 +1,5 @@
-import React from 'react';
-import cn from 'classnames';
+import React, { useMemo } from 'react';
+import classnames from 'classnames';
 import { RendererProps } from '@bento-editor/core';
 import defaultAttributes, { Attributes } from '../attributes';
 import { styles } from './index.css';
@@ -16,5 +16,34 @@ export const TextFormatRenderer: React.FC<RendererProps<Attributes>> = ({
       classNames.push(styles[prop as keyof typeof styles]);
     }
   }
-  return <span className={cn(...classNames)}>{children}</span>;
+
+  const isLink = useMemo(() => {
+    return (
+      attributes?.href !== undefined &&
+      attributes.href !== '' &&
+      attributes.target !== undefined
+    );
+  }, [attributes.href, attributes.target]);
+
+  return isLink ? (
+    <a
+      href={attributes.href}
+      target={attributes.target}
+      className={styles.href}
+    >
+      <span
+        className={classnames(...classNames)}
+        style={{ color: attributes.color }}
+      >
+        {children}
+      </span>
+    </a>
+  ) : (
+    <span
+      className={classnames(...classNames)}
+      style={{ color: attributes.color }}
+    >
+      {children}
+    </span>
+  );
 };

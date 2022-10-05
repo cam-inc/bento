@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { /*themeVars,*/ EditorClassName } from '@bento-editor/core';
+import { EditorClassName, themeVars } from '@bento-editor/core';
 
 export const styles = {
   bold: style({
@@ -27,6 +27,14 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         borderBottom: '0.05em solid',
+      },
+    },
+  }),
+  href: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        color: themeVars.color.brand,
+        borderBottom: `solid 0.1em ${themeVars.color.brand}`,
       },
     },
   }),
