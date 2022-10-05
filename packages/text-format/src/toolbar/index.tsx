@@ -8,7 +8,7 @@ import {
 } from '@bento-editor/core';
 import React, { useCallback, useState } from 'react';
 import attributes, { Attributes } from '../attributes';
-import { Form, FormErrors } from '../components';
+import { ColorPicker, Form, FormErrors } from '../components';
 import { styles } from './index.css';
 
 const toolbar: Text<Attributes>['toolbar'] = {
@@ -35,9 +35,6 @@ const toolbar: Text<Attributes>['toolbar'] = {
     const handleLinkClick = useCallback(() => {
       popoverLink.open();
     }, [popoverLink]);
-    const handleLinkDone = useCallback(() => {
-      popoverLink.close();
-    }, [popoverLink]);
 
     const [openInNew, setOpenInNew] = useState(
       attributes.defaultValue.target !== undefined
@@ -62,7 +59,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
             },
             { match: (n) => helpers.Text.isText(n), split: true }
           );
-          handleLinkDone();
+          popoverLink.close();
         } else {
           setErrors({
             reason: 'Invalid url.',
@@ -70,7 +67,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
           });
         }
       },
-      [editor, href, openInNew, handleLinkDone]
+      [editor, href, openInNew, popoverLink]
     );
     const handleFormTextboxChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,10 +89,32 @@ const toolbar: Text<Attributes>['toolbar'] = {
       []
     );
 
+    const popoverColor = usePopover<HTMLLIElement>();
+    const handleColorClick = useCallback(() => {
+      popoverColor.open();
+    }, [popoverColor]);
+
+    const [color] = useState(attributes.defaultValue.color ?? '#ffffff');
+    const handleColorChange = useCallback(
+      (newColor: string) => {
+        helpers.Transforms.setNodes(
+          editor,
+          {
+            attributes: {
+              color: newColor,
+            },
+          },
+          { match: (n) => helpers.Text.isText(n), split: true }
+        );
+        // popoverColor.close();
+      },
+      [popoverColor]
+    );
+
     return (
       <>
         <ul className={styles.list}>
-          <li ref={popoverLink.targetRef}>
+          <li ref={popoverLink.targetRef} className={styles.link}>
             <ButtonBox
               name="リンク"
               featureIcon={
@@ -152,6 +171,19 @@ const toolbar: Text<Attributes>['toolbar'] = {
               </svg>
             </button>
           </li>
+          <li ref={popoverColor.targetRef} className={styles.color}>
+            <ButtonBox
+              featureIcon={
+                <svg viewBox="0 0 20 20">
+                  <path
+                    d="M1.625 17.5V14.083H18.375V17.5H1.625ZM4.562 11.667L8.938 0H11.062L15.438 11.667H13.354L12.333 8.771H7.667L6.646 11.667H4.562ZM8.292 7H11.708L10.042 2.312H9.958L8.292 7Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              }
+              onClick={handleColorClick}
+            />
+          </li>
         </ul>
         <Popover {...popoverLink.bind}>
           <Form
@@ -168,6 +200,9 @@ const toolbar: Text<Attributes>['toolbar'] = {
             textboxFocus={true}
             errors={errors}
           />
+        </Popover>
+        <Popover {...popoverColor.bind}>
+          <ColorPicker color={color} onChange={handleColorChange} />
         </Popover>
       </>
     );

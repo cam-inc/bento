@@ -6,7 +6,7 @@ import { styles } from './index.css';
 
 const editable: Text<Attributes>['editable'] = {
   Component: (props) => {
-    const { bold, italic, strikethrough, underline, href, target } = {
+    const { bold, italic, strikethrough, underline, href, target, color } = {
       ...attributes.defaultValue,
       ...props.text.attributes,
     };
@@ -40,6 +40,7 @@ const editable: Text<Attributes>['editable'] = {
             [styles.strikethrough]: strikethrough,
             [styles.underline]: underline,
           })}
+          style={{ color }}
         >
           {props.children}
         </span>
@@ -53,6 +54,7 @@ const editable: Text<Attributes>['editable'] = {
           [styles.strikethrough]: strikethrough,
           [styles.underline]: underline,
         })}
+        style={{ color }}
       >
         {props.children}
       </span>

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { /*themeVars,*/ EditorClassName, themeVars } from '@bento-editor/core';
+import { EditorClassName, themeVars } from '@bento-editor/core';
 
 export const styles = {
   bold: style({

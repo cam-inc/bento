@@ -7,6 +7,7 @@ export type Attributes = {
   underline?: boolean;
   href?: string;
   target?: React.HTMLAttributeAnchorTarget;
+  color?: string;
 };
 
 const attributes: Text<Attributes>['attributes'] = {

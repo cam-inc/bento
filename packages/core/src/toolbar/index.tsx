@@ -43,7 +43,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const popoverTransform = usePopover<HTMLLIElement>();
-  const popoverColor = usePopover<HTMLLIElement>();
   const popoverMore = usePopover<HTMLLIElement>();
   const [path, setPath] = useState<Path>([0]);
   const [node, setNode] = useState<Node | CustomNode | null>(null);
@@ -68,13 +67,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     setBlockName('ブロックを選択');
     setBlockIcon(null);
   }, [popoverTransform]);
-
-  const handleColorClick = useCallback(() => {
-    popoverColor.open();
-  }, [popoverColor]);
-  const handleColorDone = useCallback(() => {
-    popoverColor.close();
-  }, [popoverColor]);
 
   const handleMoreClick = useCallback(() => {
     popoverMore.open();
@@ -174,19 +166,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
                   </React.Fragment>
                 )
             )}
-            <li className={styles.item} ref={popoverColor.targetRef}>
-              <ButtonBox
-                featureIcon={
-                  <svg viewBox="0 0 20 20">
-                    <path
-                      d="M1.625 17.5V14.083H18.375V17.5H1.625ZM4.562 11.667L8.938 0H11.062L15.438 11.667H13.354L12.333 8.771H7.667L6.646 11.667H4.562ZM8.292 7H11.708L10.042 2.312H9.958L8.292 7Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                }
-                onClick={handleColorClick}
-              />
-            </li>
             <li className={styles.item} ref={popoverMore.targetRef}>
               <button className={styles.moreButton} onClick={handleMoreClick}>
                 <svg viewBox="0 0 20 20">

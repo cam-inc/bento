@@ -31,9 +31,19 @@ export const TextFormatRenderer: React.FC<RendererProps<Attributes>> = ({
       target={attributes.target}
       className={styles.href}
     >
-      <span className={classnames(...classNames)}>{children}</span>
+      <span
+        className={classnames(...classNames)}
+        style={{ color: attributes.color }}
+      >
+        {children}
+      </span>
     </a>
   ) : (
-    <span className={classnames(...classNames)}>{children}</span>
+    <span
+      className={classnames(...classNames)}
+      style={{ color: attributes.color }}
+    >
+      {children}
+    </span>
   );
 };
