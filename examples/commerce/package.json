@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@bento-editor/example-commerce",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Commerce example for bento-editor",
   "main": "dist/index.js",
   "scripts": {
