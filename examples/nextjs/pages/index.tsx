@@ -62,6 +62,9 @@ const Home: NextPage = () => {
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
+        editor: {
+          padding: '0',
+        },
         color: {
           /**
          * uncomment this to set colors forcibly no matter it's dark mode or not.
@@ -340,12 +343,12 @@ const Home: NextPage = () => {
       },
       {
         type: 'divider',
-        children: [{ text: '', }],
+        children: [{ text: '' }],
       },
       {
         type: 'quote',
         attributes: {
-          cite: 'google'
+          cite: 'google',
         },
         children: [
           {
@@ -387,8 +390,8 @@ const Home: NextPage = () => {
           {
             type: 'format',
             text: '',
-          }
-        ]
+          },
+        ],
       },
       {
         type: 'embed',
@@ -397,8 +400,8 @@ const Home: NextPage = () => {
           {
             type: 'format',
             text: '',
-          }
-        ]
+          },
+        ],
       },
     ],
     []

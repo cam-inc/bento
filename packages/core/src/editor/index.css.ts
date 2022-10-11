@@ -6,12 +6,12 @@ export const styles = {
     backgroundColor: themeVars.color.background,
     //  fontFamily: vars.font.body,
     position: 'relative',
-    padding: themeVars.space['40'],
+    padding: themeVars.editor.padding,
   }),
   container: style({
     position: 'relative',
   }),
-}
+};
 
 /**
  * Global Styles
@@ -20,7 +20,6 @@ export const styles = {
  * @see: https://tailwindcss.com/docs/preflight
  * @see: https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css
  */
-
 
 // Mimic Modern Normalizer
 // @see: https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css
@@ -39,12 +38,15 @@ Use a better box model (opinionated).
 ::before,
 ::after
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} *,
 ${styles.root} ::before,
-${styles.root} ::after`, {
-  boxSizing: 'border-box'
-});
+${styles.root} ::after`,
+  {
+    boxSizing: 'border-box',
+  }
+);
 
 /**
 1. Correct the line height in all browsers.
@@ -55,14 +57,17 @@ ${styles.root} ::after`, {
 /*
 html
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root}
-`, {
-  lineHeight: 1.15, /* 1 */
-  WebkitTextSizeAdjust: '100%', /* 2 */
-  MozTabSize: 4, /* 3 */
-  tabSize: 4, /* 3 */
-})
+`,
+  {
+    lineHeight: 1.15 /* 1 */,
+    WebkitTextSizeAdjust: '100%' /* 2 */,
+    MozTabSize: 4 /* 3 */,
+    tabSize: 4 /* 3 */,
+  }
+);
 
 /*
 Sections
@@ -77,11 +82,13 @@ Sections
 /*
 body
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root}
-`, {
-  margin: 0, /* 1 */
-  fontFamily: `
+`,
+  {
+    margin: 0 /* 1 */,
+    fontFamily: `
     system-ui,
     -apple-system,
    'Segoe UI',
@@ -90,8 +97,9 @@ ${styles.root}
     Arial,
     sans-serif,
     'Apple Color Emoji',
-    'Segoe UI Emoji'` /* 2 */
-});
+    'Segoe UI Emoji'` /* 2 */,
+  }
+);
 
 /*
 Grouping content
@@ -106,12 +114,15 @@ Grouping content
 /*
 hr
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} hr
-`, {
-  height: 0, /* 1 */
-  color: 'inherit', /* 2 */
-})
+`,
+  {
+    height: 0 /* 1 */,
+    color: 'inherit' /* 2 */,
+  }
+);
 
 /*
 Text-level semantics
@@ -125,11 +136,14 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 /*
 abbr[title]
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} abbr[title]
-`, {
-  textDecoration: 'underline dotted',
-})
+`,
+  {
+    textDecoration: 'underline dotted',
+  }
+);
 
 /**
 Add the correct font weight in Edge and Safari.
@@ -139,12 +153,15 @@ Add the correct font weight in Edge and Safari.
 b,
 strong
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} b,
 ${styles.root} strong
-`, {
-  fontWeight: 'bolder',
-})
+`,
+  {
+    fontWeight: 'bolder',
+  }
+);
 
 /**
 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
@@ -157,22 +174,25 @@ kbd,
 samp,
 pre
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root}code,
 ${styles.root} kbd,
 ${styles.root} samp,
 ${styles.root} pre
-`, {
-  fontFamily: `
+`,
+  {
+    fontFamily: `
     ui-monospace,
     SFMono-Regular,
     Consolas,
     'Liberation Mono',
     Menlo,
     monospace
-  `,/* 1 */
-  fontSize: '1em', /* 2 */
-});
+  ` /* 1 */,
+    fontSize: '1em' /* 2 */,
+  }
+);
 
 /**
 Add the correct font size in all browsers.
@@ -181,11 +201,14 @@ Add the correct font size in all browsers.
 /*
 small
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} small
-`, {
-  fontSize: '80%',
-});
+`,
+  {
+    fontSize: '80%',
+  }
+);
 
 /**
 Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
@@ -195,34 +218,42 @@ Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
 sub,
 sup
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} sub,
 ${styles.root} sup
-`, {
-  fontSize: '75%',
-  lineHeight: 0,
-  position: 'relative',
-  verticalAlign: 'baseline',
-});
+`,
+  {
+    fontSize: '75%',
+    lineHeight: 0,
+    position: 'relative',
+    verticalAlign: 'baseline',
+  }
+);
 
 /*
 sub
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} sub
-`, {
-  bottom: '-0.25em',
-});
-
+`,
+  {
+    bottom: '-0.25em',
+  }
+);
 
 /*
 sup
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} sup
-`, {
-  top: '-0.5em',
-});
+`,
+  {
+    top: '-0.5em',
+  }
+);
 
 /*
 Tabular data
@@ -237,12 +268,15 @@ Tabular data
 /*
 table
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} table
-`, {
-  textIndent: 0, /* 1 */
-  borderColor: 'inherit', /* 2 */
-});
+`,
+  {
+    textIndent: 0 /* 1 */,
+    borderColor: 'inherit' /* 2 */,
+  }
+);
 
 /*
 Forms
@@ -261,18 +295,21 @@ optgroup,
 select,
 textarea
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} button,
 ${styles.root} input,
 ${styles.root} optgroup,
 ${styles.root} select,
 ${styles.root} textarea
-`, {
-  fontFamily: 'inherit', /* 1 */
-  fontSize: '100%', /* 1 */
-  lineHeight: 1.15, /* 1 */
-  margin: 0, /* 2 */
-});
+`,
+  {
+    fontFamily: 'inherit' /* 1 */,
+    fontSize: '100%' /* 1 */,
+    lineHeight: 1.15 /* 1 */,
+    margin: 0 /* 2 */,
+  }
+);
 
 /**
 Remove the inheritance of text transform in Edge and Firefox.
@@ -282,12 +319,15 @@ Remove the inheritance of text transform in Edge and Firefox.
 button,
 select
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} button,
 ${styles.root} select
-`, {
-  textTransform: 'none',
-});
+`,
+  {
+    textTransform: 'none',
+  }
+);
 
 /**
 Correct the inability to style clickable types in iOS and Safari.
@@ -299,14 +339,17 @@ button,
 [type='reset'],
 [type='submit']
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} button,
 ${styles.root} [type='button'],
 ${styles.root} [type='reset'],
 ${styles.root} [type='submit']
-`, {
-  WebkitAppearance: 'button',
-});
+`,
+  {
+    WebkitAppearance: 'button',
+  }
+);
 
 /**
 Remove the inner border and padding in Firefox.
@@ -315,12 +358,15 @@ Remove the inner border and padding in Firefox.
 /*
 ::-moz-focus-inner
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} ::-moz-focus-inner
-`, {
-  borderStyle: 'none',
-  padding: 0,
-});
+`,
+  {
+    borderStyle: 'none',
+    padding: 0,
+  }
+);
 
 /**
 Restore the focus styles unset by the previous rule.
@@ -329,11 +375,14 @@ Restore the focus styles unset by the previous rule.
 /*
 :-moz-focusring
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} :-moz-focusring
-`, {
-  outline: '1px dotted ButtonText',
-});
+`,
+  {
+    outline: '1px dotted ButtonText',
+  }
+);
 
 /**
 Remove the additional ':invalid' styles in Firefox.
@@ -343,11 +392,14 @@ See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d4
 /*
 :-moz-ui-invalid
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} :-moz-ui-invalid
-`, {
-  boxShadow: 'none',
-})
+`,
+  {
+    boxShadow: 'none',
+  }
+);
 
 /**
 Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
@@ -356,11 +408,14 @@ Remove the padding so developers are not caught out when they zero out 'fieldset
 /*
 legend
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} legend
-`, {
-  padding: 0,
-});
+`,
+  {
+    padding: 0,
+  }
+);
 
 /**
 Add the correct vertical alignment in Chrome and Firefox.
@@ -369,11 +424,14 @@ Add the correct vertical alignment in Chrome and Firefox.
 /*
 progress
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} progress
-`, {
-  verticalAlign: 'baseline',
-});
+`,
+  {
+    verticalAlign: 'baseline',
+  }
+);
 
 /**
 Correct the cursor style of increment and decrement buttons in Safari.
@@ -383,12 +441,15 @@ Correct the cursor style of increment and decrement buttons in Safari.
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} ::-webkit-inner-spin-button,
 ${styles.root} ::-webkit-outer-spin-button
-`, {
-  height: 'auto',
-});
+`,
+  {
+    height: 'auto',
+  }
+);
 
 /**
 1. Correct the odd appearance in Chrome and Safari.
@@ -398,12 +459,15 @@ ${styles.root} ::-webkit-outer-spin-button
 /*
 [type='search']
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} [type='search']
-`, {
-  WebkitAppearance: 'textfield', /* 1 */
-  outlineOffset: '-2px', /* 2 */
-});
+`,
+  {
+    WebkitAppearance: 'textfield' /* 1 */,
+    outlineOffset: '-2px' /* 2 */,
+  }
+);
 
 /**
 Remove the inner padding in Chrome and Safari on macOS.
@@ -412,11 +476,14 @@ Remove the inner padding in Chrome and Safari on macOS.
 /*
 ::-webkit-search-decoration
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} ::-webkit-search-decoration
-`, {
-  WebkitAppearance: 'none',
-});
+`,
+  {
+    WebkitAppearance: 'none',
+  }
+);
 
 /**
 1. Correct the inability to style clickable types in iOS and Safari.
@@ -426,12 +493,15 @@ ${styles.root} ::-webkit-search-decoration
 /*
 ::-webkit-file-upload-button
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} ::-webkit-file-upload-button
-`, {
-  WebkitAppearance: 'button', /* 1 */
-  font: 'inherit', /* 2 */
-})
+`,
+  {
+    WebkitAppearance: 'button' /* 1 */,
+    font: 'inherit' /* 2 */,
+  }
+);
 
 /*
 Interactive
@@ -445,11 +515,14 @@ Add the correct display in Chrome and Safari.
 /*
 summary
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} summary
-`, {
-  display: 'list-item',
-});
+`,
+  {
+    display: 'list-item',
+  }
+);
 
 // Mimic Tailwindcss's preflight
 // @see: https://tailwindcss.com/docs/preflight
@@ -470,7 +543,8 @@ figure,
 p,
 pre
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} blockquote,
 ${styles.root} dl,
 ${styles.root} dd,
@@ -484,9 +558,11 @@ ${styles.root} hr,
 ${styles.root} figure,
 ${styles.root} p,
 ${styles.root} pre
-`, {
-  margin: 0,
-});
+`,
+  {
+    margin: 0,
+  }
+);
 
 // @see: https://tailwindcss.com/docs/preflight#headings-are-unstyled
 /*
@@ -497,31 +573,37 @@ h4,
 h5,
 h6
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} h1,
 ${styles.root} h2,
 ${styles.root} h3,
 ${styles.root} h4,
 ${styles.root} h5,
 ${styles.root} h6
-`, {
-  fontSize: 'inherit',
-  fontWeight: 'inherit',
-});
+`,
+  {
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+  }
+);
 
 // @see: https://tailwindcss.com/docs/preflight#lists-are-unstyled
 /*
 ol,
 ul
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} ol,
 ${styles.root} ul
-`, {
-  listStyle: 'none',
-  margin: 0,
-  padding: 0,
-});
+`,
+  {
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+  }
+);
 
 // @see: https://tailwindcss.com/docs/preflight#images-are-block-level
 /*
@@ -534,7 +616,8 @@ iframe,
 embed,
 object
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} img,
 ${styles.root} svg,
 ${styles.root} video,
@@ -543,10 +626,12 @@ ${styles.root} audio,
 ${styles.root} iframe,
 ${styles.root} embed,
 ${styles.root} object
-`, {
-  display: 'block',
-  verticalAlign: 'middle',
-});
+`,
+  {
+    display: 'block',
+    verticalAlign: 'middle',
+  }
+);
 
 // @see: https://tailwindcss.com/docs/preflight#border-styles-are-reset-globally
 /*
@@ -554,31 +639,40 @@ ${styles.root} object
 ::before,
 ::after
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} *,
 ${styles.root} ::before,
 ${styles.root} ::after
-`, {
-  borderWidth: 0,
-  borderStyle: 'solid',
-  borderColor: 'currentColor',
-});
+`,
+  {
+    borderWidth: 0,
+    borderStyle: 'solid',
+    borderColor: 'currentColor',
+  }
+);
 
 // @see: https://tailwindcss.com/docs/preflight#buttons-have-a-default-outline
 /*
 button:focus
 */
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} button:focus
-`, {
-  outline: '1px dotted',
-  //outline: '5px auto -webkit-focus-ring-color',
-});
+`,
+  {
+    outline: '1px dotted',
+    //outline: '5px auto -webkit-focus-ring-color',
+  }
+);
 
 // Bento Specific Normalizer
-globalStyle(`
+globalStyle(
+  `
 ${styles.root} button
-`, {
-  backgroundColor: 'transparent',
-  padding: 0,
-});
+`,
+  {
+    backgroundColor: 'transparent',
+    padding: 0,
+  }
+);
