@@ -7,7 +7,14 @@ import {
 import elementParagraph, {
   ParagraphRenderer,
 } from '@bento-editor/element-paragraph';
-import elementHeading, { HeadingRenderer } from '@bento-editor/element-heading';
+import {
+  level01 as elementHeadingLevel01,
+  level02 as elementHeadingLevel02,
+  level03 as elementHeadingLevel03,
+  Level01Renderer as HeadingLevel01Renderer,
+  Level02Renderer as HeadingLevel02Renderer,
+  Level03Renderer as HeadingLevel03Renderer,
+} from '@bento-editor/element-heading';
 import elementNote, { NoteRenderer } from '@bento-editor/element-note';
 import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
 import elementDivider, { DividerRenderer } from '@bento-editor/element-divider';
@@ -44,7 +51,9 @@ const Home: NextPage = () => {
     () => ({
       elements: [
         elementParagraph,
-        elementHeading,
+        elementHeadingLevel01,
+        elementHeadingLevel02,
+        elementHeadingLevel03,
         elementList,
         elementListItem,
         elementOrderedList,
@@ -94,7 +103,7 @@ const Home: NextPage = () => {
   const initialValue = useMemo<EditorProps['initialValue']>(
     () => [
       {
-        type: 'heading',
+        type: 'heading01',
         children: [
           {
             type: 'format',
@@ -103,28 +112,22 @@ const Home: NextPage = () => {
         ],
       },
       {
-        type: 'heading',
+        type: 'heading02',
         children: [
           {
             type: 'format',
             text: 'heading 2',
           },
         ],
-        attributes: {
-          level: 2,
-        },
       },
       {
-        type: 'heading',
+        type: 'heading03',
         children: [
           {
             type: 'format',
             text: 'heading 3',
           },
         ],
-        attributes: {
-          level: 3,
-        },
       },
       {
         type: 'paragraph',
@@ -420,7 +423,9 @@ const Home: NextPage = () => {
   const renderers = useMemo<Renderers>(
     () => ({
       paragraph: ParagraphRenderer,
-      heading: HeadingRenderer,
+      heading01: HeadingLevel01Renderer,
+      heading02: HeadingLevel02Renderer,
+      heading03: HeadingLevel03Renderer,
       list: ListRenderer,
       'ordered-list': OrderedListRenderer,
       'list-item': ListItemRenderer,
