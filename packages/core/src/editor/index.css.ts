@@ -6,7 +6,7 @@ export const styles = {
     backgroundColor: themeVars.color.background,
     //  fontFamily: vars.font.body,
     position: 'relative',
-    padding: themeVars.space['40'],
+    padding: themeVars.editor.padding,
   }),
   container: style({
     position: 'relative',

@@ -62,6 +62,12 @@ const Home: NextPage = () => {
       ],
       texts: [textFormat, textEmoji],
       themeToken: {
+        /**
+         * uncomment this to set values for the editor.
+        editor: {
+          padding: '160px'
+        },
+        */
         color: {
           /**
          * uncomment this to set colors forcibly no matter it's dark mode or not.
