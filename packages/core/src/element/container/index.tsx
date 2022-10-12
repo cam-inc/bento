@@ -11,7 +11,9 @@ import { Toolbox } from '../../toolbox';
 import { Toolmenu } from '../../toolmenu';
 import { styles } from './index.css';
 
-export type ElementContainerProps = RenderElementProps;
+export type ElementContainerProps = RenderElementProps & {
+  utilsPositionY?: number;
+};
 
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const editor = useSlate();
@@ -124,21 +126,27 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
-        <div className={classnames({
-          [styles.dropArea]: true,
-          [styles.dropAreaDroppable]: aboveCollect.isDroppable,
-          [styles.dropAreaOver]: aboveCollect.isOver,
-        })} ref={aboveDropRef} />
+        <div className={classnames(styles.dropArea, styles.dropAreaAbove)} ref={aboveDropRef}>
+          <div className={classnames({
+            [styles.dropAreaInner]: true,
+            [styles.dropAreaInnerDroppable]: aboveCollect.isDroppable,
+            [styles.dropAreaInnerOver]: aboveCollect.isOver,
+          })} />
+        </div>
         <div className={styles.body} ref={bodyRef}>{props.children}</div>
-        <div className={classnames({
-          [styles.dropArea]: true,
-          [styles.dropAreaDroppable]: belowCollect.isDroppable,
-          [styles.dropAreaOver]: belowCollect.isOver,
-        })} ref={belowDropRef} />
+        <div className={classnames(styles.dropArea, styles.dropAreaBelow)} ref={belowDropRef}>
+          <div className={classnames({
+            [styles.dropAreaInner]: true,
+            [styles.dropAreaInnerDroppable]: belowCollect.isDroppable,
+            [styles.dropAreaInnerOver]: belowCollect.isOver,
+          })} />
+        </div>
         <div contentEditable={false} className={classnames({
           [styles.utilsContainer]: true,
           [styles.utilsContainerOver]: isOver,
-        })}>
+        })} style={{
+          top: `${props.utilsPositionY ?? 0}px`
+        }}>
           <div className={styles.utils}>
             <div ref={popoverToolbox.targetRef}>
               <PlusButton onClick={handlePlusButtonClick} />
