@@ -34,10 +34,13 @@ export const Toolbox: React.FC<ToolboxProps> = ({
   );
 
   const nodes = useMemo(() => {
+    const elementsWithToolbox = elements.filter((element) =>
+      Object.prototype.hasOwnProperty.call(element, 'toolbox')
+    );
     const textsWithToolbox = texts.filter((text) =>
       Object.prototype.hasOwnProperty.call(text, 'toolbox')
     );
-    const nodes = [...elements, ...textsWithToolbox];
+    const nodes = [...elementsWithToolbox, ...textsWithToolbox];
     if (!searchValue) {
       return nodes;
     }
@@ -174,7 +177,7 @@ const Item: React.FC<{
         </Button>
       </div>
       <Popover {...popover.bind}>
-        <ToolboxPreview element={node} />
+        <ToolboxPreview node={node} />
       </Popover>
     </>
   );

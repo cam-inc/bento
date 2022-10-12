@@ -12,11 +12,7 @@ const toolbox: Element['toolbox'] = {
       </svg>
     );
   },
-  Thumb: () => {
-    return <div>TODO</div>;
-  },
-  title: 'Embed',
-  description: 'TODO',
+  title: '埋め込み: PDF, その他',
 };
 
 export default toolbox;
