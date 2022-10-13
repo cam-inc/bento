@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-embed",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "TODO",
   "keywords": [
     "TODO"
@@ -56,7 +56,7 @@
     "vite": "^2.9.14"
   },
   "peerDependencies": {
-    "@bento-editor/core": "0.0.6",
+    "@bento-editor/core": "0.0.7",
     "@vanilla-extract/css": "^1.7.2"
   }
 }

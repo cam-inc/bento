@@ -1,4 +1,4 @@
-## [0.0.6](https://github.com/cam-inc/bento/compare/v0.0.5...v0.0.6) (2022-10-06)
+## [0.0.7](https://github.com/cam-inc/bento/compare/v0.0.6...v0.0.7) (2022-10-13)
 
 
 ### Features
@@ -6,6 +6,7 @@
 * **@bento-editor/block-paragraph:** init ([ee00c3b](https://github.com/cam-inc/bento/commit/ee00c3b4d3eb74a43725f1cae9486ba65ba6be9f))
 * **@bento-editor/core:** custom error / logger / portals ([9365d44](https://github.com/cam-inc/bento/commit/9365d446a21234e12137622d17f98554d10b4e10))
 * **@bento-editor/core:** design system ([4f0c401](https://github.com/cam-inc/bento/commit/4f0c401392d6adc575b42e0b2dc9740e03ce792a))
+* **@bento-editor/core:** design tokens for the editor component ([c4872ff](https://github.com/cam-inc/bento/commit/c4872ffcccf739d615ee56e96ba588b6b77cd8e3))
 * add a constructor accesstor as initializer ([1060015](https://github.com/cam-inc/bento/commit/1060015dfd3d0f2b3cc9d845757be64d599483a1))
 * add an example with declarative-plugin ([40f5d7d](https://github.com/cam-inc/bento/commit/40f5d7db2f24e6529f4ba7edf1ecf22f63e4f054))
 * add example ([2a62eda](https://github.com/cam-inc/bento/commit/2a62eda42cd5a32e7623fafdad2e2fccbbb703a9))
