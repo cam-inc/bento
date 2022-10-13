@@ -18,7 +18,7 @@ export type Renderers = {
 type Props = {
   config: Config;
   renderers: Renderers;
-  data: EditorProps['initialValue'];
+  data: NonNullable<EditorProps['initialValue']>;
 };
 
 const DefaultElementRenderer: React.FC<RendererProps> = ({

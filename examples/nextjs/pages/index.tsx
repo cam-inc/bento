@@ -47,7 +47,7 @@ import type { NextPage } from 'next';
 import { useCallback, useMemo, useState } from 'react';
 
 const Home: NextPage = () => {
-  const config = useMemo<EditorProps['config']>(
+  const config = useMemo<NonNullable<EditorProps['config']>>(
     () => ({
       elements: [
         elementParagraph,
@@ -99,7 +99,7 @@ const Home: NextPage = () => {
     }),
     []
   );
-  const initialValue = useMemo<EditorProps['initialValue']>(
+  const initialValue = useMemo<NonNullable<EditorProps['initialValue']>>(
     () => [
       {
         type: 'heading01',
@@ -414,7 +414,7 @@ const Home: NextPage = () => {
 
   const [value, setValue] = useState(initialValue);
 
-  const handleChange = useCallback<EditorProps['onChange']>((value) => {
+  const handleChange = useCallback<NonNullable<EditorProps['onChange']>>((value) => {
     console.log(value);
     setValue(value);
   }, []);
