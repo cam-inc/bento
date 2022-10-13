@@ -1,7 +1,8 @@
 import { Element, ElementContainer } from '@bento-editor/core';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
+import { ContainerContext } from '../../container/editable';
 
 const editable: Element<Attributes>['editable'] = {
   defaultValue: [
@@ -12,6 +13,10 @@ const editable: Element<Attributes>['editable'] = {
     },
   ],
   Component: (props) => {
+    const parentElement = useContext(ContainerContext);
+    if (!parentElement.attributes?.isOpen) {
+      return null;
+    }
     return (
       <ElementContainer {...props}>
         <div className={styles.root}>{props.children}</div>
