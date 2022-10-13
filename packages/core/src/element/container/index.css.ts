@@ -6,7 +6,7 @@ const root = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       position: 'relative',
-      marginBottom: themeVars.space['2'],
+      margin: `${themeVars.space['4']} 0`,
     }
   }
 });
@@ -14,22 +14,56 @@ const root = style({
 const dropArea = style({
   selectors: {
     [`${editorStyles.root} &`]: {
-      height: themeVars.space['2'],
+      position: 'absolute',
+      right: 0,
+      left: 0,
+      height: themeVars.space['0'],
+    }
+  }
+});
+
+const dropAreaAbove = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      top: `calc(${themeVars.space['2']} * -1)`,
+    }
+  }
+});
+
+const dropAreaBelow = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      bottom: `calc(${themeVars.space['2']} * -1)`,
+    }
+  }
+});
+
+const dropAreaInner = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      position: 'absolute',
+      height: themeVars.space['0'],
       backgroundColor: themeVars.color.brand,
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      margin: 'auto',
       opacity: 0,
     }
   }
 });
 
-const dropAreaDroppable = style({
+const dropAreaInnerDroppable = style({
   selectors: {
     [`${editorStyles.root} &`]: {
+      height: themeVars.space['2'],
       opacity: 0.08,
     }
   }
 });
 
-const dropAreaOver = style({
+const dropAreaInnerOver = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       opacity: 0.5,
@@ -37,7 +71,12 @@ const dropAreaOver = style({
   }
 });
 
-const body = style({});
+const body = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+    }
+  }
+});
 
 const utilsContainer = style({
   selectors: {
@@ -87,5 +126,5 @@ const button = style({
 });
 
 export const styles = {
-  root, dropArea, dropAreaDroppable, dropAreaOver, body, utilsContainer, utilsContainerOver, utils, button,
+  root, dropArea, dropAreaAbove, dropAreaBelow, dropAreaInner, dropAreaInnerDroppable, dropAreaInnerOver, body, utilsContainer, utilsContainerOver, utils, button,
 };

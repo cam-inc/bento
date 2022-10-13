@@ -1,6 +1,9 @@
 import { createThemeContract } from '@vanilla-extract/css';
 
 export const defaultThemeToken = {
+  editor: {
+    padding: '64px',
+  },
   // Follow Tailwind's default spacing scale.
   // @see: https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale
   space: {

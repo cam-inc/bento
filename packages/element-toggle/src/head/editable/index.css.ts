@@ -7,7 +7,20 @@ export const styles = {
       [`.${EditorClassName} &`]: {
         color: themeVars.color.backgroundOnLow,
         fontSize: themeVars.fontSize.label.large,
+        display: 'flex',
       },
     },
-  })
+  }),
+  ctrl: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+      },
+    },
+  }),
+  body: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+      },
+    },
+  }),
 };

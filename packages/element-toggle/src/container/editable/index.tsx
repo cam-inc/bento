@@ -1,7 +1,12 @@
-import { Element, ElementContainer } from '@bento-editor/core';
-import React from 'react';
+import { CustomElement, Element, ElementContainer } from '@bento-editor/core';
+import React, { createContext } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
+
+export const ContainerContext = createContext<CustomElement<Attributes>>({
+  type: 'toggle',
+  children: [],
+});
 
 const editable: Element<Attributes>['editable'] = {
   defaultValue: [
@@ -27,13 +32,11 @@ const editable: Element<Attributes>['editable'] = {
     },
   ],
   Component: (props) => {
-    const isOpen = !!props.element.attributes?.isOpen;
     return (
       <ElementContainer {...props}>
-        <div contentEditable={false}>
-          <div>isOpen: {isOpen.toString()}</div>
-        </div>
-        <div className={styles.root}>{props.children}</div>
+        <ContainerContext.Provider value={props.element}>
+          <div className={styles.root}>{props.children}</div>
+        </ContainerContext.Provider>
       </ElementContainer>
     );
   },

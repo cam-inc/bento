@@ -1,13 +1,12 @@
-import { Element } from '@bento-editor/core';
-import attributes, { Attributes } from './attributes';
-import editable from './editable';
-import toolbox from './toolbox';
-export { HeadingRenderer } from './renderer';
+import level01, { Level01Renderer } from './level01';
+import level02, { Level02Renderer } from './level02';
+import level03, { Level03Renderer } from './level03';
 
-const element: Element<Attributes> = {
-  type: 'heading',
-  attributes,
-  editable,
-  toolbox,
+export {
+  level01,
+  level02,
+  level03,
+  Level01Renderer,
+  Level02Renderer,
+  Level03Renderer,
 };
-export default element;

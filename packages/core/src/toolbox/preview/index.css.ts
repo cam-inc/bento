@@ -19,8 +19,7 @@ export const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 136,
-        padding: themeVars.space['2'],
+        height: 135,
         backgroundColor: themeVars.color.surfaceInvertedOnHigh,
         borderRadius: themeVars.radius.medium,
         marginBottom: themeVars.space['3'],
@@ -33,7 +32,6 @@ export const styles = {
         color: themeVars.color.surfaceInvertedOnHigh,
         fontSize: themeVars.fontSize.label.large,
         fontWeight: 'bold',
-        marginBottom: themeVars.space['2'],
       }
     }
   }),
@@ -42,6 +40,7 @@ export const styles = {
       [`${editorStyles.root} &`]: {
         color: themeVars.color.surfaceInvertedOn,
         fontSize: themeVars.fontSize.label.medium,
+        marginTop: themeVars.space['2'],
       }
     }
   }),

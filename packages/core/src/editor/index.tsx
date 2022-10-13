@@ -24,16 +24,22 @@ export const EditorClassName = styles.root;
 type SlateProps = React.ComponentProps<typeof Slate>;
 
 export type EditorProps = {
-  config: Config;
+  config?: Config;
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
-  initialValue: SlateProps['value'];
-  onChange: NonNullable<SlateProps['onChange']>;
+  initialValue?: SlateProps['value'];
+  onChange: SlateProps['onChange'];
 };
 export const Editor: React.FC<EditorProps> = ({
-  config,
-  initialValue,
-  onChange,
+  config = { elements: [], texts: [], themeToken: {} },
+  initialValue = [
+    {
+      children: [
+        { text: '' }
+      ]
+    }
+  ],
+  onChange = () => { },
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());

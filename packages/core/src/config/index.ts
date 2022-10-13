@@ -48,11 +48,11 @@ export type Element<Attributes extends Record<string, any> = {}> = {
     >;
     defaultValue: Descendant[];
   };
-  toolbox: {
+  toolbox?: {
     Icon: React.FC;
-    Thumb: React.FC;
+    Thumb?: React.FC;
     title: string;
-    description: string;
+    description?: string;
   };
   // The boolean value returned from this function is to be used to determine whether to kiff off a new normalization path.
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
@@ -87,9 +87,9 @@ export type Text<Attributes extends Record<string, any> = {}> = {
   };
   toolbox?: {
     Icon: React.FC;
-    Thumb: React.FC;
+    Thumb?: React.FC;
     title: string;
-    description: string;
+    description?: string;
   };
   normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
 };
