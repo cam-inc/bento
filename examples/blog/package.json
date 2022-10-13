@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@bento-editor/example-blog",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Blog example for bento-editor",
   "main": "dist/index.js",
   "scripts": {

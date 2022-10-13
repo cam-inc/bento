@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@bento-editor/website",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "dev": "npm run dev:en",
     "dev:en": "docusaurus start --no-open --port 4000 --locale en",
