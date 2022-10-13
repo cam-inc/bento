@@ -28,7 +28,7 @@ export type EditorProps = {
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
   initialValue?: SlateProps['value'];
-  onChange?: NonNullable<SlateProps['onChange']>;
+  onChange: SlateProps['onChange'];
 };
 export const Editor: React.FC<EditorProps> = ({
   config = { elements: [], texts: [], themeToken: {} },
