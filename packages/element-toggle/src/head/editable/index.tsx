@@ -1,5 +1,5 @@
 import { Element, ElementContainer, helpers } from '@bento-editor/core';
-import React, { useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
 import { ContainerContext } from '../../container/editable';
@@ -31,7 +31,9 @@ const editable: Element<Attributes>['editable'] = {
       <ElementContainer {...props}>
         <div className={styles.root}>
           <div className={styles.ctrl} contentEditable={false}>
-            <button onClick={handleCtrlClick}>{parentElement.attributes?.isOpen ? 'open' : 'close'}</button>
+            <button onClick={handleCtrlClick}>
+              {parentElement.attributes?.isOpen ? 'open' : 'close'}
+            </button>
           </div>
           <div className={styles.body}>{props.children}</div>
         </div>
