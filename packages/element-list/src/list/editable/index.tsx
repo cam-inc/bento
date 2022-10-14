@@ -1,5 +1,4 @@
 import { Element, ElementContainer, helpers } from '@bento-editor/core';
-import React from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
 
