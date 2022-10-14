@@ -34,7 +34,7 @@
     "noErrorTruncation": true,
     /* Completeness */
     "skipLibCheck": true,
-    "jsx": "react",
+    "jsx": "react-jsx"
     /* Command Line */
     // ...none
   },
