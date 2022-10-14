@@ -1,5 +1,4 @@
 import { Button, Switch, Textbox } from '@bento-editor/core';
-import React from 'react';
 import { styles } from './index.css';
 
 type FormProps = {

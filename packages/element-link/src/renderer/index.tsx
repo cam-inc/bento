@@ -1,4 +1,3 @@
-import React from 'react';
 import { RendererProps } from '@bento-editor/core';
 import { styles } from './index.css';
 import defaultAttributes, { Attributes } from '../attributes';
