@@ -1,5 +1,3 @@
-import React from 'react';
-
 type EditIconProps = {};
 
 export const EditIcon: React.FC<EditIconProps> = () => {

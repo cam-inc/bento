@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo, useEffect } from 'react';
+import { useCallback, useState, useMemo, useEffect } from 'react';
 import { Path, Transforms, Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { Button } from '../components/button';

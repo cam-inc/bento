@@ -2,7 +2,7 @@
  * Currently, there are no type definitions in @emoji-mart/react, so we implement our own.
  * ref. https://github.com/missive/emoji-mart/blob/665a58031c7b5b753c06e8581dcfe51741098275/packages/emoji-mart-react/react.js
  */
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Data, Picker, PickerProps, BaseEmoji } from 'emoji-mart';
 import { styles } from './index.css';
 import i18n from '@emoji-mart/data/i18n/ja.json';

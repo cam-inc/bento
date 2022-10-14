@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
@@ -41,7 +41,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   // DnD
   const type = 'Element';
   type Item = {
-    from: Path
+    from: Path;
   };
   const [_, dragRef, dragPreview] = useDrag<Item>(() => {
     return {
@@ -54,7 +54,11 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       }),
     };
   }, [path.toString()]);
-  const [aboveCollect, aboveDropRef] = useDrop<Item, void, { isDroppable: boolean; isOver: boolean }>(() => {
+  const [aboveCollect, aboveDropRef] = useDrop<
+    Item,
+    void,
+    { isDroppable: boolean; isOver: boolean }
+  >(() => {
     return {
       accept: type,
       drop: (item) => {
@@ -77,7 +81,11 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       }),
     };
   }, [editor, path.toString()]);
-  const [belowCollect, belowDropRef] = useDrop<Item, void, { isDroppable: boolean; isOver: boolean }>(() => {
+  const [belowCollect, belowDropRef] = useDrop<
+    Item,
+    void,
+    { isDroppable: boolean; isOver: boolean }
+  >(() => {
     return {
       accept: type,
       drop: (item) => {
@@ -109,12 +117,18 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, []);
 
   const [isOver, setIsOver] = useState<boolean>(false);
-  const handleMouseOver = useCallback((/*e: React.MouseEvent*/) => {
-    setIsOver(true);
-  }, []);
-  const handleMouseOut = useCallback((/*e: React.MouseEvent*/) => {
-    setIsOver(false);
-  }, []);
+  const handleMouseOver = useCallback(
+    (/*e: React.MouseEvent*/) => {
+      setIsOver(true);
+    },
+    []
+  );
+  const handleMouseOut = useCallback(
+    (/*e: React.MouseEvent*/) => {
+      setIsOver(false);
+    },
+    []
+  );
 
   return (
     <>
@@ -126,27 +140,43 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
-        <div className={classnames(styles.dropArea, styles.dropAreaAbove)} ref={aboveDropRef}>
-          <div className={classnames({
-            [styles.dropAreaInner]: true,
-            [styles.dropAreaInnerDroppable]: aboveCollect.isDroppable,
-            [styles.dropAreaInnerOver]: aboveCollect.isOver,
-          })} />
+        <div
+          className={classnames(styles.dropArea, styles.dropAreaAbove)}
+          ref={aboveDropRef}
+        >
+          <div
+            className={classnames({
+              [styles.dropAreaInner]: true,
+              [styles.dropAreaInnerDroppable]: aboveCollect.isDroppable,
+              [styles.dropAreaInnerOver]: aboveCollect.isOver,
+            })}
+          />
         </div>
-        <div className={styles.body} ref={bodyRef}>{props.children}</div>
-        <div className={classnames(styles.dropArea, styles.dropAreaBelow)} ref={belowDropRef}>
-          <div className={classnames({
-            [styles.dropAreaInner]: true,
-            [styles.dropAreaInnerDroppable]: belowCollect.isDroppable,
-            [styles.dropAreaInnerOver]: belowCollect.isOver,
-          })} />
+        <div className={styles.body} ref={bodyRef}>
+          {props.children}
         </div>
-        <div contentEditable={false} className={classnames({
-          [styles.utilsContainer]: true,
-          [styles.utilsContainerOver]: isOver,
-        })} style={{
-          top: `${props.utilsPositionY ?? 0}px`
-        }}>
+        <div
+          className={classnames(styles.dropArea, styles.dropAreaBelow)}
+          ref={belowDropRef}
+        >
+          <div
+            className={classnames({
+              [styles.dropAreaInner]: true,
+              [styles.dropAreaInnerDroppable]: belowCollect.isDroppable,
+              [styles.dropAreaInnerOver]: belowCollect.isOver,
+            })}
+          />
+        </div>
+        <div
+          contentEditable={false}
+          className={classnames({
+            [styles.utilsContainer]: true,
+            [styles.utilsContainerOver]: isOver,
+          })}
+          style={{
+            top: `${props.utilsPositionY ?? 0}px`,
+          }}
+        >
           <div className={styles.utils}>
             <div ref={popoverToolbox.targetRef}>
               <PlusButton onClick={handlePlusButtonClick} />

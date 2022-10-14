@@ -1,4 +1,3 @@
-import React from 'react';
 import { Config } from '../../config';
 import { styles } from './index.css';
 
@@ -17,9 +16,7 @@ export const ToolboxPreview: React.FC<ToolboxPreviewProps> = ({ node }) => {
           )}
           <div className={styles.title}>{node.toolbox.title}</div>
           {node.toolbox.description && (
-            <div className={styles.description}>
-              {node.toolbox.description}
-            </div>
+            <div className={styles.description}>{node.toolbox.description}</div>
           )}
         </>
       )}

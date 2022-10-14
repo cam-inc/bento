@@ -1,6 +1,6 @@
 import { Text } from '@bento-editor/core';
 import classnames from 'classnames';
-import React, { useMemo, useCallback, useState } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import attributes, { Attributes } from '../attributes';
 import { styles } from './index.css';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { GeneralError } from '../helpers/error';
 import { error } from '../helpers/logger';

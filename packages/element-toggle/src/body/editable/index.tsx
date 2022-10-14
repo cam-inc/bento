@@ -1,5 +1,5 @@
 import { Element, ElementContainer } from '@bento-editor/core';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
 import { ContainerContext } from '../../container/editable';

@@ -1,5 +1,5 @@
 import { CustomElement, Element, ElementContainer } from '@bento-editor/core';
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
 

@@ -4,7 +4,7 @@ import {
   ElementContainer,
   helpers,
 } from '@bento-editor/core';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
 

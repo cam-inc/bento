@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExclamationIcon, RendererProps } from '@bento-editor/core';
 import { styles } from './index.css';
 

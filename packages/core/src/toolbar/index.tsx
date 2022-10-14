@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { Editor, Range, Path, Node } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { Config, PickRequired } from '../config';
@@ -50,7 +50,9 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const [blockName, setBlockName] = useState('ブロックを選択');
 
   const hasToolbox = useCallback(
-    (node: Node | CustomNode | PickRequired<CustomNode, "toolbox"> | null): node is PickRequired<CustomNode, "toolbox"> => {
+    (
+      node: Node | CustomNode | PickRequired<CustomNode, 'toolbox'> | null
+    ): node is PickRequired<CustomNode, 'toolbox'> => {
       return (
         node !== null && Object.prototype.hasOwnProperty.call(node, 'toolbox')
       );
@@ -159,11 +161,11 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
             {config.texts.map(
               (text) =>
                 text.toolbar && (
-                  <React.Fragment key={text.type}>
+                  <Fragment key={text.type}>
                     <li className={styles.item}>
                       <text.toolbar.Component editor={editor} />
                     </li>
-                  </React.Fragment>
+                  </Fragment>
                 )
             )}
             <li className={styles.item} ref={popoverMore.targetRef}>

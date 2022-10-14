@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import { Descendant } from 'slate';
 import { Config } from '../config';
 import { EditorProps } from '../editor';
@@ -43,9 +43,7 @@ const createRenderer = (renderers: Props['renderers']) => {
         const children: ReturnType<React.FC>[] = [];
         data.children.forEach((child, index) => {
           children.push(
-            <React.Fragment key={index}>
-              {renderRecursively(child)}
-            </React.Fragment>
+            <Fragment key={index}>{renderRecursively(child)}</Fragment>
           );
         });
         return <Renderer attributes={data.attributes}>{children}</Renderer>;
@@ -75,7 +73,7 @@ export const EditorRenderer: React.FC<Props> = ({
         render={(style) => (
           <div style={style}>
             {data.map((d, index) => (
-              <React.Fragment key={index}>{render(d)}</React.Fragment>
+              <Fragment key={index}>{render(d)}</Fragment>
             ))}
           </div>
         )}

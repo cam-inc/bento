@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Node, Path, Transforms } from 'slate';
 import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
@@ -8,13 +8,13 @@ import { styles } from './index.css';
 export type ToolmenuProps = {
   path: Path;
   onDone: () => void;
-}
+};
 export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
   const editor = useSlate();
 
   const handleDeleteClick = useCallback(() => {
     Transforms.removeNodes(editor, {
-      at: path
+      at: path,
     });
     onDone();
   }, [editor, path, onDone]);
@@ -34,32 +34,24 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
       <div>
         <ul>
           <li>
-            <button className={styles.button}
-              onClick={handleDeleteClick}
-            >
+            <button className={styles.button} onClick={handleDeleteClick}>
               <div className={styles.buttonBG} />
               <div className={styles.buttonContainer}>
                 <div className={styles.buttonIcon}>
                   <DustboxIcon />
                 </div>
-                <div className={styles.buttonTitle}>
-                  削除
-                </div>
+                <div className={styles.buttonTitle}>削除</div>
               </div>
             </button>
           </li>
           <li>
-            <button className={styles.button}
-              onClick={handleCopyClick}
-            >
+            <button className={styles.button} onClick={handleCopyClick}>
               <div className={styles.buttonBG} />
               <div className={styles.buttonContainer}>
                 <div className={styles.buttonIcon}>
                   <CopyIcon />
                 </div>
-                <div className={styles.buttonTitle}>
-                  コピー
-                </div>
+                <div className={styles.buttonTitle}>コピー</div>
               </div>
             </button>
           </li>

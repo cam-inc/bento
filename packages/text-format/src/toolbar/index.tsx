@@ -6,7 +6,7 @@ import {
   ButtonBox,
   isUrl,
 } from '@bento-editor/core';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import attributes, { Attributes } from '../attributes';
 import { ColorPicker, Form, FormErrors } from '../components';
 import { styles } from './index.css';
