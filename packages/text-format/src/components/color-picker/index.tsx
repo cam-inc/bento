@@ -1,4 +1,3 @@
-import React from 'react';
 import { HexAlphaColorPicker } from 'react-colorful';
 
 type ColorPickerProps = Parameters<typeof HexAlphaColorPicker>[0];

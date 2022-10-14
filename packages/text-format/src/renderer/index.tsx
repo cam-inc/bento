@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import classnames from 'classnames';
 import { RendererProps } from '@bento-editor/core';
 import defaultAttributes, { Attributes } from '../attributes';
