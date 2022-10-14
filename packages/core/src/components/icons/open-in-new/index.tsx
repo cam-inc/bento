@@ -1,5 +1,3 @@
-import React from 'react';
-
 type OpenInNewIconProps = {};
 
 export const OpenInNewIcon: React.FC<OpenInNewIconProps> = () => {

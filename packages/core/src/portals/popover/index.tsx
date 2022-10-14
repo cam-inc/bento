@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Portal, TARGET } from '../../portals';
 import { useScreenGlobalStateValue } from '../../store';
 import { styles } from './index.css';
@@ -103,7 +103,13 @@ type PopoverProps = {
 };
 
 // TODO: desktop and mobile layout
-export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequestClose, targetRef, children }) => {
+export const Popover: React.FC<PopoverProps> = ({
+  isOpened,
+  isHorizontal,
+  onRequestClose,
+  targetRef,
+  children,
+}) => {
   const screen = useScreenGlobalStateValue();
 
   // Auto closing.
@@ -142,10 +148,12 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
     const centerX = rect.x + rect.width / 2;
     const centerY = rect.y + rect.height / 2;
     const isVerticallyOnUpside = centerY < screen.height / 3;
-    const isVerticallyOnMiddle = screen.height / 3 <= centerY && centerY <= (screen.height / 3) * 2;
+    const isVerticallyOnMiddle =
+      screen.height / 3 <= centerY && centerY <= (screen.height / 3) * 2;
     const isVerticallyOnDownside = (screen.height / 3) * 2 < centerY;
     const isHorizontallyOnLeft = centerX < screen.width / 3;
-    const isHorizontallyOnCenter = screen.width / 3 <= centerX && centerX <= (screen.width / 3) * 2;
+    const isHorizontallyOnCenter =
+      screen.width / 3 <= centerX && centerX <= (screen.width / 3) * 2;
     const isHorizontallyOnRight = (screen.width / 3) * 2 < centerX;
     if (isVerticallyOnUpside) {
       if (isHorizontallyOnLeft) {
@@ -190,7 +198,13 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
       }
     }
     return PLACEMENT.BOTTOM_LEFT;
-  }, [targetRef, screen.width, screen.height, isHorizontal, /* isOpened is required for re-rendering*/isOpened]);
+  }, [
+    targetRef,
+    screen.width,
+    screen.height,
+    isHorizontal,
+    /* isOpened is required for re-rendering*/ isOpened,
+  ]);
 
   const space = 8;
 
@@ -210,7 +224,7 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
         position.y = rect.top - space;
         break;
       case PLACEMENT.TOP:
-        position.x = rect.x + (rect.width / 2);
+        position.x = rect.x + rect.width / 2;
         position.y = rect.top - space;
         break;
       case PLACEMENT.TOP_RIGHT:
@@ -223,7 +237,7 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
         break;
       case PLACEMENT.RIGHT:
         position.x = rect.right + space;
-        position.y = rect.top + (rect.height / 2);
+        position.y = rect.top + rect.height / 2;
         break;
       case PLACEMENT.RIGHT_BOTTOM:
         position.x = rect.right + space;
@@ -234,7 +248,7 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
         position.y = rect.bottom + space;
         break;
       case PLACEMENT.BOTTOM:
-        position.x = rect.x + (rect.width / 2);
+        position.x = rect.x + rect.width / 2;
         position.y = rect.bottom + space;
         break;
       case PLACEMENT.BOTTOM_LEFT:
@@ -255,7 +269,11 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
         break;
     }
     return position;
-  }, [targetRef, placement, /* isOpened is required for re-rendering*/isOpened]);
+  }, [
+    targetRef,
+    placement,
+    /* isOpened is required for re-rendering*/ isOpened,
+  ]);
 
   const content = useMemo<JSX.Element | null>(() => {
     switch (placement) {
@@ -288,7 +306,13 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${position.y - space}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignEnd, styles.contentJustifyCenter)}>
+            <div
+              className={classnames(
+                styles.content,
+                styles.contentAlignEnd,
+                styles.contentJustifyCenter
+              )}
+            >
               {children}
             </div>
           </div>
@@ -322,7 +346,9 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${screen.height - position.y - space}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignStart)}>
+            <div
+              className={classnames(styles.content, styles.contentAlignStart)}
+            >
               {children}
             </div>
           </div>
@@ -340,7 +366,9 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${(distance - space) * 2}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignCenter)}>
+            <div
+              className={classnames(styles.content, styles.contentAlignCenter)}
+            >
               {children}
             </div>
           </div>
@@ -374,7 +402,9 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${screen.height - position.y - space}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignStart)}>
+            <div
+              className={classnames(styles.content, styles.contentAlignStart)}
+            >
               {children}
             </div>
           </div>
@@ -392,7 +422,13 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${screen.height - position.y - space}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignStart, styles.contentJustifyCenter)}>
+            <div
+              className={classnames(
+                styles.content,
+                styles.contentAlignStart,
+                styles.contentJustifyCenter
+              )}
+            >
               {children}
             </div>
           </div>
@@ -409,7 +445,9 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${screen.height - position.y - space}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignStart)}>
+            <div
+              className={classnames(styles.content, styles.contentAlignStart)}
+            >
               {children}
             </div>
           </div>
@@ -426,7 +464,13 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${position.y - space}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignEnd, styles.contentJustifyEnd)}>
+            <div
+              className={classnames(
+                styles.content,
+                styles.contentAlignEnd,
+                styles.contentJustifyEnd
+              )}
+            >
               {children}
             </div>
           </div>
@@ -444,7 +488,13 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${(distance - space) * 2}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignCenter, styles.contentJustifyEnd)}>
+            <div
+              className={classnames(
+                styles.content,
+                styles.contentAlignCenter,
+                styles.contentJustifyEnd
+              )}
+            >
               {children}
             </div>
           </div>
@@ -461,14 +511,27 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
               height: `${screen.height - position.y - space}px`,
             }}
           >
-            <div className={classnames(styles.content, styles.contentAlignStart, styles.contentJustifyEnd)}>
+            <div
+              className={classnames(
+                styles.content,
+                styles.contentAlignStart,
+                styles.contentJustifyEnd
+              )}
+            >
               {children}
             </div>
           </div>
         );
       }
     }
-  }, [placement, position.x, position.y, screen.width, screen.height, children]);
+  }, [
+    placement,
+    position.x,
+    position.y,
+    screen.width,
+    screen.height,
+    children,
+  ]);
 
   if (!isOpened) {
     return null;
@@ -488,7 +551,7 @@ export const Popover: React.FC<PopoverProps> = ({ isOpened, isHorizontal, onRequ
       </div>
     </Portal>
   );
-}
+};
 
 export type UsePopoverReturn<T extends HTMLElement> = {
   open: () => void;
@@ -503,14 +566,18 @@ export type UsePopoverReturn<T extends HTMLElement> = {
 };
 export const usePopover = function <T extends HTMLElement>(
   {
-    isHorizontal
+    isHorizontal,
   }: {
     isHorizontal: Partial<PopoverProps['isHorizontal']>;
   } = {
-      isHorizontal: false
-    }): UsePopoverReturn<T> {
-  const [isOpened, setIsOpened] = useState<UsePopoverReturn<T>['bind']['isOpened']>(false);
-  const handleRequestClose = useCallback<UsePopoverReturn<T>['bind']['onRequestClose']>(() => {
+    isHorizontal: false,
+  }
+): UsePopoverReturn<T> {
+  const [isOpened, setIsOpened] =
+    useState<UsePopoverReturn<T>['bind']['isOpened']>(false);
+  const handleRequestClose = useCallback<
+    UsePopoverReturn<T>['bind']['onRequestClose']
+  >(() => {
     setIsOpened(false);
   }, []);
   const open = useCallback<UsePopoverReturn<T>['open']>(() => {
@@ -536,5 +603,4 @@ export const usePopover = function <T extends HTMLElement>(
     [open, close, isOpened, handleRequestClose]
   );
   return ret;
-
-}
+};

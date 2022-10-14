@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { createEditor, Element } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { Config } from '../config';
@@ -34,12 +34,10 @@ export const Editor: React.FC<EditorProps> = ({
   config = { elements: [], texts: [], themeToken: {} },
   initialValue = [
     {
-      children: [
-        { text: '' }
-      ]
-    }
+      children: [{ text: '' }],
+    },
   ],
-  onChange = () => { },
+  onChange = () => {},
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());

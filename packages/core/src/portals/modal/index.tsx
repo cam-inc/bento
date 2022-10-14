@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Portal, TARGET } from '../../portals';
 import { styles } from './index.css';
 
@@ -7,7 +7,11 @@ export type ModalProps = {
   onRequestClose: () => void;
   children: React.ReactNode;
 };
-export const Modal: React.FC<ModalProps> = ({ isOpened, onRequestClose, children }) => {
+export const Modal: React.FC<ModalProps> = ({
+  isOpened,
+  onRequestClose,
+  children,
+}) => {
   const handleCloseClick = useCallback(() => {
     onRequestClose();
   }, [onRequestClose]);
@@ -19,7 +23,9 @@ export const Modal: React.FC<ModalProps> = ({ isOpened, onRequestClose, children
   return (
     <Portal target={TARGET.MODAL}>
       <div className={styles.root}>
-        <div><button onClick={handleCloseClick}>close</button></div>
+        <div>
+          <button onClick={handleCloseClick}>close</button>
+        </div>
         <div>{children}</div>
       </div>
     </Portal>
@@ -32,11 +38,14 @@ export type UseModalReturn = {
   bind: {
     isOpened: ModalProps['isOpened'];
     onRequestClose: ModalProps['onRequestClose'];
-  }
+  };
 };
 export const useModal = (): UseModalReturn => {
-  const [isOpened, setIsOpened] = useState<UseModalReturn['bind']['isOpened']>(false);
-  const handleRequestClose = useCallback<UseModalReturn['bind']['onRequestClose']>(() => {
+  const [isOpened, setIsOpened] =
+    useState<UseModalReturn['bind']['isOpened']>(false);
+  const handleRequestClose = useCallback<
+    UseModalReturn['bind']['onRequestClose']
+  >(() => {
     setIsOpened(false);
   }, []);
   const open = useCallback<UseModalReturn['open']>(() => {

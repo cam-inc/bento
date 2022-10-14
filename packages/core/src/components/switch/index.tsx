@@ -1,4 +1,3 @@
-import React from 'react';
 import '@rmwc/switch/styles';
 import {
   Switch as RMWCSwitch,

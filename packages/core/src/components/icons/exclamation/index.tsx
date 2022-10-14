@@ -1,4 +1,3 @@
-import React from 'react';
 import { themeVars } from '../../../theme/index.css';
 
 export type ExclamationIconProps = {

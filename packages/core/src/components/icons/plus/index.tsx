@@ -1,5 +1,3 @@
-import React from 'react';
-
 export type PlusIconProps = {};
 export const PlusIcon: React.FC<PlusIconProps> = () => {
   return (
