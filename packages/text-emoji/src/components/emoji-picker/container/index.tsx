@@ -1,6 +1,6 @@
 import { UsePopoverReturn } from '@bento-editor/core';
 import type { Data } from 'emoji-mart';
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { EmojiPicker, Emoji } from '..';
 
 type Props = {

@@ -2,7 +2,9 @@
   "name": "@bento-editor/text-emoji",
   "version": "0.0.7",
   "description": "TODO",
-  "keywords": ["TODO"],
+  "keywords": [
+    "TODO"
+  ],
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
@@ -14,7 +16,9 @@
       "require": "./dist/style.css"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepublishOnly": "run-s clear build",
     "clear": "rimraf dist && mkdirp dist",
@@ -46,7 +50,8 @@
   "devDependencies": {
     "@types/emoji-mart": "^3.0.9",
     "@types/jest": "^29.0.0",
-    "@vanilla-extract/vite-plugin": "^3.3.1",
+    "@vanilla-extract/vite-plugin": "^3.6.1",
+    "@vitejs/plugin-react": "^2.1.0",
     "jest": "^29.0.2",
     "ts-jest": "^28.0.8",
     "ts-node": "^10.9.1",

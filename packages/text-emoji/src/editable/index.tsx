@@ -1,5 +1,5 @@
 import { helpers, Popover, Text, usePopover } from '@bento-editor/core';
-import React, { useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Attributes } from '../attributes';
 import { EmojiPickerContainer } from '../components/emoji-picker/container';
 import { styles } from './index.css';
