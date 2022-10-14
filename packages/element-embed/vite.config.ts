@@ -1,6 +1,7 @@
 import path from 'path';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 import pkg from './package.json';
 
@@ -21,5 +22,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vanillaExtractPlugin()],
+  plugins: [vanillaExtractPlugin(), react()],
 });

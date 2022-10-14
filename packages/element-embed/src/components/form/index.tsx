@@ -1,5 +1,5 @@
 import { Button, Textbox } from '@bento-editor/core';
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { styles } from './index.css';
 
 type FormProps = {

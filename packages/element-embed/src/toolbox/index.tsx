@@ -1,4 +1,3 @@
-import React from 'react';
 import { Element } from '@bento-editor/core';
 
 const toolbox: Element['toolbox'] = {

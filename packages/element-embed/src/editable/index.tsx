@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { Element, ElementContainer, helpers, isUrl } from '@bento-editor/core';
 import attributes, { Attributes } from '../attributes';
 import { Form, FormErrors, Card } from '../components';
