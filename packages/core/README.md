@@ -31,7 +31,7 @@ On the same reason we call inline-level components as Text. Because Slate uses t
 refers to both Element and Text. Read [the first section of this Slate's doc](https://docs.slatejs.org/concepts/02-nodes) to see the difference between them.
 
 ### `Attributes`
-Each Node has its own set of attributes and their set, or structure, that varies depending on which Node type they are of. One example for an attribute is the `level` attribute of `@bento-editor/element-heading` which is used to set its sectioning level; `level: 1` would be regarded as `<h1 />`, `level: 2` as `<h2 />`, and so on.
+Each Node has its own set of attributes and their set, or structure, that varies depending on which Node type they are of. One example for an attribute is the `href` attribute of `@bento-editor/element-link` which is used to create a link; `href: 'https://cam-inc.co.jp'` would be regarded as `<a href="https://cam-inc.co.jp" />`.
 
 ### `Package`
 is a deliverable parcel which contains a single Node, is to be plugged in to Bento, and can be owned by Bento or you. Examples are Bento-owned packages on the npm registory like [@bento-editor/element-paragraph](https://www.npmjs.com/package/@bento-editor/element-paragraph), and any package you create tailored to your service domain like `element-{Your Service Name}-media` to handle your-service-specific media objects.
