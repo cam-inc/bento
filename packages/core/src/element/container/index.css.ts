@@ -77,6 +77,14 @@ const body = style({
     }
   }
 });
+// @see: https://bugzilla.mozilla.org/show_bug.cgi?id=36854
+const bodyPatched = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      display: 'inline-block',
+    }
+  }
+});
 
 const utilsContainer = style({
   selectors: {
@@ -126,5 +134,5 @@ const button = style({
 });
 
 export const styles = {
-  root, dropArea, dropAreaAbove, dropAreaBelow, dropAreaInner, dropAreaInnerDroppable, dropAreaInnerOver, body, utilsContainer, utilsContainerOver, utils, button,
+  root, dropArea, dropAreaAbove, dropAreaBelow, dropAreaInner, dropAreaInnerDroppable, dropAreaInnerOver, body, bodyPatched, utilsContainer, utilsContainerOver, utils, button,
 };

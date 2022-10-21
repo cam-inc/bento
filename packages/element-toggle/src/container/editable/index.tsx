@@ -16,7 +16,7 @@ const editable: Element<Attributes>['editable'] = {
       children: [
         {
           type: 'format',
-          text: 'default head',
+          text: '入力してください',
         },
       ],
     },
@@ -26,14 +26,14 @@ const editable: Element<Attributes>['editable'] = {
       children: [
         {
           type: 'format',
-          text: 'default body',
+          text: '入力してください',
         },
       ],
     },
   ],
   Component: (props) => {
     return (
-      <ElementContainer {...props}>
+      <ElementContainer {...props} utilsPositionY={4}>
         <ContainerContext.Provider value={props.element}>
           <div className={styles.root}>{props.children}</div>
         </ContainerContext.Provider>

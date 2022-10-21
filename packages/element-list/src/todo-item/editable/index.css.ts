@@ -1,14 +1,23 @@
 import { style } from '@vanilla-extract/css';
-import { themeVars } from '@bento-editor/core';
+import { themeVars, EditorClassName } from '@bento-editor/core';
 
 export const styles = {
   root: style({
-    color: themeVars.color.backgroundOn,
-    display: 'flex',
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        color: themeVars.color.backgroundOn,
+        display: 'flex',
+        gap: themeVars.space['2'],
+      },
+    },
   }),
   checkbox: style({
-    display: 'block',
-    width: 18,
-    height: 18,
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        display: 'block',
+        width: 18,
+        height: 18,
+      },
+    },
   }),
 };

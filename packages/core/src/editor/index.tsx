@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { createEditor, Element } from 'slate';
-import { Slate, withReact } from 'slate-react';
+import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config } from '../config';
 import { Editable } from '../editable';
 import { ModalContainer } from '../portals/modal/container';
@@ -37,7 +37,7 @@ export const Editor: React.FC<EditorProps> = ({
       children: [{ text: '' }],
     },
   ],
-  onChange = () => {},
+  onChange = () => { },
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());
@@ -79,6 +79,11 @@ export const Editor: React.FC<EditorProps> = ({
 
     return editor;
   }, [config]);
+
+  useEffect(() => {
+    console.log('called??: ', editor);
+    ReactEditor.focus(editor);
+  }, []);
 
   return (
     <>

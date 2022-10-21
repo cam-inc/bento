@@ -13,7 +13,7 @@ const editable: Element<Attributes>['editable'] = {
     {
       type: 'format',
       attributes: {},
-      text: '',
+      text: 'ToDo',
     },
   ],
   Component: (props) => {
@@ -32,7 +32,7 @@ const editable: Element<Attributes>['editable'] = {
     );
 
     return (
-      <ElementContainer {...props}>
+      <ElementContainer {...props} as="li" utilsPositionY={-3}>
         <div className={styles.root}>
           <span className={styles.checkbox} contentEditable={false}>
             <CheckboxIcon checked={checked} onClick={handleCheckboxClick} />

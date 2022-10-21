@@ -8,12 +8,22 @@ export const styles = {
         color: themeVars.color.backgroundOnLow,
         fontSize: themeVars.fontSize.label.large,
         display: 'flex',
+        alignItems: 'center',
+        gap: themeVars.space['2'],
       },
     },
   }),
   ctrl: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+      },
+    },
+  }),
+  opener: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        width: 32,
+        height: 32,
       },
     },
   }),

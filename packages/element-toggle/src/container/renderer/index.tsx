@@ -4,5 +4,5 @@ import { Attributes } from '../attributes';
 export const ContainerRenderer: React.FC<RendererProps<Attributes>> = ({
   children,
 }) => {
-  return <div>{children}</div>;
+  return <details>{children}</details>;
 };
