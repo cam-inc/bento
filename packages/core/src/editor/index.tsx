@@ -81,7 +81,6 @@ export const Editor: React.FC<EditorProps> = ({
   }, [config]);
 
   useEffect(() => {
-    console.log('called??: ', editor);
     ReactEditor.focus(editor);
   }, []);
 
