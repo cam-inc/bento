@@ -25,7 +25,10 @@ $ npm install --save @bento-editor/text-format
 
 ```tsx
 import { Editor } from '@bento-editor/core';
-import elementHeading from '@bento-editor/element-heading';
+import {
+  level01 as elementHeadingLevel01,
+  level02 as elementHeadingLevel02
+} from '@bento-editor/element-heading';
 import elementParagraph from '@bento-editor/element-paragraph';
 import textFormat from '@bento-editor/text-format';
 
@@ -35,7 +38,8 @@ const YourEditor = () => {
     // element-type nodes
     elements: [
       elementParagraph,
-      elementHeading
+      elementHeadingLevel01,
+      elementHeadingLevel02
     ],
     // text-type nodes
     texts: [
@@ -53,10 +57,7 @@ const YourEditor = () => {
   // Pass initial data to Bento.
   const initialValue = [
     {
-      type: 'heading',
-      attributes: {
-        level: 1,
-      },
+      type: 'heading01',
       children: [
         {
           type: 'format',
