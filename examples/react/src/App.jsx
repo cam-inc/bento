@@ -51,7 +51,7 @@ import elementLink, { LinkRenderer } from "@bento-editor/element-link";
 import elementEmbed, { EmbedRenderer } from "@bento-editor/element-embed";
 import textFormat, { TextFormatRenderer } from "@bento-editor/text-format";
 import textEmoji, { EmojiRenderer } from "@bento-editor/text-emoji";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const config = {
   elements: [
