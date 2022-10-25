@@ -1,0 +1,32 @@
+{
+  "name": "@bento-editor/example-react",
+  "version": "0.0.7",
+  "dependencies": {
+    "@bento-editor/core": "*",
+    "@bento-editor/element-callout": "*",
+    "@bento-editor/element-divider": "*",
+    "@bento-editor/element-embed": "*",
+    "@bento-editor/element-heading": "*",
+    "@bento-editor/element-link": "*",
+    "@bento-editor/element-list": "*",
+    "@bento-editor/element-note": "*",
+    "@bento-editor/element-paragraph": "*",
+    "@bento-editor/element-quote": "*",
+    "@bento-editor/element-toggle": "*",
+    "@bento-editor/text-emoji": "*",
+    "@bento-editor/text-format": "*",
+    "@vanilla-extract/css": "1.7.2",
+    "@vanilla-extract/dynamic": "2.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "slate": "0.82.0",
+    "slate-react": "0.82.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^2.1.0",
+    "vite": "^3.1.8"
+  },
+  "scripts": {
+    "dev": "vite"
+  }
+}

@@ -352,13 +352,11 @@ const Home: NextPage = () => {
       },
       {
         type: 'quote',
-        attributes: {
-          cite: 'google'
-        },
+        attributes: {},
         children: [
           {
             type: 'format',
-            text: 'default value',
+            text: 'quotequote',
           },
         ],
       },

@@ -10,7 +10,7 @@ const editable: Element<Attributes>['editable'] = {
       children: [
         {
           type: 'format',
-          text: '',
+          text: 'ToDo',
         },
       ],
     },

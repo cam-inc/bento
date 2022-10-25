@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
@@ -13,6 +13,8 @@ import { styles } from './index.css';
 
 export type ElementContainerProps = RenderElementProps & {
   utilsPositionY?: number;
+  className?: string;
+  as?: ElementType;
 };
 
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
@@ -130,13 +132,15 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     []
   );
 
+  const TagName = props.as || 'div';
+
   return (
     <>
-      <div
+      <TagName
         {...props.attributes}
         data-type={props.element.type}
         data-path={path.toString()}
-        className={styles.root}
+        className={classnames(styles.root, props.className)}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
@@ -152,7 +156,10 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
             })}
           />
         </div>
-        <div className={styles.body} ref={bodyRef}>
+        <div className={classnames({
+          [styles.body]: true,
+          [styles.bodyPatched]: props.as === 'li'
+        })} ref={bodyRef}>
           {props.children}
         </div>
         <div
@@ -188,7 +195,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </TagName>
       <Popover {...popoverToolbox.bind}>
         <Toolbox path={path} onDone={handleToolboxDone} />
       </Popover>

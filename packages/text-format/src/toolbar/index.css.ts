@@ -34,6 +34,7 @@ export const styles = {
         width: 20,
         height: 20,
         color: themeVars.color.backgroundOn,
+        marginRight: themeVars.space[3],
       },
     },
   }),

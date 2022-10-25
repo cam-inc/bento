@@ -5,8 +5,8 @@ export type ExclamationIconProps = {
 };
 
 export const iconColorMap = new Map<ExclamationIconProps['type'], string>([
-  ['note', themeVars.color.accentXXC60],
-  ['callout', themeVars.color.accentXXJ70],
+  ['note', themeVars.color.accentXXDOnHigh],
+  ['callout', themeVars.color.accentXXJOnHigh],
 ]);
 
 export const ExclamationIcon: React.FC<ExclamationIconProps> = ({ type }) => {

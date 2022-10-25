@@ -1,4 +1,4 @@
-import { Element, ElementContainer, helpers } from '@bento-editor/core';
+import { Element, ElementContainer, helpers, OpenerIcon } from '@bento-editor/core';
 import { useCallback, useContext } from 'react';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
@@ -28,11 +28,11 @@ const editable: Element<Attributes>['editable'] = {
     }, [JSON.stringify(props.editor), parentElement]);
 
     return (
-      <ElementContainer {...props}>
+      <ElementContainer {...props} utilsPositionY={4}>
         <div className={styles.root}>
           <div className={styles.ctrl} contentEditable={false}>
-            <button onClick={handleCtrlClick}>
-              {parentElement.attributes?.isOpen ? 'open' : 'close'}
+            <button className={styles.opener} onClick={handleCtrlClick}>
+              <OpenerIcon isOpened={parentElement.attributes?.isOpen} />
             </button>
           </div>
           <div className={styles.body}>{props.children}</div>

@@ -8,6 +8,8 @@ export const styles = {
       [`.${EditorClassName} &`]: {
         color: themeVars.color.backgroundOn,
         paddingLeft: 24,
+        listStyleType: 'decimal',
+        listStylePosition: 'inside',
       },
     },
   }),

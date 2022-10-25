@@ -3,10 +3,10 @@ import { style } from '@vanilla-extract/css';
 
 export const styles = {
   root: style({
-    backgroundColor: themeVars.color.accentXXJ95,
+    backgroundColor: themeVars.color.accentXXJ,
     display: 'flex',
     padding: `${themeVars.space[4]} ${themeVars.space[2]}`,
-    color: themeVars.color.surfaceInvertedOnSlight,
+    color: themeVars.color.accentXXJOn,
   }),
   exclamationIcon: style({
     display: 'block',

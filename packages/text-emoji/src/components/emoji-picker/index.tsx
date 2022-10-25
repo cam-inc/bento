@@ -55,8 +55,9 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = (props) => {
       styleElem.innerHTML = `#root {
         --em-rgb-background: ${themeVars.color.background};
         --em-color-border: ${themeVars.color.background};
-      
+
         border: solid 1px ${themeVars.color.backgroundOnSlight};
+        background-color: ${themeVars.color.background};
       }
 
       .search {

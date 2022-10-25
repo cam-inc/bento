@@ -22,6 +22,13 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         marginTop: themeVars.space['3'],
+      }
+    },
+  }),
+  input: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        backgroundColor: 'transparent',
         color: themeVars.color.backgroundOnLow,
         fontSize: themeVars.fontSize.label.small,
       }

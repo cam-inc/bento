@@ -18,7 +18,7 @@ const editable: Element<Attributes>['editable'] = {
       return null;
     }
     return (
-      <ElementContainer {...props}>
+      <ElementContainer {...props} className={styles.container} utilsPositionY={-1}>
         <div className={styles.root}>{props.children}</div>
       </ElementContainer>
     );

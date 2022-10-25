@@ -3,11 +3,11 @@ import { Attributes } from '../attributes';
 import { styles } from './index.css';
 
 const editable: Element<Attributes>['editable'] = {
-  defaultValue: [{ type: 'format', text: 'default value' }],
+  defaultValue: [{ type: 'format', text: '中見出し' }],
   Component: (props) => {
     return (
-      <ElementContainer {...props}>
-        <h1 className={styles.root}>{props.children}</h1>
+      <ElementContainer {...props} utilsPositionY={5}>
+        <h2 className={styles.root}>{props.children}</h2>
       </ElementContainer>
     );
   },

@@ -16,7 +16,11 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,md}\"",
     "graph": "turbo run build --dry-run --graph=task-graph.png"
   },
-  "workspaces": ["apps/*", "examples/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "examples/*",
+    "packages/*"
+  ],
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",

@@ -1,4 +1,4 @@
-import { Element, ElementContainer } from '@bento-editor/core';
+import { Element, ElementContainer, ExclamationIcon } from '@bento-editor/core';
 import { Attributes } from '../attributes';
 import { styles } from './index.css';
 
@@ -6,13 +6,20 @@ const editable: Element<Attributes>['editable'] = {
   defaultValue: [
     {
       type: 'format',
-      text: 'default value',
+      text: '入力してください',
     },
   ],
   Component: (props) => {
     return (
-      <ElementContainer {...props}>
-        <div className={styles.root}>{props.children}</div>
+      <ElementContainer {...props} utilsPositionY={9}>
+        <div className={styles.root}>
+          <div className={styles.icon}>
+            <ExclamationIcon type="note" />
+          </div>
+          <div>
+            {props.children}
+          </div>
+        </div>
       </ElementContainer>
     );
   },
