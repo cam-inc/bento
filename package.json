@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "bento-editor",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "volta": {
     "node": "18.7.0"
   },
