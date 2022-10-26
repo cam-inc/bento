@@ -1,10 +1,7 @@
 {
   "name": "@bento-editor/core",
   "version": "0.0.8",
-  "description": "JSON Schema based block-styled editor.",
-  "keywords": [
-    "TODO"
-  ],
+  "description": "Core for Bento Editor",
   "main": "./dist/cjs.js",
   "module": "./dist/es.js",
   "types": "./dist/types/index.d.ts",

@@ -1,10 +1,7 @@
 {
   "name": "@bento-editor/element-heading",
   "version": "0.0.8",
-  "description": "TODO",
-  "keywords": [
-    "TODO"
-  ],
+  "description": "Heading Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
