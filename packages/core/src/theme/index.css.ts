@@ -14,6 +14,7 @@ export const defaultThemeToken = {
     '2': '0.5rem',
     '3': '0.75rem',
     '4': '1rem',
+    '6': '1.5rem',
     '8': '2rem',
     '9': '2.25rem',
     '40': '10rem',
