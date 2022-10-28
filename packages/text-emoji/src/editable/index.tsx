@@ -9,9 +9,12 @@ const editable: Text<Attributes>['editable'] = {
   Component: (props) => {
     const popover = usePopover<HTMLSpanElement>();
 
+    console.log('test: ', props.text.text);
     useEffect(() => {
-      popover.open();
-    }, []);
+      if (!props.text.text) {
+        popover.open();
+      }
+    }, [props.text.text]);
 
     const createInsertText = useCallback(() => {
       return (emojiNative: string) => {

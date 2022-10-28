@@ -1,10 +1,7 @@
 {
   "name": "@bento-editor/element-divider",
   "version": "0.0.8",
-  "description": "TODO",
-  "keywords": [
-    "TODO"
-  ],
+  "description": "Divider Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
