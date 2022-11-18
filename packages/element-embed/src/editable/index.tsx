@@ -74,30 +74,21 @@ var id='embedly-platform', n = 'script';
       }
     }, [typeof window.embedly, embedlyRef, href]);
 
-    const handleFormSubmit = useCallback(
-      (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        if (
-          newHref !== undefined &&
-          isUrl(newHref) &&
-          embedTitle !== undefined
-        ) {
-          setNodes({
-            attributes: {
-              href: newHref,
-              title: embedTitle,
-            },
-          });
-        } else {
-          setErrors({
-            reason: 'Invalid url.',
-            message: '有効なURLを入力してください。',
-          });
-        }
-      },
-      [setNodes, newHref, embedTitle]
-    );
+    const submittedForm = useCallback(() => {
+      if (newHref !== undefined && isUrl(newHref) && embedTitle !== undefined) {
+        setNodes({
+          attributes: {
+            href: newHref,
+            title: embedTitle,
+          },
+        });
+      } else {
+        setErrors({
+          reason: 'Invalid url.',
+          message: '有効なURLを入力してください。',
+        });
+      }
+    }, [setNodes, newHref, embedTitle]);
 
     const handleTextboxChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,8 +104,9 @@ var id='embedly-platform', n = 'script';
     const handleFormButtonClick = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
+        submittedForm();
       },
-      []
+      [submittedForm]
     );
 
     return (
@@ -127,7 +119,6 @@ var id='embedly-platform', n = 'script';
             </div>
           ) : (
             <Form
-              handleFormSubmit={handleFormSubmit}
               handleTextboxChange={handleTextboxChange}
               handleButtonClick={handleFormButtonClick}
               labelValue="PDF、Googleドライブ、Googleマップ、CodePenなどのリンクが使えます"

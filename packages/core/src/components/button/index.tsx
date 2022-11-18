@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import { styles } from './index.css';
 
 export const BUTTON_RADIUS = {
@@ -17,34 +17,32 @@ export type ButtonProps = {
   children: React.ReactNode;
 };
 
-export const Button: React.FC<ButtonProps> = ({
-  radius = BUTTON_RADIUS.NONE,
-  onClick,
-  children,
-  disabled,
-}) => {
-  const handleClick = useCallback(
-    (e: React.MouseEvent) => {
-      onClick(e);
-    },
-    [onClick]
-  );
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ radius = BUTTON_RADIUS.NONE, onClick, children, disabled }, ref) => {
+    const handleClick = useCallback(
+      (e: React.MouseEvent) => {
+        onClick(e);
+      },
+      [onClick]
+    );
 
-  return (
-    <button
-      type="button"
-      className={classnames({
-        [styles.root]: true,
-        [styles.rootRadiusSmall]: radius === BUTTON_RADIUS.SMALL,
-        [styles.rootRadiusMedium]: radius === BUTTON_RADIUS.MEDIUM,
-        [styles.rootRadiusFull]: radius === BUTTON_RADIUS.FULL,
-        [styles.disabled]: !!disabled,
-      })}
-      onClick={handleClick}
-      disabled={disabled}
-    >
-      <div className={styles.bg} />
-      <div className={styles.container}>{children}</div>
-    </button>
-  );
-};
+    return (
+      <button
+        ref={ref}
+        type="button"
+        className={classnames({
+          [styles.root]: true,
+          [styles.rootRadiusSmall]: radius === BUTTON_RADIUS.SMALL,
+          [styles.rootRadiusMedium]: radius === BUTTON_RADIUS.MEDIUM,
+          [styles.rootRadiusFull]: radius === BUTTON_RADIUS.FULL,
+          [styles.disabled]: !!disabled,
+        })}
+        onClick={handleClick}
+        disabled={disabled}
+      >
+        <div className={styles.bg} />
+        <div className={styles.container}>{children}</div>
+      </button>
+    );
+  }
+);
