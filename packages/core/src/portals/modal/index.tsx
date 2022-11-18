@@ -24,7 +24,9 @@ export const Modal: React.FC<ModalProps> = ({
     <Portal target={TARGET.MODAL}>
       <div className={styles.root}>
         <div>
-          <button onClick={handleCloseClick}>close</button>
+          <button type="button" onClick={handleCloseClick}>
+            close
+          </button>
         </div>
         <div>{children}</div>
       </div>

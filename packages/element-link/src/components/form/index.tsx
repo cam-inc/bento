@@ -2,7 +2,6 @@ import { Button, Switch, Textbox } from '@bento-editor/core';
 import { styles } from './index.css';
 
 type FormProps = {
-  handleFormSubmit: React.FormEventHandler;
   handleTextboxChange: React.ChangeEventHandler;
   handleCheckboxChange: React.FormEventHandler;
   handleButtonClick: React.MouseEventHandler;
@@ -22,7 +21,6 @@ export type FormErrors = {
 };
 
 export const Form: React.FC<FormProps> = ({
-  handleFormSubmit,
   handleTextboxChange,
   handleCheckboxChange,
   handleButtonClick,
@@ -36,7 +34,7 @@ export const Form: React.FC<FormProps> = ({
   errors,
 }) => {
   return (
-    <form className={styles.root} onSubmit={handleFormSubmit}>
+    <div className={styles.root}>
       <div className={styles.field}>
         <Textbox
           value={textboxValue}
@@ -62,6 +60,6 @@ export const Form: React.FC<FormProps> = ({
           {buttonValue}
         </Button>
       </div>
-    </form>
+    </div>
   );
 };

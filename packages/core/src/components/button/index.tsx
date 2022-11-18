@@ -32,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type="button"
       className={classnames({
         [styles.root]: true,
         [styles.rootRadiusSmall]: radius === BUTTON_RADIUS.SMALL,

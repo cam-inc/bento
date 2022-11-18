@@ -34,7 +34,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
       <div>
         <ul>
           <li>
-            <button className={styles.button} onClick={handleDeleteClick}>
+            <button type="button" className={styles.button} onClick={handleDeleteClick}>
               <div className={styles.buttonBG} />
               <div className={styles.buttonContainer}>
                 <div className={styles.buttonIcon}>
@@ -45,7 +45,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
             </button>
           </li>
           <li>
-            <button className={styles.button} onClick={handleCopyClick}>
+            <button type="button" className={styles.button} onClick={handleCopyClick}>
               <div className={styles.buttonBG} />
               <div className={styles.buttonContainer}>
                 <div className={styles.buttonIcon}>

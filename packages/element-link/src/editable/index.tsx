@@ -47,39 +47,9 @@ const editable: Element<Attributes>['editable'] = {
       setIsHovering(true);
     }, []);
 
-    const handleFormSubmit = useCallback(
-      (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        if (newHref !== undefined && isUrl(newHref)) {
-          setNodes({
-            attributes: {
-              href: newHref,
-              target: openInNew ? '_blank' : '_self',
-            },
-          });
-        } else {
-          setErrors({
-            reason: 'Invalid url.',
-            message: '有効なURLを入力してください。',
-          });
-        }
-
-        if (isEditing) {
-          setIsEditing(false);
-        }
-
-        if (showEdit) {
-          setShowEdit(false);
-        }
-      },
-      [setNodes, isEditing, isHovering, newHref, openInNew]
-    );
-
     const handleTextboxChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewHref(event.target.value);
-
         if (event.target.checkValidity()) {
           setErrors(null);
         }
@@ -95,11 +65,36 @@ const editable: Element<Attributes>['editable'] = {
       setIsEditing(true);
     }, []);
 
+    const submittedForm = useCallback(() => {
+      if (newHref !== undefined && isUrl(newHref)) {
+        setNodes({
+          attributes: {
+            href: newHref,
+            target: openInNew ? '_blank' : '_self',
+          },
+        });
+      } else {
+        setErrors({
+          reason: 'Invalid url.',
+          message: '有効なURLを入力してください。',
+        });
+      }
+
+      if (isEditing) {
+        setIsEditing(false);
+      }
+
+      if (showEdit) {
+        setShowEdit(false);
+      }
+    }, [setNodes, isEditing, isHovering, newHref, openInNew]);
+
     const handleFormButtonClick = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
+        submittedForm();
       },
-      []
+      [submittedForm]
     );
 
     return (
@@ -130,7 +125,6 @@ const editable: Element<Attributes>['editable'] = {
             </div>
           ) : (
             <Form
-              handleFormSubmit={handleFormSubmit}
               handleTextboxChange={handleTextboxChange}
               handleCheckboxChange={handleCheckboxChange}
               handleButtonClick={handleFormButtonClick}
