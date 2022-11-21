@@ -74,22 +74,6 @@ var id='embedly-platform', n = 'script';
       }
     }, [typeof window.embedly, embedlyRef, href]);
 
-    const submittedForm = useCallback(() => {
-      if (newHref !== undefined && isUrl(newHref) && embedTitle !== undefined) {
-        setNodes({
-          attributes: {
-            href: newHref,
-            title: embedTitle,
-          },
-        });
-      } else {
-        setErrors({
-          reason: 'Invalid url.',
-          message: '有効なURLを入力してください。',
-        });
-      }
-    }, [setNodes, newHref, embedTitle]);
-
     const handleTextboxChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewHref(event.target.value);
@@ -104,10 +88,37 @@ var id='embedly-platform', n = 'script';
     const handleFormButtonClick = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        submittedForm();
+        if (
+          newHref !== undefined &&
+          isUrl(newHref) &&
+          embedTitle !== undefined
+        ) {
+          setNodes({
+            attributes: {
+              href: newHref,
+              title: embedTitle,
+            },
+          });
+        } else {
+          setErrors({
+            reason: 'Invalid url.',
+            message: '有効なURLを入力してください。',
+          });
+        }
       },
-      [submittedForm]
+      [setNodes, newHref, embedTitle]
     );
+
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+    // The click event will be called for the second time.
+    // Emitting this for doing setNodes without re-rendering recursively.
+    useEffect(() => {
+      if (embedTitle != null && embedTitle !== '') {
+        buttonRef.current?.dispatchEvent(
+          new Event('click', { cancelable: true, bubbles: true })
+        );
+      }
+    }, [buttonRef, embedTitle]);
 
     return (
       <ElementContainer {...props}>
@@ -126,7 +137,7 @@ var id='embedly-platform', n = 'script';
               placeholder={placeholder}
               buttonDisabled={newHref == null || newHref === ''}
               errors={errors}
-              embedTitle={embedTitle}
+              buttonRef={buttonRef}
             />
           )}
         </div>

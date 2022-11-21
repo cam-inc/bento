@@ -44,26 +44,6 @@ const toolbar: Text<Attributes>['toolbar'] = {
     const [href, setHref] = useState(attributes.defaultValue.href ?? '');
     const [errors, setErrors] = useState<FormErrors | null>(null);
 
-    const submittedForm = useCallback(() => {
-      if (href !== undefined && isUrl(href)) {
-        helpers.Transforms.setNodes(
-          editor,
-          {
-            attributes: {
-              href,
-              target: openInNew ? '_blank' : '_self',
-            },
-          },
-          { match: (n) => helpers.Text.isText(n), split: true }
-        );
-        popoverLink.close();
-      } else {
-        setErrors({
-          reason: 'Invalid url.',
-          message: '有効なURLを入力してください。',
-        });
-      }
-    }, [editor, href, openInNew, popoverLink]);
     const handleFormTextboxChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
         setHref(event.target.value);
@@ -80,9 +60,26 @@ const toolbar: Text<Attributes>['toolbar'] = {
     const handleFormButtonClick = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        submittedForm();
+        if (href !== undefined && isUrl(href)) {
+          helpers.Transforms.setNodes(
+            editor,
+            {
+              attributes: {
+                href,
+                target: openInNew ? '_blank' : '_self',
+              },
+            },
+            { match: (n) => helpers.Text.isText(n), split: true }
+          );
+          popoverLink.close();
+        } else {
+          setErrors({
+            reason: 'Invalid url.',
+            message: '有効なURLを入力してください。',
+          });
+        }
       },
-      [submittedForm]
+      [editor, href, openInNew, popoverLink]
     );
 
     const popoverColor = usePopover<HTMLLIElement>();

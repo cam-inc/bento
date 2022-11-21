@@ -65,36 +65,32 @@ const editable: Element<Attributes>['editable'] = {
       setIsEditing(true);
     }, []);
 
-    const submittedForm = useCallback(() => {
-      if (newHref !== undefined && isUrl(newHref)) {
-        setNodes({
-          attributes: {
-            href: newHref,
-            target: openInNew ? '_blank' : '_self',
-          },
-        });
-      } else {
-        setErrors({
-          reason: 'Invalid url.',
-          message: '有効なURLを入力してください。',
-        });
-      }
-
-      if (isEditing) {
-        setIsEditing(false);
-      }
-
-      if (showEdit) {
-        setShowEdit(false);
-      }
-    }, [setNodes, isEditing, isHovering, newHref, openInNew]);
-
     const handleFormButtonClick = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        submittedForm();
+        if (newHref !== undefined && isUrl(newHref)) {
+          setNodes({
+            attributes: {
+              href: newHref,
+              target: openInNew ? '_blank' : '_self',
+            },
+          });
+        } else {
+          setErrors({
+            reason: 'Invalid url.',
+            message: '有効なURLを入力してください。',
+          });
+        }
+
+        if (isEditing) {
+          setIsEditing(false);
+        }
+
+        if (showEdit) {
+          setShowEdit(false);
+        }
       },
-      [submittedForm]
+      [setNodes, isEditing, isHovering, newHref, openInNew]
     );
 
     return (
