@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-link",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Link Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
