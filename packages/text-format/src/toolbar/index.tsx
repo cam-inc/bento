@@ -44,10 +44,22 @@ const toolbar: Text<Attributes>['toolbar'] = {
     const [href, setHref] = useState(attributes.defaultValue.href ?? '');
     const [errors, setErrors] = useState<FormErrors | null>(null);
 
-    const handleFormSubmit = useCallback(
-      (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleFormTextboxChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setHref(event.target.value);
 
+        if (event.target.checkValidity()) {
+          setErrors(null);
+        }
+      },
+      []
+    );
+    const handleFormSwitchChange = useCallback(() => {
+      setOpenInNew((prevState) => !prevState);
+    }, []);
+    const handleFormButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
         if (href !== undefined && isUrl(href)) {
           helpers.Transforms.setNodes(
             editor,
@@ -68,25 +80,6 @@ const toolbar: Text<Attributes>['toolbar'] = {
         }
       },
       [editor, href, openInNew, popoverLink]
-    );
-    const handleFormTextboxChange = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setHref(event.target.value);
-
-        if (event.target.checkValidity()) {
-          setErrors(null);
-        }
-      },
-      []
-    );
-    const handleFormSwitchChange = useCallback(() => {
-      setOpenInNew((prevState) => !prevState);
-    }, []);
-    const handleFormButtonClick = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-      },
-      []
     );
 
     const popoverColor = usePopover<HTMLLIElement>();
@@ -129,7 +122,11 @@ const toolbar: Text<Attributes>['toolbar'] = {
             />
           </li>
           <li>
-            <button className={styles.button} onClick={handleBoldClick}>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleBoldClick}
+            >
               <svg viewBox="0 0 20 20">
                 <path
                   d="M6 15V4H10.2696C11.2087 4 12.0031 4.27767 12.6531 4.833C13.3023 5.389 13.627 6.06967 13.627 6.875C13.627 7.403 13.499 7.87167 13.243 8.281C12.9876 8.691 12.6252 9.014 12.1557 9.25V9.354C12.7081 9.53467 13.1534 9.861 13.4917 10.333C13.8306 10.8057 14 11.3407 14 11.938C14 12.8407 13.6648 13.5767 12.9943 14.146C12.3245 14.7153 11.4646 15 10.4148 15H6ZM8.05123 8.5H10.1243C10.5388 8.5 10.891 8.37167 11.1808 8.115C11.4713 7.85767 11.6165 7.54167 11.6165 7.167C11.6165 6.80567 11.4782 6.49667 11.2017 6.24C10.9251 5.98267 10.5866 5.854 10.186 5.854H8.05123V8.5ZM8.05123 13.104H10.3522C10.8356 13.104 11.2226 12.979 11.5131 12.729C11.8029 12.479 11.9478 12.1387 11.9478 11.708C11.9478 11.264 11.7992 10.9133 11.5021 10.656C11.205 10.3993 10.8008 10.271 10.2895 10.271H8.05123V13.104Z"
@@ -139,7 +136,11 @@ const toolbar: Text<Attributes>['toolbar'] = {
             </button>
           </li>
           <li>
-            <button className={styles.button} onClick={handleItalicClick}>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleItalicClick}
+            >
               <svg viewBox="0 0 20 20">
                 <path
                   d="M5 16V14H7.375L10.562 6H8V4H15V6H12.729L9.521 14H12V16H5Z"
@@ -150,6 +151,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
           </li>
           <li>
             <button
+              type="button"
               className={styles.button}
               onClick={handleStrikethroughClick}
             >
@@ -162,7 +164,11 @@ const toolbar: Text<Attributes>['toolbar'] = {
             </button>
           </li>
           <li>
-            <button className={styles.button} onClick={handleUnderlineClick}>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleUnderlineClick}
+            >
               <svg viewBox="0 0 20 20">
                 <path
                   d="M4 17V15.5H16V17H4ZM10 14C8.69981 14 7.60329 13.566 6.71044 12.698C5.81759 11.83 5.37116 10.764 5.37116 9.5V3H7.42842V9.5C7.42842 10.1947 7.67838 10.785 8.1783 11.271C8.67821 11.757 9.28544 12 10 12C10.7146 12 11.3218 11.757 11.8217 11.271C12.3216 10.785 12.5716 10.1947 12.5716 9.5V3H14.6288V9.5C14.6288 10.764 14.1824 11.83 13.2896 12.698C12.3967 13.566 11.3002 14 10 14Z"
@@ -187,7 +193,6 @@ const toolbar: Text<Attributes>['toolbar'] = {
         </ul>
         <Popover {...popoverLink.bind}>
           <Form
-            handleFormSubmit={handleFormSubmit}
             handleTextboxChange={handleFormTextboxChange}
             handleSwitchChange={handleFormSwitchChange}
             handleButtonClick={handleFormButtonClick}

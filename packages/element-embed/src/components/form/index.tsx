@@ -1,18 +1,16 @@
 import { Button, Textbox } from '@bento-editor/core';
-import { useRef, useEffect } from 'react';
 import { styles } from './index.css';
 
 type FormProps = {
-  handleFormSubmit: React.FormEventHandler;
   handleTextboxChange: React.ChangeEventHandler;
   handleButtonClick: React.MouseEventHandler;
+  buttonRef: React.MutableRefObject<HTMLButtonElement | null>;
   labelValue: string;
   buttonValue: string;
   textboxValue?: string;
   placeholder?: string;
   buttonDisabled?: boolean;
   errors?: FormErrors | null;
-  embedTitle?: string | null;
 };
 
 export type FormErrors = {
@@ -21,31 +19,18 @@ export type FormErrors = {
 };
 
 export const Form: React.FC<FormProps> = ({
-  handleFormSubmit,
   handleTextboxChange,
   handleButtonClick,
+  buttonRef,
   labelValue,
   buttonValue,
   textboxValue,
   placeholder,
   buttonDisabled,
   errors,
-  embedTitle,
 }) => {
-  const formRef = useRef<HTMLFormElement | null>(null);
-
-  // The submit event will be called for the second time.
-  // Emitting this for doing setNodes without re-rendering recursively.
-  useEffect(() => {
-    if (embedTitle != null && embedTitle !== '') {
-      formRef.current?.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true })
-      );
-    }
-  }, [formRef, embedTitle]);
-
   return (
-    <form ref={formRef} className={styles.root} onSubmit={handleFormSubmit}>
+    <div className={styles.root}>
       <div className={styles.field}>
         <Textbox
           value={textboxValue}
@@ -63,10 +48,11 @@ export const Form: React.FC<FormProps> = ({
           onClick={handleButtonClick}
           disabled={buttonDisabled}
           radius="full"
+          ref={buttonRef}
         >
           {buttonValue}
         </Button>
       </div>
-    </form>
+    </div>
   );
 };

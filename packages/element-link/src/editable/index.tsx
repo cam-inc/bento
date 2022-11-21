@@ -47,10 +47,27 @@ const editable: Element<Attributes>['editable'] = {
       setIsHovering(true);
     }, []);
 
-    const handleFormSubmit = useCallback(
-      (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleTextboxChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewHref(event.target.value);
+        if (event.target.checkValidity()) {
+          setErrors(null);
+        }
+      },
+      []
+    );
 
+    const handleCheckboxChange = useCallback(() => {
+      setOpenInNew((prevState) => !prevState);
+    }, []);
+
+    const handleEditButtonClick = useCallback(() => {
+      setIsEditing(true);
+    }, []);
+
+    const handleFormButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
         if (newHref !== undefined && isUrl(newHref)) {
           setNodes({
             attributes: {
@@ -74,32 +91,6 @@ const editable: Element<Attributes>['editable'] = {
         }
       },
       [setNodes, isEditing, isHovering, newHref, openInNew]
-    );
-
-    const handleTextboxChange = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewHref(event.target.value);
-
-        if (event.target.checkValidity()) {
-          setErrors(null);
-        }
-      },
-      []
-    );
-
-    const handleCheckboxChange = useCallback(() => {
-      setOpenInNew((prevState) => !prevState);
-    }, []);
-
-    const handleEditButtonClick = useCallback(() => {
-      setIsEditing(true);
-    }, []);
-
-    const handleFormButtonClick = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-      },
-      []
     );
 
     return (
@@ -130,7 +121,6 @@ const editable: Element<Attributes>['editable'] = {
             </div>
           ) : (
             <Form
-              handleFormSubmit={handleFormSubmit}
               handleTextboxChange={handleTextboxChange}
               handleCheckboxChange={handleCheckboxChange}
               handleButtonClick={handleFormButtonClick}

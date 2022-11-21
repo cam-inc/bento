@@ -74,10 +74,20 @@ var id='embedly-platform', n = 'script';
       }
     }, [typeof window.embedly, embedlyRef, href]);
 
-    const handleFormSubmit = useCallback(
-      (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleTextboxChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewHref(event.target.value);
 
+        if (event.target.checkValidity()) {
+          setErrors(null);
+        }
+      },
+      []
+    );
+
+    const handleFormButtonClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
         if (
           newHref !== undefined &&
           isUrl(newHref) &&
@@ -99,23 +109,16 @@ var id='embedly-platform', n = 'script';
       [setNodes, newHref, embedTitle]
     );
 
-    const handleTextboxChange = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewHref(event.target.value);
-
-        if (event.target.checkValidity()) {
-          setErrors(null);
-        }
-      },
-      []
-    );
-
-    const handleFormButtonClick = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-      },
-      []
-    );
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+    // The click event will be called for the second time.
+    // Emitting this for doing setNodes without re-rendering recursively.
+    useEffect(() => {
+      if (embedTitle != null && embedTitle !== '') {
+        buttonRef.current?.dispatchEvent(
+          new Event('click', { cancelable: true, bubbles: true })
+        );
+      }
+    }, [buttonRef, embedTitle]);
 
     return (
       <ElementContainer {...props}>
@@ -127,7 +130,6 @@ var id='embedly-platform', n = 'script';
             </div>
           ) : (
             <Form
-              handleFormSubmit={handleFormSubmit}
               handleTextboxChange={handleTextboxChange}
               handleButtonClick={handleFormButtonClick}
               labelValue="PDF、Googleドライブ、Googleマップ、CodePenなどのリンクが使えます"
@@ -135,7 +137,7 @@ var id='embedly-platform', n = 'script';
               placeholder={placeholder}
               buttonDisabled={newHref == null || newHref === ''}
               errors={errors}
-              embedTitle={embedTitle}
+              buttonRef={buttonRef}
             />
           )}
         </div>
