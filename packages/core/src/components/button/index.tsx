@@ -1,11 +1,5 @@
 import classnames from 'classnames';
-import {
-  forwardRef,
-  MouseEvent,
-  MouseEventHandler,
-  ReactNode,
-  useCallback,
-} from 'react';
+import { forwardRef, useCallback } from 'react';
 import { styles } from './index.css';
 
 export const BUTTON_RADIUS = {
@@ -19,14 +13,14 @@ export type ButtonRadius = typeof BUTTON_RADIUS[keyof typeof BUTTON_RADIUS];
 export type ButtonProps = {
   radius?: ButtonRadius;
   disabled?: boolean;
-  onClick: MouseEventHandler;
-  children: ReactNode;
+  onClick: React.MouseEventHandler;
+  children: React.ReactNode;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ radius = BUTTON_RADIUS.NONE, onClick, children, disabled }, ref) => {
     const handleClick = useCallback(
-      (e: MouseEvent) => {
+      (e: React.MouseEvent) => {
         onClick(e);
       },
       [onClick]
