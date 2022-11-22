@@ -2,8 +2,13 @@
   "private": false,
   "name": "bento-editor",
   "description": "Bento Editor - Notion-like block editor",
-  "keywords": ["bento", "bento editor", "block editor", "editor"],
-  "version": "0.0.9",
+  "keywords": [
+    "bento",
+    "bento editor",
+    "block editor",
+    "editor"
+  ],
+  "version": "0.0.10",
   "volta": {
     "node": "18.7.0"
   },

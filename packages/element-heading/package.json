@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-heading",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Heading Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -54,6 +54,6 @@
     "vite": "^3.1.8"
   },
   "peerDependencies": {
-    "@bento-editor/core": "0.0.9"
+    "@bento-editor/core": "0.0.10"
   }
 }
