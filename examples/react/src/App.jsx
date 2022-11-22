@@ -126,7 +126,7 @@ export default function App() {
         initialValue={initialValue}
         onChange={handleChange}
       />
-      {/* <EditorRenderer renderers={renderers} data={value} config={config} /> */}
+      <EditorRenderer renderers={renderers} data={value} config={config} />
     </div>
   );
 }
