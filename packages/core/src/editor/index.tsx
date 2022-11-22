@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react';
-import { createEditor, Element } from 'slate';
+import { useCallback, useEffect, useMemo } from 'react';
+import { createEditor, Descendant, Element } from 'slate';
 import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config } from '../config';
 import { Editable } from '../editable';
@@ -17,6 +17,7 @@ import { Toolbar } from '../toolbar';
 import { debounce } from '../utils';
 import { styles } from './index.css';
 
+declare const VERSION: string;
 export const EditorClassName = styles.root;
 
 // `SlateProps` is not exported from `slate-react`.
@@ -28,7 +29,7 @@ export type EditorProps = {
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
   initialValue?: SlateProps['value'];
-  onChange: SlateProps['onChange'];
+  onChange?: (value: { version: string; elements: Descendant[] }) => void;
 };
 export const Editor: React.FC<EditorProps> = ({
   config = { elements: [], texts: [], themeToken: {} },
@@ -37,7 +38,7 @@ export const Editor: React.FC<EditorProps> = ({
       children: [{ text: '' }],
     },
   ],
-  onChange = () => { },
+  onChange = () => {},
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());
@@ -80,13 +81,23 @@ export const Editor: React.FC<EditorProps> = ({
     return editor;
   }, [config]);
 
+  const handleOnChange = useCallback<NonNullable<SlateProps['onChange']>>(
+    (value) => {
+      onChange({
+        version: 'v10',
+        elements: value,
+      });
+    },
+    []
+  );
+
   useEffect(() => {
     ReactEditor.focus(editor);
   }, []);
 
   return (
     <>
-      <Slate editor={editor} value={initialValue} onChange={onChange}>
+      <Slate editor={editor} value={initialValue} onChange={handleOnChange}>
         <GlobalStateProvider>
           {/* Need to wrap with a react component to encapsulate all state related processes inside the RecoilRoot component. */}
           <Root config={config} />

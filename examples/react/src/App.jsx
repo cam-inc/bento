@@ -1,40 +1,40 @@
-import "@bento-editor/core/styles";
-import "@bento-editor/element-heading/styles";
-import "@bento-editor/element-list/styles";
-import "@bento-editor/element-paragraph/styles";
-import "@bento-editor/element-note/styles";
-import "@bento-editor/element-callout/styles";
-import "@bento-editor/element-link/styles";
-import "@bento-editor/element-embed/styles";
-import "@bento-editor/element-divider/styles";
-import "@bento-editor/element-quote/styles";
-import "@bento-editor/element-toggle/styles";
-import "@bento-editor/text-format/styles";
-import "@bento-editor/text-emoji/styles";
-import { Editor, EditorRenderer } from "@bento-editor/core";
+import '@bento-editor/core/styles';
+import '@bento-editor/element-heading/styles';
+import '@bento-editor/element-list/styles';
+import '@bento-editor/element-paragraph/styles';
+import '@bento-editor/element-note/styles';
+import '@bento-editor/element-callout/styles';
+import '@bento-editor/element-link/styles';
+import '@bento-editor/element-embed/styles';
+import '@bento-editor/element-divider/styles';
+import '@bento-editor/element-quote/styles';
+import '@bento-editor/element-toggle/styles';
+import '@bento-editor/text-format/styles';
+import '@bento-editor/text-emoji/styles';
+import { Editor, EditorRenderer } from '@bento-editor/core';
 import elementParagraph, {
-  ParagraphRenderer
-} from "@bento-editor/element-paragraph";
+  ParagraphRenderer,
+} from '@bento-editor/element-paragraph';
 import {
   level01 as elementHeadingLevel01,
   level02 as elementHeadingLevel02,
   level03 as elementHeadingLevel03,
   Level01Renderer as HeadingLevel01Renderer,
   Level02Renderer as HeadingLevel02Renderer,
-  Level03Renderer as HeadingLevel03Renderer
-} from "@bento-editor/element-heading";
-import elementNote, { NoteRenderer } from "@bento-editor/element-note";
-import elementCallout, { CalloutRenderer } from "@bento-editor/element-callout";
-import elementDivider, { DividerRenderer } from "@bento-editor/element-divider";
-import elementQuote, { QuoteRenderer } from "@bento-editor/element-quote";
+  Level03Renderer as HeadingLevel03Renderer,
+} from '@bento-editor/element-heading';
+import elementNote, { NoteRenderer } from '@bento-editor/element-note';
+import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
+import elementDivider, { DividerRenderer } from '@bento-editor/element-divider';
+import elementQuote, { QuoteRenderer } from '@bento-editor/element-quote';
 import {
   container as elementToggleContainer,
   head as elementToggleHead,
   body as elementToggleBody,
   ContainerRenderer as ToggleContainerRenderer,
   HeadRenderer as ToggleHeadRenderer,
-  BodyRenderer as ToggleBodyRenderer
-} from "@bento-editor/element-toggle";
+  BodyRenderer as ToggleBodyRenderer,
+} from '@bento-editor/element-toggle';
 import {
   list as elementList,
   listItem as elementListItem,
@@ -45,13 +45,13 @@ import {
   ListItemRenderer,
   OrderedListRenderer,
   TodoListRenderer,
-  TodoListItemRenderer
-} from "@bento-editor/element-list";
-import elementLink, { LinkRenderer } from "@bento-editor/element-link";
-import elementEmbed, { EmbedRenderer } from "@bento-editor/element-embed";
-import textFormat, { TextFormatRenderer } from "@bento-editor/text-format";
-import textEmoji, { EmojiRenderer } from "@bento-editor/text-emoji";
-import React, { useState } from "react";
+  TodoListItemRenderer,
+} from '@bento-editor/element-list';
+import elementLink, { LinkRenderer } from '@bento-editor/element-link';
+import elementEmbed, { EmbedRenderer } from '@bento-editor/element-embed';
+import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
+import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
+import React, { useState } from 'react';
 
 const config = {
   elements: [
@@ -72,21 +72,21 @@ const config = {
     elementQuote,
     elementToggleContainer,
     elementToggleHead,
-    elementToggleBody
+    elementToggleBody,
   ],
-  texts: [textFormat]
+  texts: [textFormat],
 };
 
 const initialValue = [
   {
-    type: "heading01",
+    type: 'heading01',
     children: [
       {
-        type: "format",
-        text: "heading01"
-      }
-    ]
-  }
+        type: 'format',
+        text: 'heading01',
+      },
+    ],
+  },
 ];
 
 const renderers = {
@@ -95,21 +95,21 @@ const renderers = {
   heading02: HeadingLevel02Renderer,
   heading03: HeadingLevel03Renderer,
   list: ListRenderer,
-  "ordered-list": OrderedListRenderer,
-  "list-item": ListItemRenderer,
-  "todo-list": TodoListRenderer,
-  "todo-list-item": TodoListItemRenderer,
+  'ordered-list': OrderedListRenderer,
+  'list-item': ListItemRenderer,
+  'todo-list': TodoListRenderer,
+  'todo-list-item': TodoListItemRenderer,
   note: NoteRenderer,
   callout: CalloutRenderer,
   divider: DividerRenderer,
   quote: QuoteRenderer,
   toggle: ToggleContainerRenderer,
-  "toggle-head": ToggleHeadRenderer,
-  "toggle-body": ToggleBodyRenderer,
+  'toggle-head': ToggleHeadRenderer,
+  'toggle-body': ToggleBodyRenderer,
   link: LinkRenderer,
   embed: EmbedRenderer,
   format: TextFormatRenderer,
-  emoji: EmojiRenderer
+  emoji: EmojiRenderer,
 };
 
 export default function App() {
@@ -126,7 +126,7 @@ export default function App() {
         initialValue={initialValue}
         onChange={handleChange}
       />
-      <EditorRenderer renderers={renderers} data={value} config={config} />
+      {/* <EditorRenderer renderers={renderers} data={value} config={config} /> */}
     </div>
   );
 }

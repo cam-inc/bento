@@ -5,6 +5,8 @@ import react from '@vitejs/plugin-react';
 
 import pkg from './package.json';
 
+const VERSION = process.env.VERSION || pkg.version;
+
 export default defineConfig({
   build: {
     lib: {
@@ -18,6 +20,9 @@ export default defineConfig({
     rollupOptions: {
       external: Object.keys(pkg.peerDependencies),
     },
+  },
+  define: {
+    VERSION: JSON.stringify(VERSION),
   },
   plugins: [vanillaExtractPlugin(), react()],
 });
