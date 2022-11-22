@@ -447,14 +447,14 @@ const Home: NextPage = () => {
   );
 
   return (
-    <>
+    <div>
       <Editor
         config={config}
         initialValue={initialValue}
         onChange={handleChange}
       />
       <EditorRenderer renderers={renderers} data={value} config={config} />
-    </>
+    </div>
   );
 };
 
