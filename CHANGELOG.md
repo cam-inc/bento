@@ -1,13 +1,3 @@
-## [0.0.10](https://github.com/cam-inc/bento/compare/v0.0.9...v0.0.10) (2022-11-21)
-
-
-### Bug Fixes
-
-* import ([e37cc41](https://github.com/cam-inc/bento/commit/e37cc413eb6f30766402793ad03686aed4fe86ae))
-* replace form tag of embed element ([971d2e6](https://github.com/cam-inc/bento/commit/971d2e68538fc576a0cda5d34a46c650af9e120d))
-* replace form tag of text-format ([70f3590](https://github.com/cam-inc/bento/commit/70f3590ef033e1d8b98fd36fdf1a79269f4a48d6))
-* send button type to button and quit form tag of the element-link ([3d80b35](https://github.com/cam-inc/bento/commit/3d80b35be143f0a889398e0a0a0b0fa3593e8030))
-
 ## [0.0.9](https://github.com/cam-inc/bento/compare/v0.0.8...v0.0.9) (2022-10-28)
 
 

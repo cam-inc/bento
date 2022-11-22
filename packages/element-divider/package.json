@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-divider",
-  "version": "0.0.10",
+  "version": "0.0.9",
   "description": "Divider Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
