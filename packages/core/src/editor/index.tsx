@@ -84,7 +84,7 @@ export const Editor: React.FC<EditorProps> = ({
   const handleOnChange = useCallback<NonNullable<SlateProps['onChange']>>(
     (value) => {
       onChange({
-        version: 'v10',
+        version: VERSION,
         elements: value,
       });
     },
