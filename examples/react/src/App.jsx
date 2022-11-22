@@ -115,7 +115,7 @@ const renderers = {
 export default function App() {
   const [value, setValue] = useState(initialValue);
   const handleChange = (value) => {
-    setValue(value);
+    setValue(value.elements);
   };
   return (
     <div className="App">
