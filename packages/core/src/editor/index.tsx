@@ -35,7 +35,7 @@ export type EditorProps = {
   config?: Config;
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
-  initialValue?: SlateProps['value'];
+  initialValue?: CustomElement[];
   onChange?: (value: BentoReturnData) => void;
 };
 export const Editor: React.FC<EditorProps> = ({
@@ -94,7 +94,8 @@ export const Editor: React.FC<EditorProps> = ({
         meta: {
           version: VERSION,
         },
-        elements: value,
+        // Return custom elements array only
+        elements: value as CustomElement[],
       });
     },
     []
