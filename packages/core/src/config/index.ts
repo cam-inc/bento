@@ -15,7 +15,7 @@ import { ThemeToken } from '../theme/index.css';
 export type CustomElement<Attributes extends Record<string, any> = {}> = {
   type?: string;
   attributes?: Attributes;
-  children: Descendant[];
+  children: (CustomElement | CustomText)[];
 };
 export type CustomText<Attributes extends Record<string, any> = {}> = {
   type?: string;

@@ -5,8 +5,6 @@ import react from '@vitejs/plugin-react';
 
 import pkg from './package.json';
 
-const VERSION = process.env.VERSION || pkg.version;
-
 export default defineConfig({
   build: {
     lib: {
@@ -22,7 +20,7 @@ export default defineConfig({
     },
   },
   define: {
-    VERSION: JSON.stringify(VERSION),
+    VERSION: pkg.version,
   },
   plugins: [vanillaExtractPlugin(), react()],
 });

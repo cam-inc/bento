@@ -111,6 +111,10 @@ const Home: NextPage = () => {
         ],
       },
       {
+        type: 'format',
+        text: 'hogehoge',
+      },
+      {
         type: 'heading02',
         children: [
           {

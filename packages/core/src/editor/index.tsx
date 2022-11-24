@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { createEditor, Descendant, Element } from 'slate';
+import { createEditor, Element } from 'slate';
 import { Slate, withReact, ReactEditor } from 'slate-react';
-import { Config } from '../config';
+import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
@@ -20,6 +20,13 @@ import { styles } from './index.css';
 declare const VERSION: string;
 export const EditorClassName = styles.root;
 
+export type BentoReturnData = {
+  meta: {
+    version: string;
+  };
+  elements: CustomElement[];
+};
+
 // `SlateProps` is not exported from `slate-react`.
 // Below is just a workaround of this.
 type SlateProps = React.ComponentProps<typeof Slate>;
@@ -29,7 +36,7 @@ export type EditorProps = {
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
   initialValue?: SlateProps['value'];
-  onChange?: (value: { version: string; elements: Descendant[] }) => void;
+  onChange?: (value: BentoReturnData) => void;
 };
 export const Editor: React.FC<EditorProps> = ({
   config = { elements: [], texts: [], themeToken: {} },
@@ -84,7 +91,9 @@ export const Editor: React.FC<EditorProps> = ({
   const handleOnChange = useCallback<NonNullable<SlateProps['onChange']>>(
     (value) => {
       onChange({
-        version: VERSION,
+        meta: {
+          version: VERSION,
+        },
         elements: value,
       });
     },
