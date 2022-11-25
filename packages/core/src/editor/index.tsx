@@ -17,7 +17,6 @@ import { Toolbar } from '../toolbar';
 import { debounce } from '../utils';
 import { styles } from './index.css';
 
-declare const VERSION: string;
 export const EditorClassName = styles.root;
 
 export type BentoReturnData = {
