@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-note",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Note Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -54,7 +54,7 @@
     "vite": "^3.1.8"
   },
   "peerDependencies": {
-    "@bento-editor/core": "0.0.10",
+    "@bento-editor/core": "0.1.0",
     "@vanilla-extract/css": "^1.7.2"
   }
 }

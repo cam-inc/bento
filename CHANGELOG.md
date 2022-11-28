@@ -1,12 +1,19 @@
-## [0.0.10](https://github.com/cam-inc/bento/compare/v0.0.9...v0.0.10) (2022-11-22)
+## [0.1.0](https://github.com/cam-inc/bento/compare/v0.0.10...v0.1.0) (2022-11-28)
 
 
-### Bug Fixes
+### Features
 
+* exapmle ([54ca3e0](https://github.com/cam-inc/bento/commit/54ca3e016810fb9e43fdf0ace2aa917478fefebf))
 * import ([e37cc41](https://github.com/cam-inc/bento/commit/e37cc413eb6f30766402793ad03686aed4fe86ae))
+* initial value type of editor ([d84afb5](https://github.com/cam-inc/bento/commit/d84afb51fd9982f49e53c884ee1f7b8ef3afe24b))
+* react example ([506bc3f](https://github.com/cam-inc/bento/commit/506bc3f88e5d215a508084b8c5ae8e21516621d1))
+* react example ([1f95a28](https://github.com/cam-inc/bento/commit/1f95a287d4401351ce25df1e0a85ce1645e0ef95))
+* remove debug code ([3461347](https://github.com/cam-inc/bento/commit/3461347381aadeba55c29c23cca08ef274ecf27e))
+* replace declare type place to env.d.ts ([505b7ba](https://github.com/cam-inc/bento/commit/505b7ba2f8fbf84890f031b125519cabdd8bd663))
 * replace form tag of embed element ([971d2e6](https://github.com/cam-inc/bento/commit/971d2e68538fc576a0cda5d34a46c650af9e120d))
 * replace form tag of text-format ([70f3590](https://github.com/cam-inc/bento/commit/70f3590ef033e1d8b98fd36fdf1a79269f4a48d6))
 * send button type to button and quit form tag of the element-link ([3d80b35](https://github.com/cam-inc/bento/commit/3d80b35be143f0a889398e0a0a0b0fa3593e8030))
+* version export method ([bf2661d](https://github.com/cam-inc/bento/commit/bf2661d7085cc0ff5a95b222a0b954c35cb3b43d))
 
 ## [0.0.9](https://github.com/cam-inc/bento/compare/v0.0.8...v0.0.9) (2022-10-28)
 
