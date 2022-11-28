@@ -1,8 +1,9 @@
-## [0.1.0](https://github.com/cam-inc/bento/compare/v0.0.10...v0.1.0) (2022-11-28)
+## [0.1.1](https://github.com/cam-inc/bento/compare/v0.0.10...v0.1.1) (2022-11-28)
 
 
 ### Bug Fixes
 
+* CHANGELOG ([ef49699](https://github.com/cam-inc/bento/commit/ef496992fe4795b95bce4303ed8f8700ebd4b43e))
 * exapmle ([54ca3e0](https://github.com/cam-inc/bento/commit/54ca3e016810fb9e43fdf0ace2aa917478fefebf))
 * import ([e37cc41](https://github.com/cam-inc/bento/commit/e37cc413eb6f30766402793ad03686aed4fe86ae))
 * initial value type of editor ([d84afb5](https://github.com/cam-inc/bento/commit/d84afb51fd9982f49e53c884ee1f7b8ef3afe24b))
@@ -14,6 +15,7 @@
 * replace form tag of text-format ([70f3590](https://github.com/cam-inc/bento/commit/70f3590ef033e1d8b98fd36fdf1a79269f4a48d6))
 * send button type to button and quit form tag of the element-link ([3d80b35](https://github.com/cam-inc/bento/commit/3d80b35be143f0a889398e0a0a0b0fa3593e8030))
 * version export method ([bf2661d](https://github.com/cam-inc/bento/commit/bf2661d7085cc0ff5a95b222a0b954c35cb3b43d))
+* vite global constance to wrap json stringify ([bab1133](https://github.com/cam-inc/bento/commit/bab1133e70976133288fa39687db6741b1ae241a))
 
 ## [0.0.9](https://github.com/cam-inc/bento/compare/v0.0.8...v0.0.9) (2022-10-28)
 

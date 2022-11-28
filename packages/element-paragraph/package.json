@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-paragraph",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Paragraph Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -54,6 +54,6 @@
     "vite": "^3.1.8"
   },
   "peerDependencies": {
-    "@bento-editor/core": "0.1.0"
+    "@bento-editor/core": "0.1.1"
   }
 }
