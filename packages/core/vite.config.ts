@@ -20,7 +20,7 @@ export default defineConfig({
     },
   },
   define: {
-    VERSION: pkg.version,
+    VERSION: JSON.stringify(pkg.version),
   },
   plugins: [vanillaExtractPlugin(), react()],
 });
