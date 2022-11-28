@@ -348,7 +348,7 @@ const Home: NextPage = () => {
       },
       {
         type: 'divider',
-        children: [{ text: '', }],
+        children: [{ text: '' }],
       },
       {
         type: 'quote',
@@ -393,8 +393,8 @@ const Home: NextPage = () => {
           {
             type: 'format',
             text: '',
-          }
-        ]
+          },
+        ],
       },
       {
         type: 'embed',
@@ -403,8 +403,8 @@ const Home: NextPage = () => {
           {
             type: 'format',
             text: '',
-          }
-        ]
+          },
+        ],
       },
     ],
     []
@@ -412,10 +412,13 @@ const Home: NextPage = () => {
 
   const [value, setValue] = useState(initialValue);
 
-  const handleChange = useCallback<NonNullable<EditorProps['onChange']>>((value) => {
-    console.log(value);
-    setValue(value);
-  }, []);
+  const handleChange = useCallback<NonNullable<EditorProps['onChange']>>(
+    (value) => {
+      console.log(value);
+      setValue(value.elements);
+    },
+    []
+  );
 
   const renderers = useMemo<Renderers>(
     () => ({

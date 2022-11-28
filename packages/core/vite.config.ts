@@ -19,5 +19,8 @@ export default defineConfig({
       external: Object.keys(pkg.peerDependencies),
     },
   },
+  define: {
+    VERSION: pkg.version,
+  },
   plugins: [vanillaExtractPlugin(), react()],
 });

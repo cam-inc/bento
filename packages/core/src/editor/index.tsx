@@ -1,7 +1,7 @@
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { createEditor, Element } from 'slate';
 import { Slate, withReact, ReactEditor } from 'slate-react';
-import { Config } from '../config';
+import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
@@ -19,6 +19,13 @@ import { styles } from './index.css';
 
 export const EditorClassName = styles.root;
 
+export type BentoReturnData = {
+  meta: {
+    version: string;
+  };
+  elements: CustomElement[];
+};
+
 // `SlateProps` is not exported from `slate-react`.
 // Below is just a workaround of this.
 type SlateProps = React.ComponentProps<typeof Slate>;
@@ -27,8 +34,8 @@ export type EditorProps = {
   config?: Config;
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
-  initialValue?: SlateProps['value'];
-  onChange: SlateProps['onChange'];
+  initialValue?: CustomElement[];
+  onChange?: (value: BentoReturnData) => void;
 };
 export const Editor: React.FC<EditorProps> = ({
   config = { elements: [], texts: [], themeToken: {} },
@@ -37,7 +44,7 @@ export const Editor: React.FC<EditorProps> = ({
       children: [{ text: '' }],
     },
   ],
-  onChange = () => { },
+  onChange = () => {},
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());
@@ -80,13 +87,26 @@ export const Editor: React.FC<EditorProps> = ({
     return editor;
   }, [config]);
 
+  const handleOnChange = useCallback<NonNullable<SlateProps['onChange']>>(
+    (value) => {
+      onChange({
+        meta: {
+          version: VERSION,
+        },
+        // Return custom elements array only
+        elements: value as CustomElement[],
+      });
+    },
+    []
+  );
+
   useEffect(() => {
     ReactEditor.focus(editor);
   }, []);
 
   return (
     <>
-      <Slate editor={editor} value={initialValue} onChange={onChange}>
+      <Slate editor={editor} value={initialValue} onChange={handleOnChange}>
         <GlobalStateProvider>
           {/* Need to wrap with a react component to encapsulate all state related processes inside the RecoilRoot component. */}
           <Root config={config} />
