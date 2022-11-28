@@ -1,7 +1,7 @@
 ## [0.1.0](https://github.com/cam-inc/bento/compare/v0.0.10...v0.1.0) (2022-11-28)
 
 
-### Features
+### Bug Fixes
 
 * exapmle ([54ca3e0](https://github.com/cam-inc/bento/commit/54ca3e016810fb9e43fdf0ace2aa917478fefebf))
 * import ([e37cc41](https://github.com/cam-inc/bento/commit/e37cc413eb6f30766402793ad03686aed4fe86ae))
