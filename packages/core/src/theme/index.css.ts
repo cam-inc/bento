@@ -4,6 +4,9 @@ export const defaultThemeToken = {
   editor: {
     padding: '64px',
   },
+  editable: {
+    height: '100%',
+  },
   // Follow Tailwind's default spacing scale.
   // @see: https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale
   space: {

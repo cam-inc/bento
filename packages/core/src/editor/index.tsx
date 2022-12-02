@@ -44,7 +44,7 @@ export const Editor: React.FC<EditorProps> = ({
       children: [{ text: '' }],
     },
   ],
-  onChange = () => {},
+  onChange = () => { },
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());

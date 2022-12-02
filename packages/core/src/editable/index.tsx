@@ -7,6 +7,7 @@ import {
   ReactEditor,
 } from 'slate-react';
 import { useConfigGlobalStateValue } from '../store';
+import { sytles } from './index.css';
 
 // `EditableProps` is not exported from `slate-react`.
 // Below is just a workaround of this.
@@ -72,6 +73,7 @@ export const Editable: React.FC<EditableProps> = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <SlateReactEditable
+        className={sytles.root}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onDrop={handleDrop}
