@@ -19,6 +19,9 @@ export const styles = {
     selectors: {
       [`${editorStyles.root} &`]: {
         display: 'flex',
+        listStyle: 'none',
+        margin: 0,
+        padding: 0,
       },
     },
   }),
@@ -39,6 +42,11 @@ export const styles = {
   buttonBox: style({
     selectors: {
       [`${editorStyles.root} &`]: {
+        backgroundColor: 'transparent',
+        borderWidth: 0,
+        borderStyle: 'solid',
+        borderColor: 'currentColor',
+        padding: 0,
         display: 'flex',
         placeItems: 'center',
         fontSize: themeVars.fontSize.label.medium,
@@ -72,9 +80,14 @@ export const styles = {
   moreButton: style({
     selectors: {
       [`${editorStyles.root} &`]: {
+        backgroundColor: 'transparent',
+        borderWidth: 0,
+        borderStyle: 'solid',
+        borderColor: 'currentColor',
         display: 'block',
         width: 20,
         height: 20,
+        padding: 0,
         color: themeVars.color.backgroundOnSlight,
       },
     },

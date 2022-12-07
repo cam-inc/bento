@@ -5,8 +5,13 @@ import { themeVars } from '../../theme/index.css';
 const root = style({
   selectors: {
     [`${editorStyles.root} &`]: {
+      backgroundColor: 'transparent',
+      borderWidth: 0,
+      borderStyle: 'solid',
+      borderColor: 'currentColor',
       display: 'block',
       width: '100%',
+      padding: 0,
       position: 'relative',
       overflow: 'hidden',
       cursor: 'pointer',

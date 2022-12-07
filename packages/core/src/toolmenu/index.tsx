@@ -32,7 +32,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
   return (
     <div className={styles.root}>
       <div>
-        <ul>
+        <ul className={styles.list}>
           <li>
             <button type="button" className={styles.button} onClick={handleDeleteClick}>
               <div className={styles.buttonBG} />

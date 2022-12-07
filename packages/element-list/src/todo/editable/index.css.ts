@@ -6,6 +6,8 @@ export const styles = {
     position: 'relative',
     selectors: {
       [`.${EditorClassName} &`]: {
+        listStyle: 'none',
+        margin: 0,
         color: themeVars.color.backgroundOn,
         padding: `${themeVars.space['4']} 0 ${themeVars.space['4']} ${themeVars.space['6']}`,
       },

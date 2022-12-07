@@ -5,6 +5,7 @@ export const styles = {
   root: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        margin: 0;
         fontSize: themeVars.fontSize.label.large,
         color: themeVars.color.backgroundOn,
       },
