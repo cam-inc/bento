@@ -4,12 +4,12 @@ import { themeVars } from '../../theme/index.css';
 
 const root = style({
   padding: 0,
+  backgroundColor: 'transparent',
+  borderWidth: 0,
+  borderStyle: 'solid',
+  borderColor: 'currentColor',
   selectors: {
     [`${editorStyles.root} &`]: {
-      backgroundColor: 'transparent',
-      borderWidth: 0,
-      borderStyle: 'solid',
-      borderColor: 'currentColor',
       display: 'block',
       width: '100%',
       position: 'relative',
