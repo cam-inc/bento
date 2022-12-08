@@ -91,6 +91,16 @@ const itemTitle = style({
   }
 });
 
+const list = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      listStyle: 'none',
+      margin: 0,
+      padding: 0,
+    }
+  }
+});
+
 export const styles = {
   root,
   search,
@@ -99,4 +109,5 @@ export const styles = {
   itemContainer,
   itemIcon,
   itemTitle,
+  list
 };

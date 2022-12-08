@@ -5,6 +5,9 @@ export const styles = {
   list: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        listStyle: 'none',
+        margin: 0,
+        padding: 0,
         display: 'flex',
       },
     },
@@ -30,9 +33,14 @@ export const styles = {
   button: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        borderWidth: 0,
+        borderStyle: 'solid',
+        borderColor: 'currentColor',
+        backgroundColor: 'transparent',
         display: 'block',
         width: 20,
         height: 20,
+        padding: 0,
         color: themeVars.color.backgroundOn,
         marginRight: themeVars.space[3],
       },

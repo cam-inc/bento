@@ -28,7 +28,11 @@ export const styles = {
   input: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        borderWidth: 0,
+        borderStyle: 'solid',
+        borderColor: 'currentColor',
         backgroundColor: 'transparent',
+        padding: 0,
         color: themeVars.color.backgroundOnLow,
         fontSize: themeVars.fontSize.label.small,
       }

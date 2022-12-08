@@ -71,7 +71,7 @@ export const Toolbox: React.FC<ToolboxProps> = ({
         />
       </div>
       <div>
-        <ul>
+        <ul className={styles.list}>
           {nodes.map((node) => (
             <li key={node.type}>
               <Item

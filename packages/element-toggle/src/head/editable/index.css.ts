@@ -22,6 +22,11 @@ export const styles = {
   opener: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        borderWidth: 0,
+        borderStyle: 'solid',
+        borderColor: 'currentColor',
+        backgroundColor: 'transparent',
+        padding: 0,
         width: 32,
         height: 32,
       },

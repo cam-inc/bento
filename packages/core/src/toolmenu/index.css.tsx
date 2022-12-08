@@ -18,6 +18,10 @@ const root = style({
 const button = style({
   selectors: {
     [`${editorStyles.root} &`]: {
+      backgroundColor: 'transparent',
+      borderWidth: 0,
+      borderStyle: 'solid',
+      borderColor: 'currentColor',
       display: 'block',
       width: '100%',
       padding: `${themeVars.space['2']} ${themeVars.space['3']}`,
@@ -79,6 +83,16 @@ const buttonTitle = style({
   }
 });
 
+const list = style({
+  selectors: {
+    [`${editorStyles.root} &`]: {
+      listStyle: 'none',
+      margin: 0,
+      padding: 0,
+    }
+  }
+});
+
 export const styles = {
   root,
   button,
@@ -86,4 +100,5 @@ export const styles = {
   buttonContainer,
   buttonIcon,
   buttonTitle,
+  list
 };

@@ -3,6 +3,11 @@ import { styles as editorStyles } from '../../editor/index.css';
 import { themeVars } from '../../theme/index.css';
 
 const root = style({
+  padding: 0,
+  backgroundColor: 'transparent',
+  borderWidth: 0,
+  borderStyle: 'solid',
+  borderColor: 'currentColor',
   selectors: {
     [`${editorStyles.root} &`]: {
       display: 'block',
