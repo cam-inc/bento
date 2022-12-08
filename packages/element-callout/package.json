@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-callout",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Callout Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -54,7 +54,7 @@
     "vite": "^3.1.8"
   },
   "peerDependencies": {
-    "@bento-editor/core": "0.1.1",
+    "@bento-editor/core": "0.1.2",
     "@vanilla-extract/css": "^1.7.2"
   }
 }
