@@ -3,12 +3,12 @@
  * ref. https://github.com/missive/emoji-mart/issues/576
  */
 import { useRef, useEffect } from 'react';
-import { Picker, PickerProps, Emoji as EmojiBaseType } from 'emoji-mart';
+import { Picker, PickerProps, Emoji as EmojiMart } from 'emoji-mart';
 import { styles } from './index.css';
 import i18n from '@emoji-mart/data/i18n/ja.json';
 import { themeVars } from '@bento-editor/core';
 
-export type Emoji = typeof EmojiBaseType.Props;
+export type Emoji = typeof EmojiMart.Props;
 
 declare module 'emoji-mart' {
   interface Category {
@@ -20,8 +20,8 @@ declare module 'emoji-mart' {
   interface Data {
     compressed: boolean;
     categories: Category[];
-    emojis: { [key: string]: Emoji };
-    aliases: { [key: string]: string };
+    emojis: Record<string, Emoji>;
+    aliases: Record<string, string>;
   }
 
   interface PickerProps {
