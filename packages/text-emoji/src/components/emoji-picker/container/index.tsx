@@ -44,6 +44,8 @@ export const EmojiPickerContainer: React.FC<Props> = ({
       {children}
       {emojiData !== null && (
         <EmojiPicker
+          // there is a difference type of Emoji coming from emoji-mart type definitions
+          // @ts-ignore
           onEmojiSelect={handleEmojiSelect}
           data={emojiData}
           onClickOutside={handleClickOutside}
