@@ -1,4 +1,4 @@
-## [0.1.2](https://github.com/cam-inc/bento/compare/v0.1.1...v0.1.2) (2022-12-08)
+## [0.1.3](https://github.com/cam-inc/bento/compare/v0.1.1...v0.1.3) (2022-12-09)
 
 
 ### Features
@@ -10,10 +10,12 @@
 
 * button style ([3da9f7a](https://github.com/cam-inc/bento/commit/3da9f7a11a9f1c5fc676bbf5a7a37d5beabb17bf))
 * CHANGELOG ([ef49699](https://github.com/cam-inc/bento/commit/ef496992fe4795b95bce4303ed8f8700ebd4b43e))
+* emoji mart type definition 🐛 ([f4dbd8a](https://github.com/cam-inc/bento/commit/f4dbd8a8b830a1bd1429370d95c568733fdba9f3))
 * exapmle ([54ca3e0](https://github.com/cam-inc/bento/commit/54ca3e016810fb9e43fdf0ace2aa917478fefebf))
 * final new line ([9b6a490](https://github.com/cam-inc/bento/commit/9b6a49092ffdd86ed97049c09a62cdd92ce099cb))
 * import ([e37cc41](https://github.com/cam-inc/bento/commit/e37cc413eb6f30766402793ad03686aed4fe86ae))
 * initial value type of editor ([d84afb5](https://github.com/cam-inc/bento/commit/d84afb51fd9982f49e53c884ee1f7b8ef3afe24b))
+* min height 🐛 ([9b3f087](https://github.com/cam-inc/bento/commit/9b3f087934e05d7756e668dd6016d426d8a3e841))
 * port number ([3ac03cc](https://github.com/cam-inc/bento/commit/3ac03cc9226b0f8b4c93163c2b9e3dd649b800cd))
 * react example ([506bc3f](https://github.com/cam-inc/bento/commit/506bc3f88e5d215a508084b8c5ae8e21516621d1))
 * react example ([1f95a28](https://github.com/cam-inc/bento/commit/1f95a287d4401351ce25df1e0a85ce1645e0ef95))
@@ -23,6 +25,8 @@
 * replace form tag of text-format ([70f3590](https://github.com/cam-inc/bento/commit/70f3590ef033e1d8b98fd36fdf1a79269f4a48d6))
 * reset button style ([e4bdaeb](https://github.com/cam-inc/bento/commit/e4bdaebb4bd3f3fdbd5e9c7e7e8d6809b229cf98))
 * send button type to button and quit form tag of the element-link ([3d80b35](https://github.com/cam-inc/bento/commit/3d80b35be143f0a889398e0a0a0b0fa3593e8030))
+* style bug🐛 ([bedcd8c](https://github.com/cam-inc/bento/commit/bedcd8c804952c0a72164c9579f4d67f3c2c4839))
+* text emoji bug🐛 ([b22cf26](https://github.com/cam-inc/bento/commit/b22cf26ea64b188a330754ad53351185d7c6b6bb))
 * typo ([c47d544](https://github.com/cam-inc/bento/commit/c47d544a9a0ab9bd4f51ea04a17ddf532feadeaf))
 * version export method ([bf2661d](https://github.com/cam-inc/bento/commit/bf2661d7085cc0ff5a95b222a0b954c35cb3b43d))
 * vite global constance to wrap json stringify ([bab1133](https://github.com/cam-inc/bento/commit/bab1133e70976133288fa39687db6741b1ae241a))
