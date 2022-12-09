@@ -5,7 +5,7 @@ export const defaultThemeToken = {
     padding: '64px',
   },
   editable: {
-    height: '100%',
+    minHeight: '100%',
   },
   // Follow Tailwind's default spacing scale.
   // @see: https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale
