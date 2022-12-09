@@ -1,24 +1,27 @@
 /**
- * Currently, there are no type definitions in @emoji-mart/react, so we implement our own.
- * ref. https://github.com/missive/emoji-mart/blob/665a58031c7b5b753c06e8581dcfe51741098275/packages/emoji-mart-react/react.js
+ * Currently, type definitions in @emoji-mart/react is't perfect, so we implement our own.
+ * ref. https://github.com/missive/emoji-mart/issues/576
  */
 import { useRef, useEffect } from 'react';
-import { Data, Picker, PickerProps, BaseEmoji } from 'emoji-mart';
+import { Picker, PickerProps, Emoji as EmojiMart } from 'emoji-mart';
 import { styles } from './index.css';
 import i18n from '@emoji-mart/data/i18n/ja.json';
 import { themeVars } from '@bento-editor/core';
 
-export type Emoji = Data['emojis'][number] & BaseEmoji;
+export type Emoji = typeof EmojiMart.Props;
 
 declare module 'emoji-mart' {
-  export class Picker {
-    constructor(
-      _params: PickerProps & {
-        data: Data;
-        ref?: React.RefObject<HTMLElement>;
-      }
-    );
-    update(props: PickerProps): void;
+  interface Category {
+    id: string;
+    name: string;
+    emojis: string[];
+  }
+
+  interface Data {
+    compressed: boolean;
+    categories: Category[];
+    emojis: Record<string, Emoji>;
+    aliases: Record<string, string>;
   }
 
   interface PickerProps {
@@ -28,6 +31,17 @@ declare module 'emoji-mart' {
     navPosition: 'top' | 'bottom' | 'none';
     previewPosition: 'top' | 'bottom' | 'none';
     skinTonePosition: 'top' | 'bottom' | 'none';
+  }
+
+  interface BaseEmoji {
+    id: string;
+    name: string;
+    colons: string;
+    /** Reverse mapping to keyof emoticons */
+    emoticons: string[];
+    unified: string;
+    skin: 1 | 2 | 3 | 4 | 5 | 6 | null;
+    native: string;
   }
 }
 
