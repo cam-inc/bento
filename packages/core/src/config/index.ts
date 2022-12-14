@@ -13,7 +13,7 @@ import { ThemeToken } from '../theme/index.css';
 // All the custom elements and texts must follow this type.
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
 export type CustomElement<Attributes extends Record<string, any> = {}> = {
-  type?: string;
+  type: string;
   attributes?: Attributes;
   children: (CustomElement | CustomText)[];
 };
@@ -97,6 +97,7 @@ export type Config = {
   elements: Element[];
   texts: Text[];
   themeToken: PartialDeep<ThemeToken>;
+  rootPlaceholder?: string;
 };
 
 export type PickRequired<T extends Record<string, any>, K extends keyof T> = {

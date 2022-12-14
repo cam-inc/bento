@@ -34,17 +34,13 @@ export type EditorProps = {
   config?: Config;
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
-  initialValue?: CustomElement[];
+  initialValue: CustomElement[];
   onChange?: (value: BentoReturnData) => void;
 };
 export const Editor: React.FC<EditorProps> = ({
   config = { elements: [], texts: [], themeToken: {} },
-  initialValue = [
-    {
-      children: [{ text: '' }],
-    },
-  ],
-  onChange = () => { },
+  initialValue,
+  onChange = () => {},
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());
