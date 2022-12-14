@@ -3,6 +3,7 @@ import { createEditor, Element } from 'slate';
 import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
+import { helpers } from '../helpers';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
 import {
@@ -97,6 +98,10 @@ export const Editor: React.FC<EditorProps> = ({
   );
 
   useEffect(() => {
+    !initialValue.length &&
+      helpers.logger.error({
+        messages: [`The initial value must have a child or more.`],
+      });
     ReactEditor.focus(editor);
   }, []);
 
