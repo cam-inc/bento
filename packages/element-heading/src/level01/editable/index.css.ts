@@ -11,5 +11,12 @@ export const styles = {
         color: themeVars.color.backgroundOn,
       },
     },
-  })
+  }),
+  placeholder: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        fontSize: themeVars.fontSize.heading.large,
+      },
+    },
+  }),
 };

@@ -12,6 +12,6 @@ const element: Element<Attributes> = {
   normalizeNode: (/*editor, entry*/) => {
     // TODO: textのみを許可。
     return false;
-  }
+  },
 };
 export default element;
