@@ -6,7 +6,15 @@ const editable: Element<Attributes>['editable'] = {
   defaultValue: [{ type: 'format', text: '中見出し' }],
   Component: (props) => {
     return (
-      <ElementContainer {...props} utilsPositionY={5}>
+      <ElementContainer
+        {...props}
+        utilsPositionY={5}
+        placeholder={{
+          text: 'Heading 2',
+          className: styles.placeholder,
+          unselectedShown: true,
+        }}
+      >
         <h2 className={styles.root}>{props.children}</h2>
       </ElementContainer>
     );

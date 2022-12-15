@@ -9,7 +9,11 @@ const editable: Element<Attributes>['editable'] = {
       <ElementContainer
         {...props}
         utilsPositionY={7}
-        placeholder={{ text: 'Heading 1', className: styles.placeholder }}
+        placeholder={{
+          text: 'Heading 1',
+          className: styles.placeholder,
+          unselectedShown: true,
+        }}
       >
         <h1 className={styles.root}>{props.children}</h1>
       </ElementContainer>

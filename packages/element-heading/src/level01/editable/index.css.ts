@@ -16,6 +16,7 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         fontSize: themeVars.fontSize.heading.large,
+        fontWeight: 'bold',
       },
     },
   }),

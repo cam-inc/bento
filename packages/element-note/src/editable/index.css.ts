@@ -19,7 +19,21 @@ export const styles = {
         display: 'block',
         width: 20,
         height: 20,
-      }
-    }
+      },
+    },
+  }),
+  text: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        minWidth: 1,
+      },
+    },
+  }),
+  placeholder: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        paddingLeft: `calc(${themeVars.space[4]} + 28px)`,
+      },
+    },
   }),
 };

@@ -8,24 +8,42 @@ const editable: Element<Attributes>['editable'] = {
   Component: (props) => {
     const cite = props.element.attributes?.cite;
 
-    const handleCiteChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.currentTarget;
-      helpers.Transforms.setNodes(props.editor, {
-        attributes: {
-          cite: value,
-        }
-      }, {
-        at: helpers.ReactEditor.findPath(props.editor, props.element)
-      });
-    }, [props.editor, props.element]);
-
+    const handleCiteChange = useCallback(
+      (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
+        helpers.Transforms.setNodes(
+          props.editor,
+          {
+            attributes: {
+              cite: value,
+            },
+          },
+          {
+            at: helpers.ReactEditor.findPath(props.editor, props.element),
+          }
+        );
+      },
+      [props.editor, props.element]
+    );
 
     return (
-      <ElementContainer {...props}>
+      <ElementContainer
+        {...props}
+        placeholder={{
+          text: 'Empty quote',
+          className: styles.placeholder,
+          unselectedShown: true,
+        }}
+      >
         <div className={styles.root}>
           <div className={styles.blockquote}>{props.children}</div>
           <div className={styles.cite} contentEditable={false}>
-            <input className={styles.input} value={cite} placeholder="引用元を追加" onChange={handleCiteChange} />
+            <input
+              className={styles.input}
+              value={cite}
+              placeholder="引用元を追加"
+              onChange={handleCiteChange}
+            />
           </div>
         </div>
       </ElementContainer>

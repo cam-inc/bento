@@ -6,8 +6,8 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         marginLeft: themeVars.space['9'],
-      }
-    }
+      },
+    },
   }),
   root: style({
     selectors: {
@@ -16,5 +16,5 @@ export const styles = {
         fontSize: themeVars.fontSize.label.large,
       },
     },
-  })
+  }),
 };

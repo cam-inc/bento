@@ -18,7 +18,15 @@ const editable: Element<Attributes>['editable'] = {
       return null;
     }
     return (
-      <ElementContainer {...props} className={styles.container} utilsPositionY={-1}>
+      <ElementContainer
+        {...props}
+        className={styles.container}
+        utilsPositionY={-1}
+        placeholder={{
+          text: 'Empty toggle. Type something',
+          unselectedShown: true,
+        }}
+      >
         <div className={styles.root}>{props.children}</div>
       </ElementContainer>
     );

@@ -11,12 +11,27 @@ export const styles = {
       },
     },
   }),
+  text: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        minWidth: 1,
+      },
+    },
+  }),
   checkbox: style({
     selectors: {
       [`.${EditorClassName} &`]: {
         display: 'block',
         width: 18,
         height: 18,
+      },
+    },
+  }),
+  placeholder: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        paddingLeft: `calc(${themeVars.space[6]} + 3px)`,
+        whiteSpace: 'pre',
       },
     },
   }),
