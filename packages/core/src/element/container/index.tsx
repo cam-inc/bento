@@ -31,7 +31,7 @@ export type ElementContainerProps = RenderElementProps & {
   placeholder?: {
     text: string;
     className?: string;
-    isAlwaysShown?: boolean;
+    unselectedShown?: boolean;
   };
 };
 
@@ -190,7 +190,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
               className={classnames({
                 [styles.bodyPlaceholder]: true,
                 [styles.bodyPlaceholderShown]:
-                  isEmpty && (props.placeholder.isAlwaysShown || isSelected),
+                  isEmpty && (props.placeholder.unselectedShown || isSelected),
               })}
             >
               <span className={props.placeholder.className}>
