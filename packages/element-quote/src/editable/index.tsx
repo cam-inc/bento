@@ -29,11 +29,7 @@ const editable: Element<Attributes>['editable'] = {
     return (
       <ElementContainer
         {...props}
-        placeholder={{
-          text: 'Empty quote',
-          className: styles.placeholder,
-          unselectedShown: true,
-        }}
+        emptyState={<span className={styles.emptyState}>Empty quote</span>}
       >
         <div className={styles.root}>
           <div className={styles.blockquote}>{props.children}</div>

@@ -6,10 +6,15 @@ export const styles = {
     color: themeVars.color.backgroundOn,
     minWidth: 1,
   }),
-  placeholder: style({
+  emptyState: style({
     selectors: {
       [`.${EditorClassName} &`]: {
-        // fontSize: themeVars.fontSize.heading.large,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
       },
     },
   }),

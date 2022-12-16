@@ -20,6 +20,7 @@ export const defaultThemeToken = {
     '6': '1.5rem',
     '8': '2rem',
     '9': '2.25rem',
+    '10': '2.5rem',
     '40': '10rem',
   },
   radius: {

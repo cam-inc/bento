@@ -3,17 +3,13 @@ import { Attributes } from '../attributes';
 import { styles } from './index.css';
 
 const editable: Element<Attributes>['editable'] = {
-  defaultValue: [{ type: 'format', text: '小見出し' }],
+  defaultValue: [{ type: 'format', text: '' }],
   Component: (props) => {
     return (
       <ElementContainer
         {...props}
         utilsPositionY={3}
-        placeholder={{
-          text: 'Heading 3',
-          className: styles.placeholder,
-          unselectedShown: true,
-        }}
+        emptyState={<span className={styles.emptyState}>Heading 3</span>}
       >
         <h3 className={styles.root}>{props.children}</h3>
       </ElementContainer>

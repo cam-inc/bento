@@ -38,11 +38,14 @@ export const styles = {
       },
     },
   }),
-  placeholder: style({
+  emptyState: style({
     selectors: {
       [`.${EditorClassName} &`]: {
         position: 'absolute',
         top: 0,
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
         paddingLeft: themeVars.space['4'],
       },
     },

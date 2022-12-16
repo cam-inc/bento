@@ -16,11 +16,7 @@ const editable: Element<Attributes>['editable'] = {
         {...props}
         as="li"
         utilsPositionY={-2}
-        placeholder={{
-          text: 'List',
-          className: styles.placeholder,
-          unselectedShown: true,
-        }}
+        emptyState={<span className={styles.emptyState}>List</span>}
       >
         <div className={styles.root}>{props.children}</div>
       </ElementContainer>

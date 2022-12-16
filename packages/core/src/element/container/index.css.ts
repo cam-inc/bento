@@ -90,22 +90,14 @@ const bodyPatched = style({
 const bodyPlaceholder = style({
   selectors: {
     [`${editorStyles.root} ${body} &`]: {
-      display: 'none',
+      display: 'flex',
+      alignItems: 'center',
       position: 'absolute',
       top: 0,
       bottom: 0,
       userSelect: 'none',
       pointerEvents: 'none',
       color: themeVars.color.backgroundOnSlight,
-    },
-  },
-});
-
-const bodyPlaceholderShown = style({
-  selectors: {
-    [`${editorStyles.root} ${body} &`]: {
-      display: 'flex',
-      alignItems: 'center',
     },
   },
 });
@@ -167,7 +159,6 @@ export const styles = {
   dropAreaInnerOver,
   body,
   bodyPlaceholder,
-  bodyPlaceholderShown,
   bodyPatched,
   utilsContainer,
   utilsContainerOver,

@@ -36,11 +36,7 @@ const editable: Element<Attributes>['editable'] = {
         {...props}
         as="li"
         utilsPositionY={-3}
-        placeholder={{
-          text: 'To-do',
-          className: styles.placeholder,
-          unselectedShown: true,
-        }}
+        emptyState={<span className={styles.emptyState}>To-do</span>}
       >
         <div className={styles.root}>
           <span className={styles.checkbox} contentEditable={false}>

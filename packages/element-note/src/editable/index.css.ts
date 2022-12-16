@@ -29,9 +29,17 @@ export const styles = {
       },
     },
   }),
-  placeholder: style({
+  emptyState: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
         paddingLeft: `calc(${themeVars.space[4]} + 28px)`,
       },
     },

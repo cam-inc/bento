@@ -14,7 +14,7 @@ const editable: Element<Attributes>['editable'] = {
     {
       type: 'format',
       attributes: {},
-      text: 'default head',
+      text: '',
     },
   ],
   Component: (props) => {
@@ -36,11 +36,7 @@ const editable: Element<Attributes>['editable'] = {
       <ElementContainer
         {...props}
         utilsPositionY={4}
-        placeholder={{
-          text: 'Toggle',
-          className: styles.placeholder,
-          unselectedShown: true,
-        }}
+        emptyState={<span className={styles.emptyState}>Toggle</span>}
       >
         <div className={styles.root}>
           <div className={styles.ctrl} contentEditable={false}>

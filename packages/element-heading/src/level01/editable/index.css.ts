@@ -12,11 +12,17 @@ export const styles = {
       },
     },
   }),
-  placeholder: style({
+  emptyState: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
         fontSize: themeVars.fontSize.heading.large,
         fontWeight: 'bold',
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
       },
     },
   }),

@@ -6,7 +6,7 @@ const editable: Element<Attributes>['editable'] = {
   defaultValue: [
     {
       type: 'format',
-      text: '入力してください',
+      text: '',
     },
   ],
   Component: (props) => {
@@ -14,11 +14,9 @@ const editable: Element<Attributes>['editable'] = {
       <ElementContainer
         {...props}
         utilsPositionY={9}
-        placeholder={{
-          text: 'Type something',
-          className: styles.placeholder,
-          unselectedShown: true,
-        }}
+        emptyState={
+          <span className={styles.emptyState}>Type something...</span>
+        }
       >
         <div className={styles.root}>
           <div className={styles.icon}>

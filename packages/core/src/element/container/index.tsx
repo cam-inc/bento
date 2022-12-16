@@ -28,11 +28,7 @@ export type ElementContainerProps = RenderElementProps & {
   utilsPositionY?: number;
   className?: string;
   as?: ElementType;
-  placeholder?: {
-    text: string;
-    className?: string;
-    unselectedShown?: boolean;
-  };
+  emptyState?: React.ReactNode;
 };
 
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
@@ -184,20 +180,17 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
           })}
           ref={bodyRef}
         >
-          {props.placeholder && (
+          {isEmpty && isSelected && !props.emptyState && (
             <div
               contentEditable={false}
               className={classnames({
                 [styles.bodyPlaceholder]: true,
-                [styles.bodyPlaceholderShown]:
-                  isEmpty && (props.placeholder.unselectedShown || isSelected),
               })}
             >
-              <span className={props.placeholder.className}>
-                {props.placeholder.text}
-              </span>
+              Type something
             </div>
           )}
+          {isEmpty && props.emptyState}
           {props.children}
         </div>
         <div
