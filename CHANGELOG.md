@@ -1,9 +1,13 @@
-## [0.1.3](https://github.com/cam-inc/bento/compare/v0.1.1...v0.1.3) (2022-12-09)
+## [0.1.4](https://github.com/cam-inc/bento/compare/v0.1.1...v0.1.4) (2022-12-16)
 
 
 ### Features
 
 * add editable height style ([76fe69e](https://github.com/cam-inc/bento/commit/76fe69ec37fe29eb78147aad7eb8d639a335ee51))
+* add placeholder to element packages✨ ([99d8a7d](https://github.com/cam-inc/bento/commit/99d8a7dded552c797437fa21628f6b0df73d1336))
+* add placeholder to element✨ ([428bebf](https://github.com/cam-inc/bento/commit/428bebf07c974d47a5dfe36a8a92f1a392a14660))
+* add placeholder type✨ ([873e6eb](https://github.com/cam-inc/bento/commit/873e6eb6e7dad4d1d6b511469901f170b8ce894a))
+* always shown property✨ ([6e6befe](https://github.com/cam-inc/bento/commit/6e6befe28dac633baef025725212f92fb96f6ecd))
 
 
 ### Bug Fixes
@@ -11,11 +15,13 @@
 * button style ([3da9f7a](https://github.com/cam-inc/bento/commit/3da9f7a11a9f1c5fc676bbf5a7a37d5beabb17bf))
 * CHANGELOG ([ef49699](https://github.com/cam-inc/bento/commit/ef496992fe4795b95bce4303ed8f8700ebd4b43e))
 * emoji mart type definition 🐛 ([f4dbd8a](https://github.com/cam-inc/bento/commit/f4dbd8a8b830a1bd1429370d95c568733fdba9f3))
+* empty array case for initial value ([0894cda](https://github.com/cam-inc/bento/commit/0894cda0bfd1ec1f2579013d95dcb34537c4259e))
 * exapmle ([54ca3e0](https://github.com/cam-inc/bento/commit/54ca3e016810fb9e43fdf0ace2aa917478fefebf))
 * final new line ([9b6a490](https://github.com/cam-inc/bento/commit/9b6a49092ffdd86ed97049c09a62cdd92ce099cb))
 * import ([e37cc41](https://github.com/cam-inc/bento/commit/e37cc413eb6f30766402793ad03686aed4fe86ae))
 * initial value type of editor ([d84afb5](https://github.com/cam-inc/bento/commit/d84afb51fd9982f49e53c884ee1f7b8ef3afe24b))
 * min height 🐛 ([9b3f087](https://github.com/cam-inc/bento/commit/9b3f087934e05d7756e668dd6016d426d8a3e841))
+* placeholder type 🐛 ([df10415](https://github.com/cam-inc/bento/commit/df10415c6ded818357f604ca779f94fcae300bbf))
 * port number ([3ac03cc](https://github.com/cam-inc/bento/commit/3ac03cc9226b0f8b4c93163c2b9e3dd649b800cd))
 * react example ([506bc3f](https://github.com/cam-inc/bento/commit/506bc3f88e5d215a508084b8c5ae8e21516621d1))
 * react example ([1f95a28](https://github.com/cam-inc/bento/commit/1f95a287d4401351ce25df1e0a85ce1645e0ef95))
