@@ -19,7 +19,29 @@ export const styles = {
         display: 'block',
         width: 20,
         height: 20,
-      }
-    }
+      },
+    },
+  }),
+  text: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        minWidth: 1,
+      },
+    },
+  }),
+  emptyState: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
+        paddingLeft: `calc(${themeVars.space[4]} + 28px)`,
+      },
+    },
   }),
 };

@@ -9,7 +9,7 @@ const editable: Element<Attributes>['editable'] = {
     {
       type: 'format',
       attributes: {},
-      text: 'default body',
+      text: '',
     },
   ],
   Component: (props) => {
@@ -18,7 +18,16 @@ const editable: Element<Attributes>['editable'] = {
       return null;
     }
     return (
-      <ElementContainer {...props} className={styles.container} utilsPositionY={-1}>
+      <ElementContainer
+        {...props}
+        className={styles.container}
+        utilsPositionY={-1}
+        emptyState={
+          <span className={styles.emptyState}>
+            Empty toggle. Type something...
+          </span>
+        }
+      >
         <div className={styles.root}>{props.children}</div>
       </ElementContainer>
     );

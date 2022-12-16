@@ -32,12 +32,17 @@ const editable: Element<Attributes>['editable'] = {
     );
 
     return (
-      <ElementContainer {...props} as="li" utilsPositionY={-3}>
+      <ElementContainer
+        {...props}
+        as="li"
+        utilsPositionY={-3}
+        emptyState={<span className={styles.emptyState}>To-do</span>}
+      >
         <div className={styles.root}>
           <span className={styles.checkbox} contentEditable={false}>
             <CheckboxIcon checked={checked} onClick={handleCheckboxClick} />
           </span>
-          {props.children}
+          <div className={styles.text}>{props.children}</div>
         </div>
       </ElementContainer>
     );

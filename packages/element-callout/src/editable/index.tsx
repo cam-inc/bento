@@ -6,19 +6,23 @@ const editable: Element<Attributes>['editable'] = {
   defaultValue: [
     {
       type: 'format',
-      text: '入力してください',
+      text: '',
     },
   ],
   Component: (props) => {
     return (
-      <ElementContainer {...props} utilsPositionY={9}>
+      <ElementContainer
+        {...props}
+        utilsPositionY={9}
+        emptyState={
+          <span className={styles.emptyState}>Type something...</span>
+        }
+      >
         <div className={styles.root}>
           <div className={styles.icon}>
             <ExclamationIcon type="callout" />
           </div>
-          <div>
-            {props.children}
-          </div>
+          <div className={styles.text}>{props.children}</div>
         </div>
       </ElementContainer>
     );

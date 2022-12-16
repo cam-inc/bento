@@ -7,8 +7,8 @@ const root = style({
     [`${editorStyles.root} &`]: {
       position: 'relative',
       margin: `${themeVars.space['4']} 0`,
-    }
-  }
+    },
+  },
 });
 
 const dropArea = style({
@@ -18,24 +18,24 @@ const dropArea = style({
       right: 0,
       left: 0,
       height: themeVars.space['0'],
-    }
-  }
+    },
+  },
 });
 
 const dropAreaAbove = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       top: `calc(${themeVars.space['2']} * -1)`,
-    }
-  }
+    },
+  },
 });
 
 const dropAreaBelow = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       bottom: `calc(${themeVars.space['2']} * -1)`,
-    }
-  }
+    },
+  },
 });
 
 const dropAreaInner = style({
@@ -50,8 +50,8 @@ const dropAreaInner = style({
       left: 0,
       margin: 'auto',
       opacity: 0,
-    }
-  }
+    },
+  },
 });
 
 const dropAreaInnerDroppable = style({
@@ -59,31 +59,47 @@ const dropAreaInnerDroppable = style({
     [`${editorStyles.root} &`]: {
       height: themeVars.space['2'],
       opacity: 0.08,
-    }
-  }
+    },
+  },
 });
 
 const dropAreaInnerOver = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       opacity: 0.5,
-    }
-  }
+    },
+  },
 });
 
 const body = style({
   selectors: {
     [`${editorStyles.root} &`]: {
-    }
-  }
+      position: 'relative',
+    },
+  },
 });
 // @see: https://bugzilla.mozilla.org/show_bug.cgi?id=36854
 const bodyPatched = style({
   selectors: {
     [`${editorStyles.root} &`]: {
       display: 'inline-block',
-    }
-  }
+    },
+  },
+});
+
+const bodyPlaceholder = style({
+  selectors: {
+    [`${editorStyles.root} ${body} &`]: {
+      display: 'flex',
+      alignItems: 'center',
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      userSelect: 'none',
+      pointerEvents: 'none',
+      color: themeVars.color.backgroundOnSlight,
+    },
+  },
 });
 
 const utilsContainer = style({
@@ -96,7 +112,7 @@ const utilsContainer = style({
       width: 0,
       height: 0,
     },
-  }
+  },
 });
 
 const utilsContainerOver = style({
@@ -104,7 +120,7 @@ const utilsContainerOver = style({
     [`${editorStyles.root} &`]: {
       display: 'block',
     },
-  }
+  },
 });
 
 const utils = style({
@@ -115,8 +131,8 @@ const utils = style({
       right: 0,
       display: 'flex',
       gap: 12,
-    }
-  }
+    },
+  },
 });
 
 const button = style({
@@ -130,9 +146,22 @@ const button = style({
       padding: themeVars.space['1'],
       color: themeVars.color.brand,
     },
-  }
+  },
 });
 
 export const styles = {
-  root, dropArea, dropAreaAbove, dropAreaBelow, dropAreaInner, dropAreaInnerDroppable, dropAreaInnerOver, body, bodyPatched, utilsContainer, utilsContainerOver, utils, button,
+  root,
+  dropArea,
+  dropAreaAbove,
+  dropAreaBelow,
+  dropAreaInner,
+  dropAreaInnerDroppable,
+  dropAreaInnerOver,
+  body,
+  bodyPlaceholder,
+  bodyPatched,
+  utilsContainer,
+  utilsContainerOver,
+  utils,
+  button,
 };

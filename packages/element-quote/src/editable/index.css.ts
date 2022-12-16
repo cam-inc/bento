@@ -7,7 +7,7 @@ export const styles = {
       [`.${EditorClassName} &`]: {
         paddingLeft: themeVars.space['3'],
         borderLeft: `${themeVars.space['0.5']} solid ${themeVars.color.backgroundOnLow}`,
-      }
+      },
     },
   }),
   blockquote: style({
@@ -15,14 +15,14 @@ export const styles = {
       [`.${EditorClassName} &`]: {
         color: themeVars.color.backgroundOnLow,
         fontSize: themeVars.fontSize.label.large,
-      }
+      },
     },
   }),
   cite: style({
     selectors: {
       [`.${EditorClassName} &`]: {
         marginTop: themeVars.space['3'],
-      }
+      },
     },
   }),
   input: style({
@@ -35,7 +35,19 @@ export const styles = {
         padding: 0,
         color: themeVars.color.backgroundOnLow,
         fontSize: themeVars.fontSize.label.small,
-      }
+      },
+    },
+  }),
+  emptyState: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
+        paddingLeft: themeVars.space['4'],
+      },
     },
   }),
 };

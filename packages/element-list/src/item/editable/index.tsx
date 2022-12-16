@@ -12,7 +12,12 @@ const editable: Element<Attributes>['editable'] = {
   ],
   Component: (props) => {
     return (
-      <ElementContainer {...props} as="li" utilsPositionY={-2}>
+      <ElementContainer
+        {...props}
+        as="li"
+        utilsPositionY={-2}
+        emptyState={<span className={styles.emptyState}>List</span>}
+      >
         <div className={styles.root}>{props.children}</div>
       </ElementContainer>
     );

@@ -11,12 +11,33 @@ export const styles = {
       },
     },
   }),
+  text: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        minWidth: 1,
+      },
+    },
+  }),
   checkbox: style({
     selectors: {
       [`.${EditorClassName} &`]: {
         display: 'block',
         width: 18,
         height: 18,
+      },
+    },
+  }),
+  emptyState: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
+        paddingLeft: `calc(${themeVars.space[6]} + 3px)`,
+        whiteSpace: 'pre',
       },
     },
   }),

@@ -1,11 +1,24 @@
 import classnames from 'classnames';
-import { ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  ElementType,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
-import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
+import {
+  ReactEditor,
+  RenderElementProps,
+  useSelected,
+  useSlate,
+} from 'slate-react';
 import { Button } from '../../components/button';
 import { DotsIcon } from '../../components/icons/dots';
 import { PlusIcon } from '../../components/icons/plus';
+import { helpers } from '../../helpers';
 import { Popover, usePopover } from '../../portals/popover';
 import { Toolbox } from '../../toolbox';
 import { Toolmenu } from '../../toolmenu';
@@ -15,6 +28,7 @@ export type ElementContainerProps = RenderElementProps & {
   utilsPositionY?: number;
   className?: string;
   as?: ElementType;
+  emptyState?: React.ReactNode;
 };
 
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
@@ -39,6 +53,9 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const handleToolmenuDone = useCallback(() => {
     popoverToolmenu.close();
   }, [popoverToolmenu]);
+
+  const isSelected = useSelected();
+  const isEmpty = helpers.Editor.isEmpty(editor, props.element);
 
   // DnD
   const type = 'Element';
@@ -156,10 +173,24 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
             })}
           />
         </div>
-        <div className={classnames({
-          [styles.body]: true,
-          [styles.bodyPatched]: props.as === 'li'
-        })} ref={bodyRef}>
+        <div
+          className={classnames({
+            [styles.body]: true,
+            [styles.bodyPatched]: props.as === 'li',
+          })}
+          ref={bodyRef}
+        >
+          {isEmpty && isSelected && !props.emptyState && (
+            <div
+              contentEditable={false}
+              className={classnames({
+                [styles.bodyPlaceholder]: true,
+              })}
+            >
+              Type something
+            </div>
+          )}
+          {isEmpty && props.emptyState}
           {props.children}
         </div>
         <div

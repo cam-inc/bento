@@ -11,5 +11,19 @@ export const styles = {
         color: themeVars.color.backgroundOn,
       },
     },
-  })
+  }),
+  emptyState: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        fontSize: themeVars.fontSize.heading.medium,
+        fontWeight: 'bold',
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
+      },
+    },
+  }),
 };

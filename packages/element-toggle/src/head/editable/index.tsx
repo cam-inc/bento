@@ -14,7 +14,7 @@ const editable: Element<Attributes>['editable'] = {
     {
       type: 'format',
       attributes: {},
-      text: 'default head',
+      text: '',
     },
   ],
   Component: (props) => {
@@ -33,10 +33,18 @@ const editable: Element<Attributes>['editable'] = {
     }, [JSON.stringify(props.editor), parentElement]);
 
     return (
-      <ElementContainer {...props} utilsPositionY={4}>
+      <ElementContainer
+        {...props}
+        utilsPositionY={4}
+        emptyState={<span className={styles.emptyState}>Toggle</span>}
+      >
         <div className={styles.root}>
           <div className={styles.ctrl} contentEditable={false}>
-            <button type="button" className={styles.opener} onClick={handleCtrlClick}>
+            <button
+              type="button"
+              className={styles.opener}
+              onClick={handleCtrlClick}
+            >
               <OpenerIcon isOpened={parentElement.attributes?.isOpen} />
             </button>
           </div>

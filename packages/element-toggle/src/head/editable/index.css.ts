@@ -15,8 +15,7 @@ export const styles = {
   }),
   ctrl: style({
     selectors: {
-      [`.${EditorClassName} &`]: {
-      },
+      [`.${EditorClassName} &`]: {},
     },
   }),
   opener: style({
@@ -35,6 +34,22 @@ export const styles = {
   body: style({
     selectors: {
       [`.${EditorClassName} &`]: {
+        minWidth: 1,
+      },
+    },
+  }),
+  emptyState: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
+        paddingLeft: `calc(${themeVars.space[2]} + 32px)`,
       },
     },
   }),

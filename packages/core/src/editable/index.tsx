@@ -77,6 +77,7 @@ export const Editable: React.FC<EditableProps> = () => {
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onDrop={handleDrop}
+        placeholder={config.rootPlaceholder}
       />
     </DndProvider>
   );

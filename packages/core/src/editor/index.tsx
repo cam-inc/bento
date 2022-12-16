@@ -3,6 +3,7 @@ import { createEditor, Element } from 'slate';
 import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
+import { helpers } from '../helpers';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
 import {
@@ -34,17 +35,13 @@ export type EditorProps = {
   config?: Config;
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
-  initialValue?: CustomElement[];
+  initialValue: CustomElement[];
   onChange?: (value: BentoReturnData) => void;
 };
 export const Editor: React.FC<EditorProps> = ({
   config = { elements: [], texts: [], themeToken: {} },
-  initialValue = [
-    {
-      children: [{ text: '' }],
-    },
-  ],
-  onChange = () => { },
+  initialValue,
+  onChange = () => {},
 }) => {
   const editor = useMemo(() => {
     const editor = withReact(createEditor());
@@ -101,6 +98,10 @@ export const Editor: React.FC<EditorProps> = ({
   );
 
   useEffect(() => {
+    !initialValue.length &&
+      helpers.logger.error({
+        messages: [`The initial value must have a child or more.`],
+      });
     ReactEditor.focus(editor);
   }, []);
 

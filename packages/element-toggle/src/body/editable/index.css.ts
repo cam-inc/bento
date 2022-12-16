@@ -5,9 +5,9 @@ export const styles = {
   container: style({
     selectors: {
       [`.${EditorClassName} &`]: {
-        marginLeft: themeVars.space['9'],
-      }
-    }
+        marginLeft: themeVars.space['10'],
+      },
+    },
   }),
   root: style({
     selectors: {
@@ -16,5 +16,17 @@ export const styles = {
         fontSize: themeVars.fontSize.label.large,
       },
     },
-  })
+  }),
+  emptyState: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        userSelect: 'none',
+        pointerEvents: 'none',
+        color: themeVars.color.backgroundOnSlight,
+      },
+    },
+  }),
 };
