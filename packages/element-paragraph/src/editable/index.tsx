@@ -6,11 +6,7 @@ const editable: Element<Attributes>['editable'] = {
   defaultValue: [{ type: 'format', text: 'default value', attributes: {} }],
   Component: (props) => {
     return (
-      <ElementContainer
-        {...props}
-        utilsPositionY={-1}
-        placeholder={{ text: 'Type something' }}
-      >
+      <ElementContainer {...props} utilsPositionY={-1}>
         <p className={styles.root}>{props.children}</p>
       </ElementContainer>
     );
