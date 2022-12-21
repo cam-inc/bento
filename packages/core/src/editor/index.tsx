@@ -81,7 +81,7 @@ export const Editor: React.FC<EditorProps> = ({
       return originalIsVoid(elementNode);
     };
 
-    // @see: https://docs.slatejs.org/api/nodes/editor#editor.insertbreak-editor-editor-greater-than-void
+    // @see: https://docs.slatejs.org/api/nodes/editor#insertbreak-greater-than-void
     const originalInsertBreak = editor.insertBreak;
     editor.insertBreak = () => {
       const { selection } = editor;
