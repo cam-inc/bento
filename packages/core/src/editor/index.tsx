@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { createEditor, Element, Editor as SlateEditor } from 'slate';
+import { createEditor, Element, Editor as SlateEditor, Range } from 'slate';
 import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
@@ -82,10 +82,11 @@ export const Editor: React.FC<EditorProps> = ({
     };
 
     // @see: https://docs.slatejs.org/api/nodes/editor#editor.insertbreak-editor-editor-greater-than-void
-    const insertBreak = editor.insertBreak;
+    const originalInsertBreak = editor.insertBreak;
     editor.insertBreak = () => {
       const { selection } = editor;
-      if (!selection) {
+      if (!selection || !Range.isCollapsed(selection)) {
+        originalInsertBreak();
         return;
       }
       const [match] = SlateEditor.nodes(editor, {
@@ -107,7 +108,7 @@ export const Editor: React.FC<EditorProps> = ({
           }
         }
       }
-      insertBreak();
+      originalInsertBreak();
     };
 
     return editor;
