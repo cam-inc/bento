@@ -190,7 +190,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
               Type something
             </div>
           )}
-          {isEmpty && props.emptyState}
+          {isEmpty && <div contentEditable={false}>{props.emptyState}</div>}
           {props.children}
         </div>
         <div
