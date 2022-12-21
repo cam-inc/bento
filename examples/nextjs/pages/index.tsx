@@ -40,7 +40,6 @@ import {
   TodoListItemRenderer,
 } from '@bento-editor/element-list';
 import elementLink, { LinkRenderer } from '@bento-editor/element-link';
-import elementEmbed, { EmbedRenderer } from '@bento-editor/element-embed';
 import textFormat, { TextFormatRenderer } from '@bento-editor/text-format';
 import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import type { NextPage } from 'next';
@@ -63,7 +62,6 @@ const Home: NextPage = () => {
         elementNote,
         elementCallout,
         elementLink,
-        elementEmbed,
         elementDivider,
         elementQuote,
         elementToggleContainer,
@@ -397,16 +395,6 @@ const Home: NextPage = () => {
           },
         ],
       },
-      {
-        type: 'embed',
-        attributes: {},
-        children: [
-          {
-            type: 'format',
-            text: '',
-          },
-        ],
-      },
     ],
     []
   );
@@ -440,7 +428,6 @@ const Home: NextPage = () => {
       'toggle-head': ToggleHeadRenderer,
       'toggle-body': ToggleBodyRenderer,
       link: LinkRenderer,
-      embed: EmbedRenderer,
       format: TextFormatRenderer,
       emoji: EmojiRenderer,
     }),

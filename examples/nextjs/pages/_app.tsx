@@ -5,7 +5,6 @@ import '@bento-editor/element-paragraph/styles';
 import '@bento-editor/element-note/styles';
 import '@bento-editor/element-callout/styles';
 import '@bento-editor/element-link/styles';
-import '@bento-editor/element-embed/styles';
 import '@bento-editor/element-divider/styles';
 import '@bento-editor/element-quote/styles';
 import '@bento-editor/element-toggle/styles';
