@@ -50,11 +50,11 @@ export const Editor: React.FC<EditorProps> = ({
 }) => {
   const editor = useMemo(() => {
     const baseEditor = withReact(createEditor());
-    const editor = Array.from([
+    const editor = [
       withInsertBreak,
       withOriginalIsVoid,
       withOriginalNormalizeNode,
-    ]).reduce((acc, plugin) => plugin(acc, config), baseEditor);
+    ].reduce((editor, plugin) => plugin(editor, config), baseEditor);
 
     return editor;
   }, [config]);
