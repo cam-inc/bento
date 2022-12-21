@@ -88,17 +88,22 @@ export const Editor: React.FC<EditorProps> = ({
       if (!selection) {
         return;
       }
-      const entry = SlateEditor.node(editor, selection);
-      const [node] = entry;
-      if (Element.isElement(node)) {
-        const { elements } = config;
-        const element = elements.find((element) => {
-          return element.type === node.type;
-        });
-        if (element && element.insertBreak) {
-          const isToReturn = element.insertBreak(editor, entry);
-          if (isToReturn) {
-            return;
+      const [match] = SlateEditor.nodes(editor, {
+        match: (n) => !SlateEditor.isEditor(n) && Element.isElement(n),
+        mode: 'lowest',
+      });
+      if (match) {
+        const [node] = match;
+        if (Element.isElement(node)) {
+          const { elements } = config;
+          const element = elements.find((element) => {
+            return element.type === node.type;
+          });
+          if (element && element.insertBreak) {
+            const isToReturn = element.insertBreak(editor, match);
+            if (isToReturn) {
+              return;
+            }
           }
         }
       }
