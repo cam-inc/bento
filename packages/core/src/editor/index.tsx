@@ -4,6 +4,9 @@ import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
 import { helpers } from '../helpers';
+import { withInsertBreak } from '../plugins/withInsertBreak';
+import { withOriginalIsVoid } from '../plugins/withOriginalIsVoid';
+import { withOriginalNormalizeNode } from '../plugins/withOriginalNormalizeNode';
 import { ModalContainer } from '../portals/modal/container';
 import { PopoverContainer } from '../portals/popover/container';
 import {
@@ -17,11 +20,6 @@ import { Theme } from '../theme';
 import { Toolbar } from '../toolbar';
 import { debounce } from '../utils';
 import { styles } from './index.css';
-import {
-  withInsertBreak,
-  withOriginalIsVoid,
-  withOriginalNormalizeNode,
-} from './plugins';
 
 export const EditorClassName = styles.root;
 
