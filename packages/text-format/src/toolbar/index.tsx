@@ -15,17 +15,27 @@ const toolbar: Text<Attributes>['toolbar'] = {
   Component: ({ editor }) => {
     const createHandler = useCallback((format: keyof Attributes) => {
       return () => {
+        const marks = Object.assign(
+          {},
+          helpers.Editor.marks(editor)?.attributes
+        );
+
+        if (helpers.isMarkActive(editor, format)) {
+          delete marks[format];
+        } else {
+          marks[format] = true;
+        }
+
         helpers.Transforms.setNodes(
           editor,
           {
-            attributes: {
-              [format]: true,
-            },
+            attributes: marks,
           },
           { match: (n) => helpers.Text.isText(n), split: true }
         );
       };
     }, []);
+
     const handleBoldClick = createHandler('bold');
     const handleItalicClick = createHandler('italic');
     const handleStrikethroughClick = createHandler('strikethrough');

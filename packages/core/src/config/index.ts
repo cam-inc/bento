@@ -12,12 +12,16 @@ import { ThemeToken } from '../theme/index.css';
 
 // All the custom elements and texts must follow this type.
 // @see: https://docs.slatejs.org/concepts/12-typescript#why-is-the-type-definition-unusual
-export type CustomElement<Attributes extends Record<string, any> = {}> = {
+export type CustomElement<
+  Attributes extends Record<string, any> = Record<string, any>
+> = {
   type: string;
   attributes?: Attributes;
   children: (CustomElement | CustomText)[];
 };
-export type CustomText<Attributes extends Record<string, any> = {}> = {
+export type CustomText<
+  Attributes extends Record<string, any> = Record<string, any>
+> = {
   type?: string;
   attributes?: Attributes;
   text: string;
@@ -30,7 +34,9 @@ declare module 'slate' {
   }
 }
 
-export type Element<Attributes extends Record<string, any> = {}> = {
+export type Element<
+  Attributes extends Record<string, any> = Record<string, any>
+> = {
   type: string;
   attributes: {
     defaultValue: Attributes;
@@ -60,39 +66,40 @@ export type Element<Attributes extends Record<string, any> = {}> = {
   isVoid?: boolean;
 };
 
-export type Text<Attributes extends Record<string, any> = {}> = {
-  type: string;
-  attributes: {
-    defaultValue: Attributes;
-  };
-  editable: {
-    Component: React.FC<
-      RenderLeafProps & {
-        text: {
-          attributes?: Attributes;
-        };
-        leaf: {
-          attributes?: Attributes;
-        };
+export type Text<Attributes extends Record<string, any> = Record<string, any>> =
+  {
+    type: string;
+    attributes: {
+      defaultValue: Attributes;
+    };
+    editable: {
+      Component: React.FC<
+        RenderLeafProps & {
+          text: {
+            attributes?: Attributes;
+          };
+          leaf: {
+            attributes?: Attributes;
+          };
+          editor: Editor;
+          path: Path;
+        }
+      >;
+      defaultValue?: SlateText[];
+    };
+    toolbar?: {
+      Component: React.FC<{
         editor: Editor;
-        path: Path;
-      }
-    >;
-    defaultValue?: SlateText[];
+      }>;
+    };
+    toolbox?: {
+      Icon: React.FC;
+      Thumb?: React.FC;
+      title: string;
+      description?: string;
+    };
+    normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
   };
-  toolbar?: {
-    Component: React.FC<{
-      editor: Editor;
-    }>;
-  };
-  toolbox?: {
-    Icon: React.FC;
-    Thumb?: React.FC;
-    title: string;
-    description?: string;
-  };
-  normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
-};
 
 export type Config = {
   elements: Element[];
