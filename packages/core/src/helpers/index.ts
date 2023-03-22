@@ -7,7 +7,7 @@ import Node from './node';
 import Path from './path';
 import ReactEditor from './reactEditor';
 import Transforms, * as transforms from './transform';
-import Text, * as texts from './text';
+import Text, * as textHelpers from './text';
 
 export const helpers = {
   Editor,
@@ -22,5 +22,5 @@ export const helpers = {
   Text,
   style,
   ...elements,
-  ...texts,
+  textHelpers,
 };

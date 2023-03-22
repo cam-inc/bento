@@ -1,10 +1,10 @@
 import {
-  helpers,
   Text,
   usePopover,
   Popover,
   ButtonBox,
   isUrl,
+  helpers,
 } from '@bento-editor/core';
 import { useCallback, useState } from 'react';
 import attributes, { Attributes } from '../attributes';
@@ -15,17 +15,15 @@ const toolbar: Text<Attributes>['toolbar'] = {
   Component: ({ editor }) => {
     const createHandler = useCallback((format: keyof Attributes) => {
       return () => {
-        helpers.Transforms.setNodes(
-          editor,
-          {
-            attributes: {
-              [format]: true,
-            },
-          },
-          { match: (n) => helpers.Text.isText(n), split: true }
-        );
+        const {
+          textHelpers: { removeTextAttribute, setTextAttribute, hasAttribute },
+        } = helpers;
+        hasAttribute(editor, format)
+          ? removeTextAttribute(editor, format)
+          : setTextAttribute(editor, { [format]: true });
       };
     }, []);
+
     const handleBoldClick = createHandler('bold');
     const handleItalicClick = createHandler('italic');
     const handleStrikethroughClick = createHandler('strikethrough');
@@ -69,7 +67,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
                 target: openInNew ? '_blank' : '_self',
               },
             },
-            { match: (n) => helpers.Text.isText(n), split: true }
+            { match: (n) => helpers.textHelpers.isText(n), split: true }
           );
           popoverLink.close();
         } else {
@@ -90,16 +88,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
     const [color] = useState(attributes.defaultValue.color ?? '#ffffff');
     const handleColorChange = useCallback(
       (newColor: string) => {
-        helpers.Transforms.setNodes(
-          editor,
-          {
-            attributes: {
-              color: newColor,
-            },
-          },
-          { match: (n) => helpers.Text.isText(n), split: true }
-        );
-        // popoverColor.close();
+        helpers.textHelpers.setTextAttribute(editor, { color: newColor });
       },
       [popoverColor]
     );
