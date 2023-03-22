@@ -2,9 +2,9 @@ import { Editor, Text as SlateText, Transforms } from 'slate';
 
 export const isText = SlateText.isText;
 
-export const isActiveAttribute = (editor: Editor, key: string) => {
+export const hasAttribute = (editor: Editor, key: string) => {
   const marks = Editor.marks(editor);
-  return !!marks?.attributes?.[key];
+  return Object.keys(marks?.attributes || {}).includes(key);
 };
 
 export const removeTextAttribute = (editor: Editor, attribute: string) => {

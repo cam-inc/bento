@@ -47,7 +47,7 @@ const createRenderer = (renderers: Props['renderers']) => {
           );
         });
         return <Renderer attributes={data.attributes}>{children}</Renderer>;
-      } else if (helpers.isText(data)) {
+      } else if (helpers.textHelpers.isText(data)) {
         const Renderer = renderers[data.type] ?? DefaultTextRenderer;
         return <Renderer attributes={data.attributes}>{data.text}</Renderer>;
       } else {

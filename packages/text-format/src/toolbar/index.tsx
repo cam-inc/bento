@@ -15,9 +15,10 @@ const toolbar: Text<Attributes>['toolbar'] = {
   Component: ({ editor }) => {
     const createHandler = useCallback((format: keyof Attributes) => {
       return () => {
-        const { isActiveAttribute, removeTextAttribute, setTextAttribute } =
-          helpers;
-        isActiveAttribute(editor, format)
+        const {
+          textHelpers: { removeTextAttribute, setTextAttribute, hasAttribute },
+        } = helpers;
+        hasAttribute(editor, format)
           ? removeTextAttribute(editor, format)
           : setTextAttribute(editor, { [format]: true });
       };
@@ -66,7 +67,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
                 target: openInNew ? '_blank' : '_self',
               },
             },
-            { match: (n) => helpers.Text.isText(n), split: true }
+            { match: (n) => helpers.textHelpers.isText(n), split: true }
           );
           popoverLink.close();
         } else {
@@ -87,7 +88,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
     const [color] = useState(attributes.defaultValue.color ?? '#ffffff');
     const handleColorChange = useCallback(
       (newColor: string) => {
-        helpers.setTextAttribute(editor, { color: newColor });
+        helpers.textHelpers.setTextAttribute(editor, { color: newColor });
       },
       [popoverColor]
     );
