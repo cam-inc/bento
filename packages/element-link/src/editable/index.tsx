@@ -6,7 +6,7 @@ import {
   Button,
   isUrl,
 } from '@bento-editor/core';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import attributes, { Attributes } from '../attributes';
 import { Link, Form, FormErrors } from '../components';
 import { styles } from './index.css';
@@ -28,8 +28,6 @@ const editable: Element<Attributes>['editable'] = {
 
     const setNodes = helpers.useTransformsSetNodes(props.element);
 
-    const [openInNew, setOpenInNew] = useState(target === '_blank');
-    const [newHref, setNewHref] = useState(href);
     const [showEdit, setShowEdit] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
@@ -47,51 +45,37 @@ const editable: Element<Attributes>['editable'] = {
       setIsHovering(true);
     }, []);
 
-    const handleTextboxChange = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewHref(event.target.value);
-        if (event.target.checkValidity()) {
-          setErrors(null);
-        }
-      },
-      []
-    );
-
-    const handleCheckboxChange = useCallback(() => {
-      setOpenInNew((prevState) => !prevState);
-    }, []);
-
     const handleEditButtonClick = useCallback(() => {
       setIsEditing(true);
     }, []);
 
-    const handleFormButtonClick = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-        if (newHref !== undefined && isUrl(newHref)) {
+    const handleFormButtonClick = useCallback<
+      React.ComponentProps<typeof Form>['handleButtonClick']
+    >(
+      (href, openInNew) => {
+        if (isUrl(href)) {
           setNodes({
             attributes: {
-              href: newHref,
+              href: href,
               target: openInNew ? '_blank' : '_self',
             },
           });
+          setIsEditing(false);
         } else {
           setErrors({
             reason: 'Invalid url.',
             message: '有効なURLを入力してください。',
           });
         }
-
-        if (isEditing) {
-          setIsEditing(false);
-        }
-
-        if (showEdit) {
-          setShowEdit(false);
-        }
       },
-      [setNodes, isEditing, isHovering, newHref, openInNew]
+      [setNodes, isEditing, isHovering]
     );
+
+    useEffect(() => {
+      if (!href) {
+        setIsEditing(true);
+      }
+    }, []);
 
     return (
       <ElementContainer {...props}>
@@ -121,15 +105,12 @@ const editable: Element<Attributes>['editable'] = {
             </div>
           ) : (
             <Form
-              handleTextboxChange={handleTextboxChange}
-              handleCheckboxChange={handleCheckboxChange}
               handleButtonClick={handleFormButtonClick}
               labelValue="新しいタブで開く"
-              switchChecked={openInNew}
               buttonValue={isEditing ? '保存する' : 'リンクを作成する'}
-              textboxValue={newHref}
+              href={href}
+              openInNew={target === '_blank'}
               placeholder={placeholder}
-              buttonDisabled={newHref == null || newHref === ''}
               textboxFocus={isEditing}
               errors={errors}
             />

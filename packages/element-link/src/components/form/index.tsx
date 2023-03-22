@@ -1,18 +1,16 @@
 import { Button, Switch, Textbox } from '@bento-editor/core';
+import { useCallback, useState } from 'react';
 import { styles } from './index.css';
 
 type FormProps = {
-  handleTextboxChange: React.ChangeEventHandler;
-  handleCheckboxChange: React.FormEventHandler;
-  handleButtonClick: React.MouseEventHandler;
+  handleButtonClick: (href: string, openInNew: boolean) => void;
   labelValue: string;
-  switchChecked: boolean;
   buttonValue: string;
-  textboxValue?: string;
   textboxFocus?: boolean;
   placeholder?: string;
-  buttonDisabled?: boolean;
   errors?: FormErrors | null;
+  openInNew: boolean;
+  href?: string;
 };
 
 export type FormErrors = {
@@ -21,25 +19,37 @@ export type FormErrors = {
 };
 
 export const Form: React.FC<FormProps> = ({
-  handleTextboxChange,
-  handleCheckboxChange,
   handleButtonClick,
-  textboxValue,
   textboxFocus,
   placeholder,
   labelValue,
-  switchChecked,
+  openInNew: originalOpenInNew,
   buttonValue,
-  buttonDisabled,
   errors,
+  href: originalHref,
 }) => {
+  const [href, setHref] = useState(originalHref || '');
+  const [openInNew, setOpenInNew] = useState(originalOpenInNew);
+
+  const handleOnChangeHref = useCallback<
+    React.ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setHref(e.currentTarget.value);
+  }, []);
+
+  const handleOnChangeCheckbox = useCallback<
+    NonNullable<React.ComponentProps<typeof Switch>['onChange']>
+  >(() => {
+    setOpenInNew((cur) => !cur);
+  }, []);
+
   return (
     <div className={styles.root}>
       <div className={styles.field}>
         <Textbox
-          value={textboxValue}
+          value={href}
           placeholder={placeholder}
-          onChange={handleTextboxChange}
+          onChange={handleOnChangeHref}
           autoFocus={textboxFocus}
           required={true}
         />
@@ -48,13 +58,13 @@ export const Form: React.FC<FormProps> = ({
         )}
         <div className={styles.switchContainer}>
           <label>{labelValue}</label>
-          <Switch onChange={handleCheckboxChange} checked={switchChecked} />
+          <Switch onChange={handleOnChangeCheckbox} checked={openInNew} />
         </div>
       </div>
       <div className={styles.buttonContainer}>
         <Button
-          onClick={handleButtonClick}
-          disabled={buttonDisabled}
+          onClick={() => handleButtonClick(href, openInNew)}
+          disabled={!href}
           radius="full"
         >
           {buttonValue}
