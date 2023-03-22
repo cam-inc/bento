@@ -32,22 +32,8 @@ const editable: Element<Attributes>['editable'] = {
 
     const setNodes = helpers.useTransformsSetNodes(props.element);
 
-    const [showEdit, setShowEdit] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [isHovering, setIsHovering] = useState(false);
     const [errors, setErrors] = useState<FormErrors | null>(null);
-
-    const handleLinkMouseEnter = useCallback(() => {
-      setShowEdit(true);
-    }, []);
-
-    const handleLinkMouseLeave = useCallback(() => {
-      setShowEdit(!isHovering);
-    }, [isHovering]);
-
-    const handleLinkMouseOver = useCallback(() => {
-      setIsHovering(true);
-    }, []);
 
     const handleEditButtonClick = useCallback(() => {
       setIsEditing(true);
@@ -73,7 +59,7 @@ const editable: Element<Attributes>['editable'] = {
           });
         }
       },
-      [setNodes, isEditing, isHovering]
+      [setNodes, isEditing]
     );
 
     useEffect(() => {
@@ -86,27 +72,16 @@ const editable: Element<Attributes>['editable'] = {
       <ElementContainer {...props}>
         <div contentEditable={false} className={styles.root}>
           {!isEditing ? (
-            <div
-              onMouseEnter={handleLinkMouseEnter}
-              onMouseLeave={handleLinkMouseLeave}
-              onMouseOver={handleLinkMouseOver}
-            >
+            <div className={styles.contentWrapper}>
               <Link text={text} href={href as string} target={target} />
-              {showEdit && (
-                <span className={styles.editButton}>
-                  <span
-                    className={styles.spacer}
-                    onClick={handleEditButtonClick}
-                    role="button"
-                  />
-                  <Button onClick={handleEditButtonClick}>
-                    <span className={styles.editIcon}>
-                      <EditIcon />
-                    </span>
-                    <span>編集</span>
-                  </Button>
-                </span>
-              )}
+              <span className={styles.editButton}>
+                <Button onClick={handleEditButtonClick}>
+                  <span className={styles.editIcon}>
+                    <EditIcon />
+                  </span>
+                  <span>編集</span>
+                </Button>
+              </span>
             </div>
           ) : (
             <Form
