@@ -4,7 +4,10 @@ export const isText = SlateText.isText;
 
 export const hasAttribute = (editor: Editor, key: string) => {
   const marks = Editor.marks(editor);
-  return Object.keys(marks?.attributes || {}).includes(key);
+  if (!marks?.attributes) {
+    return false;
+  }
+  return marks.attributes.hasOwnProperty(key);
 };
 
 export const removeTextAttribute = (editor: Editor, attribute: string) => {
