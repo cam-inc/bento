@@ -3,14 +3,16 @@ import { useCallback, useState } from 'react';
 import { styles } from './index.css';
 
 type FormProps = {
-  handleButtonClick: (href: string, openInNew: boolean) => void;
+  handleButtonClick: (href: string, text?: string, openInNew?: boolean) => void;
   labelValue: string;
   buttonValue: string;
   textboxFocus?: boolean;
-  placeholder?: string;
+  hrefPlaceholder?: string;
+  textPlaceholder?: string;
   errors?: FormErrors | null;
   openInNew: boolean;
   href?: string;
+  text?: string;
 };
 
 export type FormErrors = {
@@ -21,15 +23,24 @@ export type FormErrors = {
 export const Form: React.FC<FormProps> = ({
   handleButtonClick,
   textboxFocus,
-  placeholder,
+  hrefPlaceholder,
+  textPlaceholder,
   labelValue,
   openInNew: originalOpenInNew,
   buttonValue,
   errors,
   href: originalHref,
+  text: originalText,
 }) => {
+  const [text, setText] = useState(originalText || '');
   const [href, setHref] = useState(originalHref || '');
   const [openInNew, setOpenInNew] = useState(originalOpenInNew);
+
+  const handleOnChangeText = useCallback<
+    React.ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setText(e.currentTarget.value);
+  }, []);
 
   const handleOnChangeHref = useCallback<
     React.ChangeEventHandler<HTMLInputElement>
@@ -47,8 +58,13 @@ export const Form: React.FC<FormProps> = ({
     <div className={styles.root}>
       <div className={styles.field}>
         <Textbox
+          value={text}
+          placeholder={textPlaceholder}
+          onChange={handleOnChangeText}
+        />
+        <Textbox
           value={href}
-          placeholder={placeholder}
+          placeholder={hrefPlaceholder}
           onChange={handleOnChangeHref}
           autoFocus={textboxFocus}
           required={true}
@@ -63,7 +79,7 @@ export const Form: React.FC<FormProps> = ({
       </div>
       <div className={styles.buttonContainer}>
         <Button
-          onClick={() => handleButtonClick(href, openInNew)}
+          onClick={() => handleButtonClick(href, text, openInNew)}
           disabled={!href}
           radius="full"
         >

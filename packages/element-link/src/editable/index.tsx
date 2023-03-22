@@ -19,12 +19,16 @@ const editable: Element<Attributes>['editable'] = {
     },
   ],
   Component: (props) => {
+    const text = props.element.attributes?.text ?? attributes.defaultValue.text;
     const href = props.element.attributes?.href ?? attributes.defaultValue.href;
     const target =
       props.element.attributes?.target ?? attributes.defaultValue.target;
-    const placeholder =
-      props.element.attributes?.placeholder ??
-      attributes.defaultValue.placeholder;
+    const hrefPlaceholder =
+      props.element.attributes?.hrefPlaceholder ??
+      attributes.defaultValue.hrefPlaceholder;
+    const textPlaceholder =
+      props.element.attributes?.textPlaceholder ??
+      attributes.defaultValue.textPlaceholder;
 
     const setNodes = helpers.useTransformsSetNodes(props.element);
 
@@ -52,11 +56,12 @@ const editable: Element<Attributes>['editable'] = {
     const handleFormButtonClick = useCallback<
       React.ComponentProps<typeof Form>['handleButtonClick']
     >(
-      (href, openInNew) => {
+      (href, text, openInNew) => {
         if (isUrl(href)) {
           setNodes({
             attributes: {
-              href: href,
+              href,
+              ...(text && { text }),
               target: openInNew ? '_blank' : '_self',
             },
           });
@@ -80,13 +85,13 @@ const editable: Element<Attributes>['editable'] = {
     return (
       <ElementContainer {...props}>
         <div contentEditable={false} className={styles.root}>
-          {href != null && href !== '' && !isEditing ? (
+          {!isEditing ? (
             <div
               onMouseEnter={handleLinkMouseEnter}
               onMouseLeave={handleLinkMouseLeave}
               onMouseOver={handleLinkMouseOver}
             >
-              <Link href={href} target={target} />
+              <Link text={text} href={href as string} target={target} />
               {showEdit && (
                 <span className={styles.editButton}>
                   <span
@@ -109,8 +114,10 @@ const editable: Element<Attributes>['editable'] = {
               labelValue="新しいタブで開く"
               buttonValue={isEditing ? '保存する' : 'リンクを作成する'}
               href={href}
+              text={text}
               openInNew={target === '_blank'}
-              placeholder={placeholder}
+              hrefPlaceholder={hrefPlaceholder}
+              textPlaceholder={textPlaceholder}
               textboxFocus={isEditing}
               errors={errors}
             />
