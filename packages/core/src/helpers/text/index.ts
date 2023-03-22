@@ -2,7 +2,7 @@ import { Editor, Text as SlateText, Transforms } from 'slate';
 
 export const isText = SlateText.isText;
 
-export const isAttributeIsActive = (editor: Editor, key: string) => {
+export const isActiveAttribute = (editor: Editor, key: string) => {
   const marks = Editor.marks(editor);
   return !!marks?.attributes?.[key];
 };

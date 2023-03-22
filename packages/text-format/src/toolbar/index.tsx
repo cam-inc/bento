@@ -15,9 +15,9 @@ const toolbar: Text<Attributes>['toolbar'] = {
   Component: ({ editor }) => {
     const createHandler = useCallback((format: keyof Attributes) => {
       return () => {
-        const { isAttributeIsActive, removeTextAttribute, setTextAttribute } =
+        const { isActiveAttribute, removeTextAttribute, setTextAttribute } =
           helpers;
-        isAttributeIsActive(editor, format)
+        isActiveAttribute(editor, format)
           ? removeTextAttribute(editor, format)
           : setTextAttribute(editor, { [format]: true });
       };
