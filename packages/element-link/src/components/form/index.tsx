@@ -54,6 +54,10 @@ export const Form: React.FC<FormProps> = ({
     setOpenInNew((cur) => !cur);
   }, []);
 
+  const handleOnClick = useCallback(() => {
+    handleButtonClick(href, text, openInNew);
+  }, [href, text, openInNew]);
+
   return (
     <div className={styles.root}>
       <div className={styles.field}>
@@ -78,11 +82,7 @@ export const Form: React.FC<FormProps> = ({
         </div>
       </div>
       <div className={styles.buttonContainer}>
-        <Button
-          onClick={() => handleButtonClick(href, text, openInNew)}
-          disabled={!href}
-          radius="full"
-        >
+        <Button onClick={handleOnClick} disabled={!href} radius="full">
           {buttonValue}
         </Button>
       </div>
