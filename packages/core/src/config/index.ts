@@ -63,7 +63,6 @@ export type Element<
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
   normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
   insertBreak?: (editor: Editor, entry: NodeEntry) => boolean;
-  insertSoftBreak?: (editor: Editor, entry: NodeEntry) => boolean;
   isVoid?: boolean;
 };
 
