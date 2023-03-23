@@ -50,6 +50,12 @@ export const defaultThemeToken = {
       '1': '0px 1px 2px rgba(81, 86, 169, 0.3), 0px 2px 6px rgba(81, 86, 169, 0.15)',
     },
   },
+  zIndex: {
+    toolbar: '10',
+    toolbox: '10',
+    toolmenu: '10',
+    elementUtil: '20',
+  },
   color: {
     // Same values as the ones of light mode.
     background: '#FFFFFF',

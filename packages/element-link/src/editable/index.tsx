@@ -35,6 +35,21 @@ const editable: Element<Attributes>['editable'] = {
     const [isEditing, setIsEditing] = useState(false);
     const [errors, setErrors] = useState<FormErrors | null>(null);
 
+    const [showEdit, setShowEdit] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleLinkMouseEnter = useCallback(() => {
+      setShowEdit(true);
+    }, []);
+
+    const handleLinkMouseLeave = useCallback(() => {
+      setShowEdit(!isHovering);
+    }, [isHovering]);
+
+    const handleLinkMouseOver = useCallback(() => {
+      setIsHovering(true);
+    }, []);
+
     const handleEditButtonClick = useCallback(() => {
       setIsEditing(true);
     }, []);
@@ -70,19 +85,28 @@ const editable: Element<Attributes>['editable'] = {
 
     return (
       <ElementContainer {...props}>
-        <div contentEditable={false} className={styles.root}>
+        <div
+          contentEditable={false}
+          className={styles.root}
+          onMouseEnter={handleLinkMouseEnter}
+          onMouseLeave={handleLinkMouseLeave}
+          onMouseOver={handleLinkMouseOver}
+        >
           {!isEditing ? (
-            <div className={styles.contentWrapper}>
+            <>
               <Link text={text} href={href as string} target={target} />
-              <span className={styles.editButton}>
-                <Button onClick={handleEditButtonClick}>
-                  <span className={styles.editIcon}>
-                    <EditIcon />
-                  </span>
-                  <span>編集</span>
-                </Button>
-              </span>
-            </div>
+              {showEdit && (
+                <span className={styles.editButton}>
+                  <span className={styles.spacer} />
+                  <Button onClick={handleEditButtonClick}>
+                    <span className={styles.editIcon}>
+                      <EditIcon />
+                    </span>
+                    <span>編集</span>
+                  </Button>
+                </span>
+              )}
+            </>
           ) : (
             <Form
               handleButtonClick={handleFormButtonClick}

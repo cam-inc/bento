@@ -1,55 +1,47 @@
-import { themeVars } from '@bento-editor/core';
+import { EditorClassName, themeVars } from '@bento-editor/core';
 import { globalStyle, style } from '@vanilla-extract/css';
 
-const contentWrapper = style({
-  position: 'relative',
-});
-
-const root = style({
-  color: themeVars.color.backgroundOn,
-  width: 'fit-content',
-});
-
-const editButton = style({
-  display: 'none',
-  backgroundColor: themeVars.color.surface,
-  zIndex: 10,
-  selectors: {
-    [`${contentWrapper}:hover &`]: {
-      position: 'absolute',
-      right: 0,
-      display: 'flex',
-      justifyContent: 'right',
-      flexWrap: 'wrap',
-      placeItems: 'flex-end',
-      whiteSpace: 'nowrap',
+export const styles = {
+  root: style({
+    color: themeVars.color.backgroundOn,
+    width: 'fit-content',
+    position: 'relative',
+  }),
+  spacer: style({
+    width: '100%',
+    height: themeVars.space[2],
+    cursor: 'pointer',
+    maxWidth: 108,
+  }),
+  editButton: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        backgroundColor: themeVars.color.surface,
+        zIndex: themeVars.zIndex.elementUtil,
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'absolute',
+        right: 0,
+      },
     },
-  },
-});
+  }),
+  editIcon: style({
+    display: 'block',
+    width: 18,
+    height: 18,
+    marginRight: themeVars.space[4],
+  }),
+};
 
-const editIcon = style({
-  display: 'block',
-  width: 18,
-  height: 18,
-  marginRight: themeVars.space[4],
-});
-
-globalStyle(`${editButton} button`, {
+globalStyle(`${styles.editButton} button`, {
   marginLeft: 'auto',
   maxWidth: 108,
   border: `solid 1px ${themeVars.color.surfaceOnSlight}`,
   borderRadius: themeVars.radius.medium,
 });
 
-globalStyle(`${editButton} button > div`, {
+globalStyle(`${styles.editButton} button > div`, {
   display: 'flex',
   alignItems: 'center',
   padding: themeVars.space[3],
 });
-
-export const styles = {
-  root,
-  contentWrapper,
-  editButton,
-  editIcon,
-};
