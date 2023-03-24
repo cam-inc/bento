@@ -1,26 +1,49 @@
-## [0.1.5](https://github.com/cam-inc/bento/compare/v0.1.4...v0.1.5) (2022-12-22)
+## [0.2.0](https://github.com/cam-inc/bento/compare/v0.1.4...v0.2.0) (2023-03-24)
 
 
 ### Features
 
+* add braek text func to elment text✨ ([9e8f837](https://github.com/cam-inc/bento/commit/9e8f837ba944bd7744f8803b85ff0605fcf6c8b2))
+* add get root path helper✨ ([7a814e5](https://github.com/cam-inc/bento/commit/7a814e51e07dcadf9f210cab4bd62ca6128d811f))
+* add hide utils interface to element container✨ ([2e046ca](https://github.com/cam-inc/bento/commit/2e046ca01ee9d03ae98b08de12a4082fc0dd176a))
 * add insert break interface to core editor✨ ([9e2a95e](https://github.com/cam-inc/bento/commit/9e2a95eda1720dd04697f59faca042f454385ffb))
+* add insertSoftBraek interface to element✨ ([9bb3e69](https://github.com/cam-inc/bento/commit/9bb3e690c826afbe28e33cf0a804ae2fc6085003))
+* add normalize node func to element note✨ ([55d924c](https://github.com/cam-inc/bento/commit/55d924c398e14111049a6e5c7530edb48c0d28f5))
 * add placeholder to element packages✨ ([99d8a7d](https://github.com/cam-inc/bento/commit/99d8a7dded552c797437fa21628f6b0df73d1336))
 * add placeholder to element✨ ([428bebf](https://github.com/cam-inc/bento/commit/428bebf07c974d47a5dfe36a8a92f1a392a14660))
 * add placeholder type✨ ([873e6eb](https://github.com/cam-inc/bento/commit/873e6eb6e7dad4d1d6b511469901f170b8ce894a))
+* add slate-history ✨ ([46faa69](https://github.com/cam-inc/bento/commit/46faa69555876b6543493faed5098180c3d42eb6))
+* add text input to element-link ✨ ([a83f730](https://github.com/cam-inc/bento/commit/a83f7301753ee3e7aabfbcd626cb3c5af484e668))
 * always shown property✨ ([6e6befe](https://github.com/cam-inc/bento/commit/6e6befe28dac633baef025725212f92fb96f6ecd))
 * remove embed block ✨ ([725f98a](https://github.com/cam-inc/bento/commit/725f98a315d5a83b88a1def69bd210e8aa91dd2c))
+* update link logic✨ ([15dd83d](https://github.com/cam-inc/bento/commit/15dd83dec74dae620d4d0e12c602f0009dff7ec3))
 
 
 ### Bug Fixes
 
+* cannot overlap inline style bug 🐛 ([6565275](https://github.com/cam-inc/bento/commit/656527550ed3decbf8bae4e802008b5baed770f6))
+* debug code🐛 ([3cb03c3](https://github.com/cam-inc/bento/commit/3cb03c329459a0b3cce0ebfec8dc10c6f6bfd2d3))
 * empty array case for initial value ([0894cda](https://github.com/cam-inc/bento/commit/0894cda0bfd1ec1f2579013d95dcb34537c4259e))
 * empty state logic ([b9d5074](https://github.com/cam-inc/bento/commit/b9d50744d6bd71ac378f77f7b9042670ec492848))
+* empty state text style🐛 ([37f112b](https://github.com/cam-inc/bento/commit/37f112bbb412d777f06a7cd2c013a710c5a3ca20))
+* has attribute helper logic 🐛 ([c62eb96](https://github.com/cam-inc/bento/commit/c62eb968111f78ee44d080c021b2aa180f080499))
 * insert break logic ([4b12dba](https://github.com/cam-inc/bento/commit/4b12dbadeac3d33d6b490907d7915ce2aab0965a))
 * insert break logic 🐛 ([1ffbe89](https://github.com/cam-inc/bento/commit/1ffbe89f8286ff800d00182b3db0acb93262ff17))
+* link hover edit button style🐛 ([9dccb6d](https://github.com/cam-inc/bento/commit/9dccb6d7d8b6a7325595744547f8aadca8affd99))
+* link style🐛 ([f4faa48](https://github.com/cam-inc/bento/commit/f4faa4880c91274239acd8ef9b70c4e9516dbeb3))
 * logic of plugin array🐛 ([f4e8f38](https://github.com/cam-inc/bento/commit/f4e8f382b8076e7ba43edf005d14dd3a7eef543f))
+* memo callback function 🐛 ([f08d87c](https://github.com/cam-inc/bento/commit/f08d87c1ea514faa043f8e310a4003b5c2f87a30))
+* name of helper🐛 ([914f97d](https://github.com/cam-inc/bento/commit/914f97d9494bbebf586f81a4b65d8ef2b12418d7))
+* name of utils 🐛 ([f45c0d1](https://github.com/cam-inc/bento/commit/f45c0d1e7ed38bee7eb0289a1190d7c28a2c3f38))
 * paragraph ([be5bf57](https://github.com/cam-inc/bento/commit/be5bf57a49b00ee6a67b783856c1ef57c2ec133c))
 * placeholder type 🐛 ([df10415](https://github.com/cam-inc/bento/commit/df10415c6ded818357f604ca779f94fcae300bbf))
 * reference doc🐛 ([353807e](https://github.com/cam-inc/bento/commit/353807e3f01a345b3c2f57c1e42609eef8f4a84a))
+* sample of note element🐛 ([4ca2a87](https://github.com/cam-inc/bento/commit/4ca2a878181309f8a7dd675da6032f317628d969))
+* text helpers export name🐛 ([90826d1](https://github.com/cam-inc/bento/commit/90826d106feee18250498f3ec307b36cdf48592a))
+* typo and logic 🐛 ([a8d997a](https://github.com/cam-inc/bento/commit/a8d997a3808280c699e20343d166784925643145))
+* unused helpers 🐛 ([78fad55](https://github.com/cam-inc/bento/commit/78fad55c4c4f9f1b96d4b37df03d767d108bae63))
+* update editor type to add history editor🐛 ([84c3551](https://github.com/cam-inc/bento/commit/84c35515572548ff4dd0b6c4a6f97f6abb3221f7))
+* update text inline style 🐛 ([ef5550b](https://github.com/cam-inc/bento/commit/ef5550baa9514dda6a0083c82a393bc5c203e13c))
 
 ## [0.1.3](https://github.com/cam-inc/bento/compare/v0.1.1...v0.1.3) (2022-12-09)
 
