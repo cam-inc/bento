@@ -1,7 +1,7 @@
 import { Editor, Element, Node, NodeEntry, Transforms } from 'slate';
 import { warn } from '../logger';
 
-export const restricteChild = (
+export const restrictChild = (
   editor: Editor,
   entry: NodeEntry,
   allowType: string | string[]

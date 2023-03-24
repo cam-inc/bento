@@ -7,10 +7,9 @@ export const getRootAncestorPath = (path: SlatePath): SlatePath => {
   const isRootChild = SlatePath.isParent([], path);
   if (isRootChild) {
     return path;
-  } else {
-    const parentPath = SlatePath.parent(path);
-    return getRootAncestorPath(parentPath);
   }
+  const parentPath = SlatePath.parent(path);
+  return getRootAncestorPath(parentPath);
 };
 
 export default SlatePath;
