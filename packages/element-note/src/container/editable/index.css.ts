@@ -9,7 +9,6 @@ export const styles = {
         display: 'flex',
         gap: themeVars.space['2'],
         padding: `${themeVars.space[3]} ${themeVars.space[4]}`,
-        color: themeVars.color.accentXXDOn,
       },
     },
   }),
@@ -19,28 +18,6 @@ export const styles = {
         display: 'block',
         width: 20,
         height: 20,
-      },
-    },
-  }),
-  text: style({
-    selectors: {
-      [`.${EditorClassName} &`]: {
-        minWidth: 1,
-      },
-    },
-  }),
-  emptyState: style({
-    selectors: {
-      [`.${EditorClassName} &`]: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        display: 'flex',
-        alignItems: 'center',
-        userSelect: 'none',
-        pointerEvents: 'none',
-        color: themeVars.color.backgroundOnSlight,
-        paddingLeft: `calc(${themeVars.space[4]} + 28px)`,
       },
     },
   }),

@@ -1,14 +1,4 @@
-import { Element } from '@bento-editor/core';
-import attributes, { Attributes } from './attributes';
-import editable from './editable';
-import toolbox from './toolbox';
-export * from './renderer';
+import body, { BodyRenderer } from './body';
+import container, { ContainerRenderer } from './container';
 
-const element: Element<Attributes> = {
-  type: 'note',
-  attributes,
-  editable,
-  toolbox,
-};
-
-export default element;
+export { container, body, ContainerRenderer, BodyRenderer };
