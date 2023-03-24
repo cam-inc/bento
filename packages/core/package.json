@@ -66,6 +66,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "recoil": "^0.7.5",
+    "slate-history": "^0.86.0",
     "store2": "^2.14.2",
     "type-fest": "^2.18.1",
     "validator": "^13.7.0"

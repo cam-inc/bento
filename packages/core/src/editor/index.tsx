@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { createEditor } from 'slate';
+import { withHistory } from 'slate-history';
 import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
@@ -48,7 +49,7 @@ export const Editor: React.FC<EditorProps> = ({
   onChange = () => {},
 }) => {
   const editor = useMemo(() => {
-    const baseEditor = withReact(createEditor());
+    const baseEditor = withReact(withHistory(createEditor()));
     const editor = [
       withInsertBreak,
       withInsertSoftBreak,
