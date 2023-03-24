@@ -6,7 +6,7 @@ import {
   Button,
   isUrl,
 } from '@bento-editor/core';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import attributes, { Attributes } from '../attributes';
 import { Link, Form, FormErrors } from '../components';
 import { styles } from './index.css';
@@ -19,21 +19,24 @@ const editable: Element<Attributes>['editable'] = {
     },
   ],
   Component: (props) => {
+    const text = props.element.attributes?.text ?? attributes.defaultValue.text;
     const href = props.element.attributes?.href ?? attributes.defaultValue.href;
     const target =
       props.element.attributes?.target ?? attributes.defaultValue.target;
-    const placeholder =
-      props.element.attributes?.placeholder ??
-      attributes.defaultValue.placeholder;
+    const hrefPlaceholder =
+      props.element.attributes?.hrefPlaceholder ??
+      attributes.defaultValue.hrefPlaceholder;
+    const textPlaceholder =
+      props.element.attributes?.textPlaceholder ??
+      attributes.defaultValue.textPlaceholder;
 
     const setNodes = helpers.useTransformsSetNodes(props.element);
 
-    const [openInNew, setOpenInNew] = useState(target === '_blank');
-    const [newHref, setNewHref] = useState(href);
-    const [showEdit, setShowEdit] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [isHovering, setIsHovering] = useState(false);
     const [errors, setErrors] = useState<FormErrors | null>(null);
+
+    const [showEdit, setShowEdit] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
 
     const handleLinkMouseEnter = useCallback(() => {
       setShowEdit(true);
@@ -47,69 +50,54 @@ const editable: Element<Attributes>['editable'] = {
       setIsHovering(true);
     }, []);
 
-    const handleTextboxChange = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewHref(event.target.value);
-        if (event.target.checkValidity()) {
-          setErrors(null);
-        }
-      },
-      []
-    );
-
-    const handleCheckboxChange = useCallback(() => {
-      setOpenInNew((prevState) => !prevState);
-    }, []);
-
     const handleEditButtonClick = useCallback(() => {
       setIsEditing(true);
     }, []);
 
-    const handleFormButtonClick = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-        if (newHref !== undefined && isUrl(newHref)) {
+    const handleFormButtonClick = useCallback<
+      React.ComponentProps<typeof Form>['handleButtonClick']
+    >(
+      (href, text, openInNew) => {
+        if (isUrl(href)) {
           setNodes({
             attributes: {
-              href: newHref,
+              href,
+              ...(text && { text }),
               target: openInNew ? '_blank' : '_self',
             },
           });
+          setIsEditing(false);
         } else {
           setErrors({
             reason: 'Invalid url.',
             message: '有効なURLを入力してください。',
           });
         }
-
-        if (isEditing) {
-          setIsEditing(false);
-        }
-
-        if (showEdit) {
-          setShowEdit(false);
-        }
       },
-      [setNodes, isEditing, isHovering, newHref, openInNew]
+      [setNodes, isEditing]
     );
+
+    useEffect(() => {
+      if (!href) {
+        setIsEditing(true);
+      }
+    }, []);
 
     return (
       <ElementContainer {...props}>
-        <div contentEditable={false} className={styles.root}>
-          {href != null && href !== '' && !isEditing ? (
-            <div
-              onMouseEnter={handleLinkMouseEnter}
-              onMouseLeave={handleLinkMouseLeave}
-              onMouseOver={handleLinkMouseOver}
-            >
-              <Link href={href} target={target} />
+        <div
+          contentEditable={false}
+          className={styles.root}
+          onMouseEnter={handleLinkMouseEnter}
+          onMouseLeave={handleLinkMouseLeave}
+          onMouseOver={handleLinkMouseOver}
+        >
+          {!isEditing ? (
+            <>
+              <Link text={text} href={href as string} target={target} />
               {showEdit && (
                 <span className={styles.editButton}>
-                  <span
-                    className={styles.spacer}
-                    onClick={handleEditButtonClick}
-                    role="button"
-                  />
+                  <span className={styles.spacer} />
                   <Button onClick={handleEditButtonClick}>
                     <span className={styles.editIcon}>
                       <EditIcon />
@@ -118,18 +106,17 @@ const editable: Element<Attributes>['editable'] = {
                   </Button>
                 </span>
               )}
-            </div>
+            </>
           ) : (
             <Form
-              handleTextboxChange={handleTextboxChange}
-              handleCheckboxChange={handleCheckboxChange}
               handleButtonClick={handleFormButtonClick}
               labelValue="新しいタブで開く"
-              switchChecked={openInNew}
               buttonValue={isEditing ? '保存する' : 'リンクを作成する'}
-              textboxValue={newHref}
-              placeholder={placeholder}
-              buttonDisabled={newHref == null || newHref === ''}
+              href={href}
+              text={text}
+              openInNew={target === '_blank'}
+              hrefPlaceholder={hrefPlaceholder}
+              textPlaceholder={textPlaceholder}
               textboxFocus={isEditing}
               errors={errors}
             />

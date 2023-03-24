@@ -1,18 +1,18 @@
 import { Button, Switch, Textbox } from '@bento-editor/core';
+import { useCallback, useState } from 'react';
 import { styles } from './index.css';
 
 type FormProps = {
-  handleTextboxChange: React.ChangeEventHandler;
-  handleCheckboxChange: React.FormEventHandler;
-  handleButtonClick: React.MouseEventHandler;
+  handleButtonClick: (href: string, text?: string, openInNew?: boolean) => void;
   labelValue: string;
-  switchChecked: boolean;
   buttonValue: string;
-  textboxValue?: string;
   textboxFocus?: boolean;
-  placeholder?: string;
-  buttonDisabled?: boolean;
+  hrefPlaceholder?: string;
+  textPlaceholder?: string;
   errors?: FormErrors | null;
+  openInNew: boolean;
+  href?: string;
+  text?: string;
 };
 
 export type FormErrors = {
@@ -21,25 +21,55 @@ export type FormErrors = {
 };
 
 export const Form: React.FC<FormProps> = ({
-  handleTextboxChange,
-  handleCheckboxChange,
   handleButtonClick,
-  textboxValue,
   textboxFocus,
-  placeholder,
+  hrefPlaceholder,
+  textPlaceholder,
   labelValue,
-  switchChecked,
+  openInNew: originalOpenInNew,
   buttonValue,
-  buttonDisabled,
   errors,
+  href: originalHref,
+  text: originalText,
 }) => {
+  const [text, setText] = useState(originalText || '');
+  const [href, setHref] = useState(originalHref || '');
+  const [openInNew, setOpenInNew] = useState(originalOpenInNew);
+
+  const handleOnChangeText = useCallback<
+    React.ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setText(e.currentTarget.value);
+  }, []);
+
+  const handleOnChangeHref = useCallback<
+    React.ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setHref(e.currentTarget.value);
+  }, []);
+
+  const handleOnChangeCheckbox = useCallback<
+    NonNullable<React.ComponentProps<typeof Switch>['onChange']>
+  >(() => {
+    setOpenInNew((cur) => !cur);
+  }, []);
+
+  const handleOnClick = useCallback(() => {
+    handleButtonClick(href, text, openInNew);
+  }, [href, text, openInNew]);
+
   return (
     <div className={styles.root}>
       <div className={styles.field}>
         <Textbox
-          value={textboxValue}
-          placeholder={placeholder}
-          onChange={handleTextboxChange}
+          value={text}
+          placeholder={textPlaceholder}
+          onChange={handleOnChangeText}
+        />
+        <Textbox
+          value={href}
+          placeholder={hrefPlaceholder}
+          onChange={handleOnChangeHref}
           autoFocus={textboxFocus}
           required={true}
         />
@@ -48,15 +78,11 @@ export const Form: React.FC<FormProps> = ({
         )}
         <div className={styles.switchContainer}>
           <label>{labelValue}</label>
-          <Switch onChange={handleCheckboxChange} checked={switchChecked} />
+          <Switch onChange={handleOnChangeCheckbox} checked={openInNew} />
         </div>
       </div>
       <div className={styles.buttonContainer}>
-        <Button
-          onClick={handleButtonClick}
-          disabled={buttonDisabled}
-          radius="full"
-        >
+        <Button onClick={handleOnClick} disabled={!href} radius="full">
           {buttonValue}
         </Button>
       </div>

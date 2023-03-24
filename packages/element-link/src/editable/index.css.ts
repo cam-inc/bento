@@ -1,26 +1,27 @@
-import { themeVars, EditorClassName } from '@bento-editor/core';
+import { EditorClassName, themeVars } from '@bento-editor/core';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const styles = {
   root: style({
     color: themeVars.color.backgroundOn,
     width: 'fit-content',
+    position: 'relative',
   }),
   spacer: style({
     width: '100%',
-    height: themeVars.space[4],
+    height: themeVars.space[2],
     cursor: 'pointer',
     maxWidth: 108,
   }),
   editButton: style({
     selectors: {
       [`.${EditorClassName} &`]: {
-        display: 'flex',
-        justifyContent: 'right',
-        flexWrap: 'wrap',
-        placeItems: 'flex-end',
         backgroundColor: themeVars.color.surface,
-        whiteSpace: 'nowrap',
+        zIndex: themeVars.zIndex.elementUtil,
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'absolute',
+        right: 0,
       },
     },
   }),
@@ -42,5 +43,5 @@ globalStyle(`${styles.editButton} button`, {
 globalStyle(`${styles.editButton} button > div`, {
   display: 'flex',
   alignItems: 'center',
-  padding: themeVars.space[4],
+  padding: themeVars.space[3],
 });
