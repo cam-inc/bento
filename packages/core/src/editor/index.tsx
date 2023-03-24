@@ -5,6 +5,7 @@ import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
 import { helpers } from '../helpers';
 import { withInsertBreak } from '../plugins/withInsertBreak';
+import { withInsertSoftBreak } from '../plugins/withInsertSoftBreak';
 import { withOriginalIsVoid } from '../plugins/withOriginalIsVoid';
 import { withOriginalNormalizeNode } from '../plugins/withOriginalNormalizeNode';
 import { ModalContainer } from '../portals/modal/container';
@@ -50,6 +51,7 @@ export const Editor: React.FC<EditorProps> = ({
     const baseEditor = withReact(createEditor());
     const editor = [
       withInsertBreak,
+      withInsertSoftBreak,
       withOriginalIsVoid,
       withOriginalNormalizeNode,
     ].reduce((editor, plugin) => plugin(editor, config), baseEditor);
@@ -79,14 +81,12 @@ export const Editor: React.FC<EditorProps> = ({
   }, []);
 
   return (
-    <>
-      <Slate editor={editor} value={initialValue} onChange={handleOnChange}>
-        <GlobalStateProvider>
-          {/* Need to wrap with a react component to encapsulate all state related processes inside the RecoilRoot component. */}
-          <Root config={config} />
-        </GlobalStateProvider>
-      </Slate>
-    </>
+    <Slate editor={editor} value={initialValue} onChange={handleOnChange}>
+      <GlobalStateProvider>
+        {/* Need to wrap with a react component to encapsulate all state related processes inside the RecoilRoot component. */}
+        <Root config={config} />
+      </GlobalStateProvider>
+    </Slate>
   );
 };
 
