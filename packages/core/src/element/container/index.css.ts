@@ -98,6 +98,7 @@ const bodyPlaceholder = style({
       userSelect: 'none',
       pointerEvents: 'none',
       color: themeVars.color.backgroundOnSlight,
+      whiteSpace: 'nowrap',
     },
   },
 });
