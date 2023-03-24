@@ -1,4 +1,4 @@
-import { Element } from '@bento-editor/core';
+import { Element, helpers } from '@bento-editor/core';
 import attributes, { Attributes } from './attributes';
 import editable from './editable';
 import toolbox from './toolbox';
@@ -9,6 +9,9 @@ const element: Element<Attributes> = {
   attributes,
   editable,
   toolbox,
+  normalizeNode: (editor, entry) => {
+    return helpers.childHelpers.restrictedChildren(editor, entry, 'note-body');
+  },
 };
 
 export default element;

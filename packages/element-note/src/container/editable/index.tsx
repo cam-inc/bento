@@ -21,7 +21,7 @@ const editable: Element<Attributes>['editable'] = {
           <div className={styles.icon}>
             <ExclamationIcon type="note" />
           </div>
-          <div>{props.children}</div>
+          <div className={styles.childrenContainer}>{props.children}</div>
         </div>
       </ElementContainer>
     );

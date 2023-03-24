@@ -8,6 +8,7 @@ import Path, * as pathHelpers from './path';
 import ReactEditor from './reactEditor';
 import Transforms, * as transforms from './transform';
 import Text, * as textHelpers from './text';
+import * as childHelpers from './child';
 
 export const helpers = {
   Editor,
@@ -24,4 +25,5 @@ export const helpers = {
   ...elements,
   textHelpers,
   pathHelpers,
+  childHelpers,
 };

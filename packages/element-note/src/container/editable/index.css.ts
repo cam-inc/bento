@@ -21,4 +21,11 @@ export const styles = {
       },
     },
   }),
+  childrenContainer: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        flexGrow: 1,
+      },
+    },
+  }),
 };
