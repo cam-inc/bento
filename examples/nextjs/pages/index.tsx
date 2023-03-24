@@ -337,8 +337,13 @@ const Home: NextPage = () => {
         type: 'note',
         children: [
           {
-            type: 'format',
-            text: 'default value',
+            type: 'note-body',
+            children: [
+              {
+                type: 'format',
+                text: '',
+              },
+            ],
           },
         ],
       },
