@@ -6,6 +6,7 @@ import {
   Path,
   Text as SlateText,
 } from 'slate';
+import { HistoryEditor } from 'slate-history';
 import { ReactEditor, RenderElementProps, RenderLeafProps } from 'slate-react';
 import { PartialDeep } from 'type-fest';
 import { ThemeToken } from '../theme/index.css';
@@ -28,7 +29,7 @@ export type CustomText<
 };
 declare module 'slate' {
   interface CustomTypes {
-    Editor: BaseEditor & ReactEditor;
+    Editor: BaseEditor & ReactEditor & HistoryEditor;
     Element: CustomElement;
     Text: CustomText;
   }
@@ -63,6 +64,7 @@ export type Element<
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
   normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
   insertBreak?: (editor: Editor, entry: NodeEntry) => boolean;
+  insertSoftBreak?: (editor: Editor, entry: NodeEntry) => boolean;
   isVoid?: boolean;
 };
 

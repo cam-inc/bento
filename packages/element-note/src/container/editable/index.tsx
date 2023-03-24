@@ -5,24 +5,23 @@ import { styles } from './index.css';
 const editable: Element<Attributes>['editable'] = {
   defaultValue: [
     {
-      type: 'format',
-      text: '',
+      type: 'note-body',
+      children: [
+        {
+          type: 'format',
+          text: '',
+        },
+      ],
     },
   ],
   Component: (props) => {
     return (
-      <ElementContainer
-        {...props}
-        utilsPositionY={9}
-        emptyState={
-          <span className={styles.emptyState}>Type something...</span>
-        }
-      >
+      <ElementContainer {...props} utilsPositionY={9}>
         <div className={styles.root}>
           <div className={styles.icon}>
             <ExclamationIcon type="note" />
           </div>
-          <div className={styles.text}>{props.children}</div>
+          <div className={styles.childrenContainer}>{props.children}</div>
         </div>
       </ElementContainer>
     );

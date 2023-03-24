@@ -22,7 +22,12 @@ import {
   Level02Renderer as HeadingLevel02Renderer,
   Level03Renderer as HeadingLevel03Renderer,
 } from '@bento-editor/element-heading';
-import elementNote, { NoteRenderer } from '@bento-editor/element-note';
+import {
+  container as elementNoteContainer,
+  body as elementNoteBody,
+  ContainerRenderer as NoteContainerRenderer,
+  BodyRenderer as NoteBodyRenderer,
+} from '@bento-editor/element-note';
 import elementCallout, { CalloutRenderer } from '@bento-editor/element-callout';
 import elementDivider, { DividerRenderer } from '@bento-editor/element-divider';
 import elementQuote, { QuoteRenderer } from '@bento-editor/element-quote';
@@ -62,7 +67,8 @@ const config = {
     elementOrderedList,
     elementTodoList,
     elementTodoListItem,
-    elementNote,
+    elementNoteContainer,
+    elementNoteBody,
     elementCallout,
     elementLink,
     elementDivider,
@@ -96,7 +102,8 @@ const renderers = {
   'list-item': ListItemRenderer,
   'todo-list': TodoListRenderer,
   'todo-list-item': TodoListItemRenderer,
-  note: NoteRenderer,
+  note: NoteContainerRenderer,
+  'note-body': NoteBodyRenderer,
   callout: CalloutRenderer,
   divider: DividerRenderer,
   quote: QuoteRenderer,
