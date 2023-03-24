@@ -29,6 +29,7 @@ export type ElementContainerProps = RenderElementProps & {
   className?: string;
   as?: ElementType;
   emptyState?: React.ReactNode;
+  hideUtils?: boolean;
 };
 
 export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
@@ -181,12 +182,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
           ref={bodyRef}
         >
           {isEmpty && isSelected && !props.emptyState && (
-            <div
-              contentEditable={false}
-              className={classnames({
-                [styles.bodyPlaceholder]: true,
-              })}
-            >
+            <div contentEditable={false} className={styles.bodyPlaceholder}>
               Type something
             </div>
           )}
@@ -209,7 +205,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
           contentEditable={false}
           className={classnames({
             [styles.utilsContainer]: true,
-            [styles.utilsContainerOver]: isOver,
+            [styles.utilsContainerOver]: !props.hideUtils && isOver,
           })}
           style={{
             top: `${props.utilsPositionY ?? 0}px`,
