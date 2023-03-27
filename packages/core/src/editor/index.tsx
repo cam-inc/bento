@@ -78,7 +78,7 @@ export const Editor: React.FC<EditorProps> = ({
       helpers.logger.error({
         messages: [`The initial value must have a child or more.`],
       });
-    !verifyDefaultElement(config) &&
+    !checkDefaultElementInElements(config) &&
       helpers.logger.error({
         messages: [`The default element must be one of the given elements`],
       });
@@ -164,5 +164,5 @@ const Root: React.FC<RootProps> = ({ config }) => {
   );
 };
 
-const verifyDefaultElement = (config: Config) =>
+const checkDefaultElementInElements = (config: Config) =>
   config.elements.some((e) => e.type === config.defaultElement.type);
