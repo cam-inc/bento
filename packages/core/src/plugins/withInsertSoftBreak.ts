@@ -21,7 +21,7 @@ export const withInsertSoftBreak: EditorPlugin = (editor, config) => {
             return element.type === node.type;
           });
           if (element && element.insertSoftBreak) {
-            const isToReturn = element.insertSoftBreak(editor, match);
+            const isToReturn = element.insertSoftBreak(editor, match, config);
             if (isToReturn) {
               return;
             }

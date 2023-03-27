@@ -53,6 +53,7 @@ import { useCallback, useMemo, useState } from 'react';
 const Home: NextPage = () => {
   const config = useMemo<NonNullable<EditorProps['config']>>(
     () => ({
+      defaultElement: elementParagraph,
       rootPlaceholder: 'Type something',
       elements: [
         elementParagraph,

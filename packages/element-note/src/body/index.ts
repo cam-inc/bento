@@ -7,25 +7,23 @@ const element: Element<Attributes> = {
   type: 'note-body',
   attributes,
   editable,
-  insertBreak: (editor, entry) => {
+  insertBreak: (editor, entry, config) => {
     const { Path, Transforms, pathHelpers } = helpers;
     const [_, path] = entry;
 
     const rootParentPath = pathHelpers.getRootAncestorPath(path);
     const next = Path.next(rootParentPath);
 
-    const element: CustomElement = {
-      type: 'paragraph',
-      children: [
-        {
-          type: 'format',
-          text: '',
-        },
-      ],
-    };
+    const { defaultElement } = config;
 
-    Transforms.insertNodes(editor, element, { at: next });
-    Transforms.select(editor, next);
+    Transforms.insertNodes(
+      editor,
+      {
+        type: defaultElement.type,
+        children: defaultElement.editable.defaultValue,
+      },
+      { at: next, select: true }
+    );
 
     return true;
   },

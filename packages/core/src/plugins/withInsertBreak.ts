@@ -21,7 +21,7 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
             return element.type === node.type;
           });
           if (element && element.insertBreak) {
-            const isToReturn = element.insertBreak(editor, match);
+            const isToReturn = element.insertBreak(editor, match, config);
             if (isToReturn) {
               return;
             }

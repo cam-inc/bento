@@ -57,6 +57,7 @@ import textEmoji, { EmojiRenderer } from '@bento-editor/text-emoji';
 import React, { useState } from 'react';
 
 const config = {
+  defaultElement: elementParagraph,
   elements: [
     elementParagraph,
     elementHeadingLevel01,
