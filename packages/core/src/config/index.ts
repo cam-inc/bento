@@ -110,6 +110,9 @@ export type Text<Attributes extends Record<string, any> = Record<string, any>> =
 export type Config = {
   elements: Element[];
   texts: Text[];
+  /**
+   * @description must be passed one of the given elements
+   */
   defaultElement: Element;
   themeToken: PartialDeep<ThemeToken>;
   rootPlaceholder?: string;
