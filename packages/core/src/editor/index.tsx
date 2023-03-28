@@ -37,14 +37,14 @@ export type BentoReturnData = {
 type SlateProps = React.ComponentProps<typeof Slate>;
 
 export type EditorProps = {
-  config?: Config;
+  config: Config;
   // Rename to `initialvalue` for the <Slate> component's `value` props is only used as initial state for the editor.
   // @see:
   initialValue: CustomElement[];
   onChange?: (value: BentoReturnData) => void;
 };
 export const Editor: React.FC<EditorProps> = ({
-  config = { elements: [], texts: [], themeToken: {} },
+  config,
   initialValue,
   onChange = () => {},
 }) => {
@@ -77,6 +77,10 @@ export const Editor: React.FC<EditorProps> = ({
     !initialValue.length &&
       helpers.logger.error({
         messages: [`The initial value must have a child or more.`],
+      });
+    !checkDefaultElementInElements(config) &&
+      helpers.logger.error({
+        messages: [`The default element must be one of the given elements`],
       });
     ReactEditor.focus(editor);
   }, []);
@@ -159,3 +163,6 @@ const Root: React.FC<RootProps> = ({ config }) => {
     />
   );
 };
+
+const checkDefaultElementInElements = (config: Config) =>
+  config.elements.some((e) => e.type === config.defaultElement.type);

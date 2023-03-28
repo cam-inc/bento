@@ -3,7 +3,7 @@ import { Attributes } from '../attributes';
 import { styles } from './index.css';
 
 const editable: Element<Attributes>['editable'] = {
-  defaultValue: [{ type: 'format', text: 'default value', attributes: {} }],
+  defaultValue: [{ type: 'format', text: '', attributes: {} }],
   Component: (props) => {
     return (
       <ElementContainer {...props} utilsPositionY={-1}>

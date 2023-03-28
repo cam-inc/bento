@@ -62,9 +62,13 @@ export type Element<
   };
   // The boolean value returned from this function is to be used to determine whether to kiff off a new normalization path.
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
-  normalizeNode?: (editor: Editor, entry: NodeEntry) => boolean;
-  insertBreak?: (editor: Editor, entry: NodeEntry) => boolean;
-  insertSoftBreak?: (editor: Editor, entry: NodeEntry) => boolean;
+  normalizeNode?: (editor: Editor, entry: NodeEntry, config: Config) => boolean;
+  insertBreak?: (editor: Editor, entry: NodeEntry, config: Config) => boolean;
+  insertSoftBreak?: (
+    editor: Editor,
+    entry: NodeEntry,
+    config: Config
+  ) => boolean;
   isVoid?: boolean;
 };
 
@@ -106,6 +110,10 @@ export type Text<Attributes extends Record<string, any> = Record<string, any>> =
 export type Config = {
   elements: Element[];
   texts: Text[];
+  /**
+   * @description must be passed one of the given elements
+   */
+  defaultElement: Element;
   themeToken: PartialDeep<ThemeToken>;
   rootPlaceholder?: string;
 };
