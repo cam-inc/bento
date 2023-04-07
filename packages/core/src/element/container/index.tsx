@@ -137,18 +137,14 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, []);
 
   const [isOver, setIsOver] = useState<boolean>(false);
-  const handleMouseOver = useCallback(
-    (/*e: React.MouseEvent*/) => {
-      setIsOver(true);
-    },
-    []
-  );
-  const handleMouseOut = useCallback(
-    (/*e: React.MouseEvent*/) => {
-      setIsOver(false);
-    },
-    []
-  );
+  const handleMouseOver = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOver(true);
+  }, []);
+  const handleMouseOut = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOver(false);
+  }, []);
 
   const TagName = props.as || 'div';
 
