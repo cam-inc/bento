@@ -1,5 +1,7 @@
 import {
-  atom, /*AtomEffect,*/ RecoilRoot, useRecoilState,
+  atom,
+  /*AtomEffect,*/ RecoilRoot,
+  useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from 'recoil';
@@ -27,7 +29,7 @@ export const useGlobalStateValue = useRecoilValue;
 export const useGlobalStateSet = useSetRecoilState;
 
 // Config
-export const atomConfig = atom<Config>({
+export const atomConfig = atom<Omit<Config, 'defaultElement'>>({
   key: 'config',
   default: {
     elements: [],
@@ -36,13 +38,11 @@ export const atomConfig = atom<Config>({
   },
 });
 export const useConfigGlobalState = () => useGlobalState(atomConfig);
-export const useConfigGlobalStateValue = () =>
-  useGlobalStateValue(atomConfig);
-export const useConfigGlobalStateSet = () =>
-  useGlobalStateSet(atomConfig);
+export const useConfigGlobalStateValue = () => useGlobalStateValue(atomConfig);
+export const useConfigGlobalStateSet = () => useGlobalStateSet(atomConfig);
 
 // Screen
-type Screen = { width: number; height: number; };
+type Screen = { width: number; height: number };
 export const atomScreen = atom<Screen>({
   key: 'screen',
   default: {
@@ -51,10 +51,8 @@ export const atomScreen = atom<Screen>({
   },
 });
 export const useScreenGlobalState = () => useGlobalState(atomScreen);
-export const useScreenGlobalStateValue = () =>
-  useGlobalStateValue(atomScreen);
-export const useScreenGlobalStateSet = () =>
-  useGlobalStateSet(atomScreen);
+export const useScreenGlobalStateValue = () => useGlobalStateValue(atomScreen);
+export const useScreenGlobalStateSet = () => useGlobalStateSet(atomScreen);
 
 // Color Scheme
 export const COLOR_SCHEME = {
