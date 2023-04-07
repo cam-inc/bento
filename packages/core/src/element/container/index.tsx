@@ -137,18 +137,14 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, []);
 
   const [isOver, setIsOver] = useState<boolean>(false);
-  const handleMouseOver = useCallback(
-    (/*e: React.MouseEvent*/) => {
-      setIsOver(true);
-    },
-    []
-  );
-  const handleMouseOut = useCallback(
-    (/*e: React.MouseEvent*/) => {
-      setIsOver(false);
-    },
-    []
-  );
+  const handleMouseOver = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOver(true);
+  }, []);
+  const handleMouseOut = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOver(false);
+  }, []);
 
   const TagName = props.as || 'div';
 
@@ -237,7 +233,7 @@ const PlusButton: React.FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button radius="small" onClick={onClick}>
       <div className={styles.button}>
         <PlusIcon />
       </div>
@@ -249,7 +245,7 @@ const DotsButton: React.FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button radius="small" onClick={onClick}>
       <div className={styles.button}>
         <DotsIcon />
       </div>

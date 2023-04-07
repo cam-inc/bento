@@ -131,7 +131,8 @@ const utils = style({
       top: 0,
       right: 0,
       display: 'flex',
-      gap: 12,
+      gap: 4,
+      paddingRight: 4,
     },
   },
 });
