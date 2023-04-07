@@ -233,7 +233,7 @@ const PlusButton: React.FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button radius="small" onClick={onClick}>
       <div className={styles.button}>
         <PlusIcon />
       </div>
@@ -245,7 +245,7 @@ const DotsButton: React.FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button radius="small" onClick={onClick}>
       <div className={styles.button}>
         <DotsIcon />
       </div>
