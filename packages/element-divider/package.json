@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/element-divider",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Divider Element for Bento Editor",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -54,6 +54,6 @@
     "vite": "^3.1.8"
   },
   "peerDependencies": {
-    "@bento-editor/core": "0.2.0"
+    "@bento-editor/core": "0.2.1"
   }
 }
