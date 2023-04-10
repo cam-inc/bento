@@ -1,11 +1,10 @@
 {
   "name": "@bento-editor/example-react",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "dependencies": {
     "@bento-editor/core": "*",
     "@bento-editor/element-callout": "*",
     "@bento-editor/element-divider": "*",
-    "@bento-editor/element-embed": "*",
     "@bento-editor/element-heading": "*",
     "@bento-editor/element-link": "*",
     "@bento-editor/element-list": "*",

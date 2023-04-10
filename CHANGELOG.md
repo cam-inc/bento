@@ -1,3 +1,20 @@
+## [0.2.1](https://github.com/cam-inc/bento/compare/v0.2.0...v0.2.1) (2023-04-10)
+
+
+### Features
+
+* add default element config✨ ([6d7675e](https://github.com/cam-inc/bento/commit/6d7675e079f25ce2e4781a8941f593362b20931d))
+
+
+### Bug Fixes
+
+* add logger error of default element🐛 ([a14df9d](https://github.com/cam-inc/bento/commit/a14df9dfd67a18a7a3ff9e31c9d8e8d2345638ae))
+* default element type 🐛 ([94dc684](https://github.com/cam-inc/bento/commit/94dc68486d74d99035acdaf936f5385033cbc871))
+* name of check default element🐛 ([3386ada](https://github.com/cam-inc/bento/commit/3386ada6de46a52326a185efa33993cc6521c596))
+* plus and dots style 🐛 ([b659911](https://github.com/cam-inc/bento/commit/b659911ca50dcbd35af19fc4c7a36900ac41b2d0))
+* stop propagation to mouse over and out🐛 ([0aebaad](https://github.com/cam-inc/bento/commit/0aebaad5ba1ce5f40434937015a48aae9deef38f))
+* unused import 🐛 ([1d25db8](https://github.com/cam-inc/bento/commit/1d25db8b7c5a4ba7a0106e45b67d6609c708a6b4))
+
 ## [0.2.0](https://github.com/cam-inc/bento/compare/v0.1.4...v0.2.0) (2023-03-24)
 
 
