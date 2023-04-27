@@ -9,7 +9,6 @@ const editable: Text<Attributes>['editable'] = {
   Component: (props) => {
     const popover = usePopover<HTMLSpanElement>();
 
-    console.log('test: ', props.text.text);
     useEffect(() => {
       if (!props.text.text) {
         popover.open();

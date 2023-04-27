@@ -1,5 +1,5 @@
 import { useCallback, useState, useMemo, useEffect } from 'react';
-import { Path, Transforms, Node } from 'slate';
+import { Path, Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { Button } from '../components/button';
 import { SearchIcon } from '../components/icons/search';
@@ -119,22 +119,20 @@ const Item: React.FC<{
       : { text: node.editable.defaultValue };
     if (isInToolbar) {
       const rootPath = findRootPath(path);
-      Transforms.removeNodes(editor, { at: rootPath });
-      Transforms.insertNodes(
-        editor,
+      editor.removeNodes({ at: rootPath });
+      editor.insertNodes(
         {
           type: node.type,
           attributes: node.attributes.defaultValue,
           ...defaultValue,
-        } as Node,
+        },
         {
           at: rootPath,
         }
       );
       onDone();
     } else {
-      Transforms.insertNodes(
-        editor,
+      editor.insertNodes(
         {
           type: node.type,
           attributes: node.attributes.defaultValue,

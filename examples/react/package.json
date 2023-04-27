@@ -18,8 +18,8 @@
     "@vanilla-extract/dynamic": "2.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "slate": "0.82.0",
-    "slate-react": "0.82.0"
+    "slate": "0.94.0",
+    "slate-react": "0.94.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^2.1.0",
