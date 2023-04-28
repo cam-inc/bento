@@ -27,7 +27,7 @@ const element: Element<Attributes> = {
             },
           ],
         });
-        helpers.Transforms.removeNodes(editor, {
+        editor.removeNodes({
           at: childPath,
         });
         isNormalized = true;

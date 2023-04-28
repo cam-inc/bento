@@ -56,7 +56,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, [popoverToolmenu]);
 
   const isSelected = useSelected();
-  const isEmpty = helpers.Editor.isEmpty(editor, props.element);
+  const isEmpty = editor.isEmpty(props.element);
 
   // DnD
   const type = 'Element';

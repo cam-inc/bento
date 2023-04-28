@@ -59,8 +59,7 @@ const toolbar: Text<Attributes>['toolbar'] = {
       (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         if (href !== undefined && isUrl(href)) {
-          helpers.Transforms.setNodes(
-            editor,
+          editor.setNodes(
             {
               attributes: {
                 href,

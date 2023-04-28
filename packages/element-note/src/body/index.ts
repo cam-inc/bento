@@ -8,7 +8,7 @@ const element: Element<Attributes> = {
   attributes,
   editable,
   insertBreak: (editor, entry, config) => {
-    const { Path, Transforms, pathHelpers } = helpers;
+    const { Path, pathHelpers } = helpers;
     const [_, path] = entry;
 
     const rootParentPath = pathHelpers.getRootAncestorPath(path);
@@ -16,8 +16,7 @@ const element: Element<Attributes> = {
 
     const { defaultElement } = config;
 
-    Transforms.insertNodes(
-      editor,
+    editor.insertNodes(
       {
         type: defaultElement.type,
         children: defaultElement.editable.defaultValue,
@@ -28,7 +27,7 @@ const element: Element<Attributes> = {
     return true;
   },
   insertSoftBreak: (editor, entry) => {
-    const { Path, Transforms } = helpers;
+    const { Path } = helpers;
     const [_, path] = entry;
     const next = Path.next(path);
 
@@ -42,8 +41,8 @@ const element: Element<Attributes> = {
       ],
     };
 
-    Transforms.insertNodes(editor, element, { at: next });
-    Transforms.select(editor, next);
+    editor.insertNodes(element, { at: next });
+    editor.select(next);
     return true;
   },
 };

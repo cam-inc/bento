@@ -17,7 +17,7 @@ const editable: Text<Attributes>['editable'] = {
 
     const createInsertText = useCallback(() => {
       return (emojiNative: string) => {
-        helpers.Editor.insertText(props.editor, emojiNative);
+        props.editor.insertText(emojiNative);
       };
     }, []);
 
