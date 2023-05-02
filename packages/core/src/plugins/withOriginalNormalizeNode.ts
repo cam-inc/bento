@@ -1,4 +1,4 @@
-import { Element, Transforms } from 'slate';
+import { Element } from 'slate';
 import { EditorPlugin } from '.';
 
 export const withOriginalNormalizeNode: EditorPlugin = (editor, config) => {
@@ -9,8 +9,7 @@ export const withOriginalNormalizeNode: EditorPlugin = (editor, config) => {
     const [node, path] = entry;
     if (editor.children.length === 0) {
       const { defaultElement } = config;
-      Transforms.insertNodes(
-        editor,
+      editor.insertNodes(
         {
           type: defaultElement.type,
           children: defaultElement.editable.defaultValue,

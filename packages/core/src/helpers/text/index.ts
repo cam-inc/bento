@@ -1,4 +1,4 @@
-import { Editor, Text as SlateText, Transforms } from 'slate';
+import { Editor, Text as SlateText } from 'slate';
 
 export const isText = SlateText.isText;
 
@@ -13,8 +13,7 @@ export const hasAttribute = (editor: Editor, key: string) => {
 export const removeTextAttribute = (editor: Editor, attribute: string) => {
   const marks = Object.assign({}, Editor.marks(editor)?.attributes);
   delete marks[attribute];
-  Transforms.setNodes(
-    editor,
+  editor.setNodes(
     {
       attributes: marks,
     },
@@ -26,8 +25,7 @@ export const setTextAttribute = (
   editor: Editor,
   newAttributes: Record<string, any>
 ) => {
-  Transforms.setNodes(
-    editor,
+  editor.setNodes(
     {
       attributes: {
         ...Editor.marks(editor)?.attributes,

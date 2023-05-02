@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Node, Path, Transforms } from 'slate';
+import { Node, Path } from 'slate';
 import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
 import { DustboxIcon } from '../components/icons/dustbox';
@@ -13,7 +13,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
   const editor = useSlate();
 
   const handleDeleteClick = useCallback(() => {
-    Transforms.removeNodes(editor, {
+    editor.removeNodes({
       at: path,
     });
     onDone();
@@ -23,7 +23,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
     const node = Node.get(editor, path);
     // TODO: There seems to be no API for copying. Replace this workaround if any found.
     const copiedNode = JSON.parse(JSON.stringify(node));
-    Transforms.insertNodes(editor, copiedNode, {
+    editor.insertNodes(copiedNode, {
       at: Path.next(path),
     });
     onDone();
@@ -34,7 +34,11 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
       <div>
         <ul className={styles.list}>
           <li>
-            <button type="button" className={styles.button} onClick={handleDeleteClick}>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleDeleteClick}
+            >
               <div className={styles.buttonBG} />
               <div className={styles.buttonContainer}>
                 <div className={styles.buttonIcon}>
@@ -45,7 +49,11 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
             </button>
           </li>
           <li>
-            <button type="button" className={styles.button} onClick={handleCopyClick}>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleCopyClick}
+            >
               <div className={styles.buttonBG} />
               <div className={styles.buttonContainer}>
                 <div className={styles.buttonIcon}>
