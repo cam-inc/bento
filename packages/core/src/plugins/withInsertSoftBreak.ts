@@ -9,7 +9,7 @@ export const withInsertSoftBreak: EditorPlugin = (editor, config) => {
   editor.insertSoftBreak = () => {
     const { selection } = editor;
     if (selection && Range.isCollapsed(selection)) {
-      const [match] = Editor.nodes(editor, {
+      const [match] = editor.nodes({
         match: (n) => !Editor.isEditor(n) && Element.isElement(n),
         mode: 'lowest',
       });
