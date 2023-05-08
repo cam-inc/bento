@@ -1,4 +1,4 @@
-import { Editor, Element, Node, NodeEntry, Transforms } from 'slate';
+import { Editor, Element, Node, NodeEntry } from 'slate';
 import { warn } from '../logger';
 
 export const restrictChild = (
@@ -20,7 +20,7 @@ export const restrictChild = (
           },
         ],
       });
-      Transforms.removeNodes(editor, {
+      editor.removeNodes({
         at: childPath,
       });
       isRestricted = true;

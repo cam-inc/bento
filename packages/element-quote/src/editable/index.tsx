@@ -11,8 +11,7 @@ const editable: Element<Attributes>['editable'] = {
     const handleCiteChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.currentTarget;
-        helpers.Transforms.setNodes(
-          props.editor,
+        props.editor.setNodes(
           {
             attributes: {
               cite: value,

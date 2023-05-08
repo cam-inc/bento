@@ -21,8 +21,7 @@ const editable: Element<Attributes>['editable'] = {
     const parentElement = useContext(ContainerContext);
 
     const handleCtrlClick = useCallback(() => {
-      helpers.Transforms.setNodes(
-        props.editor,
+      props.editor.setNodes(
         {
           attributes: {
             isOpen: !parentElement.attributes?.isOpen,

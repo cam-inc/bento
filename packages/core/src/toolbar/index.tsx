@@ -92,7 +92,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
         !isFocused ||
         !selection ||
         Range.isCollapsed(selection) ||
-        Editor.string(editor, selection) === ''
+        editor.string(selection) === ''
       ) {
         return false;
       }

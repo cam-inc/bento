@@ -14,7 +14,10 @@ const element: Element<Attributes> = {
     let isNormalized: boolean = false;
     const [node, path] = entry;
     for (const [child, childPath] of helpers.Node.children(editor, path)) {
-      if (!helpers.Element.isElement(child) || (child.type !== 'toggle-head' && child.type !== 'toggle-body')) {
+      if (
+        !helpers.Element.isElement(child) ||
+        (child.type !== 'toggle-head' && child.type !== 'toggle-body')
+      ) {
         helpers.logger.warn({
           messages: [
             'Element removed.',
@@ -24,7 +27,7 @@ const element: Element<Attributes> = {
             },
           ],
         });
-        helpers.Transforms.removeNodes(editor, {
+        editor.removeNodes({
           at: childPath,
         });
         isNormalized = true;

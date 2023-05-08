@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { Path, Transforms } from 'slate';
+import { Path } from 'slate';
 import {
   ReactEditor,
   RenderElementProps,
@@ -18,7 +18,6 @@ import {
 import { Button } from '../../components/button';
 import { DotsIcon } from '../../components/icons/dots';
 import { PlusIcon } from '../../components/icons/plus';
-import { helpers } from '../../helpers';
 import { Popover, usePopover } from '../../portals/popover';
 import { Toolbox } from '../../toolbox';
 import { Toolmenu } from '../../toolmenu';
@@ -56,7 +55,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   }, [popoverToolmenu]);
 
   const isSelected = useSelected();
-  const isEmpty = helpers.Editor.isEmpty(editor, props.element);
+  const isEmpty = editor.isEmpty(props.element);
 
   // DnD
   const type = 'Element';
@@ -82,7 +81,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     return {
       accept: type,
       drop: (item) => {
-        Transforms.moveNodes(editor, {
+        editor.moveNodes({
           at: item.from,
           to: path,
         });
@@ -120,7 +119,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
             to = Path.next(path);
             break;
         }
-        Transforms.moveNodes(editor, {
+        editor.moveNodes({
           at: item.from,
           to,
         });
