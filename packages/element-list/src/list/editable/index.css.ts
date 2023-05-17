@@ -13,5 +13,5 @@ export const styles = {
         listStylePosition: 'inside',
       },
     },
-  }),
+  })
 };

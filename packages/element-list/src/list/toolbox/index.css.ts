@@ -6,8 +6,8 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         display: 'block',
-        width: '100%',
+        width: '100%'
       },
     },
-  }),
+  })
 };

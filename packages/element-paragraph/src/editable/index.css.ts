@@ -10,5 +10,5 @@ export const styles = {
         color: themeVars.color.backgroundOn,
       },
     },
-  }),
+  })
 };
