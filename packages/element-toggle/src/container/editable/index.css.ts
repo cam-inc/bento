@@ -7,7 +7,7 @@ export const styles = {
       [`.${EditorClassName} &`]: {
         color: themeVars.color.backgroundOn,
         padding: `${themeVars.space['4']} 0`,
-      }
+      },
     },
-  })
+  }),
 };

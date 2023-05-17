@@ -1,12 +1,12 @@
-import { style } from "@vanilla-extract/css";
+import { style } from '@vanilla-extract/css';
 
 export const styles = {
   root: style({
-    display: "flex"
+    display: 'flex',
   }),
   checkbox: style({
-    display: "block",
+    display: 'block',
     width: 18,
-    height: 18
-  })
-}
+    height: 18,
+  }),
+};

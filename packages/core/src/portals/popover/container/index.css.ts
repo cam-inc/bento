@@ -13,5 +13,5 @@ export const styles = {
         left: 0,
       },
     },
-  })
+  }),
 };

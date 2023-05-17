@@ -11,4 +11,4 @@ export const styles = {
   container: style({
     position: 'relative',
   }),
-}
+};

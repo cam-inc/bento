@@ -42,7 +42,7 @@ export const useConfigGlobalStateValue = () => useGlobalStateValue(atomConfig);
 export const useConfigGlobalStateSet = () => useGlobalStateSet(atomConfig);
 
 // Screen
-type Screen = { width: number; height: number; };
+type Screen = { width: number; height: number };
 export const atomScreen = atom<Screen>({
   key: 'screen',
   default: {

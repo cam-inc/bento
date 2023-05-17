@@ -5,6 +5,6 @@ export type Attributes = {
 };
 
 const attributes: Element<Attributes>['attributes'] = {
-  defaultValue: {}
+  defaultValue: {},
 };
 export default attributes;

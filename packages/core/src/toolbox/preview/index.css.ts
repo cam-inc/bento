@@ -10,8 +10,8 @@ export const styles = {
         backgroundColor: themeVars.color.surfaceInverted,
         borderRadius: themeVars.radius.medium,
         padding: themeVars.space['2'],
-      }
-    }
+      },
+    },
   }),
   thumb: style({
     selectors: {
@@ -23,8 +23,8 @@ export const styles = {
         backgroundColor: themeVars.color.surfaceInvertedOnHigh,
         borderRadius: themeVars.radius.medium,
         marginBottom: themeVars.space['3'],
-      }
-    }
+      },
+    },
   }),
   title: style({
     selectors: {
@@ -32,8 +32,8 @@ export const styles = {
         color: themeVars.color.surfaceInvertedOnHigh,
         fontSize: themeVars.fontSize.label.large,
         fontWeight: 'bold',
-      }
-    }
+      },
+    },
   }),
   description: style({
     selectors: {
@@ -41,7 +41,7 @@ export const styles = {
         color: themeVars.color.surfaceInvertedOn,
         fontSize: themeVars.fontSize.label.medium,
         marginTop: themeVars.space['2'],
-      }
-    }
+      },
+    },
   }),
 };

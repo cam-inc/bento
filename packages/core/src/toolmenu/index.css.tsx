@@ -11,8 +11,8 @@ const root = style({
       borderRadius: themeVars.radius.medium,
       border: `1px solid ${themeVars.color.surfaceOnSlight}`,
       overflow: 'hidden',
-    }
-  }
+    },
+  },
 });
 
 const button = style({
@@ -27,7 +27,7 @@ const button = style({
       padding: `${themeVars.space['2']} ${themeVars.space['3']}`,
       position: 'relative',
     },
-  }
+  },
 });
 
 const buttonBG = style({
@@ -43,7 +43,7 @@ const buttonBG = style({
       bottom: 0,
       left: 0,
     },
-  }
+  },
 });
 
 const buttonContainer = style({
@@ -54,8 +54,8 @@ const buttonContainer = style({
       alignItems: 'center',
       justifyContent: 'flex-start',
       gap: themeVars.space['3'],
-    }
-  }
+    },
+  },
 });
 
 const buttonIcon = style({
@@ -70,8 +70,8 @@ const buttonIcon = style({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-    }
-  }
+    },
+  },
 });
 
 const buttonTitle = style({
@@ -79,8 +79,8 @@ const buttonTitle = style({
     [`${editorStyles.root} &`]: {
       color: themeVars.color.surfaceOn,
       fontSize: themeVars.fontSize.label.medium,
-    }
-  }
+    },
+  },
 });
 
 const list = style({
@@ -89,8 +89,8 @@ const list = style({
       listStyle: 'none',
       margin: 0,
       padding: 0,
-    }
-  }
+    },
+  },
 });
 
 export const styles = {
@@ -100,5 +100,5 @@ export const styles = {
   buttonContainer,
   buttonIcon,
   buttonTitle,
-  list
+  list,
 };

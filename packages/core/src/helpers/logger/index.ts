@@ -19,11 +19,7 @@ type Payload = {
   namespace?: Namespace;
 };
 
-const log = (
-  level: Level,
-  namespace: Namespace,
-  messages: unknown[]
-): void => {
+const log = (level: Level, namespace: Namespace, messages: unknown[]): void => {
   // There is no function named `fatal` in Console interface so just use error function instead.
   if (level === LEVEL.FATAL) {
     console.error(`[${level}][${namespace}]: `, ...messages);

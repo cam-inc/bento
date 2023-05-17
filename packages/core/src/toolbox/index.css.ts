@@ -14,8 +14,8 @@ const root = style({
       boxShadow: themeVars.boxShadow.level['1'],
       overflow: 'scroll',
       overscrollBehavior: 'contain',
-    }
-  }
+    },
+  },
 });
 
 const search = style({
@@ -23,8 +23,8 @@ const search = style({
     [`${editorStyles.root} &`]: {
       position: 'relative',
       padding: themeVars.space['2'],
-    }
-  }
+    },
+  },
 });
 
 const searchIcon = style({
@@ -38,8 +38,8 @@ const searchIcon = style({
       bottom: 0,
       left: themeVars.space['4'],
       color: themeVars.color.brand,
-    }
-  }
+    },
+  },
 });
 
 const searchInput = style({
@@ -50,8 +50,8 @@ const searchInput = style({
       border: `1px solid ${themeVars.color.surfaceOnSlight}`,
       borderRadius: themeVars.radius.small,
       padding: `${themeVars.space['2']} ${themeVars.space['2']} ${themeVars.space['2']} ${themeVars.space['9']}`,
-    }
-  }
+    },
+  },
 });
 
 const itemContainer = style({
@@ -62,8 +62,8 @@ const itemContainer = style({
       justifyContent: 'flex-start',
       gap: themeVars.space['3'],
       padding: `${themeVars.space['2']} ${themeVars.space['3']}`,
-    }
-  }
+    },
+  },
 });
 
 const itemIcon = style({
@@ -78,8 +78,8 @@ const itemIcon = style({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-    }
-  }
+    },
+  },
 });
 
 const itemTitle = style({
@@ -87,8 +87,8 @@ const itemTitle = style({
     [`${editorStyles.root} &`]: {
       color: themeVars.color.surfaceOn,
       fontSize: themeVars.fontSize.label.medium,
-    }
-  }
+    },
+  },
 });
 
 const list = style({
@@ -97,8 +97,8 @@ const list = style({
       listStyle: 'none',
       margin: 0,
       padding: 0,
-    }
-  }
+    },
+  },
 });
 
 export const styles = {
@@ -109,5 +109,5 @@ export const styles = {
   itemContainer,
   itemIcon,
   itemTitle,
-  list
+  list,
 };

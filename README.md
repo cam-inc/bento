@@ -3,6 +3,7 @@
 Bento is a react library for Notion-like block-style editor build on top of [Slate](https://github.com/ianstormtaylor/slate).
 
 ## Packages
+
 - [core](./packages/core)
 - [heading](./packages/heading)
 - [paragraph](./packages/paragraph)
@@ -11,6 +12,7 @@ Bento is a react library for Notion-like block-style editor build on top of [Sla
 ## Quick Start
 
 ### Install Packages
+
 ```sh
 # you always need to install the core package.
 $ npm install --save @bento-editor/core
@@ -27,30 +29,23 @@ $ npm install --save @bento-editor/text-format
 import { Editor } from '@bento-editor/core';
 import {
   level01 as elementHeadingLevel01,
-  level02 as elementHeadingLevel02
+  level02 as elementHeadingLevel02,
 } from '@bento-editor/element-heading';
 import elementParagraph from '@bento-editor/element-paragraph';
 import textFormat from '@bento-editor/text-format';
 
 const YourEditor = () => {
-
   const config = {
     // element-type nodes
-    elements: [
-      elementParagraph,
-      elementHeadingLevel01,
-      elementHeadingLevel02
-    ],
+    elements: [elementParagraph, elementHeadingLevel01, elementHeadingLevel02],
     // text-type nodes
-    texts: [
-      textFormat
-    ],
+    texts: [textFormat],
     // customize appearance
     themeToken: {
       color: {
         background: 'darkblue',
         backgroundOn: 'lightblue',
-      }
+      },
     },
   };
 
@@ -61,10 +56,10 @@ const YourEditor = () => {
       children: [
         {
           type: 'format',
-          text: 'This is a heading.'
-        }
-      ]
-    }
+          text: 'This is a heading.',
+        },
+      ],
+    },
   ];
 
   const handleChange = (value) => {
