@@ -1,3 +1,11 @@
+## [0.2.2](https://github.com/cam-inc/bento/compare/v0.2.1...v0.2.2) (2023-05-17)
+
+
+### Bug Fixes
+
+* unused import🐛 ([e0908ea](https://github.com/cam-inc/bento/commit/e0908ea9a73999471a1aa777cbe1e3314e693009))
+* useTrasformsSetNodes error🐛 ([e7dc808](https://github.com/cam-inc/bento/commit/e7dc808f36f98e0e52ebc2aef9cb06c71867f966))
+
 ## [0.2.1](https://github.com/cam-inc/bento/compare/v0.2.0...v0.2.1) (2023-04-10)
 
 ### Features
