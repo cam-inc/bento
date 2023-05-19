@@ -2,7 +2,7 @@
   "name": "@bento-editor/example-nextjs",
   "version": "0.2.2",
   "scripts": {
-    "dev": "next dev -p",
+    "dev": "next dev",
     "build": "next build"
   },
   "dependencies": {
