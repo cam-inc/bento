@@ -1,3 +1,15 @@
+## [0.2.3](https://github.com/cam-inc/bento/compare/v0.2.2...v0.2.3) (2023-05-22)
+
+
+### Features
+
+* update delete backward action✨ ([415b6ea](https://github.com/cam-inc/bento/commit/415b6ea08041ff3f7c6a16887bc11711e29c4c31))
+
+
+### Bug Fixes
+
+* unused option 🐛 ([227a20f](https://github.com/cam-inc/bento/commit/227a20f54d13311b5904f5dc66dd35e928865f35))
+
 ## [0.2.2](https://github.com/cam-inc/bento/compare/v0.2.1...v0.2.2) (2023-05-17)
 
 
