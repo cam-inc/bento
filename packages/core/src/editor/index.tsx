@@ -5,6 +5,7 @@ import { Slate, withReact, ReactEditor } from 'slate-react';
 import { Config, CustomElement } from '../config';
 import { Editable } from '../editable';
 import { helpers } from '../helpers';
+import { withDeleteBackward } from '../plugins/withDeleteBackward';
 import { withInsertBreak } from '../plugins/withInsertBreak';
 import { withInsertSoftBreak } from '../plugins/withInsertSoftBreak';
 import { withOriginalIsVoid } from '../plugins/withOriginalIsVoid';
@@ -55,6 +56,7 @@ export const Editor: React.FC<EditorProps> = ({
       withInsertSoftBreak,
       withOriginalIsVoid,
       withOriginalNormalizeNode,
+      withDeleteBackward,
     ].reduce((editor, plugin) => plugin(editor, config), baseEditor);
 
     return editor;
