@@ -12,6 +12,7 @@ export const styles = {
         borderRadius: themeVars.radius.medium,
         border: `1px solid ${themeVars.color.surfaceOnSlight}`,
         overflow: 'hidden',
+        boxShadow: themeVars.boxShadow.level['1'],
       },
     },
   }),
