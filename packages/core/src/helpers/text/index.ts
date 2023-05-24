@@ -3,7 +3,7 @@ import { Editor, Text as SlateText } from 'slate';
 export const isText = SlateText.isText;
 
 export const hasAttribute = (editor: Editor, key: string) => {
-  const marks = editor.marks;
+  const marks = editor.getMarks();
   if (!marks?.attributes) {
     return false;
   }
@@ -25,10 +25,11 @@ export const setTextAttribute = (
   editor: Editor,
   newAttributes: Record<string, any>
 ) => {
+  const marks = editor.getMarks();
   editor.setNodes(
     {
       attributes: {
-        ...editor.marks?.attributes,
+        ...marks?.attributes,
         ...newAttributes,
       },
     },
