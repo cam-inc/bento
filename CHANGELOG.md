@@ -1,3 +1,10 @@
+## [0.2.4](https://github.com/cam-inc/bento/compare/v0.2.3...v0.2.4) (2023-05-24)
+
+
+### Bug Fixes
+
+*  editor marks to get marks🐛 ([cbb0a42](https://github.com/cam-inc/bento/commit/cbb0a42229c97a43e175ebb6550636506f4ccb30))
+
 ## [0.2.3](https://github.com/cam-inc/bento/compare/v0.2.2...v0.2.3) (2023-05-22)
 
 
