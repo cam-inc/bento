@@ -100,7 +100,7 @@ type PopoverProps = {
   // Target element ref for a popover to be placed.
   targetRef: React.RefObject<HTMLElement>;
   children: React.ReactNode;
-  fixedPlacement?: Placement;
+  placement?: Placement;
 };
 
 // TODO: desktop and mobile layout
@@ -110,7 +110,7 @@ export const Popover: React.FC<PopoverProps> = ({
   onRequestClose,
   targetRef,
   children,
-  fixedPlacement,
+  placement: fixedPlacement,
 }) => {
   const screen = useScreenGlobalStateValue();
 
@@ -134,6 +134,7 @@ export const Popover: React.FC<PopoverProps> = ({
   useEffect(() => {
     onRequestClose();
   }, [onRequestClose, screen]);
+
   // Stop event propagation.
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -159,7 +160,6 @@ export const Popover: React.FC<PopoverProps> = ({
     const isHorizontallyOnCenter =
       screen.width / 3 <= centerX && centerX <= (screen.width / 3) * 2;
     const isHorizontallyOnRight = (screen.width / 3) * 2 < centerX;
-
     if (isVerticallyOnUpside) {
       if (isHorizontallyOnLeft) {
         if (isHorizontal) {
