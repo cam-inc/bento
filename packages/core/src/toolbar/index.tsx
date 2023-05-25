@@ -119,7 +119,8 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
     const toolbarHeight = toolBarRef.current?.getBoundingClientRect().height;
     if (toolbarHeight) {
-      const scrollStartHeight = toolbarHeight + 10;
+      const space = 10;
+      const scrollStartHeight = toolbarHeight + space;
       if (rect.top < scrollStartHeight)
         window.scrollBy(0, -(scrollStartHeight - rect.top));
     }
