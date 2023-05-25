@@ -134,7 +134,6 @@ export const Popover: React.FC<PopoverProps> = ({
   useEffect(() => {
     onRequestClose();
   }, [onRequestClose, screen]);
-
   // Stop event propagation.
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -142,6 +141,9 @@ export const Popover: React.FC<PopoverProps> = ({
 
   // Placement
   const placement = useMemo<Placement>(() => {
+    if (fixedPlacement) {
+      return fixedPlacement;
+    }
     const targetElement = targetRef.current;
     if (!targetElement) {
       return PLACEMENT.BOTTOM_LEFT;
@@ -157,9 +159,7 @@ export const Popover: React.FC<PopoverProps> = ({
     const isHorizontallyOnCenter =
       screen.width / 3 <= centerX && centerX <= (screen.width / 3) * 2;
     const isHorizontallyOnRight = (screen.width / 3) * 2 < centerX;
-    if (fixedPlacement) {
-      return fixedPlacement;
-    }
+
     if (isVerticallyOnUpside) {
       if (isHorizontallyOnLeft) {
         if (isHorizontal) {

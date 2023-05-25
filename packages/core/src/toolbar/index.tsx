@@ -135,6 +135,20 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
   const config = useConfigGlobalStateValue();
 
+  const getPlacement = () => {
+    const targetElement = popover.targetRef.current;
+    if (!targetElement) {
+      return PLACEMENT.BOTTOM_LEFT;
+    }
+    const rect = targetElement.getBoundingClientRect();
+    const toolbarHeight = 40;
+    if (rect.top > toolbarHeight) {
+      return PLACEMENT.TOP_LEFT;
+    } else {
+      return PLACEMENT.BOTTOM_LEFT;
+    }
+  };
+
   return (
     <>
       <div
@@ -148,7 +162,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           left: `${rect?.left}px`,
         }}
       />
-      <Popover {...popover.bind} fixedPlacement={PLACEMENT.TOP_LEFT}>
+      <Popover {...popover.bind} fixedPlacement={getPlacement()}>
         <div className={styles.root}>
           <ul className={styles.list}>
             <li className={styles.item} ref={popoverTransform.targetRef}>
