@@ -5,7 +5,7 @@ import { useScreenGlobalStateValue } from '../../store';
 import { styles } from './index.css';
 
 // Which point of the target element the popover should be placed.
-const PLACEMENT = {
+export const PLACEMENT = {
   /**
    * ↑
    * . →
@@ -100,6 +100,7 @@ type PopoverProps = {
   // Target element ref for a popover to be placed.
   targetRef: React.RefObject<HTMLElement>;
   children: React.ReactNode;
+  fixedPlacement?: Placement;
 };
 
 // TODO: desktop and mobile layout
@@ -109,6 +110,7 @@ export const Popover: React.FC<PopoverProps> = ({
   onRequestClose,
   targetRef,
   children,
+  fixedPlacement,
 }) => {
   const screen = useScreenGlobalStateValue();
 
@@ -155,6 +157,9 @@ export const Popover: React.FC<PopoverProps> = ({
     const isHorizontallyOnCenter =
       screen.width / 3 <= centerX && centerX <= (screen.width / 3) * 2;
     const isHorizontallyOnRight = (screen.width / 3) * 2 < centerX;
+    if (fixedPlacement) {
+      return fixedPlacement;
+    }
     if (isVerticallyOnUpside) {
       if (isHorizontallyOnLeft) {
         if (isHorizontal) {

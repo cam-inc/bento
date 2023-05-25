@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from 'react';
 import { Range, Path, Node } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { Config, PickRequired } from '../config';
-import { Popover, usePopover } from '../portals/popover';
+import { PLACEMENT, Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
 import { Toolbox } from '../toolbox';
 import { Toolmenu } from '../toolmenu';
@@ -148,7 +148,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           left: `${rect?.left}px`,
         }}
       />
-      <Popover {...popover.bind}>
+      <Popover {...popover.bind} fixedPlacement={PLACEMENT.TOP_LEFT}>
         <div className={styles.root}>
           <ul className={styles.list}>
             <li className={styles.item} ref={popoverTransform.targetRef}>
