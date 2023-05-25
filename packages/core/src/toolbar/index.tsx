@@ -115,6 +115,11 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
       setRect(rect);
       setIsVisible(true);
     }
+
+    const toolbarHeight = 48;
+    if (rect.top < toolbarHeight) {
+      window.scrollBy(0, -(toolbarHeight - rect.top));
+    }
   }, [isFocused, editor.selection]);
 
   useEffect(() => {
@@ -135,20 +140,6 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
   const config = useConfigGlobalStateValue();
 
-  const getPlacement = () => {
-    const targetElement = popover.targetRef.current;
-    if (!targetElement) {
-      return PLACEMENT.TOP_LEFT;
-    }
-    const rect = targetElement.getBoundingClientRect();
-    const toolbarHeight = 40;
-    if (rect.top > toolbarHeight) {
-      return PLACEMENT.TOP_LEFT;
-    } else {
-      return PLACEMENT.BOTTOM_LEFT;
-    }
-  };
-
   return (
     <>
       <div
@@ -162,7 +153,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           left: `${rect?.left}px`,
         }}
       />
-      <Popover {...popover.bind} placement={getPlacement()}>
+      <Popover {...popover.bind} placement={PLACEMENT.TOP_LEFT}>
         <div className={styles.root}>
           <ul className={styles.list}>
             <li className={styles.item} ref={popoverTransform.targetRef}>
