@@ -100,6 +100,7 @@ type PopoverProps = {
   // Target element ref for a popover to be placed.
   targetRef: React.RefObject<HTMLElement>;
   children: React.ReactNode;
+  placement?: Placement;
 };
 
 // TODO: desktop and mobile layout
@@ -109,6 +110,7 @@ export const Popover: React.FC<PopoverProps> = ({
   onRequestClose,
   targetRef,
   children,
+  placement: fixedPlacement,
 }) => {
   const screen = useScreenGlobalStateValue();
 
@@ -140,6 +142,9 @@ export const Popover: React.FC<PopoverProps> = ({
 
   // Placement
   const placement = useMemo<Placement>(() => {
+    if (fixedPlacement) {
+      return fixedPlacement;
+    }
     const targetElement = targetRef.current;
     if (!targetElement) {
       return PLACEMENT.BOTTOM_LEFT;

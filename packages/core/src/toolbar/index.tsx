@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Range, Path, Node } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { Config, PickRequired } from '../config';
@@ -35,6 +35,7 @@ export const ButtonBox: React.FC<ButtonBoxProps> = ({
 
 export type ToolbarProps = {};
 export const Toolbar: React.FC<ToolbarProps> = () => {
+  const toolBarRef = useRef<HTMLDivElement>(null);
   const editor = useSlate();
   const isFocused = useFocused();
 
@@ -115,6 +116,14 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
       setRect(rect);
       setIsVisible(true);
     }
+
+    const toolbarHeight = toolBarRef.current?.getBoundingClientRect().height;
+    if (toolbarHeight) {
+      const space = 10;
+      const scrollStartHeight = toolbarHeight + space;
+      if (rect.top < scrollStartHeight)
+        window.scrollBy(0, -(scrollStartHeight - rect.top));
+    }
   }, [isFocused, editor.selection]);
 
   useEffect(() => {
@@ -148,8 +157,8 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           left: `${rect?.left}px`,
         }}
       />
-      <Popover {...popover.bind}>
-        <div className={styles.root}>
+      <Popover {...popover.bind} placement="TopLeft">
+        <div className={styles.root} ref={toolBarRef}>
           <ul className={styles.list}>
             <li className={styles.item} ref={popoverTransform.targetRef}>
               <ButtonBox
