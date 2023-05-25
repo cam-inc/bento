@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Range, Path, Node } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { Config, PickRequired } from '../config';
-import { PLACEMENT, Popover, usePopover } from '../portals/popover';
+import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
 import { Toolbox } from '../toolbox';
 import { Toolmenu } from '../toolmenu';
@@ -119,8 +119,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
     const toolbarHeight = toolBarRef.current?.getBoundingClientRect().height;
     if (toolbarHeight) {
-      const scrollStartHeight =
-        toolBarRef?.current?.getBoundingClientRect().height + 10;
+      const scrollStartHeight = toolbarHeight + 10;
       if (rect.top < scrollStartHeight)
         window.scrollBy(0, -(scrollStartHeight - rect.top));
     }
@@ -157,7 +156,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           left: `${rect?.left}px`,
         }}
       />
-      <Popover {...popover.bind} placement={PLACEMENT.TOP_LEFT}>
+      <Popover {...popover.bind} placement="TopLeft">
         <div className={styles.root} ref={toolBarRef}>
           <ul className={styles.list}>
             <li className={styles.item} ref={popoverTransform.targetRef}>

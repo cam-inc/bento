@@ -5,7 +5,7 @@ import { useScreenGlobalStateValue } from '../../store';
 import { styles } from './index.css';
 
 // Which point of the target element the popover should be placed.
-export const PLACEMENT = {
+const PLACEMENT = {
   /**
    * ↑
    * . →
