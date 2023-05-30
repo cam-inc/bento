@@ -93,8 +93,6 @@ const PLACEMENT = {
 } as const;
 type Placement = typeof PLACEMENT[keyof typeof PLACEMENT];
 
-type PopoverType = 'common' | 'followScroll';
-
 type PopoverProps = {
   isOpened: boolean;
   isHorizontal: boolean;
@@ -103,7 +101,7 @@ type PopoverProps = {
   targetRef: React.RefObject<HTMLElement>;
   children: React.ReactNode;
   placement?: Placement;
-  type?: PopoverType;
+  isScrollable?: boolean;
 };
 
 // TODO: desktop and mobile layout
@@ -114,7 +112,7 @@ export const Popover: React.FC<PopoverProps> = ({
   targetRef,
   children,
   placement: fixedPlacement,
-  type,
+  isScrollable,
 }) => {
   const screen = useScreenGlobalStateValue();
   const [scrollDistance, setScrollDistance] = useState<number>(0);
@@ -127,7 +125,7 @@ export const Popover: React.FC<PopoverProps> = ({
       if (targetRef.current?.contains(e.target as Node)) {
         return;
       }
-      if (e.type === 'scroll' && type === 'followScroll') {
+      if (e.type === 'scroll' && isScrollable) {
         if (initialScrollYRef.current === undefined) {
           initialScrollYRef.current = window.scrollY;
         } else {
@@ -304,7 +302,8 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               left: '0px',
-              bottom: scrollDistance ? `${scrollDistance}px` : '0px',
+              bottom:
+                isScrollable && scrollDistance ? `${scrollDistance}px` : '0px',
               maxWidth: `${screen.width - position.x - space}px`,
               height: `${position.y - space}px`,
             }}
@@ -322,7 +321,8 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               left: `-${distance - space}px`,
-              bottom: scrollDistance ? `${scrollDistance}px` : '0px',
+              bottom:
+                isScrollable && scrollDistance ? `${scrollDistance}px` : '0px',
               width: `${(distance - space) * 2}px`,
               height: `${position.y - space}px`,
             }}
@@ -345,7 +345,8 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               right: '0px',
-              bottom: scrollDistance ? `${scrollDistance}px` : '0px',
+              bottom:
+                isScrollable && scrollDistance ? `${scrollDistance}px` : '0px',
               maxWidth: `${position.x - space}px`,
               height: `${position.y - space}px`,
             }}
@@ -362,7 +363,10 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               left: '0px',
-              top: scrollDistance ? `${scrollDistance * -1}px` : '0px',
+              top:
+                isScrollable && scrollDistance
+                  ? `${scrollDistance * -1}px`
+                  : '0px',
               maxWidth: `${screen.width - position.x - space}px`,
               height: `${screen.height - position.y - space}px`,
             }}
@@ -382,9 +386,10 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               left: '0px',
-              top: scrollDistance
-                ? `${scrollDistance * -1 - (distance - space)}px`
-                : `-${distance - space}px`,
+              top:
+                isScrollable && scrollDistance
+                  ? `${scrollDistance * -1 - (distance - space)}px`
+                  : `-${distance - space}px`,
               maxWidth: `${screen.width - position.x - space}px`,
               height: `${(distance - space) * 2}px`,
             }}
@@ -403,7 +408,8 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               left: '0px',
-              bottom: scrollDistance ? `${scrollDistance}px` : '0px',
+              bottom:
+                isScrollable && scrollDistance ? `${scrollDistance}px` : '0px',
               maxWidth: `${screen.width - position.x - space}px`,
               height: `${position.y - space}px`,
             }}
@@ -420,7 +426,10 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               right: '0px',
-              top: scrollDistance ? `${scrollDistance * -1}px` : '0px',
+              top:
+                isScrollable && scrollDistance
+                  ? `${scrollDistance * -1}px`
+                  : '0px',
               maxWidth: `${position.x - space}px`,
               height: `${screen.height - position.y - space}px`,
             }}
@@ -440,7 +449,10 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               left: `-${distance - space}px`,
-              top: scrollDistance ? `${scrollDistance * -1}px` : '0px',
+              top:
+                isScrollable && scrollDistance
+                  ? `${scrollDistance * -1}px`
+                  : '0px',
               width: `${(distance - space) * 2}px`,
               height: `${screen.height - position.y - space}px`,
             }}
@@ -463,7 +475,10 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               left: '0px',
-              top: scrollDistance ? `${scrollDistance * -1}px` : '0px',
+              top:
+                isScrollable && scrollDistance
+                  ? `${scrollDistance * -1}px`
+                  : '0px',
               maxWidth: `${screen.width - position.x - space}px`,
               height: `${screen.height - position.y - space}px`,
             }}
@@ -482,7 +497,8 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               right: '0px',
-              bottom: scrollDistance ? `${scrollDistance}px` : '0px',
+              bottom:
+                isScrollable && scrollDistance ? `${scrollDistance}px` : '0px',
               maxWidth: `${position.x - space}px`,
               height: `${position.y - space}px`,
             }}
@@ -506,9 +522,10 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               right: '0px',
-              top: scrollDistance
-                ? `${scrollDistance * -1 - (distance - space)}px`
-                : `-${distance - space}px`,
+              top:
+                isScrollable && scrollDistance
+                  ? `${scrollDistance * -1 - (distance - space)}px`
+                  : `-${distance - space}px`,
               maxWidth: `${position.x - space}px`,
               height: `${(distance - space) * 2}px`,
             }}
@@ -531,7 +548,10 @@ export const Popover: React.FC<PopoverProps> = ({
             className={styles.contentWrapper}
             style={{
               right: '0px',
-              top: scrollDistance ? `${scrollDistance * -1}px` : '0px',
+              top:
+                isScrollable && scrollDistance
+                  ? `${scrollDistance * -1}px`
+                  : '0px',
               maxWidth: `${position.x - space}px`,
               height: `${screen.height - position.y - space}px`,
             }}

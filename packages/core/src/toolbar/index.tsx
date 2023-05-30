@@ -174,7 +174,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           left: `${rect?.left}px`,
         }}
       />
-      <Popover {...popover.bind} placement="TopLeft" type="followScroll">
+      <Popover {...popover.bind} placement="TopLeft" isScrollable>
         <div className={styles.root} ref={toolBarRef}>
           <ul className={styles.list}>
             <li className={styles.item} ref={popoverTransform.targetRef}>
