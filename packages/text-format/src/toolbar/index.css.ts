@@ -16,8 +16,8 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         borderRight: `solid 1px ${themeVars.color.backgroundOnFaint}`,
-        marginRight: themeVars.space[3],
-        paddingRight: themeVars.space[3],
+        marginRight: themeVars.space[1],
+        paddingRight: themeVars.space[1],
       },
     },
   }),
@@ -25,8 +25,8 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         borderLeft: `solid 1px ${themeVars.color.backgroundOnFaint}`,
-        marginLeft: themeVars.space[3],
-        paddingLeft: themeVars.space[3],
+        marginLeft: themeVars.space[1],
+        paddingLeft: themeVars.space[1],
       },
     },
   }),
@@ -42,7 +42,7 @@ export const styles = {
         height: 20,
         padding: 0,
         color: themeVars.color.backgroundOn,
-        marginRight: themeVars.space[3],
+        marginRight: themeVars.space[1],
       },
     },
   }),

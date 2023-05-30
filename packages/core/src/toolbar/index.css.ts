@@ -6,7 +6,7 @@ export const styles = {
   root: style({
     selectors: {
       [`${editorStyles.root} &`]: {
-        padding: themeVars.space['2'],
+        padding: themeVars.space['1.5'],
         backgroundColor: themeVars.color.surface,
         color: themeVars.color.surfaceOn,
         borderRadius: themeVars.radius.medium,
@@ -29,8 +29,8 @@ export const styles = {
   item: style({
     selectors: {
       [`${editorStyles.root} &`]: {
-        paddingRight: themeVars.space['3'],
-        marginRight: themeVars.space['3'],
+        paddingRight: themeVars.space['1'],
+        marginRight: themeVars.space['1'],
         borderRight: `1px solid ${themeVars.color.surfaceOnFaint}`,
       },
       [`${editorStyles.root} &:last-child`]: {
@@ -63,7 +63,6 @@ export const styles = {
         width: 20,
         height: 20,
         color: themeVars.color.brand,
-        marginRight: themeVars.space[1],
       },
     },
   }),
