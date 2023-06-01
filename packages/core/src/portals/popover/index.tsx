@@ -135,7 +135,7 @@ export const Popover: React.FC<PopoverProps> = ({
       if (!isScrollable) {
         return onRequestClose();
       }
-      if (initialScrollYRef.current === undefined) {
+      if (!initialScrollYRef.current) {
         initialScrollYRef.current = window.scrollY;
       } else {
         setScrollDistance(window.scrollY - initialScrollYRef.current);
