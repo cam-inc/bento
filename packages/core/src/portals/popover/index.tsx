@@ -115,33 +115,38 @@ export const Popover: React.FC<PopoverProps> = ({
   isScrollable,
 }) => {
   const screen = useScreenGlobalStateValue();
-  const [scrollDistance, setScrollDistance] = useState<number>(0);
+  const [scrollDistance, setScrollDistance] = useState<number>();
   const initialScrollYRef = useRef<number>();
 
   // Auto closing.
   useEffect(() => {
-    const handler = (e: Event) => {
+    const clickHandler = (e: Event) => {
       // Do nothing when the event has been dispatched from elements inside the target element.
       if (targetRef.current?.contains(e.target as Node)) {
         return;
       }
-      if (e.type === 'scroll' && isScrollable) {
-        if (initialScrollYRef.current === undefined) {
-          initialScrollYRef.current = window.scrollY;
-        } else {
-          setScrollDistance(window.scrollY - initialScrollYRef.current);
-        }
-        return;
+      if (initialScrollYRef.current) {
+        initialScrollYRef.current = undefined;
+        setScrollDistance(0);
       }
-      initialScrollYRef.current = undefined;
-      setScrollDistance(0);
       onRequestClose();
     };
-    window.addEventListener('click', handler);
-    window.addEventListener('scroll', handler);
+    const scrollHandler = () => {
+      if (!isScrollable) {
+        return onRequestClose();
+      }
+      if (initialScrollYRef.current === undefined) {
+        initialScrollYRef.current = window.scrollY;
+      } else {
+        setScrollDistance(window.scrollY - initialScrollYRef.current);
+      }
+    };
+
+    window.addEventListener('click', clickHandler);
+    window.addEventListener('scroll', scrollHandler);
     const cleanup = () => {
-      window.removeEventListener('click', handler);
-      window.removeEventListener('scroll', handler);
+      window.removeEventListener('click', clickHandler);
+      window.removeEventListener('scroll', scrollHandler);
     };
     return cleanup;
   }, [targetRef, onRequestClose]);
