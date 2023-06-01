@@ -43,6 +43,7 @@ export const styles = {
         padding: 0,
         color: themeVars.color.backgroundOn,
         marginRight: themeVars.space[1],
+        cursor: 'pointer',
       },
     },
   }),
