@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { themeVars, EditorClassName } from '@bento-editor/core';
 
 export const styles = {
@@ -41,9 +42,29 @@ export const styles = {
         width: 20,
         height: 20,
         padding: 0,
+        position: 'relative',
         color: themeVars.color.backgroundOn,
         marginRight: themeVars.space[1],
         cursor: 'pointer',
+      },
+    },
+  }),
+  bg: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
+        position: 'absolute',
+        top: calc.multiply(themeVars.space[1.5], -1.2),
+        right: 0,
+        bottom: calc.multiply(themeVars.space[1.5], -1.2),
+        left: 0,
+      },
+      [`.${EditorClassName} &:hover`]: {
+        backgroundColor: themeVars.color.brand,
+        opacity: themeVars.opacity.hover,
+      },
+      [`.${EditorClassName} &:active`]: {
+        backgroundColor: themeVars.color.brand,
+        opacity: themeVars.opacity.active,
       },
     },
   }),

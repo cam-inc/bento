@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { styles as editorStyles } from '../editor/index.css';
 import { themeVars } from '../theme/index.css';
 
@@ -50,6 +51,7 @@ export const styles = {
         padding: 0,
         display: 'flex',
         placeItems: 'center',
+        position: 'relative',
         fontSize: themeVars.fontSize.label.medium,
         whiteSpace: 'nowrap',
         cursor: 'pointer',
@@ -89,8 +91,28 @@ export const styles = {
         width: 20,
         height: 20,
         padding: 0,
+        position: 'relative',
         color: themeVars.color.backgroundOnSlight,
         cursor: 'pointer',
+      },
+    },
+  }),
+  bg: style({
+    selectors: {
+      [`${editorStyles.root} &`]: {
+        position: 'absolute',
+        top: calc.multiply(themeVars.space[1.5], -1.2),
+        right: 0,
+        bottom: calc.multiply(themeVars.space[1.5], -1.2),
+        left: 0,
+      },
+      [`${editorStyles.root} &:hover`]: {
+        backgroundColor: themeVars.color.brand,
+        opacity: themeVars.opacity.hover,
+      },
+      [`${editorStyles.root} &:active`]: {
+        backgroundColor: themeVars.color.brand,
+        opacity: themeVars.opacity.active,
       },
     },
   }),
