@@ -11,14 +11,14 @@ import { styles } from './index.css';
 export type CustomNode = Config['elements'][number] | Config['texts'][number];
 
 export type ButtonBoxProps = {
-  featureIcon: React.ReactNode;
   onClick: React.MouseEventHandler;
   name?: string;
+  featureIcon?: React.ReactNode;
 };
 export const ButtonBox: React.FC<ButtonBoxProps> = ({
-  featureIcon,
   onClick,
   name,
+  featureIcon,
 }) => {
   return (
     <button type="button" className={styles.buttonBox} onClick={onClick}>
