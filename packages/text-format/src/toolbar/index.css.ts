@@ -1,5 +1,4 @@
 import { style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 import { themeVars, EditorClassName } from '@bento-editor/core';
 
 export const styles = {

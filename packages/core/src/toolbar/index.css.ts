@@ -1,5 +1,4 @@
 import { style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 import { styles as editorStyles } from '../editor/index.css';
 import { themeVars } from '../theme/index.css';
 
