@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { KeyboardEventHandler, useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import {
@@ -70,6 +70,26 @@ export const Editable: React.FC<EditableProps> = () => {
     return true;
   }, []);
 
+  const handleKeyDown: KeyboardEventHandler = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const { selection } = editor;
+      if (!selection) {
+        return;
+      }
+      const currentNode = editor.children[selection.anchor.path[0]];
+      const nodeType = currentNode.type;
+      if (nodeType?.includes('heading') || nodeType === 'paragraph') {
+        editor.insertNode({
+          type: 'paragraph',
+          children: [{ type: 'format', text: '' }],
+        });
+        return;
+      }
+      editor.insertBreak();
+    }
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <SlateReactEditable
@@ -77,6 +97,7 @@ export const Editable: React.FC<EditableProps> = () => {
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onDrop={handleDrop}
+        onKeyDown={handleKeyDown}
         placeholder={config.rootPlaceholder}
       />
     </DndProvider>
