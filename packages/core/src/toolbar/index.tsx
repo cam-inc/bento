@@ -23,7 +23,7 @@ export const ButtonBox: React.FC<ButtonBoxProps> = ({
   return (
     <button type="button" className={styles.buttonBox} onClick={onClick}>
       <div className={styles.bg} />
-      <span className={styles.featureIcon}>{featureIcon}</span>
+      {featureIcon && <span className={styles.featureIcon}>{featureIcon}</span>}
       {name && <span>{name}</span>}
       <span className={styles.dropDownIcon}>
         <svg viewBox="0 0 20 20">

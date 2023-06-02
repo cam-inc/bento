@@ -8,6 +8,7 @@ export const styles = {
     selectors: {
       [`${editorStyles.root} &`]: {
         padding: themeVars.space['1.5'],
+        paddingLeft: themeVars.space['2'],
         backgroundColor: themeVars.color.surface,
         color: themeVars.color.surfaceOn,
         borderRadius: themeVars.radius.medium,
