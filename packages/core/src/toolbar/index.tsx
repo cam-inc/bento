@@ -48,6 +48,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const [node, setNode] = useState<Node | CustomNode | null>(null);
   const [blockIcon, setBlockIcon] = useState<React.ReactNode | null>(null);
   const [blockName, setBlockName] = useState('ブロックを選択');
+  const [isMouseDown, setIsMouseDown] = useState(false);
 
   const hasToolbox = useCallback(
     (
@@ -79,8 +80,23 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   }, [popoverMore]);
 
   useEffect(() => {
-    const { selection } = editor;
+    const handleMouseDown = () => {
+      setIsMouseDown(true);
+    };
+    const handleMouseUp = () => {
+      setIsMouseDown(false);
+    };
 
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
+
+  useEffect(() => {
+    const { selection } = editor;
     if (selection?.anchor !== undefined) {
       const path = selection.anchor.path;
       setPath(path);
@@ -91,7 +107,8 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
       if (
         !selection ||
         Range.isCollapsed(selection) ||
-        editor.string(selection) === ''
+        editor.string(selection) === '' ||
+        isMouseDown
       ) {
         return false;
       }
@@ -122,7 +139,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
       if (rect.top < scrollStartHeight)
         window.scrollBy(0, -(scrollStartHeight - rect.top));
     }
-  }, [editor.selection]);
+  }, [editor.selection, isMouseDown]);
 
   useEffect(() => {
     if (hasToolbox(node)) {
@@ -154,7 +171,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
           left: `${rect?.left}px`,
         }}
       />
-      <Popover {...popover.bind} placement="TopLeft">
+      <Popover {...popover.bind} placement="TopLeft" isScrollable>
         <div className={styles.root} ref={toolBarRef}>
           <ul className={styles.list}>
             <li className={styles.item} ref={popoverTransform.targetRef}>
