@@ -102,9 +102,9 @@ export const styles = {
     selectors: {
       [`${editorStyles.root} &`]: {
         position: 'absolute',
-        top: calc.multiply(themeVars.space[1.5], -1.2),
+        top: `calc(${themeVars.space['1.5']} * -1)`,
         right: 0,
-        bottom: calc.multiply(themeVars.space[1.5], -1.2),
+        bottom: `calc(${themeVars.space['1.5']} * -1.2)`,
         left: 0,
       },
       [`${editorStyles.root} &:hover`]: {
