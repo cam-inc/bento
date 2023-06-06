@@ -8,6 +8,7 @@ import ReactEditor from './reactEditor';
 import * as transforms from './transform';
 import Text, * as textHelpers from './text';
 import * as childHelpers from './child';
+import * as insertBreaks from './insertBreak';
 
 export const helpers = {
   ReactEditor,
@@ -23,4 +24,5 @@ export const helpers = {
   textHelpers,
   pathHelpers,
   childHelpers,
+  insertBreaks,
 };
