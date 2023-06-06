@@ -1,4 +1,4 @@
-import { KeyboardEventHandler, useCallback } from 'react';
+import { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import {
@@ -8,7 +8,6 @@ import {
 } from 'slate-react';
 import { useConfigGlobalStateValue } from '../store';
 import { styles } from './index.css';
-import { Editor, Range, Element, Text } from 'slate';
 
 // `EditableProps` is not exported from `slate-react`.
 // Below is just a workaround of this.
@@ -71,53 +70,6 @@ export const Editable: React.FC<EditableProps> = () => {
     return true;
   }, []);
 
-  const handleKeyDown: KeyboardEventHandler = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const { selection } = editor;
-      if (!selection) {
-        return;
-      }
-
-      const currentNode = editor.children[selection.anchor.path[0]];
-      if (!Element.isElement(currentNode)) {
-        return;
-      }
-      const nodeType = currentNode.type;
-      const isText = nodeType?.includes('heading') || nodeType === 'paragraph';
-      if (!isText) {
-        editor.insertBreak();
-        return;
-      }
-
-      const pointStart = Range.end(selection);
-      const [node, path] = Editor.node(editor, pointStart);
-      const lastNode = currentNode.children[currentNode.children.length - 1];
-      if (!Text.isText(lastNode) || !Text.isText(node)) {
-        return;
-      }
-
-      const isLastNode = node.text === lastNode.text;
-      const isEnd =
-        !pointStart ||
-        (!Editor.string(editor, {
-          anchor: pointStart,
-          focus: Editor.end(editor, path),
-        }) &&
-          isLastNode);
-
-      if (!isEnd) {
-        editor.insertBreak();
-        return;
-      }
-
-      editor.insertNode({
-        type: 'paragraph',
-        children: [{ type: 'format', text: '' }],
-      });
-    }
-  };
-
   return (
     <DndProvider backend={HTML5Backend}>
       <SlateReactEditable
@@ -125,7 +77,6 @@ export const Editable: React.FC<EditableProps> = () => {
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onDrop={handleDrop}
-        onKeyDown={handleKeyDown}
         placeholder={config.rootPlaceholder}
       />
     </DndProvider>
