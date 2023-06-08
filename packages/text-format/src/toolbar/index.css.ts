@@ -16,8 +16,6 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         borderRight: `solid 1px ${themeVars.color.backgroundOnFaint}`,
-        marginRight: themeVars.space[1],
-        paddingRight: themeVars.space[1],
       },
     },
   }),
@@ -25,8 +23,6 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         borderLeft: `solid 1px ${themeVars.color.backgroundOnFaint}`,
-        marginLeft: themeVars.space[1],
-        paddingLeft: themeVars.space[1],
       },
     },
   }),
@@ -38,13 +34,20 @@ export const styles = {
         borderColor: 'currentColor',
         backgroundColor: 'transparent',
         display: 'block',
+        height: 32,
+        padding: `0 ${themeVars.space[1]}`,
+        position: 'relative',
+        color: themeVars.color.backgroundOn,
+        cursor: 'pointer',
+      },
+    },
+  }),
+  icon: style({
+    selectors: {
+      [`.${EditorClassName} &`]: {
         width: 20,
         height: 20,
         padding: 0,
-        position: 'relative',
-        color: themeVars.color.backgroundOn,
-        marginRight: themeVars.space[1],
-        cursor: 'pointer',
       },
     },
   }),
@@ -52,9 +55,9 @@ export const styles = {
     selectors: {
       [`.${EditorClassName} &`]: {
         position: 'absolute',
-        top: `calc(${themeVars.space['1.5']} * -1)`,
+        top: 0,
         right: 0,
-        bottom: `calc(${themeVars.space['1.5']} * -1.2)`,
+        bottom: 0,
         left: 0,
       },
       [`.${EditorClassName} &:hover`]: {
