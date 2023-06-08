@@ -172,9 +172,9 @@ const toolbar: Text<Attributes>['toolbar'] = {
           <li ref={popoverColor.targetRef} className={styles.color}>
             <ButtonBox
               featureIcon={
-                <svg viewBox="0 0 20 20">
+                <svg viewBox="0 0 20 20" className={styles.icon}>
                   <path
-                    d="M1.625 17.5V14.083H18.375V17.5H1.625ZM4.562 11.667L8.938 0H11.062L15.438 11.667H13.354L12.333 8.771H7.667L6.646 11.667H4.562ZM8.292 7H11.708L10.042 2.312H9.958L8.292 7Z"
+                    d="M2 18V14.8759H18V18H2ZM4.80549 12.667L8.98555 2H11.0144L15.1945 12.667H13.2038L12.2285 10.0192H7.77146L6.79618 12.667H4.80549ZM8.36848 8.4H11.6315L10.0401 4.11383H9.95988L8.36848 8.4Z"
                     fill="currentColor"
                   />
                 </svg>

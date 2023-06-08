@@ -28,7 +28,7 @@ const list = style({
 const item = style({
   selectors: {
     [`${editorStyles.root} &`]: {
-      borderRight: `1px solid ${themeVars.color.surfaceOnFaint}`,
+      borderRight: `1px solid ${themeVars.color.backgroundOnFaint}`,
     },
     [`${editorStyles.root} &:last-child`]: {
       paddingRight: 0,
@@ -57,7 +57,7 @@ const buttonBox = style({
       paddingRight: themeVars.space[1],
     },
     [`${editorStyles.root} ${list} ${item}:first-child &`]: {
-      paddingLeft: themeVars.space[1.5],
+      paddingLeft: themeVars.space[2],
     },
   },
 });
