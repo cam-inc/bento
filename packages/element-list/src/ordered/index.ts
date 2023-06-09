@@ -32,8 +32,8 @@ const element: Element<Attributes> = {
     }
     return isNormalized;
   },
-  insertBreak: (editor, nodeEntry) =>
-    helpers.insertBreaks.copyInsertBreak(editor, nodeEntry),
+  insertBreak: (editor, nodeEntry, config) =>
+    helpers.insertBreaks.copyInsertBreak(editor, nodeEntry, config),
 };
 
 export default element;

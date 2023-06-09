@@ -1,6 +1,7 @@
-import { Editor, Element, NodeEntry, Text } from 'slate';
+import { Text, Element } from 'slate';
+import { InsertBreak } from '../../config';
 
-export const copyInsertBreak = (editor: Editor, entry: NodeEntry): boolean => {
+export const copyInsertBreak: InsertBreak = (editor, entry) => {
   const { selection } = editor;
   if (!selection) {
     return false;

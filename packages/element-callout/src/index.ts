@@ -1,4 +1,4 @@
-import { Element } from '@bento-editor/core';
+import { Element, helpers } from '@bento-editor/core';
 import attributes, { Attributes } from './attributes';
 import editable from './editable';
 import toolbox from './toolbox';
@@ -9,6 +9,8 @@ const element: Element<Attributes> = {
   attributes,
   editable,
   toolbox,
+  insertBreak: (editor, nodeEntry, config) =>
+    helpers.insertBreaks.copyInsertBreak(editor, nodeEntry, config),
 };
 
 export default element;

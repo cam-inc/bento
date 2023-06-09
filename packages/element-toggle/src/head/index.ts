@@ -7,7 +7,7 @@ const element: Element<Attributes> = {
   type: 'toggle-head',
   attributes,
   editable,
-  insertBreak: (editor, nodeEntry) =>
-    helpers.insertBreaks.copyInsertBreak(editor, nodeEntry),
+  insertBreak: (editor, nodeEntry, config) =>
+    helpers.insertBreaks.copyInsertBreak(editor, nodeEntry, config),
 };
 export default element;
