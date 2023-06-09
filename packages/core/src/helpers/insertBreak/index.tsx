@@ -1,47 +1,27 @@
-import { Editor, Element, NodeEntry, Range, Text } from 'slate';
-import { Config } from '../../config';
+import { Editor, Element, NodeEntry, Text } from 'slate';
 
-export const defaultElementInsertBreak = (
-  editor: Editor,
-  nodeEntry: NodeEntry,
-  config: Config
-): boolean => {
+export const copyInsertBreak = (editor: Editor, entry: NodeEntry): boolean => {
   const { selection } = editor;
   if (!selection) {
     return false;
   }
 
-  const currentElement = nodeEntry[0];
+  const [currentElement, path] = entry;
   if (!Element.isElement(currentElement)) {
-    return false;
+    editor.splitNodes({ always: true });
+    return true;
   }
-
-  const pointStart = Range.end(selection);
-  const [node, path] = Editor.node(editor, pointStart);
-  const firstNode = currentElement.children[0];
-  if (!Text.isText(firstNode) || !Text.isText(node)) {
-    return false;
+  const node = currentElement.children[0];
+  if (!Text.isText(node)) {
+    editor.splitNodes({ always: true });
+    return true;
   }
-
-  const afterText = editor.string({
-    anchor: pointStart,
-    focus: editor.end(path),
-  });
-  if (!Text.isText(firstNode)) {
-    return false;
+  if (node.text === '') {
+    editor.move({ unit: 'line', reverse: true });
+    editor.removeNodes({ at: path });
+    return true;
   }
-
-  const isFirst = !pointStart || afterText === firstNode.text;
   editor.splitNodes({ always: true });
-  if (isFirst) {
-    editor.setNodes(
-      { type: config.defaultElement.type },
-      { at: [selection.anchor.path[0]] }
-    );
-  } else {
-    editor.setNodes({
-      type: config.defaultElement.type,
-    });
-  }
+
   return true;
 };

@@ -1,4 +1,4 @@
-import { Element } from 'slate';
+import { Element, Range } from 'slate';
 import { Editor } from 'slate';
 import { EditorPlugin } from '.';
 
@@ -29,6 +29,22 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
           }
         }
       }
+
+      const pointStart = Range.start(selection);
+      editor.splitNodes({ height: 0, always: true });
+      if (pointStart.offset === 0) {
+        editor.setNodes(
+          {
+            type: config.defaultElement.type,
+          },
+          { at: [selection.anchor.path[0]] }
+        );
+      } else {
+        editor.setNodes({
+          type: config.defaultElement.type,
+        });
+      }
+      return;
     }
     originalInsertBreak();
   };

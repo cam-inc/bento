@@ -9,7 +9,7 @@ const element: Element<Attributes> = {
   attributes,
   editable,
   toolbox,
-  insertBreak: (editor, nodeEntry, config) =>
-    helpers.insertBreaks.defaultElementInsertBreak(editor, nodeEntry, config),
+  insertBreak: (editor, nodeEntry) =>
+    helpers.insertBreaks.copyInsertBreak(editor, nodeEntry),
 };
 export default element;
