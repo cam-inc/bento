@@ -34,7 +34,7 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
 
       const pointStart = Range.start(selection);
       editor.splitNodes({ always: true });
-      if (pointStart.offset === 0) {
+      if (pointStart.path[1] === 0 && pointStart.offset === 0) {
         editor.setNodes(
           {
             type: config.defaultElement.type,
