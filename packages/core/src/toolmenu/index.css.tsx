@@ -27,6 +27,7 @@ const button = style({
       width: '100%',
       padding: `${themeVars.space['2']} ${themeVars.space['3']}`,
       position: 'relative',
+      cursor: 'pointer',
     },
   },
 });
