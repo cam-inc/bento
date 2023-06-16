@@ -36,8 +36,33 @@ export const copyAndTextEmptyRemoveInsertBreak: NodeFunction = (
   const isTextEmpty = !textList.join();
 
   if (isTextEmpty) {
-    editor.move({ unit: 'line', reverse: true });
     editor.removeNodes({ at: currentPath });
+    const next = editor.next();
+    if (!next) {
+      return false;
+    }
+    const [nextNode, nextPath] = next;
+    const parent = editor.parent(nextPath);
+    const textList = Array.from(
+      editor.nodes({
+        at: parent[1],
+        match: (node) => Text.isText(node),
+      })
+    );
+    const [lastNode, lastNodePath] = textList[textList.length - 1];
+    if (!Text.isText(lastNode)) {
+      return false;
+    }
+    editor.setSelection({
+      anchor: {
+        path: lastNodePath,
+        offset: lastNode.text.length,
+      },
+      focus: {
+        path: lastNodePath,
+        offset: lastNode.text.length,
+      },
+    });
     return true;
   }
   editor.splitNodes({ always: true });
