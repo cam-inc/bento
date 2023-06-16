@@ -1,25 +1,27 @@
 import { Text, Element } from 'slate';
 import { InsertBreak } from '../../config';
 
+/**
+ * Inherit the type of the current Element when you press enter.
+ * If the text is empty, remove the Element.
+ */
 export const copyInsertBreak: InsertBreak = (editor, entry) => {
-  const { selection } = editor;
-  if (!selection) {
-    return false;
+  const [currentNode, currentPath] = entry;
+  if (!Element.isElement(currentNode)) {
+    editor.splitNodes({ always: true });
+    return true;
   }
+  const textList = Array.from(
+    editor.nodes({
+      at: currentPath,
+      match: (node) => Text.isText(node),
+    })
+  ).map((node) => (Text.isText(node[0]) ? node[0].text : ''));
+  const isTextEmpty = !textList.join();
 
-  const [currentElement, path] = entry;
-  if (!Element.isElement(currentElement)) {
-    editor.splitNodes({ always: true });
-    return true;
-  }
-  const node = currentElement.children[0];
-  if (!Text.isText(node)) {
-    editor.splitNodes({ always: true });
-    return true;
-  }
-  if (node.text === '') {
+  if (isTextEmpty) {
     editor.move({ unit: 'line', reverse: true });
-    editor.removeNodes({ at: path });
+    editor.removeNodes({ at: currentPath });
     return true;
   }
   editor.splitNodes({ always: true });
