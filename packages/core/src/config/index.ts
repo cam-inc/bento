@@ -34,7 +34,7 @@ declare module 'slate' {
     Text: CustomText;
   }
 }
-export type InsertBreak = (
+export type NodeFunction = (
   editor: Editor,
   entry: NodeEntry,
   config: Config
@@ -67,14 +67,9 @@ export type Element<
   };
   // The boolean value returned from this function is to be used to determine whether to kiff off a new normalization path.
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
-  normalizeNode?: (editor: Editor, entry: NodeEntry, config: Config) => boolean;
-  insertBreak?: InsertBreak;
-  insertSoftBreak?: (
-    editor: Editor,
-    entry: NodeEntry,
-    config: Config
-  ) => boolean;
-  isVoid?: boolean;
+  normalizeNode?: NodeFunction;
+  insertBreak?: NodeFunction;
+  insertSoftBreak?: NodeFunction;
 };
 
 export type Text<Attributes extends Record<string, any> = Record<string, any>> =

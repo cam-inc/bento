@@ -1,10 +1,10 @@
 import { Text, Element } from 'slate';
-import { InsertBreak } from '../../config';
+import { NodeFunction } from '../../config';
 
 /**
  * Inherit the type of the current Element when you press enter.
  */
-export const copyInsertBreak: InsertBreak = (editor, entry) => {
+export const copyInsertBreak: NodeFunction = (editor, entry) => {
   const [currentNode] = entry;
   if (!Element.isElement(currentNode)) {
     editor.splitNodes({ always: true });
@@ -18,7 +18,7 @@ export const copyInsertBreak: InsertBreak = (editor, entry) => {
  * Inherit the type of the current Element when you press enter.
  * If the text is empty, remove the Element.
  */
-export const copyAndTextEmptyRemoveInsertBreak: InsertBreak = (
+export const copyAndTextEmptyRemoveInsertBreak: NodeFunction = (
   editor,
   entry
 ) => {
