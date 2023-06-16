@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Element, Node, Path } from 'slate';
+import { Path } from 'slate';
 import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
 import { DustboxIcon } from '../components/icons/dustbox';
@@ -24,19 +24,28 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
   const handleCopyClick = useCallback(async () => {
     const selection = editor.selection;
     if (!selection || selection.anchor.offset === selection.focus.offset) {
-      const node = Node.get(editor, path);
-      if (!Element.isElement(node)) return;
-      const lastChildIndex = node.children.length - 1;
-      const lastNode = node.children[lastChildIndex];
-      if (!Text.isText(lastNode)) return;
-      const lastOffset = lastNode.text.length;
+      const textNodeList = Array.from(
+        editor.nodes({
+          at: path,
+          match: (node) => Text.isText(node),
+        })
+      );
+      if (!textNodeList.length) {
+        return;
+      }
+      const lastTextPath = textNodeList[textNodeList.length - 1][1];
+      const lastTextNode = textNodeList[textNodeList.length - 1][0];
+      if (!Text.isText(lastTextNode)) {
+        return;
+      }
+      const lastOffset = lastTextNode.text.length;
       editor.selection = {
         anchor: {
           path: [...path, 0],
           offset: 0,
         },
         focus: {
-          path: [...path, lastChildIndex],
+          path: lastTextPath,
           offset: lastOffset,
         },
       };
