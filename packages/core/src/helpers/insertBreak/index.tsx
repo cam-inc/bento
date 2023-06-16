@@ -3,9 +3,25 @@ import { InsertBreak } from '../../config';
 
 /**
  * Inherit the type of the current Element when you press enter.
- * If the text is empty, remove the Element.
  */
 export const copyInsertBreak: InsertBreak = (editor, entry) => {
+  const [currentNode] = entry;
+  if (!Element.isElement(currentNode)) {
+    editor.splitNodes({ always: true });
+    return true;
+  }
+  editor.splitNodes({ always: true });
+  return true;
+};
+
+/**
+ * Inherit the type of the current Element when you press enter.
+ * If the text is empty, remove the Element.
+ */
+export const copyAndTextEmptyRemoveInsertBreak: InsertBreak = (
+  editor,
+  entry
+) => {
   const [currentNode, currentPath] = entry;
   if (!Element.isElement(currentNode)) {
     editor.splitNodes({ always: true });

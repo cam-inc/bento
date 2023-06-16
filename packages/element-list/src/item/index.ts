@@ -8,6 +8,10 @@ const element: Element<Attributes> = {
   attributes,
   editable,
   insertBreak: (editor, nodeEntry, config) =>
-    helpers.insertBreaks.copyInsertBreak(editor, nodeEntry, config),
+    helpers.insertBreaks.copyAndTextEmptyRemoveInsertBreak(
+      editor,
+      nodeEntry,
+      config
+    ),
 };
 export default element;
