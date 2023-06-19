@@ -40,7 +40,7 @@ export const copyAndRemoveTextEmptyInsertBreak: NodeFunction = (
     if (!next) {
       return false;
     }
-    const nextPath = next[1];
+    const [nextNode, nextPath] = next;
     const parent = editor.parent(nextPath);
     const textList = Array.from(
       editor.nodes({
@@ -51,6 +51,12 @@ export const copyAndRemoveTextEmptyInsertBreak: NodeFunction = (
     const [lastNode, lastNodePath] = textList[textList.length - 1];
     if (!Text.isText(lastNode)) {
       return false;
+    }
+    if (Element.isElement(nextNode)) {
+      if (editor.isVoid(nextNode)) {
+        editor.removeNodes({ at: currentPath });
+        return true;
+      }
     }
     editor.setSelection({
       anchor: {
