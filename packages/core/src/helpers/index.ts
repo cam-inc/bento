@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 import Element, * as elements from './element';
 import * as logger from './logger';
 import * as error from './error';
-import * as Node from './node';
+import Node, * as nodeHelpers from './node';
 import Path, * as pathHelpers from './path';
 import ReactEditor from './reactEditor';
 import * as transforms from './transform';
@@ -23,4 +23,5 @@ export const helpers = {
   textHelpers,
   pathHelpers,
   childHelpers,
+  ...nodeHelpers,
 };
