@@ -18,7 +18,7 @@ export const copyInsertBreak: NodeFunction = (editor, entry) => {
  * Inherit the type of the current Element when you press enter.
  * If the text is empty, remove the Element.
  */
-export const copyAndTextEmptyRemoveInsertBreak: NodeFunction = (
+export const copyAndRemoveTextEmptyInsertBreak: NodeFunction = (
   editor,
   entry
 ) => {
@@ -41,7 +41,7 @@ export const copyAndTextEmptyRemoveInsertBreak: NodeFunction = (
     if (!next) {
       return false;
     }
-    const [nextNode, nextPath] = next;
+    const nextPath = next[1];
     const parent = editor.parent(nextPath);
     const textList = Array.from(
       editor.nodes({

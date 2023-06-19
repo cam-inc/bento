@@ -70,6 +70,7 @@ export type Element<
   normalizeNode?: NodeFunction;
   insertBreak?: NodeFunction;
   insertSoftBreak?: NodeFunction;
+  isVoid?: boolean;
 };
 
 export type Text<Attributes extends Record<string, any> = Record<string, any>> =

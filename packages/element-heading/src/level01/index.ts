@@ -1,4 +1,4 @@
-import { Element, helpers } from '@bento-editor/core';
+import { Element } from '@bento-editor/core';
 import attributes, { Attributes } from './attributes';
 import editable from './editable';
 import toolbox from './toolbox';
