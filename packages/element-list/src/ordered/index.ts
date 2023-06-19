@@ -33,7 +33,7 @@ const element: Element<Attributes> = {
     return isNormalized;
   },
   insertBreak: (editor, nodeEntry, config) =>
-    helpers.insertBreaks.copyAndRemoveTextEmptyInsertBreak(
+    helpers.insertBreaks.copyAndRemoveEmptyTextInsertBreak(
       editor,
       nodeEntry,
       config

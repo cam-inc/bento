@@ -34,6 +34,7 @@ declare module 'slate' {
     Text: CustomText;
   }
 }
+
 export type NodeFunction = (
   editor: Editor,
   entry: NodeEntry,

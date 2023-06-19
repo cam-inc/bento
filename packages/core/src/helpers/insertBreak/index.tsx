@@ -18,7 +18,7 @@ export const copyInsertBreak: NodeFunction = (editor, entry) => {
  * Inherit the type of the current Element when you press enter.
  * If the text is empty, remove the Element.
  */
-export const copyAndRemoveTextEmptyInsertBreak: NodeFunction = (
+export const copyAndRemoveEmptyTextInsertBreak: NodeFunction = (
   editor,
   entry
 ) => {
@@ -41,16 +41,16 @@ export const copyAndRemoveTextEmptyInsertBreak: NodeFunction = (
       return false;
     }
     const [nextNode, nextPath] = next;
-    const parent = editor.parent(nextPath);
-    const textList = Array.from(
+    const parentEntry = editor.parent(nextPath);
+    const textNodeList = Array.from(
       editor.nodes({
-        at: parent[1],
+        at: parentEntry[1],
         match: (node) => Text.isText(node),
       })
     );
-    const [lastNode, lastNodePath] = textList[textList.length - 1];
+    const [lastNode, lastNodePath] = textNodeList[textNodeList.length - 1];
     if (!Text.isText(lastNode)) {
-      return false;
+      return true;
     }
     if (Element.isElement(nextNode)) {
       if (editor.isVoid(nextNode)) {

@@ -10,7 +10,7 @@ const element: Element<Attributes> = {
   editable,
   toolbox,
   insertBreak: (editor, nodeEntry, config) =>
-    helpers.insertBreaks.copyAndRemoveTextEmptyInsertBreak(
+    helpers.insertBreaks.copyAndRemoveEmptyTextInsertBreak(
       editor,
       nodeEntry,
       config
