@@ -36,7 +36,6 @@ export const copyAndRemoveTextEmptyInsertBreak: NodeFunction = (
   const isTextEmpty = !textList.join();
 
   if (isTextEmpty) {
-    editor.removeNodes({ at: currentPath });
     const next = editor.next();
     if (!next) {
       return false;
@@ -63,6 +62,7 @@ export const copyAndRemoveTextEmptyInsertBreak: NodeFunction = (
         offset: lastNode.text.length,
       },
     });
+    editor.removeNodes({ at: currentPath });
     return true;
   }
   editor.splitNodes({ always: true });
