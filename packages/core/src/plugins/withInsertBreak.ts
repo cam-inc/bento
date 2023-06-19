@@ -3,6 +3,13 @@ import { Editor } from 'slate';
 import { EditorPlugin } from '.';
 import { helpers } from '../helpers';
 
+/**
+ * If the original insertBreak is set, execute it.
+ * If enter is pressed at the beginning of a line, insert the default Element at the line above.
+ * If enter is pressed in the line, it will wrap the line and overwrite the default Element.
+ * If enter is pressed at the end of a line, insert the default Element at the below.
+ * If the string is empty, overwrite that line with the default Element.
+ */
 export const withInsertBreak: EditorPlugin = (editor, config) => {
   const originalInsertBreak = editor.insertBreak;
 
