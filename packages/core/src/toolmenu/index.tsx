@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Path } from 'slate';
+import { Path, last } from 'slate';
 import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
 import { DustboxIcon } from '../components/icons/dustbox';
@@ -39,6 +39,10 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
         return;
       }
       const lastOffset = lastTextNode.text.length;
+      if (!lastOffset) {
+        onDone();
+        return;
+      }
       editor.selection = {
         anchor: {
           path: [...path, 0],
