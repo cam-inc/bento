@@ -23,53 +23,44 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
 
   const handleCopyClick = useCallback(async () => {
     const selection = editor.selection;
-    if (!selection || selection.anchor.offset === selection.focus.offset) {
-      const textNodeEntryList = Array.from(
-        editor.nodes({
-          at: path,
-          match: (node) => Text.isText(node),
-        })
-      );
-      if (!textNodeEntryList.length) {
-        return;
-      }
-
-      const [lastTextNode, lastTextPath] =
-        textNodeEntryList[textNodeEntryList.length - 1];
-      if (!Text.isText(lastTextNode)) {
-        return;
-      }
-
-      const lastOffset = lastTextNode.text.length;
-      if (!lastOffset) {
-        onDone();
-        return;
-      }
-
-      const firstTextPath = textNodeEntryList[0][1];
-      editor.selection = {
-        anchor: {
-          path: firstTextPath,
-          offset: 0,
-        },
-        focus: {
-          path: lastTextPath,
-          offset: lastOffset,
-        },
-      };
-      await helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
-
-      const headLinePoint = {
-        path: [...path, 0],
-        offset: 0,
-      };
-      editor.selection = {
-        anchor: headLinePoint,
-        focus: headLinePoint,
-      };
-    } else {
+    if (selection && selection.anchor.offset !== selection.focus.offset) {
       helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
+      onDone();
+      return;
     }
+
+    const [lastTextNode, lastTextPath] = editor.node(path, { edge: 'end' });
+    if (!Text.isText(lastTextNode)) {
+      return;
+    }
+
+    const lastOffset = lastTextNode.text.length;
+    if (!lastOffset) {
+      onDone();
+      return;
+    }
+
+    const [_, firstTextPath] = editor.node(path, { edge: 'start' });
+    editor.select({
+      anchor: {
+        path: firstTextPath,
+        offset: 0,
+      },
+      focus: {
+        path: lastTextPath,
+        offset: lastOffset,
+      },
+    });
+    await helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
+
+    const headLinePoint = {
+      path: firstTextPath,
+      offset: 0,
+    };
+    editor.select({
+      anchor: headLinePoint,
+      focus: headLinePoint,
+    });
     onDone();
   }, [editor, path, onDone]);
 
