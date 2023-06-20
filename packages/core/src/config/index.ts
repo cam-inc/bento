@@ -35,7 +35,7 @@ declare module 'slate' {
   }
 }
 
-export type NodeFunction = (
+export type Plugin = (
   editor: Editor,
   entry: NodeEntry,
   config: Config
@@ -68,9 +68,9 @@ export type Element<
   };
   // The boolean value returned from this function is to be used to determine whether to kiff off a new normalization path.
   // @see: https://docs.slatejs.org/concepts/11-normalizing#multi-pass-normalizing
-  normalizeNode?: NodeFunction;
-  insertBreak?: NodeFunction;
-  insertSoftBreak?: NodeFunction;
+  normalizeNode?: Plugin;
+  insertBreak?: Plugin;
+  insertSoftBreak?: Plugin;
   isVoid?: boolean;
 };
 

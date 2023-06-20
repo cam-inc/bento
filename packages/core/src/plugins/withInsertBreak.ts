@@ -1,4 +1,4 @@
-import { Element, Node, Range, Text } from 'slate';
+import { Element, Range } from 'slate';
 import { Editor } from 'slate';
 import { EditorPlugin } from '.';
 import { helpers } from '../helpers';
@@ -68,6 +68,7 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
     }
 
     editor.splitNodes({ always: true });
+
     // When the cursor is at the beginning of the line
     const pointStart = Range.start(selection);
     const isFirst = pointStart.path[1] === 0 && pointStart.offset === 0;
