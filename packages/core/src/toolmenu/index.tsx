@@ -53,7 +53,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
           offset: lastOffset,
         },
       };
-      await helpers.nodeHelpers.copyNode(editor);
+      await helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
       editor.selection = {
         anchor: {
           path: [...path, 0],
@@ -65,7 +65,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
         },
       };
     } else {
-      helpers.nodeHelpers.copyNode(editor);
+      helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
     }
     onDone();
   }, [editor, path, onDone]);

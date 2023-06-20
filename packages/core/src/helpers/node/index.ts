@@ -2,7 +2,7 @@ import { Editor, Node as SlateNode } from 'slate';
 
 export default SlateNode;
 
-export const copyNode = async (editor: Editor) => {
+export const copySelectedNodeToClipBoard = async (editor: Editor) => {
   const dataTransfer = new DataTransfer();
   editor.setFragmentData(dataTransfer, 'copy');
   const clipboardBlobList = dataTransfer.types.map((type) => {
@@ -12,7 +12,7 @@ export const copyNode = async (editor: Editor) => {
   const clipBoardItem: Record<string, Blob> = {};
   const removeType = 'application/x-slate-fragment';
   clipboardBlobList
-    .filter((value) => value.type !== removeType)
+    .filter((blob) => blob.type !== removeType)
     .forEach((blob) => {
       clipBoardItem[blob.type] = blob;
     });
