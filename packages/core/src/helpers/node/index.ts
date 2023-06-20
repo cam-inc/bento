@@ -1,44 +1,49 @@
-import { Editor, Element, NodeEntry, Node as SlateNode, Text } from 'slate';
+import {
+  Editor,
+  Element,
+  Node,
+  NodeEntry,
+  Node as SlateNode,
+  Text,
+} from 'slate';
 
 export default SlateNode;
 
-/**
- * Remove Node.
- */
 export const removeNode = (editor: Editor, entry: NodeEntry) => {
   const path = entry[1];
   const next = editor.next();
   if (!next) {
-    return false;
+    editor.removeNodes({ at: path });
+    return;
   }
+
   const [nextNode, nextPath] = next;
-  const parentEntry = editor.parent(nextPath);
-  const textNodeList = Array.from(
-    editor.nodes({
-      at: parentEntry[1],
-      match: (node) => Text.isText(node),
-    })
-  );
-  const [lastNode, lastNodePath] = textNodeList[textNodeList.length - 1];
-  if (!Text.isText(lastNode)) {
-    return true;
-  }
   if (Element.isElement(nextNode)) {
     if (editor.isVoid(nextNode)) {
       editor.removeNodes({ at: path });
-      return true;
+      return;
     }
   }
+
+  const parentEntry = editor.parent(nextPath);
+  const textNodeEntryList = Array.from(Node.texts(parentEntry[0]));
+  const lastNodeEntry = textNodeEntryList.at(-1);
+  if (!lastNodeEntry?.length) {
+    return;
+  }
+
+  const [lastNode, lastPath] = lastNodeEntry;
+  if (!Text.isText(lastNode)) {
+    return;
+  }
+
+  const endLinePosition = {
+    path: [...nextPath.slice(0, nextPath.length - 1), lastPath[0]],
+    offset: lastNode.text.length,
+  };
   editor.setSelection({
-    anchor: {
-      path: lastNodePath,
-      offset: lastNode.text.length,
-    },
-    focus: {
-      path: lastNodePath,
-      offset: lastNode.text.length,
-    },
+    anchor: endLinePosition,
+    focus: endLinePosition,
   });
   editor.removeNodes({ at: path });
-  return true;
 };
