@@ -39,15 +39,15 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
       return;
     }
 
-    const [currentNode] = match;
-    if (!Element.isElement(currentNode)) {
+    const [node] = match;
+    if (!Element.isElement(node)) {
       return;
     }
 
     // when there is an original insertBreak
     const { elements } = config;
     const element = elements.find((element) => {
-      return element.type === currentNode.type;
+      return element.type === node.type;
     });
     if (element && element.insertBreak) {
       const isToReturn = element.insertBreak(editor, match, config);
@@ -58,8 +58,8 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
 
     // when text is empty
     if (
-      helpers.textHelpers.isTextEmpty(currentNode) &&
-      currentNode.type !== config.defaultElement.type
+      helpers.textHelpers.isTextEmpty(node) &&
+      node.type !== config.defaultElement.type
     ) {
       editor.setNodes({
         type: config.defaultElement.type,
