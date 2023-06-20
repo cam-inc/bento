@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Path, last } from 'slate';
+import { Path } from 'slate';
 import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
 import { DustboxIcon } from '../components/icons/dustbox';
@@ -33,8 +33,8 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
       if (!textNodeList.length) {
         return;
       }
-      const lastTextPath = textNodeList[textNodeList.length - 1][1];
-      const lastTextNode = textNodeList[textNodeList.length - 1][0];
+      const [lastTextNode, lastTextPath] =
+        textNodeList[textNodeList.length - 1];
       if (!Text.isText(lastTextNode)) {
         return;
       }
@@ -53,7 +53,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
           offset: lastOffset,
         },
       };
-      await helpers.copyNode(editor);
+      await helpers.nodeHelpers.copyNode(editor);
       editor.selection = {
         anchor: {
           path: [...path, 0],
@@ -65,7 +65,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
         },
       };
     } else {
-      helpers.copyNode(editor);
+      helpers.nodeHelpers.copyNode(editor);
     }
     onDone();
   }, [editor, path, onDone]);

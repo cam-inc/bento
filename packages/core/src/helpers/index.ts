@@ -23,5 +23,5 @@ export const helpers = {
   textHelpers,
   pathHelpers,
   childHelpers,
-  ...nodeHelpers,
+  nodeHelpers,
 };
