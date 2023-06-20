@@ -9,12 +9,15 @@ const element: Element<Attributes> = {
   attributes,
   editable,
   toolbox,
-  insertBreak: (editor, nodeEntry, config) =>
-    helpers.insertBreaks.copyAndRemoveEmptyTextInsertBreak(
-      editor,
-      nodeEntry,
-      config
-    ),
+  insertBreak: (editor, nodeEntry) => {
+    const [node] = nodeEntry;
+    if (helpers.textHelpers.isTextEmpty(node)) {
+      helpers.nodeHelpers.removeNode(editor, nodeEntry);
+    } else {
+      editor.splitNodes({ always: true });
+    }
+    return true;
+  },
 };
 
 export default element;

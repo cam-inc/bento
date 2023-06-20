@@ -1,4 +1,4 @@
-import { Editor, Text as SlateText } from 'slate';
+import { Editor, Node, Text as SlateText } from 'slate';
 
 export const isText = SlateText.isText;
 
@@ -35,6 +35,16 @@ export const setTextAttribute = (
     },
     { match: (n) => SlateText.isText(n), split: true }
   );
+};
+
+export const isTextEmpty = (node: Node) => {
+  const textNodeList = Array.from(Node.texts(node));
+  const firstTextNode = textNodeList[0][0];
+  if (!SlateText.isText(firstTextNode)) {
+    return false;
+  }
+
+  return !firstTextNode.text.length;
 };
 
 export default SlateText;

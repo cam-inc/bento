@@ -2,8 +2,7 @@ import { style } from '@vanilla-extract/css';
 import Element, * as elements from './element';
 import * as logger from './logger';
 import * as error from './error';
-import * as insertBreaks from './insertBreak';
-import Node from './node';
+import Node, * as nodeHelpers from './node';
 import Path, * as pathHelpers from './path';
 import * as rangeHelpers from './range';
 import ReactEditor from './reactEditor';
@@ -22,9 +21,9 @@ export const helpers = {
   Text,
   style,
   ...elements,
+  nodeHelpers,
   textHelpers,
   pathHelpers,
   rangeHelpers,
   childHelpers,
-  insertBreaks,
 };

@@ -4,6 +4,8 @@ import { EditorPlugin } from '.';
 import { helpers } from '../helpers';
 
 /**
+ * Overrides the behavior of insertBreak.
+ *
  * case1: original insertBreak is set.
  * action: execute original insertBreak.
  *
@@ -55,13 +57,8 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
     }
 
     // when text is empty
-    const textEntryList = Array.from(Node.texts(currentNode));
-    const [firstTextNode] = textEntryList[0];
-    if (!Text.isText(firstTextNode)) {
-      return;
-    }
     if (
-      !firstTextNode.text.length &&
+      helpers.textHelpers.isTextEmpty(currentNode) &&
       currentNode.type !== config.defaultElement.type
     ) {
       editor.setNodes({
