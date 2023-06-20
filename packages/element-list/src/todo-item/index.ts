@@ -8,13 +8,20 @@ const element: Element<Attributes> = {
   attributes,
   editable,
   insertBreak: (editor, nodeEntry) => {
-    const [node] = nodeEntry;
-
-    if (helpers.textHelpers.isEmpty(node)) {
-      helpers.nodeHelpers.removeNode(editor, nodeEntry);
-    } else {
+    const [node, path] = nodeEntry;
+    if (!helpers.textHelpers.isEmpty(node)) {
       editor.splitNodes({ always: true });
+      return true;
     }
+    const next = editor.next();
+    if (next) {
+      const [_, nextPath] = next;
+      const [parentNode, parentPath] = editor.parent(nextPath);
+      if (helpers.Element.isElement(parentNode) && !editor.isVoid(parentNode)) {
+        helpers.selectNextLineEnd(editor, parentPath);
+      }
+    }
+    editor.removeNodes({ at: path });
     return true;
   },
 };
