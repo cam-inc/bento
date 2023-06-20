@@ -46,9 +46,10 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
         return;
       }
 
+      const firstTextPath = textNodeList[0][1];
       editor.selection = {
         anchor: {
-          path: [...path, 0],
+          path: firstTextPath,
           offset: 0,
         },
         focus: {
