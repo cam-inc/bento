@@ -24,18 +24,18 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
   const handleCopyClick = useCallback(async () => {
     const selection = editor.selection;
     if (!selection || selection.anchor.offset === selection.focus.offset) {
-      const textNodeList = Array.from(
+      const textNodeEntryList = Array.from(
         editor.nodes({
           at: path,
           match: (node) => Text.isText(node),
         })
       );
-      if (!textNodeList.length) {
+      if (!textNodeEntryList.length) {
         return;
       }
 
       const [lastTextNode, lastTextPath] =
-        textNodeList[textNodeList.length - 1];
+        textNodeEntryList[textNodeEntryList.length - 1];
       if (!Text.isText(lastTextNode)) {
         return;
       }
@@ -46,7 +46,7 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
         return;
       }
 
-      const firstTextPath = textNodeList[0][1];
+      const firstTextPath = textNodeEntryList[0][1];
       editor.selection = {
         anchor: {
           path: firstTextPath,
