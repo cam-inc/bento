@@ -37,7 +37,7 @@ export const setTextAttribute = (
   );
 };
 
-export const isTextEmpty = (node: Node) => {
+export const isEmpty = (node: Node) => {
   const textNodeList = Array.from(Node.texts(node));
   const firstTextNode = textNodeList[0][0];
   if (!SlateText.isText(firstTextNode)) {

@@ -58,7 +58,7 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
 
     // when text is empty
     if (
-      helpers.textHelpers.isTextEmpty(node) &&
+      helpers.textHelpers.isEmpty(node) &&
       node.type !== config.defaultElement.type
     ) {
       editor.setNodes({
