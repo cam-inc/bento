@@ -1,11 +1,4 @@
-import {
-  Editor,
-  Element,
-  Node,
-  NodeEntry,
-  Node as SlateNode,
-  Text,
-} from 'slate';
+import { Editor, Element, NodeEntry, Node as SlateNode, Text } from 'slate';
 
 export default SlateNode;
 
@@ -25,8 +18,10 @@ export const removeNode = (editor: Editor, entry: NodeEntry) => {
     }
   }
 
-  const parentEntry = editor.parent(nextPath);
-  const textNodeEntryList = Array.from(Node.texts(parentEntry[0]));
+  const parentPath = editor.parent(nextPath)[1];
+  const textNodeEntryList = Array.from(
+    editor.nodes({ at: parentPath, match: (node) => Text.isText(node) })
+  );
   const lastNodeEntry = textNodeEntryList.at(-1);
   if (!lastNodeEntry?.length) {
     return;
@@ -38,7 +33,7 @@ export const removeNode = (editor: Editor, entry: NodeEntry) => {
   }
 
   const endLinePosition = {
-    path: [...nextPath.slice(0, nextPath.length - 1), lastPath[0]],
+    path: lastPath,
     offset: lastNode.text.length,
   };
   editor.setSelection({
