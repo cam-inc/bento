@@ -33,16 +33,19 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
       if (!textNodeList.length) {
         return;
       }
+
       const [lastTextNode, lastTextPath] =
         textNodeList[textNodeList.length - 1];
       if (!Text.isText(lastTextNode)) {
         return;
       }
+
       const lastOffset = lastTextNode.text.length;
       if (!lastOffset) {
         onDone();
         return;
       }
+
       editor.selection = {
         anchor: {
           path: [...path, 0],
@@ -54,15 +57,14 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
         },
       };
       await helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
+
+      const headLinePoint = {
+        path: [...path, 0],
+        offset: 0,
+      };
       editor.selection = {
-        anchor: {
-          path: [...path, 0],
-          offset: 0,
-        },
-        focus: {
-          path: [...path, 0],
-          offset: 0,
-        },
+        anchor: headLinePoint,
+        focus: headLinePoint,
       };
     } else {
       helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
