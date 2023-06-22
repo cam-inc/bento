@@ -1,5 +1,4 @@
-import { Element, Range } from 'slate';
-import { Editor } from 'slate';
+import { Editor, Element, Range } from 'slate';
 import { EditorPlugin } from '.';
 import { helpers } from '../helpers';
 
@@ -31,7 +30,7 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
 
     helpers.rangeHelpers.deleteRange(editor, selection);
 
-    const [match] = editor.nodes({
+    const [match] = editor.nodes<Element>({
       match: (n) => !Editor.isEditor(n) && Element.isElement(n),
       mode: 'lowest',
     });
@@ -40,9 +39,6 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
     }
 
     const [node] = match;
-    if (!Element.isElement(node)) {
-      return;
-    }
 
     // when there is an original insertBreak
     const { elements } = config;
