@@ -9,7 +9,7 @@ const element: Element<Attributes> = {
   editable,
   insertBreak: (editor, nodeEntry) => {
     const [node, path] = nodeEntry;
-    if (!helpers.textHelpers.isEmpty(node)) {
+    if (helpers.Element.isElement(node) && !editor.isEmpty(node)) {
       editor.splitNodes({ always: true });
       return true;
     }
