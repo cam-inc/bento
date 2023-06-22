@@ -1,6 +1,6 @@
 import { Editor, Element, Range } from 'slate';
-import { EditorPlugin } from '.';
 import { helpers } from '../helpers';
+import { EditorPlugin } from '.';
 
 /**
  * Overrides the behavior of insertBreak.

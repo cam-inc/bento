@@ -20,7 +20,7 @@ const element: Element<Attributes> = {
       const [_, nextPath] = next;
       const [parentNode, parentPath] = editor.parent(nextPath);
       if (helpers.Element.isElement(parentNode) && !editor.isVoid(parentNode)) {
-        helpers.selectNextLineEnd(editor, parentPath);
+        helpers.selectLineEnd(editor, parentPath);
       }
     }
     editor.removeNodes({ at: path });

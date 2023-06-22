@@ -17,7 +17,7 @@ export const useTransformsSetNodes = (
   );
 };
 
-export const selectNextLineEnd = (editor: Editor, path: Path) => {
+export const selectLineEnd = (editor: Editor, path: Path) => {
   const [endNode, endPath] = editor.node(path, { edge: 'end' });
   if (!Text.isText(endNode)) {
     return;

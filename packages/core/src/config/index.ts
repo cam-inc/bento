@@ -35,11 +35,7 @@ declare module 'slate' {
   }
 }
 
-export type Plugin = (
-  editor: Editor,
-  entry: NodeEntry,
-  config: Config
-) => boolean;
+type Plugin = (editor: Editor, entry: NodeEntry, config: Config) => boolean;
 
 export type Element<
   Attributes extends Record<string, any> = Record<string, any>
