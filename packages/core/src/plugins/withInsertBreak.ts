@@ -62,13 +62,18 @@ export const withInsertBreak: EditorPlugin = (editor, config) => {
 
     // case3: enter is pressed at the beginning of a line.
     if (editor.isStart(selection.anchor, path)) {
-      editor.setNodes({
-        type: config.defaultElement.type,
-      });
       editor.splitNodes({ always: true });
-      editor.setNodes({
-        type: node.type,
-      });
+      const previous = editor.previous({ match: (n) => Element.isElement(n) });
+      if (!previous) {
+        return;
+      }
+      const [_, previousPath] = previous;
+      editor.setNodes(
+        {
+          type: config.defaultElement.type,
+        },
+        { at: previousPath }
+      );
       return;
     }
 

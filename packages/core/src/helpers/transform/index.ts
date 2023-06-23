@@ -18,12 +18,6 @@ export const useTransformsSetNodes = (
 };
 
 export const selectLineEnd = (editor: Editor, path: Path) => {
-  const [endNode, endPath] = editor.node(path, { edge: 'end' });
-  if (!Text.isText(endNode)) {
-    return;
-  }
-  editor.select({
-    path: endPath,
-    offset: endNode.text.length,
-  });
+  const endPoint = editor.end(path);
+  editor.select(endPoint);
 };
