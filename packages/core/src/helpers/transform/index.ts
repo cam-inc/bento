@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Editor, Path, Transforms as SlateTransforms, Text } from 'slate';
+import { Editor, Path, Transforms as SlateTransforms } from 'slate';
 import { ReactEditor, useSlate } from 'slate-react';
 
 export const useTransformsSetNodes = (
