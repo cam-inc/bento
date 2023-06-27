@@ -143,7 +143,7 @@ export const Popover: React.FC<PopoverProps> = ({
     };
 
     window.addEventListener('click', clickHandler);
-    window.addEventListener('scroll', scrollHandler);
+    window.addEventListener('scroll', scrollHandler, { capture: true });
     const cleanup = () => {
       window.removeEventListener('click', clickHandler);
       window.removeEventListener('scroll', scrollHandler);
