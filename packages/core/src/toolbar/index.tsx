@@ -1,5 +1,5 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
-import { Range, Path, Node } from 'slate';
+import { Node, Path, Range } from 'slate';
 import { useSlate } from 'slate-react';
 import { Config, PickRequired } from '../config';
 import { Popover, usePopover } from '../portals/popover';
@@ -104,6 +104,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
     const isToShow = (() => {
       if (
+        window.getSelection()?.isCollapsed ||
         !selection ||
         Range.isCollapsed(selection) ||
         editor.string(selection) === '' ||
