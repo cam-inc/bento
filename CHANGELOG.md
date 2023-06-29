@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/cam-inc/bento/compare/v0.3.0...v0.3.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* fixed a bug that scroll event does not fire :bug: ([18248da](https://github.com/cam-inc/bento/commit/18248da43e80076e9fd2d16e2da9399b501b0978))
+* hide toolbar when press other :bug: ([c39974d](https://github.com/cam-inc/bento/commit/c39974d18584a3a2d0f77a916175bb10eb85b635))
+* hide toolbar when press other :bug: ([09896e7](https://github.com/cam-inc/bento/commit/09896e76a2ba352a9ed69e0892221479cb6ea25d))
+
 ## [0.3.0](https://github.com/cam-inc/bento/compare/v0.2.4...v0.3.0) (2023-06-23)
 
 
