@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
-import { Range, Path, Node } from 'slate';
-import { useSlate } from 'slate-react';
+import { Node, Path, Range } from 'slate';
+import { useFocused, useSlate } from 'slate-react';
 import { Config, PickRequired } from '../config';
 import { Popover, usePopover } from '../portals/popover';
 import { useConfigGlobalStateValue } from '../store';
@@ -38,6 +38,7 @@ export type ToolbarProps = {};
 export const Toolbar: React.FC<ToolbarProps> = () => {
   const toolBarRef = useRef<HTMLDivElement>(null);
   const editor = useSlate();
+  const isFocused = useFocused();
 
   const popover = usePopover<HTMLDivElement>();
   const [rect, setRect] = useState<DOMRect>();
@@ -104,6 +105,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 
     const isToShow = (() => {
       if (
+        !isFocused ||
         !selection ||
         Range.isCollapsed(selection) ||
         editor.string(selection) === '' ||
@@ -138,7 +140,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
       if (rect.top < scrollStartHeight)
         window.scrollBy(0, -(scrollStartHeight - rect.top));
     }
-  }, [editor.selection, isMouseDown]);
+  }, [editor.selection, isMouseDown, isFocused]);
 
   useEffect(() => {
     if (hasToolbox(node)) {
@@ -150,7 +152,8 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     if (isVisible) {
       popover.open();
     } else {
-      popover.close();
+      // TODO
+      //popover.close();
     }
   }, [popover, isVisible]);
 
