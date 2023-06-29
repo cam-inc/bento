@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Transforms as SlateTransforms } from 'slate';
+import { Editor, Path, Transforms as SlateTransforms } from 'slate';
 import { ReactEditor, useSlate } from 'slate-react';
 
 export const useTransformsSetNodes = (
@@ -15,4 +15,9 @@ export const useTransformsSetNodes = (
     },
     [editor, element]
   );
+};
+
+export const selectLineEnd = (editor: Editor, path: Path) => {
+  const endPoint = editor.end(path);
+  editor.select(endPoint);
 };
