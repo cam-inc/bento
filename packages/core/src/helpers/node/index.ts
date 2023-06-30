@@ -4,9 +4,11 @@ export default SlateNode;
 
 export const copySelectedNodeToClipBoard = async (editor: Editor) => {
   const dataTransfer = new DataTransfer();
+  const fragment = editor.getFragment();
   editor.setFragmentData(dataTransfer, 'copy');
   const clipboardBlobList = dataTransfer.types.map((type) => {
-    return new Blob([dataTransfer.getData(type)], { type: type });
+    console.log('dataTranf', dataTransfer.getData(type));
+    return new Blob([dataTransfer.getData(type)], { type });
   });
 
   const clipBoardItem: Record<string, Blob> = {};

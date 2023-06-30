@@ -1,11 +1,10 @@
 import { useCallback } from 'react';
-import { Path } from 'slate';
+import { Path, Text } from 'slate';
 import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
 import { DustboxIcon } from '../components/icons/dustbox';
-import { styles } from './index.css';
-import { Text } from 'slate';
 import { helpers } from '../helpers';
+import { styles } from './index.css';
 
 export type ToolmenuProps = {
   path: Path;
@@ -40,6 +39,11 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
       return;
     }
 
+    const copyEvent = new CustomEvent('x_bento_copy', {
+      detail: { isToolbar: false },
+    });
+    window.dispatchEvent(copyEvent);
+
     const [_, firstTextPath] = editor.node(path, { edge: 'start' });
     editor.select({
       anchor: {
@@ -57,10 +61,9 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
       path: firstTextPath,
       offset: 0,
     };
-    editor.select({
-      anchor: headLinePoint,
-      focus: headLinePoint,
-    });
+    editor.select(headLinePoint);
+
+    window.dispatchEvent(copyEvent);
     onDone();
   }, [editor, path, onDone]);
 
