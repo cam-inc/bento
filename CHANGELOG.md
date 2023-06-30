@@ -1,3 +1,43 @@
+## [0.3.1](https://github.com/cam-inc/bento/compare/v0.3.0...v0.3.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* fixed a bug that scroll event does not fire :bug: ([18248da](https://github.com/cam-inc/bento/commit/18248da43e80076e9fd2d16e2da9399b501b0978))
+* hide toolbar when press other :bug: ([c39974d](https://github.com/cam-inc/bento/commit/c39974d18584a3a2d0f77a916175bb10eb85b635))
+* hide toolbar when press other :bug: ([09896e7](https://github.com/cam-inc/bento/commit/09896e76a2ba352a9ed69e0892221479cb6ea25d))
+
+## [0.3.0](https://github.com/cam-inc/bento/compare/v0.2.4...v0.3.0) (2023-06-23)
+
+
+### Features
+
+* add comment explaining insertBreak behavior ([68c193d](https://github.com/cam-inc/bento/commit/68c193dd80df16ddb0c3db47f1947de37eefd653))
+* add processing to delete selection to insertBreak :sparkles: ([b76b6f3](https://github.com/cam-inc/bento/commit/b76b6f3d5970d3c99ccf95bfbb8b5734f0fb6fec))
+* change action when enter is pressed :sparkles: ([f1ef247](https://github.com/cam-inc/bento/commit/f1ef24743c6df029ebb24b97b91bb6ddfde89166))
+* Changed the specification when it was empty text ([aefe563](https://github.com/cam-inc/bento/commit/aefe5632a5cfdea8d7ec8cf7ef5cd11dd2b65c8d))
+* create method that makes insertBreak default element ([efd7353](https://github.com/cam-inc/bento/commit/efd7353e208eb688bfb5b5c488de10507b40ce2d))
+* create new insertBreak ([b82d7df](https://github.com/cam-inc/bento/commit/b82d7dfa2aa3a262e7276c0269e2a3b766943136))
+* don't copy Text :sparkles: ([402f474](https://github.com/cam-inc/bento/commit/402f4745811792931b5e864289190073522f0f0d))
+* dynamically change scroll height ([a340a22](https://github.com/cam-inc/bento/commit/a340a22a921a944e467bfdda8c3a9e460f2c30f5))
+* fiexed-toolbar-top :sparkles: ([65261f9](https://github.com/cam-inc/bento/commit/65261f9399cecb0ff267484f5de238d8e52891ee))
+* hide toolbar when enter is press :sparkles: ([50459ed](https://github.com/cam-inc/bento/commit/50459ede6b45ca4dbba6d306070e97f6255f3ac2))
+* insert normal text when enter is pressed :sparkles: ([05aa44c](https://github.com/cam-inc/bento/commit/05aa44c7c7137957c13e718d185322e10bd7d6a2))
+* made the deleteRange method return void :sparkles: ([6c0ee44](https://github.com/cam-inc/bento/commit/6c0ee44184bcaade67afba979c481a6bbf851c2f))
+* override default type when empty string ([d9baf07](https://github.com/cam-inc/bento/commit/d9baf07291c565ee4caa54cea389bbcc12f7d486))
+* overwrite insert break :sparkles: ([6e7d983](https://github.com/cam-inc/bento/commit/6e7d983af3ad47e885436692468248d11d717548))
+* scrol if there is no margin above :sparkles: ([cc06a3c](https://github.com/cam-inc/bento/commit/cc06a3c4c713873947c4bad6f71a8579aab49b3c))
+* support scrolling toolbar :sparkles: ([2233282](https://github.com/cam-inc/bento/commit/2233282a87740b7eef509becc3c794fef5585eeb))
+
+
+### Bug Fixes
+
+* change specification if element is void in line below ([b6411e3](https://github.com/cam-inc/bento/commit/b6411e3cb4957929dd007e8fac40b66e243769c0))
+* fix line head judgment :bug: ([42ea4f9](https://github.com/cam-inc/bento/commit/42ea4f90fb30943b738faeafbc1537c11a7c19ed))
+* Fixed behavior when empty string ([4e637a7](https://github.com/cam-inc/bento/commit/4e637a76ea0e237e7ab2aec75b7448afd5af8772))
+* Fixed toolbar can't be pressed ([5a539b6](https://github.com/cam-inc/bento/commit/5a539b6bd1ea551bdeb1ce80f4f8e7f745c201f9))
+* removed unnecessary setting in package.json ([1f03261](https://github.com/cam-inc/bento/commit/1f0326115133c5967a40828041d47243079fda6c))
+
 ## [0.2.4](https://github.com/cam-inc/bento/compare/v0.2.3...v0.2.4) (2023-05-24)
 
 

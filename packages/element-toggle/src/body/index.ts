@@ -7,5 +7,9 @@ const element: Element<Attributes> = {
   type: 'toggle-body',
   attributes,
   editable,
+  insertBreak: (editor) => {
+    editor.splitNodes({ always: true });
+    return true;
+  },
 };
 export default element;
