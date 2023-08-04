@@ -271,7 +271,7 @@ const initialValue: EditorProps['initialValue'] = [
         children: [
           {
             type: 'format',
-            text: '',
+            text: 'default value',
           },
         ],
       },
