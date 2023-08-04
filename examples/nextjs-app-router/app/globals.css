@@ -42,4 +42,8 @@ a {
   .editor {
     border: 1px solid white;
   }
+
+  .result {
+    border: 1px solid white;
+  }
 }
