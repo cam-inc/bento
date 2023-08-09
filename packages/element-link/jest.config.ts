@@ -1,8 +1,5 @@
-import type { InitialOptionsTsJest } from 'ts-jest';
-
-const config: InitialOptionsTsJest = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+const config = {
+  preset: '@bento-editor/jest-presets',
 };
 
 export default config;
