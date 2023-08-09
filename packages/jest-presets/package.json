@@ -1,0 +1,17 @@
+{
+  "name": "@bento-editor/jest-presets",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "ts-jest": "^29.1.1"
+  },
+  "homepage": "https://github.com/cam-inc/bento/tree/main/packages/jest-presets",
+  "bugs": {
+    "url": "https://github.com/cam-inc/bento/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cam-inc/bento.git"
+  }
+}
