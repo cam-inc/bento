@@ -10,7 +10,11 @@ const element: Element<Attributes> = {
   editable,
   toolbox,
   normalizeNode: (editor, entry) => {
-    return helpers.childHelpers.restrictChild(editor, entry, 'note-body');
+    return helpers.normalizeNode.nestedElementNormalizeNode(
+      editor,
+      entry,
+      'note-body'
+    );
   },
 };
 
