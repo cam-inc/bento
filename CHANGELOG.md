@@ -1,3 +1,17 @@
+## [0.3.2](https://github.com/cam-inc/bento/compare/v0.3.1...v0.3.2) (2024-01-22)
+
+
+### Features
+
+* **@bento-editor/example-nextjs-app-router:** init ([22633f4](https://github.com/cam-inc/bento/commit/22633f4708d1bcb1966728203e4a3a7f00a82e72))
+
+
+### Bug Fixes
+
+* **@bento-editor/example-nextjs-app-router:** remove unnecessary fragment element ([ebffb4a](https://github.com/cam-inc/bento/commit/ebffb4adb911ca69e415285a3e38ba77304b4479))
+* **@bento-editor/example-nextjs-app-router:** set border color for dark mode ([95580ee](https://github.com/cam-inc/bento/commit/95580ee0744f806db75e7209b41fb4526ee0bd11))
+* **@bento-editor/example-nextjs-app-router:** set dafault value ([ac6b586](https://github.com/cam-inc/bento/commit/ac6b58682ad12093505c3dd94018004e136c9a89))
+
 ## [0.3.1](https://github.com/cam-inc/bento/compare/v0.3.0...v0.3.1) (2023-06-29)
 
 
