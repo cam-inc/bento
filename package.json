@@ -10,7 +10,7 @@
   ],
   "version": "0.3.1",
   "volta": {
-    "node": "18.7.0"
+    "node": "18.17.0"
   },
   "license": "MIT",
   "scripts": {
