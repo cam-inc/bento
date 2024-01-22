@@ -18,7 +18,7 @@
     "@bento-editor/element-link": "*",
     "@bento-editor/text-format": "*",
     "@bento-editor/text-emoji": "*",
-    "next": "^12.2.4",
+    "next": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
