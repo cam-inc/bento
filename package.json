@@ -17,6 +17,7 @@
     "preflight": "npm ci .",
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
+    "clean": "turbo run clean",
     "test": "turbo run test",
     "lint": "turbo run lint",
     "changelog": "conventional-changelog --preset conventionalcommits --commit-path $PWD --pkg $PWD/package.json --infile $PWD/CHANGELOG.md --same-file",
