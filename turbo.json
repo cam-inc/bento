@@ -5,45 +5,74 @@
     "dev": {
       "cache": false
     },
+    "clear": {
+      "cache": false
+    },
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "@bento-editor/core#build": {},
     "@bento-editor/element-heading#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-paragraph#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-list#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-note#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-callout#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-divider#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-quote#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-toggle#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/element-link#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/text-format#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "@bento-editor/text-emoji#build": {
-      "dependsOn": ["@bento-editor/core#build"]
+      "dependsOn": [
+        "@bento-editor/core#build"
+      ]
     },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "output": []
     },
     "lint": {
