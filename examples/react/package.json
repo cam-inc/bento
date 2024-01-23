@@ -1,6 +1,6 @@
 {
   "name": "@bento-editor/example-react",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "dependencies": {
     "@bento-editor/core": "*",
     "@bento-editor/element-callout": "*",
