@@ -5,6 +5,9 @@
     "dev": {
       "cache": false
     },
+    "clear": {
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build"]
     },
