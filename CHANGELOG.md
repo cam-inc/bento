@@ -1,3 +1,21 @@
+## [0.3.4](https://github.com/cam-inc/bento/compare/v0.3.2...v0.3.4) (2024-03-29)
+
+
+### Bug Fixes
+
+* **@bento-editor/core:** Incorrect Dependency ([a7c18b7](https://github.com/cam-inc/bento/commit/a7c18b79d04ed2bbf8d40b7f30558fc1e7fb93da))
+* **@bento-editor/core:** typo ([0a1301b](https://github.com/cam-inc/bento/commit/0a1301ba60ff338cf2804e1d5281136a9a8a59e0))
+* **@bento-editor/element-callout:** typo ([52a5e6a](https://github.com/cam-inc/bento/commit/52a5e6ae543f7fbf1f842c7d70af6fb479ef69a4))
+* **@bento-editor/element-divider:** typo ([91961af](https://github.com/cam-inc/bento/commit/91961af79505333f758cc313930695fcdb1b6759))
+* **@bento-editor/element-heading:** typo ([25a7231](https://github.com/cam-inc/bento/commit/25a723115b4c7706ad15eea7297ae5690882bc6f))
+* **@bento-editor/element-list:** typo ([ee5c3bf](https://github.com/cam-inc/bento/commit/ee5c3bfb1719e84f08ede7893fbb1dc5b17bde63))
+* **@bento-editor/element-note:** typo ([b2545e9](https://github.com/cam-inc/bento/commit/b2545e9ffcb3c46ede8b0911bd79c84bf5382fdc))
+* **@bento-editor/element-paragraph:** typo ([4f2961a](https://github.com/cam-inc/bento/commit/4f2961ab479e470c8c05508a5b1724dec44d01a6))
+* **@bento-editor/element-quote:** typo ([7485516](https://github.com/cam-inc/bento/commit/748551657207882ec07028846920f961339f0043))
+* **@bento-editor/element-toggle:** typo ([a8660aa](https://github.com/cam-inc/bento/commit/a8660aaf2b63099d3bbd1d7a9ed6782d44897258))
+* **@bento-editor/text-emoji:** typo ([21d5849](https://github.com/cam-inc/bento/commit/21d5849062b734bf59dbf884f4609a179f8c6ba8))
+* to clear from clean ([d7317a1](https://github.com/cam-inc/bento/commit/d7317a18e47339d3003e9863d765e055ec530126))
+
 ## [0.3.3](https://github.com/cam-inc/bento/compare/v0.3.2...v0.3.3) (2024-01-23)
 
 
