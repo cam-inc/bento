@@ -1,5 +1,9 @@
 # bento
 
+> [!WARNING]
+> **This repository is archived and no longer maintained.**
+> No further updates, bug fixes, or security patches will be provided. Please fork the repository if you need to continue development.
+
 Bento is a react library for Notion-like block-style editor build on top of [Slate](https://github.com/ianstormtaylor/slate).
 
 ## Packages
