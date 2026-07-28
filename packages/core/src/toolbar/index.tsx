@@ -50,6 +50,7 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
   const [node, setNode] = useState<Node | CustomNode | null>(null);
   const [blockName, setBlockName] = useState('ブロックを選択');
   const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isCopy, setIsCopy] = useState(false);
 
   const hasToolbox = useCallback(
     (
@@ -86,16 +87,28 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
     const handleMouseUp = () => {
       setIsMouseDown(false);
     };
+    const handleCopy = (e: Event) => {
+      setIsCopy((value) => !value);
+    };
+    window.addEventListener('x_bento_copy', (e: Event) => {
+      handleCopy(e);
+    });
 
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     return () => {
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('x_bento_copy', (e) => {
+        handleCopy(e);
+      });
     };
   }, []);
 
   useEffect(() => {
+    if (isCopy) {
+      return;
+    }
     const { selection } = editor;
     if (selection?.anchor !== undefined) {
       const path = selection.anchor.path;

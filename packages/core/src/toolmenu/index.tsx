@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
-import { Node, Path } from 'slate';
+import { Path, Text } from 'slate';
 import { useSlate } from 'slate-react';
 import { CopyIcon } from '../components/icons/copy';
 import { DustboxIcon } from '../components/icons/dustbox';
+import { helpers } from '../helpers';
 import { styles } from './index.css';
 
 export type ToolmenuProps = {
@@ -19,13 +20,50 @@ export const Toolmenu: React.FC<ToolmenuProps> = ({ path, onDone }) => {
     onDone();
   }, [editor, path, onDone]);
 
-  const handleCopyClick = useCallback(() => {
-    const node = Node.get(editor, path);
-    // TODO: There seems to be no API for copying. Replace this workaround if any found.
-    const copiedNode = JSON.parse(JSON.stringify(node));
-    editor.insertNodes(copiedNode, {
-      at: Path.next(path),
+  const handleCopyClick = useCallback(async () => {
+    const selection = editor.selection;
+    if (selection && selection.anchor.offset !== selection.focus.offset) {
+      helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
+      onDone();
+      return;
+    }
+
+    const [lastTextNode, lastTextPath] = editor.node(path, { edge: 'end' });
+    if (!Text.isText(lastTextNode)) {
+      return;
+    }
+
+    const lastOffset = lastTextNode.text.length;
+    if (!lastOffset) {
+      onDone();
+      return;
+    }
+
+    const copyEvent = new CustomEvent('x_bento_copy', {
+      detail: { isToolbar: false },
     });
+    window.dispatchEvent(copyEvent);
+
+    const [_, firstTextPath] = editor.node(path, { edge: 'start' });
+    editor.select({
+      anchor: {
+        path: firstTextPath,
+        offset: 0,
+      },
+      focus: {
+        path: lastTextPath,
+        offset: lastOffset,
+      },
+    });
+    await helpers.nodeHelpers.copySelectedNodeToClipBoard(editor);
+
+    const headLinePoint = {
+      path: firstTextPath,
+      offset: 0,
+    };
+    editor.select(headLinePoint);
+
+    window.dispatchEvent(copyEvent);
     onDone();
   }, [editor, path, onDone]);
 
